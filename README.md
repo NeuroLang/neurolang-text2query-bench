@@ -127,6 +127,60 @@ Each run directory gets three files:
   language and per tag
 - `report.md`: the tables, and the answers that are not exact
 
+### Tuning ReAct for Gemma 4 31B (2026-10-15)
+
+The ReAct agent was tuned on a dev split and evaluated once on held-out
+questions, measured by the overlap of the query results with the
+official answers (F1). Both splits are ReAct with Gemma 4 31B on
+OpenRouter.
+
+- **Dev split:** db25 and the odd ck26 questions, English only.
+- **Test split:** db26 in English and Spanish, with db25 as few-shot
+  examples, and the even ck26 questions in English and German.
+
+| system | ck26 en | ck26 de | db26 en | db26 es | all |
+|---|---:|---:|---:|---:|---:|
+| Gemma 4 31B, baseline agent | 0.404 | 0.229 | 0.353 | 0.400 | 0.357 |
+| Gemma 4 31B, tuned agent | 0.628 | 0.606 | 0.645 | 0.584 | **0.615** |
+| DeepSeek V4.1 Flash, tuned agent | 0.683 | 0.567 | 0.615 | 0.591 | 0.610 |
+| Datalog ceiling (checked translations) | 0.980 | 0.980 | 1.000 | 1.000 | |
+
+The ceiling is the score of the checked Datalog translations of the gold
+queries. It shows that nearly all of the remaining gap comes from the
+agent, not from translating SPARQL to Datalog.
+
+The changes, each found in Gemma's dev trajectories:
+
+1. `search_values(pattern)` searches every stored relation, takes a
+   column by name or number, and shows the matching facts with their
+   IRIs. It also matches IRIs, with spaces as underscores, and shows at
+   most 3 facts per predicate.
+2. The text protocol accepts the usual formatting slips.
+3. When the agent runs out of steps, its answer is the most detailed
+   query that gave rows.
+4. `final_answer` runs the query first. A runtime error rejects it. An
+   answer with no rows must be confirmed, and the agent is reminded of
+   its query that gave rows.
+5. `check_query` rejects an aggregation over a conjunction, and grouping
+   by the aggregated variable.
+6. The reference covers yes/no questions, answer classes, max/min, and
+   top k.
+7. Queries run in a child process, stopped after 30 s or above 4 GB.
+
+On the dev split, Gemma's F1 rose:
+
+| dev half | baseline | v1 | v2 | v3 |
+|---|---:|---:|---:|---:|
+| ck26 | 0.384 | 0.553 | 0.685 | 0.613 |
+| db25 | 0.379 | 0.469 | 0.604 | 0.667 |
+
+v4, the version tested, is v3 with the max-first guidance for "the
+most …" questions.
+
+On the test split, the tuned agent had 76 exact answers out of 150,
+against 44 for the baseline. It had 17 empty answers instead of 42, and
+9 errors instead of 21.
+
 ## TEXT2SPARQL question sets in Datalog
 
 The four question sets of the TEXT2SPARQL challenge are also in the
