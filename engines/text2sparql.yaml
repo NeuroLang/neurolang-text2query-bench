@@ -1,0 +1,30 @@
+# NeuroLang engines of the TEXT2SPARQL question sets: the knowledge
+# graphs are loaded with NeuroLang's ontology loader, every triple being
+# a fact (individuals) and predicates being named by prefix (pv:name).
+engines:
+  text2sparql-corporate:
+    description: >
+      eccenca's corporate knowledge graph of the TEXT2SPARQL challenge:
+      products (hardware and services), their bills of material, prices,
+      suppliers and categories, and the company's employees, managers and
+      departments (vocabulary prod-vocab, instances prod-instances).
+    builtins: [lcase, ucase, strlen, strstarts, strends, str_contains, regex,
+               round, abs, floor, ceil, int, float, str]
+    ontologies:
+      - urls:
+          - https://raw.githubusercontent.com/AKSW/text2sparql.aksw.org/2026/docs/participation/data/prod-vocab.ttl
+          - https://raw.githubusercontent.com/AKSW/text2sparql.aksw.org/2026/docs/participation/data/prod-inst.ttl
+        individuals: true
+        names: prefixed
+
+  text2sparql-dbpedia:
+    description: >
+      DBpedia 2015-10 (English and Spanish chapters), as the subgraph the
+      TEXT2SPARQL DBpedia endpoint gives for the questions' gold queries
+      and the entities they mention (t2q-bench build-dbpedia-subgraph).
+    builtins: [lcase, ucase, strlen, strstarts, strends, str_contains, regex,
+               round, abs, floor, ceil, int, float, str]
+    ontologies:
+      - url: ../data/dbpedia-subgraph.ttl
+        individuals: true
+        names: prefixed

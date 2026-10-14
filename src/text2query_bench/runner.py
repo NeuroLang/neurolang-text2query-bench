@@ -13,6 +13,7 @@ from dataclasses import asdict, dataclass
 from pathlib import Path
 from typing import Callable, Optional
 
+from . import text2sparql
 from .dataset import Dataset
 from .engine import execute
 from .metrics import mean, score
@@ -49,7 +50,14 @@ def ask(
 
 
 def gold_answers(nl, dataset: Dataset, timeout: float = 300.0) -> dict:
-    """Return the gold rows of the questions, by id."""
+    """
+    Return the gold answers of the questions, by id.
+
+    They are the rows of the gold queries on the engine or, for a
+    TEXT2SPARQL dataset, the official values, by natural language.
+    """
+    if dataset.metric == "text2sparql":
+        return official_gold(dataset)
     gold = {}
     for question in dataset.questions:
         language, query = question.gold_query()
@@ -60,6 +68,34 @@ def gold_answers(nl, dataset: Dataset, timeout: float = 300.0) -> dict:
             "error": execution.error, "seconds": execution.seconds,
         }
     return gold
+
+
+def official_gold(dataset: Dataset) -> dict:
+    """Return the official values of a TEXT2SPARQL dataset, by id."""
+    results = text2sparql.load_gold(dataset.gold_results)
+    gold = {}
+    for question in dataset.questions:
+        gold[question.id] = {"values": {
+            language: sorted(text2sparql.gold_values(
+                results,
+                text2sparql.question_key(
+                    dataset.set, question.source_id, language
+                ),
+            ))
+            for language in question.text
+        }}
+    return gold
+
+
+def _score(dataset, expected: dict, language: str, rows):
+    """Return the score of *rows* and the size of the gold answer."""
+    if dataset.metric == "text2sparql":
+        gold_values = set(expected["values"].get(language, ()))
+        scored = text2sparql.score_values(
+            text2sparql.values(rows), gold_values
+        )
+        return scored, len(gold_values)
+    return score(rows, expected["rows"]), len(expected["rows"])
 
 
 @dataclass
@@ -101,7 +137,9 @@ def evaluate(
             executed, rows = execution.ok, execution.rows
             seconds = execution.seconds
             error = execution.error
-        scored = score(rows, expected["rows"]) if executed else None
+        scored, gold_size = _score(dataset, expected, answer["language"], rows)
+        if not executed:
+            scored = None
         result = Result(
             answer["id"], answer["language"], answer.get("system", ""),
             answer.get("query", ""), answer["query_language"],
@@ -109,7 +147,7 @@ def evaluate(
             scored.precision if scored else 0.0,
             scored.recall if scored else 0.0,
             scored.f1 if scored else 0.0,
-            len(rows), len(expected["rows"]), error,
+            len(rows), gold_size, error,
             answer.get("seconds", 0.0), seconds,
             answer.get("calls", 0), answer.get("tokens", 0),
         )

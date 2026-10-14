@@ -1,7 +1,13 @@
 __pycache__/
-*.egg-info/
+!runs/README.md
 .venv/
+*.egg-info/
+data/
+data/dbpedia-cache/
+datasets/*.gold.json
+datasets/*.translations.json
+datasets/ck2?.yaml
+datasets/db2?.yaml
+datasets/text2sparql/
 neurolang_data/
 runs/*/
-!runs/README.md
-datasets/*.gold.json

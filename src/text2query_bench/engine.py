@@ -21,11 +21,19 @@ class QueryTimeout(Exception):
     """Raised in a query that ran longer than its time limit."""
 
 
-def build_engine(name: str, data_dir):
-    """Return the engine *name* of the NeuroLang registry."""
+def build_engine(name: str, data_dir, engines_file=None):
+    """
+    Return the engine *name* of the NeuroLang registry.
+
+    The engine is that of *engines_file*, an engines YAML file, when
+    given, else of NeuroLang's own engines.
+    """
     from neurolang.utils import engine_registry
 
-    return engine_registry.build_engine(name, Path(data_dir), None)
+    return engine_registry.build_engine(
+        name, Path(data_dir), None,
+        yaml_path=Path(engines_file) if engines_file else None,
+    )
 
 
 def run_with_timeout(function, timeout: float):

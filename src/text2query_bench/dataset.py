@@ -20,6 +20,12 @@ query returns on the engine, and a question can be asked in several
 natural languages. The gold query is written in Datalog (and may also
 be given in SQUALL); the answers of a system are compared with the gold
 rows, whatever the query language of the system.
+
+A dataset imported from TEXT2SPARQL (see :mod:`.text2sparql`) has the
+``metric`` ``text2sparql``: its questions are scored against the
+official result set of ``gold_results``, and their gold is a SPARQL
+query with, when there is one, its Datalog translation. Its engine is
+declared in ``engines_file``, relative to the dataset.
 """
 
 from dataclasses import dataclass, field
@@ -28,6 +34,8 @@ from pathlib import Path
 import yaml
 
 QUERY_LANGUAGES = ("datalog", "squall")
+GOLD_LANGUAGES = QUERY_LANGUAGES + ("sparql",)
+METRICS = ("rows", "text2sparql")
 
 
 class DatasetError(ValueError):
@@ -42,13 +50,18 @@ class Question:
     text: dict
     gold: dict
     tags: list = field(default_factory=list)
+    source_id: str = ""
 
     def gold_query(self):
-        """Return ``(language, query)`` of the gold query, Datalog first."""
+        """
+        Return ``(language, query)`` of the NeuroLang gold, Datalog first.
+
+        It is None for a question whose gold is only a SPARQL query.
+        """
         for language in QUERY_LANGUAGES:
             if self.gold.get(language):
                 return language, self.gold[language]
-        raise DatasetError(f"Question {self.id} has no gold query.")
+        return None
 
 
 @dataclass
@@ -60,6 +73,10 @@ class Dataset:
     questions: list
     description: str = ""
     path: Path = None
+    metric: str = "rows"
+    engines_file: Path = None
+    gold_results: Path = None
+    set: str = ""
 
     @property
     def languages(self) -> list:
@@ -99,14 +116,15 @@ def _question(entry: dict, index: int) -> Question:
         language: query.strip()
         for language, query in (entry.get("gold") or {}).items()
     }
-    unknown = set(gold) - set(QUERY_LANGUAGES)
+    unknown = set(gold) - set(GOLD_LANGUAGES)
     if unknown or not gold:
         raise DatasetError(
             f"Question {entry['id']} needs a gold query in "
-            f"{' or '.join(QUERY_LANGUAGES)}."
+            f"{', '.join(GOLD_LANGUAGES)}."
         )
     return Question(
-        str(entry["id"]), dict(text), gold, list(entry.get("tags") or [])
+        str(entry["id"]), dict(text), gold, list(entry.get("tags") or []),
+        str(entry.get("source_id", "")),
     )
 
 
@@ -124,7 +142,24 @@ def load_dataset(path) -> Dataset:
         raise DatasetError(f"Duplicate question ids: {', '.join(duplicates)}")
     if not data.get("engine"):
         raise DatasetError("The dataset names no engine.")
+    metric = data.get("metric", "rows")
+    if metric not in METRICS:
+        raise DatasetError(f"Unknown metric {metric!r}.")
+    if metric == "rows":
+        missing = [q.id for q in questions if q.gold_query() is None]
+        if missing:
+            raise DatasetError(
+                f"Questions without a Datalog or SQUALL gold query: "
+                f"{', '.join(missing)}."
+            )
+    elif not data.get("gold_results"):
+        raise DatasetError("A text2sparql dataset needs gold_results.")
+    relative = (
+        lambda key: path.parent / data[key] if data.get(key) else None
+    )
     return Dataset(
         data.get("dataset", path.stem), data["engine"], questions,
-        data.get("description", ""), path,
+        data.get("description", ""), path, metric,
+        relative("engines_file"), relative("gold_results"),
+        data.get("set", ""),
     )

@@ -41,7 +41,7 @@ def _engine(args, dataset):
 
     _log(f"Building the {dataset.engine} engine...")
     start = time.perf_counter()
-    nl = build_engine(dataset.engine, args.data_dir)
+    nl = build_engine(dataset.engine, args.data_dir, dataset.engines_file)
     _log(f"Built in {time.perf_counter() - start:.0f} s.")
     return nl
 
@@ -69,8 +69,19 @@ def _questions(args, dataset):
     return dataset.select(args.ids, args.tags)[: args.limit or None]
 
 
+def _examples(args, dataset):
+    """Return the few-shot examples of ``--examples-from``, if any."""
+    from .systems import gold_examples
+
+    source = getattr(args, "examples_from", None)
+    if not source:
+        return None
+    other = dataset if source == "self" else load_dataset(source)
+    return gold_examples(other, args.query_language)
+
+
 def _system(args, nl, dataset):
-    from .systems import AssistantSystem, EndpointSystem
+    from .systems import AssistantSystem, EndpointSystem, engine_description
 
     if getattr(args, "endpoint", None):
         return EndpointSystem(
@@ -80,6 +91,8 @@ def _system(args, nl, dataset):
     return AssistantSystem(
         nl, dataset.engine, args.query_language, args.provider,
         args.strategy, args.llm_config,
+        examples=_examples(args, dataset),
+        description=engine_description(dataset),
     )
 
 
@@ -118,9 +131,60 @@ def _evaluate_and_write(args, nl, dataset, answers, out_dir: Path) -> None:
     print(run_report(name, scores))
 
 
+def cmd_import(args) -> int:
+    from .text2sparql import SETS, write_dataset
+
+    for name in args.sets or sorted(SETS):
+        path = write_dataset(name)
+        _log(f"Wrote {path}")
+    return 0
+
+
+def cmd_build_dbpedia(args) -> int:
+    from .dataset import load_dataset as load
+    from .dbpedia_subgraph import Endpoint, build, write
+
+    from .text2sparql import load_gold
+
+    questions, answers = [], set()
+    for path in args.datasets:
+        dataset = load(path)
+        questions += [
+            (q.id, q.gold["sparql"]) for q in dataset.questions
+            if q.gold.get("sparql")
+        ]
+        for values in load_gold(dataset.gold_results).values():
+            if isinstance(values, dict):
+                answers |= {v for v in values if v.startswith("http")}
+    graph = build(questions, Endpoint(args.endpoint), _log, answers)
+    write(graph, args.output)
+    _log(f"Wrote {len(graph)} triples to {args.output}")
+    return 0
+
+
+def cmd_check_translations(args, dataset, nl) -> int:
+    from .text2sparql import check_translations
+
+    checks = check_translations(nl, dataset, args.timeout)
+    counts = {}
+    for check in checks:
+        counts[check["status"]] = counts.get(check["status"], 0) + 1
+        if check["status"] != "missing":
+            detail = check.get("detail", "")
+            print(
+                f"{check['status']:<8} {check['id']}: F1 "
+                f"{check['f1']:.2f} {detail}"
+            )
+    print(", ".join(f"{n} {status}" for status, n in sorted(counts.items())))
+    write_json(dataset.path.with_suffix(".translations.json"), checks)
+    return 0
+
+
 def cmd_check_gold(args) -> int:
     dataset = load_dataset(args.dataset)
     nl = _engine(args, dataset)
+    if dataset.metric == "text2sparql":
+        return cmd_check_translations(args, dataset, nl)
     gold = gold_answers(nl, dataset, args.timeout)
     failed = 0
     for question_id, entry in gold.items():
@@ -215,6 +279,11 @@ def _add_system(parser) -> None:
     parser.add_argument("--llm-config", help="LLM configuration file")
     parser.add_argument("--query-language", default="datalog",
                         choices=("datalog", "squall"))
+    parser.add_argument(
+        "--examples-from", metavar="DATASET",
+        help="few-shot examples from the gold queries of DATASET (a dataset "
+        "file, or 'self': the other questions of the dataset)",
+    )
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -227,7 +296,33 @@ def build_parser() -> argparse.ArgumentParser:
                         help="time limit of a query, in seconds")
     commands = parser.add_subparsers(dest="command", required=True)
 
-    commands.add_parser("check-gold", help="run and cache the gold queries")
+    commands.add_parser(
+        "check-gold",
+        help="run and cache the gold queries; for a TEXT2SPARQL set, "
+        "check the Datalog translations against the official answers",
+    )
+
+    dbpedia_parser = commands.add_parser(
+        "build-dbpedia-subgraph",
+        help="fetch the DBpedia subgraph of the DBpedia question sets",
+    )
+    dbpedia_parser.add_argument(
+        "datasets", nargs="*",
+        default=["datasets/db25.yaml", "datasets/db26.yaml"],
+    )
+    dbpedia_parser.add_argument(
+        "--endpoint", default="http://141.57.8.18:9081/sparql"
+    )
+    dbpedia_parser.add_argument(
+        "-o", "--output", default="data/dbpedia-subgraph.ttl"
+    )
+
+    import_parser = commands.add_parser(
+        "import-text2sparql", help="import TEXT2SPARQL question sets"
+    )
+    import_parser.add_argument(
+        "sets", nargs="*", help="ck25 ck26 db25 db26 (default: all)"
+    )
 
     ask_parser = commands.add_parser("ask", help="collect a system's queries")
     _add_system(ask_parser)
@@ -257,6 +352,8 @@ def build_parser() -> argparse.ArgumentParser:
 
 
 COMMANDS = {
+    "import-text2sparql": cmd_import,
+    "build-dbpedia-subgraph": cmd_build_dbpedia,
     "check-gold": cmd_check_gold, "ask": cmd_ask, "evaluate": cmd_evaluate,
     "run": cmd_run, "serve": cmd_serve, "report": cmd_report,
 }

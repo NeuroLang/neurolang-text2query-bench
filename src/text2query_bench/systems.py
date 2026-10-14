@@ -14,6 +14,7 @@ A system turns a question into a NeuroLang query
 
 import time
 from dataclasses import asdict, dataclass, field
+from pathlib import Path
 from typing import Optional
 
 import httpx
@@ -60,12 +61,17 @@ class AssistantSystem(System):
     *config_path* (see ``neurolang.utils.llm.config``); *query_language*
     is ``datalog`` or ``squall``. *exclude_gold* leaves the question out
     of the few-shot examples when the engine's example bank holds it.
+
+    *examples* (``neurolang.utils.llm.examples.Example``) and
+    *description* replace the example bank and the description of the
+    engine, e.g. for an engine that is not in NeuroLang's registry.
     """
 
     def __init__(
         self, nl, engine_name: str, query_language: str = "datalog",
         provider: Optional[str] = None, strategy: Optional[str] = None,
         config_path=None, client=None, exclude_gold: bool = True,
+        examples=None, description: Optional[str] = None,
     ):
         from neurolang.utils.llm import load_config
 
@@ -77,6 +83,8 @@ class AssistantSystem(System):
         self.strategy = strategy or self.config.assistant.strategy
         self.client = client
         self.exclude_gold = exclude_gold
+        self.examples = examples
+        self.description = description
         self.name = (
             f"{self.strategy}-{self.query_language}-{self.provider.name}"
         )
@@ -94,6 +102,7 @@ class AssistantSystem(System):
                 "observation": step.observation[:500],
             }),
             exclude_question=question if self.exclude_gold else "",
+            examples=self.examples, description=self.description,
         )
         start = time.perf_counter()
         try:
@@ -148,3 +157,36 @@ class EndpointSystem(System):
             data.get("calls", 0),
             data.get("tokens", 0),
         )
+
+
+def gold_examples(dataset, query_language: str = "datalog") -> list:
+    """
+    Return the few-shot examples of the gold queries of *dataset*.
+
+    Each question with a gold query in *query_language* gives one example
+    per natural language, so that a question is left out of its own
+    prompt in any language (leave-one-out).
+    """
+    from neurolang.utils.llm.examples import Example
+
+    examples = []
+    for question in dataset.questions:
+        query = question.gold.get(query_language)
+        if query:
+            examples += [
+                Example(text, {query_language: query})
+                for text in question.text.values()
+            ]
+    return examples
+
+
+def engine_description(dataset) -> Optional[str]:
+    """Return the description of the engine of *dataset*, if declared."""
+    if not dataset.engines_file:
+        return None
+    import yaml
+
+    engines = yaml.safe_load(Path(dataset.engines_file).read_text())
+    return (engines.get("engines", {}).get(dataset.engine) or {}).get(
+        "description"
+    )
