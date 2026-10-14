@@ -278,8 +278,11 @@ def cmd_report(args) -> int:
     for path in args.results:
         data = json.loads(Path(path).read_text(encoding="utf-8"))
         system = (data["results"][0]["system"] if data["results"]
-                  else Path(path).parent.name)
-        runs[system] = data["summary"]
+                  else "")
+        dataset = data.get("dataset", "").rstrip("/").split("/")[-1]
+        runs[f"{Path(path).parent.name} ({system}, {dataset})"] = (
+            data["summary"]
+        )
     print(comparison_report(runs))
     return 0
 
