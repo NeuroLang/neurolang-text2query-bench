@@ -168,8 +168,10 @@ against the official answers. Datalog has no ORDER BY, LIMIT or OPTIONAL:
 - an `OPTIONAL` is flattened, which the official metric allows.
 
 A `note` explains each translation that cannot match exactly, usually
-a tie that the endpoint broke arbitrarily. ck25 matches on 45 of 50
-questions and ck26 on 47 of 50.
+a tie that the endpoint broke arbitrarily. The translations reproduce
+the official answers on 45 of ck25's 50 questions (two of its official
+answers are wrongly empty), 47 of ck26's 50, all 100 of db25's and all
+50 of db26's.
 
 **Scoring.** These sets are scored as in the challenge: the set of the
 values of all the answers, numbers in a canonical form, against the
