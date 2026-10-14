@@ -8,6 +8,10 @@ engines:
       products (hardware and services), their bills of material, prices,
       suppliers and categories, and the company's employees, managers and
       departments (vocabulary prod-vocab, instances prod-instances).
+      Answers are compared as in the TEXT2SPARQL challenge: return the
+      entities asked for as their IRIs, not their names, unless the
+      question asks for a name, a number, a date or another value, and
+      return only what the question asks for.
     builtins: [lcase, ucase, strlen, strstarts, strends, str_contains, regex,
                round, abs, floor, ceil, int, float, str]
     ontologies:
@@ -22,6 +26,10 @@ engines:
       DBpedia 2015-10 (English and Spanish chapters), as the subgraph the
       TEXT2SPARQL DBpedia endpoint gives for the questions' gold queries
       and the entities they mention (t2q-bench build-dbpedia-subgraph).
+      Answers are compared as in the TEXT2SPARQL challenge: return the
+      entities asked for as their IRIs, not their names, unless the
+      question asks for a name, a number, a date or another value, and
+      return only what the question asks for.
     builtins: [lcase, ucase, strlen, strstarts, strends, str_contains, regex,
                round, abs, floor, ceil, int, float, str]
     ontologies:
