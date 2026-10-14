@@ -190,3 +190,17 @@ def test_unknown_predicates_can_give_no_rows(nl):
     empty = execute(nl, "ans(x) :- dbo:launchDate(x)", "datalog",
                     unknown_is_empty=True)
     assert empty.ok and empty.rows == []
+
+
+def test_ask_resumes_an_interrupted_run(dataset):
+    previous = [
+        {"id": "q1", "language": "en", "query": "kept", "valid": True,
+         "calls": 1},
+        {"id": "q1", "language": "fr", "query": "", "valid": False,
+         "calls": 0, "error": "usage limit"},
+    ]
+    system = Scripted({"Quelles études ?": "ans(s) :- mentions(s, t)"})
+    answers = ask(system, dataset, ["en", "fr"], previous=previous)
+    assert answers[0]["query"] == "kept"
+    assert answers[1]["query"] == "ans(s) :- mentions(s, t)"
+    assert answers[2]["id"] == "q2"

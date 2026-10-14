@@ -98,6 +98,21 @@ def _system(args, nl, dataset):
     )
 
 
+def _previous_answers(args, path: Path) -> list:
+    """Return the answers of the run to resume, if ``--resume``."""
+    if getattr(args, "resume", False) and path.exists():
+        return json.loads(path.read_text(encoding="utf-8"))
+    return []
+
+
+def _saving(path: Path):
+    """Return the progress callback printing and saving the answers."""
+    def progress(answer, answers):
+        _print_answer(answer)
+        write_json(path, answers)
+    return progress
+
+
 def _print_answer(answer: dict) -> None:
     status = "ok" if answer["valid"] else "INVALID"
     _log(
@@ -208,11 +223,12 @@ def cmd_ask(args) -> int:
     dataset = load_dataset(args.dataset)
     nl = None if args.endpoint else _engine(args, dataset)
     system = _system(args, nl, dataset)
+    output = Path(args.output)
     answers = ask(
         system, dataset, args.languages, _questions(args, dataset),
-        _print_answer,
+        _saving(output), _previous_answers(args, output),
     )
-    write_json(args.output, answers)
+    write_json(output, answers)
     return 0
 
 
@@ -229,11 +245,12 @@ def cmd_run(args) -> int:
     nl = _engine(args, dataset)
     system = _system(args, nl, dataset)
     out_dir = Path(args.output or f"runs/{system.name}")
+    path = out_dir / "answers.json"
     answers = ask(
         system, dataset, args.languages, _questions(args, dataset),
-        _print_answer,
+        _saving(path), _previous_answers(args, path),
     )
-    write_json(out_dir / "answers.json", answers)
+    write_json(path, answers)
     _evaluate_and_write(args, nl, dataset, answers, out_dir)
     return 0
 
@@ -268,6 +285,11 @@ def cmd_report(args) -> int:
 
 
 def _add_selection(parser) -> None:
+    parser.add_argument(
+        "--resume", action="store_true",
+        help="keep the answers of an interrupted run (answers.json) and "
+        "ask the questions it failed to",
+    )
     parser.add_argument("--lang", dest="languages", nargs="+",
                         default=["en"], help="natural languages (en fr)")
     parser.add_argument("--ids", nargs="+", help="question ids to ask")

@@ -19,22 +19,40 @@ from .engine import execute
 from .metrics import mean, score
 
 
+def answered(answer: dict) -> bool:
+    """
+    Whether *answer* is the system's answer, rather than a failure to ask.
+
+    An answer without any call to the model, failed (e.g. the provider's
+    usage limit), is asked again when a run is resumed.
+    """
+    return bool(answer.get("valid") or answer.get("calls"))
+
+
 def ask(
     system, dataset: Dataset, languages, questions=None,
-    progress: Optional[Callable] = None,
+    progress: Optional[Callable] = None, previous=(),
 ) -> list:
     """
     Return the answers of *system* to the questions of *dataset*.
 
     Each answer is a dict: the question id, natural language, text and
     the :class:`~.systems.Generation` of the system. Questions without a
-    text in a language are skipped for it.
+    text in a language are skipped for it. The *previous* answers of an
+    interrupted run are kept when they are answers (see
+    :func:`answered`); the other questions are asked.
     """
+    kept = {
+        (a["id"], a["language"]): a for a in previous if answered(a)
+    }
     answers = []
     for question in questions or dataset.questions:
         for language in languages:
             text = question.text.get(language)
             if not text:
+                continue
+            if (question.id, language) in kept:
+                answers.append(kept[(question.id, language)])
                 continue
             generation = system.generate(text, language).as_dict()
             answer = {
@@ -45,7 +63,7 @@ def ask(
             }
             answers.append(answer)
             if progress:
-                progress(answer)
+                progress(answer, answers)
     return answers
 
 
