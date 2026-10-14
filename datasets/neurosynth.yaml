@@ -1,0 +1,304 @@
+dataset: https://neurolang.github.io/text2query/2026/neurosynth/
+engine: neurosynth
+description: >
+  Questions on the NeuroSynth database (studies, the terms their
+  abstracts mention with TF-IDF weights, reported activation peaks in
+  MNI voxel coordinates, the Schaefer atlas and a uniform probabilistic
+  choice over studies), asked in English and French. The gold answers
+  are the rows of the gold Datalog query on NeuroLang's neurosynth
+  engine.
+
+# Tags: simple, constant, join, multi-hop, negation, disjunction,
+# conjunction, comparison, aggregation, probabilistic, atlas, and
+# entity-resolution (the question's wording differs from the stored
+# constant, e.g. "decision-making" for 'decision making').
+
+questions:
+  - id: ns-001
+    tags: [simple, constant]
+    question:
+      en: Which studies mention pain?
+      fr: Quelles études mentionnent la douleur ?
+    gold:
+      datalog: ans(s) :- mentions(s, 'pain')
+
+  - id: ns-002
+    tags: [simple, constant]
+    question:
+      en: Which studies mention the amygdala?
+      fr: Quelles études mentionnent l'amygdale ?
+    gold:
+      datalog: ans(s) :- mentions(s, 'amygdala')
+
+  - id: ns-003
+    tags: [simple]
+    question:
+      en: List all the terms of the vocabulary.
+      fr: Donne tous les termes du vocabulaire.
+    gold:
+      datalog: ans(t) :- term(t)
+
+  - id: ns-004
+    tags: [simple, constant]
+    question:
+      en: Which terms does study 10022492 mention?
+      fr: Quels termes l'étude 10022492 mentionne-t-elle ?
+    gold:
+      datalog: ans(t) :- mentions(10022492, t)
+
+  - id: ns-005
+    tags: [simple, constant]
+    question:
+      en: Which voxels does study 10022492 report activation peaks at?
+      fr: En quels voxels l'étude 10022492 rapporte-t-elle des pics d'activation ?
+    gold:
+      datalog: ans(i, j, k) :- peak_reported(i, j, k, 10022492)
+
+  - id: ns-006
+    tags: [simple, constant]
+    question:
+      en: Which studies report an activation peak at voxel (117, 135, 47)?
+      fr: Quelles études rapportent un pic d'activation au voxel (117, 135, 47) ?
+    gold:
+      datalog: ans(s) :- peak_reported(117, 135, 47, s)
+
+  - id: ns-007
+    tags: [join, constant]
+    question:
+      en: Which voxels are reported by studies that mention reward?
+      fr: Quels voxels sont rapportés par les études qui mentionnent la récompense ?
+    gold:
+      datalog: ans(i, j, k) :- mentions(s, 'reward'), reports(s, i, j, k)
+
+  - id: ns-008
+    tags: [join, multi-hop, constant]
+    question:
+      en: Which terms are mentioned by studies reporting a peak at voxel (117, 135, 47)?
+      fr: Quels termes sont mentionnés par les études qui rapportent un pic au voxel (117, 135, 47) ?
+    gold:
+      datalog: ans(t) :- peak_reported(117, 135, 47, s), mentions(s, t)
+
+  - id: ns-009
+    tags: [join, multi-hop, constant]
+    question:
+      en: Which terms co-occur with schizophrenia in some study?
+      fr: Quels termes apparaissent avec la schizophrénie dans une même étude ?
+    gold:
+      datalog: ans(t) :- mentions(s, 'schizophrenia'), mentions(s, t)
+
+  - id: ns-010
+    tags: [constant, entity-resolution]
+    question:
+      en: Which studies are about decision-making?
+      fr: Quelles études portent sur la prise de décision ?
+    gold:
+      datalog: ans(s) :- mentions(s, 'decision making')
+
+  - id: ns-011
+    tags: [constant, entity-resolution]
+    question:
+      en: Which studies discuss theory of mind?
+      fr: Quelles études traitent de la théorie de l'esprit ?
+    gold:
+      datalog: ans(s) :- mentions(s, 'theory mind')
+
+  - id: ns-012
+    tags: [constant, entity-resolution]
+    question:
+      en: Which studies mention the anterior cingulate cortex?
+      fr: Quelles études mentionnent le cortex cingulaire antérieur ?
+    gold:
+      datalog: ans(s) :- mentions(s, 'anterior cingulate')
+
+  - id: ns-013
+    tags: [join, constant, entity-resolution]
+    question:
+      en: Where in the brain do working memory studies report activations?
+      fr: Où dans le cerveau les études sur la mémoire de travail rapportent-elles des activations ?
+    gold:
+      datalog: ans(i, j, k) :- mentions(s, 'working memory'), reports(s, i, j, k)
+
+  - id: ns-014
+    tags: [negation, constant]
+    question:
+      en: Which studies do not mention pain?
+      fr: Quelles études ne mentionnent pas la douleur ?
+    gold:
+      datalog: ans(s) :- study(s), ~mentions(s, 'pain')
+
+  - id: ns-015
+    tags: [disjunction, constant]
+    question:
+      en: Which studies mention either anxiety or depression?
+      fr: Quelles études mentionnent l'anxiété ou la dépression ?
+    gold:
+      datalog: |-
+        anxiety_or_depression(s) :- mentions(s, 'anxiety')
+        anxiety_or_depression(s) :- mentions(s, 'depression')
+        ans(s) :- anxiety_or_depression(s)
+
+  - id: ns-016
+    tags: [conjunction, constant]
+    question:
+      en: Which studies mention both fear and the amygdala?
+      fr: Quelles études mentionnent à la fois la peur et l'amygdale ?
+    gold:
+      datalog: >-
+        ans(s) :- term_in_study_tfidf(s, 'fear', v), term_in_study_tfidf(s, 'amygdala', w),
+        (v > 0.03), (w > 0.03)
+
+  - id: ns-017
+    tags: [conjunction, negation, constant]
+    question:
+      en: Which studies mention memory but not working memory?
+      fr: Quelles études mentionnent la mémoire mais pas la mémoire de travail ?
+    gold:
+      datalog: >-
+        ans(s) :- term_in_study_tfidf(s, 'memory', v), (v > 0.03),
+        ~mentions(s, 'working memory')
+
+  - id: ns-018
+    tags: [comparison, constant]
+    question:
+      en: Which studies have a TF-IDF weight above 0.2 for the term music?
+      fr: Quelles études ont un poids TF-IDF supérieur à 0,2 pour le terme musique ?
+    gold:
+      datalog: ans(s) :- weighted_mention(s, 'music', w), (w > 0.2)
+
+  - id: ns-019
+    tags: [comparison, constant]
+    question:
+      en: Give the TF-IDF weight of the term reward in every study that mentions it.
+      fr: Donne le poids TF-IDF du terme récompense dans chaque étude qui le mentionne.
+    gold:
+      datalog: ans(s, w) :- weighted_mention(s, 'reward', w), (w > 0.03)
+
+  - id: ns-020
+    tags: [comparison, conjunction, constant]
+    question:
+      en: Which studies mention fear and weight pain more than fear?
+      fr: Quelles études mentionnent la peur et donnent plus de poids à la douleur qu'à la peur ?
+    gold:
+      datalog: >-
+        ans(s) :- term_in_study_tfidf(s, 'pain', w), term_in_study_tfidf(s, 'fear', v),
+        (w > v), (v > 0.03)
+
+  - id: ns-021
+    tags: [aggregation]
+    question:
+      en: How many studies are there in the database?
+      fr: Combien d'études la base contient-elle ?
+    gold:
+      datalog: |-
+        study_count(n) :- AGGREGATE[](study(s) @ count(s)) = n
+        ans(n) :- study_count(n)
+
+  - id: ns-022
+    tags: [aggregation, constant]
+    question:
+      en: How many studies mention autism?
+      fr: Combien d'études mentionnent l'autisme ?
+    gold:
+      datalog: |-
+        autism_count(n) :- AGGREGATE[](mentions(s, 'autism') @ count(s)) = n
+        ans(n) :- autism_count(n)
+
+  - id: ns-023
+    tags: [aggregation]
+    question:
+      en: How many studies mention each term?
+      fr: Combien d'études mentionnent chaque terme ?
+    gold:
+      datalog: |-
+        term_study_count(t, n) :- AGGREGATE[t](mentions(s, t) @ count(s)) = n
+        ans(t, n) :- term_study_count(t, n)
+
+  - id: ns-024
+    tags: [aggregation]
+    question:
+      en: How many terms does each study mention?
+      fr: Combien de termes chaque étude mentionne-t-elle ?
+    gold:
+      datalog: |-
+        study_term_count(s, n) :- AGGREGATE[s](mentions(s, t) @ count(t)) = n
+        ans(s, n) :- study_term_count(s, n)
+
+  - id: ns-025
+    tags: [aggregation, constant]
+    question:
+      en: What is the highest TF-IDF weight of the term attention?
+      fr: Quel est le poids TF-IDF le plus élevé du terme attention ?
+    gold:
+      datalog: |-
+        attention_max(m) :- AGGREGATE[](weighted_mention(s, 'attention', w) @ max(w)) = m
+        ans(m) :- attention_max(m)
+
+  - id: ns-026
+    tags: [aggregation, comparison]
+    question:
+      en: Which voxels are reported by at least 50 studies?
+      fr: Quels voxels sont rapportés par au moins 50 études ?
+    gold:
+      datalog: |-
+        voxel_study_count(i, j, k, n) :- AGGREGATE[i, j, k](reports(s, i, j, k) @ count(s)) = n
+        ans(i, j, k) :- voxel_study_count(i, j, k, n), (n >= 50)
+
+  - id: ns-027
+    tags: [aggregation, conjunction, constant]
+    question:
+      en: How many studies mention both fear and the amygdala?
+      fr: Combien d'études mentionnent à la fois la peur et l'amygdale ?
+    gold:
+      datalog: |-
+        fear_amygdala(s) :- term_in_study_tfidf(s, 'fear', v), term_in_study_tfidf(s, 'amygdala', w), (v > 0.03), (w > 0.03)
+        fear_amygdala_count(n) :- AGGREGATE[](fear_amygdala(s) @ count(s)) = n
+        ans(n) :- fear_amygdala_count(n)
+
+  - id: ns-028
+    tags: [atlas]
+    question:
+      en: List the region labels of the Schaefer atlas.
+      fr: Donne les étiquettes des régions de l'atlas de Schaefer.
+    gold:
+      datalog: ans(l) :- schaefer_label(l)
+
+  - id: ns-029
+    tags: [atlas, aggregation]
+    question:
+      en: How many voxels does each region of the Schaefer atlas have?
+      fr: Combien de voxels compte chaque région de l'atlas de Schaefer ?
+    gold:
+      datalog: |-
+        region_voxel_count(l, n) :- AGGREGATE[l](schaefer_voxels(i, j, k, l) @ count(i)) = n
+        ans(l, n) :- region_voxel_count(l, n)
+
+  - id: ns-030
+    tags: [probabilistic]
+    question:
+      en: For each term, what is the probability that a randomly selected study mentions it?
+      fr: Pour chaque terme, quelle est la probabilité qu'une étude choisie au hasard le mentionne ?
+    gold:
+      datalog: |-
+        mentioned_term(t) :- selected_study(s), mentions(s, t)
+        ans(t, p) :- PROB[mentioned_term(t)] = p
+
+  - id: ns-031
+    tags: [probabilistic, constant]
+    question:
+      en: For each term, what is the probability that a random study mentions it, given that the study mentions fear?
+      fr: Pour chaque terme, quelle est la probabilité qu'une étude au hasard le mentionne, sachant qu'elle mentionne la peur ?
+    gold:
+      datalog: |-
+        mentioned_term(t) :- selected_study(s), mentions(s, t)
+        ans(t, p) :- PROB[mentioned_term(t) // mentioned_term('fear')] = p
+
+  - id: ns-032
+    tags: [probabilistic, join, constant]
+    question:
+      en: What is the probability that each voxel is reported by a random study, given that the study mentions auditory?
+      fr: Quelle est la probabilité que chaque voxel soit rapporté par une étude au hasard, sachant qu'elle mentionne le terme auditif ?
+    gold:
+      datalog: |-
+        activation(i, j, k, s) :- peak_reported(i, j, k, s), selected_study(s)
+        term_association(s, t) :- mentions(s, t), selected_study(s)
+        ans(i, j, k, p) :- PROB[activation(i, j, k, s) // term_association(s, 'auditory')] = p

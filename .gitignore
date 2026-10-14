@@ -1,0 +1,7 @@
+__pycache__/
+*.egg-info/
+.venv/
+neurolang_data/
+runs/*/
+!runs/README.md
+datasets/*.gold.json
