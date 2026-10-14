@@ -40,6 +40,14 @@ providers:
     model: albert-large
     tool_calling: text
 
+  # Gemma 4 31B on Albert (DINUM). The models of a key: GET /v1/models.
+  albert-gemma:
+    api: openai
+    base_url: https://albert.api.etalab.gouv.fr/v1
+    api_key_env: ALBERT_API_KEY
+    model: gemma-4-31b-it
+    tool_calling: text
+
   anthropic:
     api: anthropic
     base_url: https://api.anthropic.com/v1
