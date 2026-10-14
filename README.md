@@ -77,7 +77,7 @@ uv pip install -e ".[dev]"
 Until they are merged, NeuroLang needs two branches:
 
 - `tui-5-llm` (NeuroLang/NeuroLang#904), the LLM assistant;
-- `feat/rdf-data-loading`, for the TEXT2SPARQL sets: loading RDF
+- `feat/rdf-data-loading` (NeuroLang/NeuroLang#912), for the TEXT2SPARQL sets: loading RDF
   instances, IRIs and prefixed names in Datalog, SPARQL-like builtins,
   `min` and `avg`.
 
