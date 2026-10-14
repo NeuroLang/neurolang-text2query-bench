@@ -52,6 +52,8 @@ def _gold_path(dataset) -> Path:
 
 def _gold(args, nl, dataset) -> dict:
     """Return the gold rows, from the cache when it is up to date."""
+    if dataset.metric == "text2sparql":
+        return gold_answers(nl, dataset)
     path = _gold_path(dataset)
     if path.exists() and path.stat().st_mtime >= dataset.path.stat().st_mtime:
         gold = json.loads(path.read_text(encoding="utf-8"))
