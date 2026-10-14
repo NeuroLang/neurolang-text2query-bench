@@ -285,7 +285,15 @@ def build(questions, endpoint: Endpoint, log=print, answers=()):
 
 
 def write(graph: rdflib.Graph, path: Path) -> None:
-    """Write *graph* in Turtle, with the DBpedia prefixes, at *path*."""
+    """
+    Write *graph* in Turtle, with the DBpedia prefixes, at *path*.
+
+    The triples are written as N-Triples after the ``@prefix`` lines,
+    which is Turtle too and much faster to write than pretty Turtle.
+    """
     path = Path(path)
     path.parent.mkdir(parents=True, exist_ok=True)
-    graph.serialize(path, format="turtle")
+    with open(path, "w", encoding="utf-8") as stream:
+        for prefix, namespace in PREFIXES.items():
+            stream.write(f"@prefix {prefix}: <{namespace}> .\n")
+        stream.write(graph.serialize(format="nt"))
