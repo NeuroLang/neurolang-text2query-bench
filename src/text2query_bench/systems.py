@@ -98,6 +98,7 @@ class AssistantSystem(System):
             self.query_language, self.strategy,
             engine_name=self.engine_name, client=self.client,
             on_step=lambda step: steps.append({
+                "thought": step.thought[:500],
                 "action": step.action, "arguments": step.arguments,
                 "observation": step.observation[:500],
             }),

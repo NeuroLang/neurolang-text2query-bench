@@ -49,6 +49,17 @@ providers:
     tool_calling: text
     requests_per_minute: 24     # Albert keys allow 25 a minute
 
+  # The same Gemma 4 31B on OpenRouter, without Albert's daily cap: for
+  # tuning, the final runs being on Albert.
+  openrouter-gemma:
+    api: openai
+    base_url: https://openrouter.ai/api/v1
+    api_key_env: OPENROUTER_API_KEY
+    model: google/gemma-4-31b-it
+    tool_calling: text
+    headers:
+      X-Title: NeuroLang
+
   anthropic:
     api: anthropic
     base_url: https://api.anthropic.com/v1
