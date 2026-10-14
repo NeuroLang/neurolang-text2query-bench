@@ -1,0 +1,301 @@
+# Datalog translations of the gold SPARQL queries of TEXT2SPARQL ck25,
+# by question id. Each is checked against the official result set by
+# `t2q-bench --dataset datasets/ck25.yaml check-gold`. A question without
+# a faithful translation has `datalog: null` and a `note` telling why.
+#
+# Conventions: predicates are named by prefix (pv:name, rdf:type); an
+# instance of a class C is C(x), subclasses included; IRIs are <...>.
+translations:
+  1:
+    datalog: |-
+      ans(r) :- pv:memberOf(<http://ld.company.org/prod-instances/empl-Karen.Brant%40company.org>, r), pv:Department(r)
+  2:
+    datalog: |-
+      ans(r) :- pv:phone(<http://ld.company.org/prod-instances/empl-Baldwin.Dirksen%40company.org>, r)
+  3:
+    datalog: |-
+      ans(r) :- pv:hasManager(<http://ld.company.org/prod-instances/empl-Heinrich.Hoch%40company.org>, r)
+  4:
+    datalog: |-
+      ans(r) :- pv:name(d, 'Marketing'), pv:memberOf(p, d), pv:email(p, r), pv:name(p, n), str_contains(n, 'Sabrina')
+  5:
+    datalog: |-
+      ans(r) :- pv:areaOfExpertise(r, <http://ld.company.org/prod-instances/prod-cat-Transistor>)
+  6:
+    datalog: |-
+      ans(r) :- pv:areaOfExpertise(r, <http://ld.company.org/prod-instances/prod-cat-Sensor>)
+  7:
+    datalog: |-
+      ans(r) :- pv:memberOf(p, <http://ld.company.org/prod-instances/dept-41622>), pv:hasManager(p, r)
+  8:
+    datalog: |-
+      ans(r) :- pv:responsibleFor(r, <http://ld.company.org/prod-instances/hw-M558-2275045>)
+  9:
+    datalog: |-
+      sensor_switch(h) :- pv:hasCategory(h, <http://ld.company.org/prod-instances/prod-cat-Sensor>), pv:hasCategory(h, <http://ld.company.org/prod-instances/prod-cat-Switch>)
+      sensor_switch_count(n) :- AGGREGATE[](sensor_switch(h) @ count(h)) = n
+      ans(n) :- sensor_switch_count(n)
+  10:
+    datalog: |-
+      ans(r) :- pv:memberOf(e, <http://ld.company.org/prod-instances/dept-85880>), pv:areaOfExpertise(e, <http://ld.company.org/prod-instances/prod-cat-Network>), pv:name(e, r)
+  11:
+    datalog: |-
+      ans(r) :- pv:memberOf(e, r), pv:areaOfExpertise(e, <http://ld.company.org/prod-instances/prod-cat-Transducer>)
+  12:
+    datalog: |-
+      ans(r) :- pv:hasSupplier(h, r), pv:hasCategory(h, <http://ld.company.org/prod-instances/prod-cat-Compensator>)
+  13:
+    datalog: |-
+      french_supplier(s) :- pv:hasSupplier(p, s), pv:addressCountry(s, 'France')
+      french_supplier_count(n) :- AGGREGATE[](french_supplier(s) @ count(s)) = n
+      ans(n) :- french_supplier_count(n)
+  14:
+    datalog: |-
+      ans(r) :- pv:hasSupplier(p, r), pv:hasCategory(p, <http://ld.company.org/prod-instances/prod-cat-Compensator>), pv:addressCountry(r, 'France')
+  15:
+    datalog: |-
+      encoder_price(h, a) :- pv:hasCategory(h, <http://ld.company.org/prod-instances/prod-cat-Encoder>), pv:price(h, p), pv:amount(p, a), pv:hasSupplier(h, s), pv:addressCountry(s, 'France')
+      encoder_price(h, a) :- pv:hasCategory(h, <http://ld.company.org/prod-instances/prod-cat-Encoder>), pv:price(h, p), pv:amount(p, a), pv:hasSupplier(h, s), pv:addressCountry(s, 'Germany')
+      cheapest_price(m) :- AGGREGATE[](encoder_price(h, a) @ min(a)) = m
+      ans(h) :- encoder_price(h, m), cheapest_price(m)
+    note: ORDER BY ... LIMIT 1 is the price equal to the minimum (ties all kept).
+  16:
+    datalog: |-
+      ans() :- pv:hasSupplier(p, s), pv:addressLocality(s, 'Toulouse')
+  17:
+    datalog: |-
+      ans(r) :- pv:hasSupplier(p, r), pv:addressLocality(r, 'Toulouse')
+  18:
+    datalog: |-
+      oscillator_price(h, a) :- pv:hasCategory(h, <http://ld.company.org/prod-instances/prod-cat-Oscillator>), pv:price(h, p), pv:amount(p, a)
+      cheapest_price(m) :- AGGREGATE[](oscillator_price(h, a) @ min(a)) = m
+      ans(h) :- oscillator_price(h, m), cheapest_price(m)
+    note: ORDER BY ... LIMIT 1 is the price equal to the minimum (ties all kept).
+  19:
+    datalog: |-
+      service_price(s, a) :- pv:Service(s), pv:price(s, p), pv:amount(p, a)
+      top_price(m) :- AGGREGATE[](service_price(s, a) @ max(a)) = m
+      ans(s) :- service_price(s, m), top_price(m)
+    note: ORDER BY DESC ... LIMIT 1 is the price equal to the maximum (ties all kept).
+  20:
+    datalog: |-
+      service_price(r, a) :- pv:Service(s), pv:hasProductManager(s, r), pv:price(s, p), pv:amount(p, a)
+      top_price(m) :- AGGREGATE[](service_price(r, a) @ max(a)) = m
+      ans(r) :- service_price(r, m), top_price(m)
+    note: ORDER BY DESC ... LIMIT 1 is the price equal to the maximum (ties all kept).
+  21:
+    datalog: |-
+      small_coil(h, w) :- pv:hasCategory(h, <http://ld.company.org/prod-instances/prod-cat-Coil>), pv:weight_g(h, w), pv:width_mm(h, x), pv:depth_mm(h, d), (x <= 15), (d <= 15)
+      heaviest(m) :- AGGREGATE[](small_coil(h, w) @ max(w)) = m
+      ans(h) :- small_coil(h, m), heaviest(m)
+    note: ORDER BY DESC ... LIMIT 1 is the weight equal to the maximum (ties all kept).
+  22:
+    datalog: |-
+      ans(r) :- pv:compatibleProduct(<http://ld.company.org/prod-instances/hw-U990-5234138>, r)
+  23:
+    datalog: |-
+      ans(r) :- pv:compatibleProduct(<http://ld.company.org/prod-instances/hw-U990-5234138>, r), pv:hasSupplier(r, s), pv:country(s, <http://dbpedia.org/resource/United_States>)
+  24:
+    datalog: |-
+      potentiometer_volume(h, v) :- pv:hasCategory(h, <http://ld.company.org/prod-instances/prod-cat-Potentiometer>), pv:width_mm(h, w), pv:depth_mm(h, d), pv:height_mm(h, t), (v == w * d * t)
+      smallest(m) :- AGGREGATE[](potentiometer_volume(h, v) @ min(v)) = m
+      ans(h) :- potentiometer_volume(h, m), smallest(m)
+    note: ORDER BY ... LIMIT 1 is the volume equal to the minimum (ties all kept).
+  25:
+    datalog: |-
+      coil_density(h, x) :- pv:hasCategory(h, <http://ld.company.org/prod-instances/prod-cat-Coil>), pv:width_mm(h, w), pv:depth_mm(h, d), pv:height_mm(h, t), pv:weight_g(h, g), (x == (g / 1000) / (w * d * t / 1000000000))
+      densest(m) :- AGGREGATE[](coil_density(h, x) @ max(x)) = m
+      ans(h) :- coil_density(h, m), densest(m)
+    note: ORDER BY DESC ... LIMIT 1 is the density equal to the maximum (ties all kept).
+  26:
+    datalog: |-
+      ans(r) :- pv:hasCategory(p, <http://ld.company.org/prod-instances/prod-cat-LCD>), pv:hasSupplier(p, s), pv:country(s, <http://dbpedia.org/resource/United_States>), pv:addressLocality(s, r)
+  27:
+    datalog: |-
+      manages(m) :- pv:hasManager(e, m)
+      employee(e) :- pv:Employee(e)
+      staff(e, n, m) :- employee(e), pv:name(e, n), pv:email(e, m), ~manages(e)
+      vals(v) :- staff(e, n, m), (v == e)
+      vals(v) :- staff(e, n, m), (v == n)
+      vals(v) :- staff(e, n, m), (v == m)
+      vals(v) :- staff(e, n, m), pv:phone(e, v)
+      ans(v) :- vals(v)
+    note: >-
+      OPTIONAL phone flattened into a single value column (metric-equivalent);
+      ORDER BY dropped. pv:Employee goes through the employee helper because a
+      subclass-rewritten class atom next to a negation gives nothing (NeuroLang bug).
+  28:
+    datalog: |-
+      russian_bom(b) :- pv:hasBomPart(b, bp), pv:hasPart(bp, h), pv:hasSupplier(h, s), pv:addressCountry(s, c), str_contains(lcase(c), 'russia')
+      ans() :- russian_bom(b), pv:Service(s), pv:eligibleFor(s, h), pv:hasBomPart(b, bp), pv:hasPart(bp, h)
+  29:
+    datalog: |-
+      row(h, s, n, c, a) :- pv:Supplier(s), pv:addressCountry(s, c), pv:name(s, n), pv:Hardware(h), pv:price(h, p), pv:amount(p, a), pv:currency(p, 'EUR'), pv:hasSupplier(h, s)
+      above(a, h2, s2, n2, c2, a2) :- row(h, s, n, c, a), row(h2, s2, n2, c2, a2), (a2 > a)
+      at_least(a, h2, s2, n2, c2, a2) :- row(h, s, n, c, a), row(h2, s2, n2, c2, a2), (a2 >= a)
+      n_above(a, k) :- AGGREGATE[a](above(a, h2, s2, n2, c2, a2) @ count(h2)) = k
+      n_at_least(a, k) :- AGGREGATE[a](at_least(a, h2, s2, n2, c2, a2) @ count(h2)) = k
+      ranked(n, c, a) :- row(h, s, n, c, a), n_above(a, k), n_at_least(a, j), (k < 15), (j > 10)
+      ans(n, c, a) :- ranked(n, c, a)
+    note: >-
+      LIMIT 5 OFFSET 10 not exactly expressible: as rank thresholds, rows with
+      fewer than 15 strictly dearer rows and more than 10 at least as dear. Ties
+      straddle both boundaries (5.96 at ranks 10-11, 5.92 at ranks 15-16) and the
+      endpoint broke them in its own order, so this keeps 2 extra rows (Mcdaniel,
+      Dean and Delgado / India; Cook LLC / Morocco). The columns are returned
+      side by side: a single value column mixing strings and floats fails in
+      NeuroLang (union of str and float columns).
+  30:
+    datalog: |-
+      member(n, d, e) :- pv:Department(d), pv:name(d, n), rdf:type(e, <http://ld.company.org/prod-vocab/Employee>), pv:memberOf(e, d)
+      dept_size(n, k) :- AGGREGATE[n](member(n, d, e) @ count(e)) = k
+      ans(n, k) :- dept_size(n, k), (k > 5)
+    note: >-
+      GROUP BY ?depty ?name groups by name only (?depty is unbound in the gold
+      query). `?emp a pv:Employee` is matched without RDFS inference by the
+      official endpoint, so only direct instances (rdf:type) count, not managers.
+  31:
+    datalog: |-
+      cat_weight(c, h, w) :- pv:ProductCategory(ci), pv:name(ci, c), pv:Hardware(h), pv:hasCategory(h, ci), pv:weight_g(h, w)
+      min_weight(c, m) :- AGGREGATE[c](cat_weight(c, h, w) @ min(w)) = m
+      max_weight(c, m) :- AGGREGATE[c](cat_weight(c, h, w) @ max(w)) = m
+      ans(c, a, b) :- min_weight(c, a), max_weight(c, b)
+  32:
+    datalog: |-
+      sold(s, n, h, c) :- pv:Supplier(s), pv:name(s, n), pv:hasSupplier(h, s), pv:price(h, p), pv:amount(p, a), pv:currency(p, 'EUR'), (c == round(a * 100))
+      cents(s, n, t) :- AGGREGATE[s, n](sold(s, n, h, c) @ sum(c)) = t
+      items(s, n, k) :- AGGREGATE[s, n](sold(s, n, h, c) @ count(h)) = k
+      ans(n, r) :- cents(s, n, t), items(s, n, k), (r == round(t / k) / 100)
+    note: >-
+      AVG computed as a sum of integer cents over a count, so that ROUND(AVG * 100)
+      rounds the exact decimal average (a float average misrounds halves like 3.225).
+  33:
+    datalog: |-
+      has_manager(d) :- pv:memberOf(m, d), pv:Manager(m)
+      ans() :- pv:Department(d), ~has_manager(d)
+  34:
+    datalog: |-
+      vals(v) :- pv:Supplier(s), pv:name(s, v)
+      vals(v) :- pv:Supplier(s), pv:name(s, n), pv:addressLocality(s, v)
+      vals(v) :- pv:Supplier(s), pv:name(s, n), pv:addressCountryCode(s, v)
+      vals(v) :- pv:Supplier(s), pv:name(s, n), pv:addressCountry(s, v)
+      ans(v) :- vals(v)
+    note: OPTIONALs flattened into a single value column (metric-equivalent).
+  35:
+    datalog: |-
+      eur_price(x, a) :- pv:price(x, p), pv:amount(p, a), pv:currency(p, 'EUR')
+      ans(x, y, d) :- pv:Product(x), pv:compatibleProduct(x, y), eur_price(x, a), eur_price(y, b), (d == round((a - b) * 100) / 100)
+    note: >-
+      The difference of two 2-decimal amounts is rounded to cents to undo float
+      noise (0.9999999 would be canonicalised as '1.0', not '1').
+  36:
+    datalog: |-
+      cat_item(c, n, h) :- pv:Hardware(h), pv:hasCategory(h, c), pv:name(c, n)
+      cat_count(c, n, k) :- AGGREGATE[c, n](cat_item(c, n, h) @ count(h)) = k
+      beaten_by(c, n, c2, n2) :- cat_count(c, n, k), cat_count(c2, n2, k2), (k2 > k)
+      n_beaten(c, n, j) :- AGGREGATE[c, n](beaten_by(c, n, c2, n2) @ count(c2)) = j
+      top(c, n) :- n_beaten(c, n, j), (j < 3)
+      top(c, n) :- cat_count(c, n, k), ~beaten_by_any(c, n)
+      beaten_by_any(c, n) :- beaten_by(c, n, c2, n2)
+      ans(c, n) :- top(c, n)
+    note: ORDER BY DESC(COUNT(*)) LIMIT 3 as "fewer than 3 categories with a larger count" (ties at the boundary all kept).
+  37:
+    datalog: |-
+      bom_part(b, p, q) :- pv:BillOfMaterial(b), pv:hasBomPart(b, p), pv:quantity(p, x), (q == int(x))
+      part_count(b, k) :- AGGREGATE[b](bom_part(b, p, q) @ count(p)) = k
+      total_qty(b, t) :- AGGREGATE[b](bom_part(b, p, q) @ sum(q)) = t
+      ans(b, k, t) :- part_count(b, k), total_qty(b, t), (t > 600)
+    note: ORDER BY dropped.
+  38:
+    datalog: |-
+      vals(v) :- pv:Agent(e), pv:name(e, v)
+      vals(v) :- pv:Agent(e), pv:name(e, n), pv:email(e, v)
+      vals(v) :- pv:Agent(e), pv:name(e, n), pv:phone(e, v)
+      vals(v) :- pv:Agent(e), pv:name(e, n), pv:memberOf(e, d), pv:name(d, v)
+      vals(v) :- pv:Agent(e), pv:name(e, n), pv:hasManager(e, m), pv:name(m, v)
+      ans(v) :- vals(v)
+    note: OPTIONALs flattened into a single value column (metric-equivalent).
+  39:
+    datalog: |-
+      ans(h, w, t, d) :- pv:Hardware(h), pv:width_mm(h, w), pv:height_mm(h, t), pv:depth_mm(h, d), (w > t), (d < 50)
+  40:
+    datalog: |-
+      has_named_pm(h) :- pv:hasProductManager(h, m), pv:name(m, x)
+      ans(h, i, n) :- pv:Hardware(h), pv:id(h, i), pv:name(h, n), ~has_named_pm(h)
+  41:
+    datalog: |-
+      full_member(m, e) :- pv:hasManager(e, m)
+      full_team(m, k) :- AGGREGATE[m](full_member(m, e) @ count(e)) = k
+      dept_member(m, d, e) :- pv:memberOf(m, d), pv:hasManager(e, m), pv:memberOf(e, d)
+      dept_team(m, k) :- AGGREGATE[m](dept_member(m, d, e) @ count(e)) = k
+      ans(m, n, p) :- pv:name(m, n), full_team(m, f), dept_team(m, t), (p == t / f * 100)
+    note: >-
+      Faithful translation, but the official result set is empty although the
+      gold SPARQL has answers on the KG (13 values here, e.g. Elena Herzog 100):
+      the official answer looks wrong.
+  42:
+    datalog: |-
+      part_line(b, p, s, q) :- pv:BillOfMaterial(b), pv:hasBomPart(b, p), pv:quantity(p, x), pv:hasPart(p, h), pv:price(h, r), pv:amount(r, a), pv:currency(r, 'EUR'), (q == int(x)), (s == int(x) * a)
+      sum_sub(b, t) :- AGGREGATE[b](part_line(b, p, s, q) @ sum(s)) = t
+      sum_qty(b, t) :- AGGREGATE[b](part_line(b, p, s, q) @ sum(q)) = t
+      unit_cost(b, c) :- sum_sub(b, t), sum_qty(b, u), (c == round(t / u * 100) / 100)
+      best(m) :- AGGREGATE[](unit_cost(b, c) @ max(c)) = m
+      ans(b, m) :- unit_cost(b, m), best(m)
+    note: >-
+      ORDER BY DESC ... LIMIT 1 is the cost equal to the maximum (ties all kept);
+      the outer AVG is over a single row per BOM, so it is the inner ratio itself.
+      The official result set is empty although the gold SPARQL has an answer on
+      the KG (bom-8, 4.22): the official answer looks wrong.
+  43:
+    datalog: |-
+      ans(a, b) :- pv:compatibleProduct(a, b), (a < b)
+  44:
+    datalog: |-
+      hw_width(h, w) :- pv:Hardware(h), pv:width_mm(h, w)
+      min_width(m) :- AGGREGATE[](hw_width(h, w) @ min(w)) = m
+      max_width(m) :- AGGREGATE[](hw_width(h, w) @ max(w)) = m
+      ans(i, n, w) :- min_width(a), max_width(b), pv:Hardware(h), pv:id(h, i), pv:name(h, n), pv:width_mm(h, w), (w >= a + 0.9 * (b - a))
+    note: ORDER BY dropped.
+  45:
+    datalog: |-
+      inductor(h, x) :- pv:hasCategory(h, <http://ld.company.org/prod-instances/prod-cat-Inductor>), pv:reliabilityIndex(h, x), pv:hasSupplier(h, s)
+      most_reliable(m) :- AGGREGATE[](inductor(h, x) @ max(x)) = m
+      ans(s) :- inductor(h, m), most_reliable(m), pv:hasSupplier(h, s)
+    note: ORDER BY DESC ... LIMIT 1 is the reliability equal to the maximum (ties all kept).
+  46:
+    datalog: |-
+      supplied(s, h, x) :- pv:reliabilityIndex(h, x), pv:hasSupplier(h, s)
+      raw_avg_rel(s, a) :- AGGREGATE[s](supplied(s, h, x) @ avg(x)) = a
+      avg_rel(s, r) :- raw_avg_rel(s, a), (r == round(a * 1000000) / 1000000)
+      better(s, s2) :- avg_rel(s, a), avg_rel(s2, b), (b > a)
+      n_better(s, k) :- AGGREGATE[s](better(s, s2) @ count(s2)) = k
+      beaten(s) :- better(s, s2)
+      top(s, a) :- avg_rel(s, a), n_better(s, k), (k < 5)
+      top(s, a) :- avg_rel(s, a), ~beaten(s)
+      ans(s, a) :- top(s, a)
+    note: >-
+      LIMIT 5 not exactly expressible: as "fewer than 5 suppliers with a higher
+      average" (averages rounded to 1e-6 to undo float noise). Nine suppliers tie
+      at 0.942 for the 5th place and the endpoint kept one of them arbitrarily,
+      so this returns 8 extra suppliers.
+  47:
+    datalog: |-
+      ans(r) :- pv:hasBomPart(<http://ld.company.org/prod-instances/bom-17>, bp), pv:hasPart(bp, p), pv:hasSupplier(p, s), pv:country(s, r)
+  48:
+    datalog: |-
+      ans(r) :- pv:BillOfMaterial(r), pv:hasBomPart(r, bp), pv:hasPart(bp, p), pv:hasSupplier(p, s), pv:country(s, <http://dbpedia.org/resource/Poland>)
+  49:
+    datalog: |-
+      alt_supplier(a, s) :- pv:compatibleProduct(<http://ld.company.org/prod-instances/hw-K367-1320550>, a), pv:hasSupplier(a, s)
+      n_suppliers(n) :- AGGREGATE[](alt_supplier(a, s) @ count(s)) = n
+      ans(n) :- n_suppliers(n)
+  50:
+    datalog: |-
+      responsible(r, p) :- pv:responsibleFor(r, p)
+      n_products(r, k) :- AGGREGATE[r](responsible(r, p) @ count(p)) = k
+      top_count(m) :- AGGREGATE[](n_products(r, k) @ max(k)) = m
+      ans(r, m) :- n_products(r, m), top_count(m)
+    note: >-
+      LIMIT 1 not exactly expressible: as the count equal to the maximum. dept-22183
+      and dept-85880 both have 12 products and the endpoint kept dept-85880
+      arbitrarily, so this returns dept-22183 too.

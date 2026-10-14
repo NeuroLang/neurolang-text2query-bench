@@ -40,6 +40,7 @@ GOLD = {
 @pytest.mark.parametrize("value, expected", [
     (3, "3"), (3.0, "3"), ("3.0", "3"), ("-0.20", "-0.2"), (0.123456, "0.1235"),
     (True, "true"), ("http://x.org/a", "http://x.org/a"), ("nan", "nan"),
+    (-0.9999999999, "-1"), (-0.0, "0"),
 ])
 def test_canonical(value, expected):
     assert text2sparql.canonical(value) == expected

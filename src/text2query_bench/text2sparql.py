@@ -206,9 +206,10 @@ def canonical(value) -> str:
         return text
     if number != number or number in (float("inf"), float("-inf")):
         return text
+    number = round(number, 4)
     if number.is_integer():
         return str(int(number))
-    return repr(round(number, 4))
+    return repr(number)
 
 
 def values(rows) -> set:
