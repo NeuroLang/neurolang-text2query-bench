@@ -60,6 +60,17 @@ providers:
     headers:
       X-Title: NeuroLang
 
+  # DeepSeek V4 Flash (the snapshot Albert serves) on OpenRouter.
+  openrouter-deepseek-flash:
+    api: openai
+    base_url: https://openrouter.ai/api/v1
+    api_key_env: OPENROUTER_API_KEY
+    model: deepseek/deepseek-v4-flash-0731
+    tool_calling: text
+    max_tokens: 4096
+    headers:
+      X-Title: NeuroLang
+
   anthropic:
     api: anthropic
     base_url: https://api.anthropic.com/v1
