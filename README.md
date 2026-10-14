@@ -199,6 +199,32 @@ The question sets and gold result sets are not redistributed here;
 DBpedia is CC-BY-SA-3.0. The Datalog translations are derived from the
 gold queries of these sets and are distributed under the same terms.
 
+## Results
+
+These are first results of NeuroLang's LLM assistant with Claude Sonnet,
+through the `claude-code` provider, writing Datalog. The run date is
+2026-10-14 and the scores are the mean over all the questions and
+languages of each set.
+
+| dataset | strategy | F1 | exact | valid | LLM calls | s/question |
+|---|---|---:|---:|---:|---:|---:|
+| neurosynth (en, fr) | ICL | 0.875 | 86% | 100% | 1.2 | 10 |
+| neurosynth (en, fr) | ReAct | **0.918** | 89% | 95% | 4.1 | 25 |
+| ck26 (en, de), zero-shot | ICL | 0.496 | 37% | 98% | 1.0 | 10 |
+| ck26 (en, de), zero-shot | ReAct | **0.677** | 54% | 69% | 6.7 | 37 |
+| db26 (en, es), db25 as examples | ICL | 0.394 | 39% | 99% | 1.2 | 13 |
+| db26 (en, es), db25 as examples | ReAct | **0.590** | 55% | 61% | 5.2 | 44 |
+
+- **ReAct beats ICL by 0.04 to 0.20 F1.** Its tools resolve entities to
+  stored constants, and it can check its queries' results before
+  answering.
+- **Some answers are missing.** The `claude -p` usage limit cut off 2 of
+  ck26's ReAct answers and 15 of db26's, and those count as 0. Resume
+  them with `run --resume`.
+- **On the TEXT2SPARQL sets, most errors are about what to return.**
+  Examples are returning entity names instead of IRIs, or adding
+  columns. The official metric scores these as wrong answers.
+
 ## Metrics
 
 For each question and natural language:
