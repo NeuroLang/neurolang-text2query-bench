@@ -96,6 +96,10 @@ See `neurolang/utils/llm/llm.example.yaml`. The supported providers are:
 - any OpenAI-compatible server
 - a local command such as `claude -p` (provider `claude-code`)
 
+`configs/llm.yaml` uses Gemma 4 31B on Albert (`albert-gemma`) by
+default. It reads the key from `ALBERT_API_KEY` and keeps to Albert's
+limit of 25 requests a minute.
+
 ## Usage
 
 ```bash

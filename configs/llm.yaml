@@ -18,7 +18,7 @@
 #   text    a Thought / Action / Observation protocol that any chat
 #           model can follow
 
-default_provider: claude-code
+default_provider: albert-gemma
 
 providers:
   openrouter:
