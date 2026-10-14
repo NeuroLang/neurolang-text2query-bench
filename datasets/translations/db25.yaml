@@ -1,0 +1,406 @@
+# Datalog translations of the gold SPARQL queries of TEXT2SPARQL db25,
+# by question id. Each is checked against the official result set by
+# `t2q-bench --dataset datasets/db25.yaml check-gold`. A question without
+# a faithful translation has `datalog: null` and a `note` telling why.
+#
+# Conventions: predicates are named by prefix (dbo:name, dbp:name, rdfs:label);
+# an instance of a class C is C(x) (DBpedia types are materialised, no
+# subclass reasoning); IRIs are <...>; literals carry no language tag.
+translations:
+  1:
+    datalog: |-
+      sf(x, a) :- dbo:literaryGenre(x, <http://dbpedia.org/resource/Science_fiction>), dbo:author(x, a)
+      n(c) :- AGGREGATE[](sf(x, a) @ count(a)) = c
+      ans(c) :- n(c)
+    note: >-
+      COUNT(?author) without DISTINCT counts the (novel, author) solutions, so the
+      count is over the pairs.
+  2:
+    datalog: |-
+      pop(c, p) :- dbo:Country(c), dbo:populationTotal(c, p)
+      beaten_by(c, c2) :- pop(c, p), pop(c2, p2), (p2 > p)
+      n_beaten(c, j) :- AGGREGATE[c](beaten_by(c, c2) @ count(c2)) = j
+      beaten(c) :- beaten_by(c, c2)
+      top(c) :- n_beaten(c, j), (j < 10)
+      top(c) :- pop(c, p), ~beaten(c)
+      ans(c) :- top(c)
+    note: >-
+      ORDER BY DESC ... LIMIT 10 as "fewer than 10 countries with a larger
+      population" (ties at the boundary all kept).
+  3:
+    datalog: |-
+      ans(r) :- dbp:birthPlace(<http://dbpedia.org/resource/Keanu_Reeves>, r)
+  4:
+    datalog: |-
+      ans(r) :- dbp:numLocations(<http://dbpedia.org/resource/Starbucks>, r)
+  5:
+    datalog: |-
+      ans(r) :- dbp:capital(<http://dbpedia.org/resource/Republic_of_Montenegro_(1992–2006)>, r)
+  6:
+    datalog: |-
+      ans(r) :- dbo:Company(r), dbo:product(r, <http://dbpedia.org/resource/IPhone>), dbo:product(r, <http://dbpedia.org/resource/IPad>)
+  7:
+    datalog: |-
+      ans(r) :- dbo:birthPlace(<http://dbpedia.org/resource/Gustave_Eiffel>, r)
+  8:
+    datalog: |-
+      ans() :- dbo:location(<http://dbpedia.org/resource/Eiffel_Tower>, <http://dbpedia.org/resource/Paris>)
+  9:
+    datalog: |-
+      ans(r) :- dbo:designer(<http://dbpedia.org/resource/Python_(programming_language)>, r)
+  10:
+    datalog: |-
+      ans(r) :- dbp:position(x, <http://dbpedia.org/resource/Wide_receiver>), dbo:team(x, r), dbo:AmericanFootballPlayer(x)
+  11:
+    datalog: |-
+      stud(u, s) :- dbo:University(u), dbo:state(u, <http://dbpedia.org/resource/California>), dbo:numberOfStudents(u, s)
+      total(t) :- AGGREGATE[](stud(u, s) @ sum(s)) = t
+      ans(t) :- total(t)
+  12:
+    datalog: |-
+      ans(r) :- dbo:manufacturer(<http://dbpedia.org/resource/Boeing_747>, r)
+  13:
+    datalog: |-
+      ans(r) :- dbp:starring(r, <http://dbpedia.org/resource/Johnny_Depp>), dbo:Film(r)
+  14:
+    datalog: |-
+      ans() :- dbp:author(<http://dbpedia.org/resource/Harry_Potter>, <http://dbpedia.org/resource/J._K._Rowling>)
+  15:
+    datalog: |-
+      ans(r) :- dbo:director(<http://dbpedia.org/resource/Louvre>, r)
+  16:
+    datalog: |-
+      ans(r) :- dbp:director(<http://dbpedia.org/resource/Inception>, r)
+  17:
+    datalog: |-
+      ans(r) :- dbo:distributor(r, <http://dbpedia.org/resource/Netflix>), dbo:Film(r)
+  18:
+    datalog: |-
+      top(m) :- AGGREGATE[](dbo:populationTotal(c, p) @ max(p)) = m
+      ans(c) :- dbo:populationTotal(c, m), top(m)
+    note: >-
+      ORDER BY DESC ... LIMIT 1 is the population equal to the maximum (ties all
+      kept).
+  19:
+    datalog: |-
+      ans(r) :- dbo:sourceCountry(<http://dbpedia.org/resource/Amazon_River>, r)
+  20:
+    datalog: |-
+      ans(r) :- dbo:ethnicity(<http://dbpedia.org/resource/Chimamanda_Ngozi_Adichie>, x), dbo:language(x, r), dbo:EthnicGroup(x)
+  21:
+    datalog: |-
+      ans(r) :- dbo:location(<http://dbpedia.org/resource/Eiffel_Tower>, r), dbo:Country(r)
+  22:
+    datalog: |-
+      ans(r) :- dbp:producer(x, <http://dbpedia.org/resource/Steven_Spielberg>), dbo:director(x, r), dbo:Film(x)
+  23:
+    datalog: |-
+      founded(u, d) :- dbo:formationYear(u, d)
+      founded(u, d) :- dbo:foundingYear(u, d)
+      ans(u) :- dbo:Organisation(u), founded(u, d), strstarts(str(d), '1990')
+    note: >-
+      The regex on the year is strstarts on its string. The official result set is
+      empty, so it agrees with this translation, but the subgraph holds no triples
+      for this pattern (the CONSTRUCT over the gold WHERE was empty). On the full
+      endpoint, organisations founded in 1990 exist; the empty gold probably comes
+      from the endpoint's regex on xsd:gYear literals.
+  24:
+    datalog: |-
+      ans(r) :- dbo:birthPlace(<http://dbpedia.org/resource/J._K._Rowling>, r), dbo:birthPlace(<http://dbpedia.org/resource/Ghadam-Ali_Sarami>, r)
+  25:
+    datalog: |-
+      f(u) :- dbo:director(u, <http://dbpedia.org/resource/Christopher_Nolan>), dbo:Film(u)
+      n(c) :- AGGREGATE[](f(u) @ count(u)) = c
+      ans(c) :- n(c)
+  26:
+    datalog: |-
+      ans(r) :- dbo:commander(<http://dbpedia.org/resource/Battle_of_Gettysburg>, r)
+  27:
+    datalog: |-
+      ans(r) :- dbp:director(<http://dbpedia.org/resource/Casablanca_(film)>, r)
+  28:
+    datalog: |-
+      inf(u) :- dbo:location(u, <http://dbpedia.org/resource/France>)
+      inf(u) :- dbo:location(u, x), dbo:country(x, <http://dbpedia.org/resource/France>)
+      ans(u) :- dbo:Winery(u), inf(u)
+  29:
+    datalog: |-
+      ans() :- dbo:academicDiscipline(<http://dbpedia.org/resource/IEEE_Intelligent_Systems>, <http://dbpedia.org/resource/Artificial_intelligence>)
+  30:
+    datalog: |-
+      l(u) :- dbo:officialLanguage(<http://dbpedia.org/resource/Switzerland>, u)
+      n(c) :- AGGREGATE[](l(u) @ count(u)) = c
+      ans(c) :- n(c)
+  31:
+    datalog: |-
+      ans(x) :- dbo:Book(x), dbo:illustrator(x, <http://dbpedia.org/resource/Quentin_Blake>)
+  32:
+    datalog: |-
+      ans(m) :- dbo:homeStadium(x, <http://dbpedia.org/resource/Old_Trafford>), dbo:manager(x, m)
+  33:
+    datalog: |-
+      b(u) :- dbp:author(u, <http://dbpedia.org/resource/J._K._Rowling>)
+      n(c) :- AGGREGATE[](b(u) @ count(u)) = c
+      ans(c) :- n(c)
+  34:
+    datalog: |-
+      ans(r) :- dbo:previousWork(<http://dbpedia.org/resource/Butters'_Very_Own_Episode>, x), dbo:director(x, r), dbo:TelevisionEpisode(x)
+  35:
+    datalog: |-
+      ans(r) :- dbo:party(<http://dbpedia.org/resource/Narendra_Modi>, r), dbo:leaderName(<http://dbpedia.org/resource/Varanasi>, r)
+  36:
+    datalog: |-
+      ans(r) :- dbp:producer(<http://dbpedia.org/resource/Kind_of_Blue>, x), dbo:associatedBand(x, r), dbo:MusicalArtist(x)
+  37:
+    datalog: |-
+      ans(r) :- dbp:origin(<http://dbpedia.org/resource/The_Beatles>, r)
+  38:
+    datalog: |-
+      films(d, k) :- AGGREGATE[d](dbo:director(f, d) @ count(f)) = k
+      n_with(k, m) :- AGGREGATE[k](films(d, k) @ count(d)) = m
+      above(k, k2, m2) :- n_with(k, m), n_with(k2, m2), (k2 > k)
+      n_above(k, j) :- AGGREGATE[k](above(k, k2, m2) @ sum(m2)) = j
+      beaten(k) :- above(k, k2, m2)
+      top(d) :- films(d, k), n_above(k, j), (j < 10)
+      top(d) :- films(d, k), ~beaten(k)
+      ans(d) :- top(d)
+    note: >-
+      ORDER BY DESC(COUNT(?film)) LIMIT 10 as "fewer than 10 directors with more
+      films" (ties at the boundary all kept). The rank of a film count is the sum
+      of the numbers of directors with each larger count, which avoids a quadratic
+      join over all directors.
+  39:
+    datalog: |-
+      ans(r) :- dbo:border(x, <http://dbpedia.org/resource/Pacific_Ocean>), dbo:river(x, r)
+  40:
+    datalog: |-
+      ans(r) :- dbp:affiliations(r, <http://dbpedia.org/resource/University_of_California>), dbo:University(r), dbo:state(r, <http://dbpedia.org/resource/California>)
+  41:
+    datalog: |-
+      ans(x) :- dbo:location(x, <http://dbpedia.org/resource/Silicon_Valley>), dbo:Company(x)
+  42:
+    datalog: |-
+      ans(r) :- dbo:league(r, <http://dbpedia.org/resource/Campeonato_Brasileiro_Série_A>)
+  43:
+    datalog: |-
+      ans(r) :- dbp:neighboringMunicipalities(r, <http://dbpedia.org/resource/Geneva>), dbp:neighboringMunicipalities(r, <http://dbpedia.org/resource/Carouge>), dbo:Place(r)
+  44:
+    datalog: |-
+      ans(c) :- dbo:governmentType(x, <http://dbpedia.org/resource/Parliamentary_republic>), dbo:Country(x), dbo:capital(x, c)
+  45:
+    datalog: |-
+      ans(d) :- dbo:launchDate(<http://dbpedia.org/resource/Apollo_11>, d)
+    note: >-
+      Faithful translation, but dbo:launchDate does not occur in the subgraph
+      (Apollo_11 has no such triple on the endpoint, and the official result set
+      is empty). NeuroLang rejects a query on an unknown predicate
+      (SymbolNotFoundError), whereas SPARQL just matches nothing, so this check
+      errors instead of returning the empty answer.
+  46:
+    datalog: |-
+      ans(b) :- dbo:musicalArtist(s, b), dbo:Band(b)
+    note: >-
+      ORDER BY dropped.
+  47:
+    datalog: |-
+      ans(r) :- dbp:predecessor(x, <http://dbpedia.org/resource/Margaret_Thatcher>), dbo:OfficeHolder(x), dbp:placeOfDeath(x, r)
+  48:
+    datalog: |-
+      ans(r) :- dbp:almaMater(<http://dbpedia.org/resource/Bill_Gates>, r), dbp:almaMater(<http://dbpedia.org/resource/Mark_Zuckerberg>, r)
+  49:
+    datalog: |-
+      ans() :- dbo:anthem(<http://dbpedia.org/resource/United_States>, <http://dbpedia.org/resource/The_Star-Spangled_Banner>)
+  50:
+    datalog: |-
+      ans() :- dbo:firstAscentPerson(<http://dbpedia.org/resource/Mount_Everest>, <http://dbpedia.org/resource/Edmund_Hillary>)
+  51:
+    datalog: |-
+      ans(r) :- dbo:spouse(<http://dbpedia.org/resource/Nicole_Kidman>, r), dbo:spouse(<http://dbpedia.org/resource/Katie_Holmes>, r)
+  52:
+    datalog: |-
+      ans() :- dbo:party(<http://dbpedia.org/resource/Julia_Gillard>, r), dbo:party(<http://dbpedia.org/resource/Kevin_Rudd>, r)
+  53:
+    datalog: |-
+      ans(r) :- dbo:headquarter(r, <http://dbpedia.org/resource/New_York_City>), dbo:Organisation(r)
+  54:
+    datalog: |-
+      ans(r) :- dbo:employer(r, <http://dbpedia.org/resource/The_New_York_Times>), dbo:Person(r)
+  55:
+    datalog: |-
+      ans(r) :- dbo:director(<http://dbpedia.org/resource/Inception>, r)
+  56:
+    datalog: |-
+      ans(r) :- dbp:publisher(x, <http://dbpedia.org/resource/Penguin_Books>), dbo:author(x, r)
+  57:
+    datalog: |-
+      ans(r) :- dbo:instrument(<http://dbpedia.org/resource/Jazz>, r)
+  58:
+    datalog: |-
+      ans() :- dbo:starring(<http://dbpedia.org/resource/Harry_Potter_(film_series)>, <http://dbpedia.org/resource/Emma_Watson>)
+  59:
+    datalog: |-
+      ans(r) :- dbo:birthPlace(<http://dbpedia.org/resource/Leonardo_da_Vinci>, p), dbo:country(p, c), dbp:capital(c, r)
+  60:
+    datalog: |-
+      ans(n) :- dbo:largestCity(<http://dbpedia.org/resource/Canada>, x), dbo:populationTotal(x, n)
+  61:
+    datalog: |-
+      f(u) :- dbo:cinematography(u, <http://dbpedia.org/resource/Roger_Deakins>)
+      n(c) :- AGGREGATE[](f(u) @ count(u)) = c
+      ans(c) :- n(c)
+  62:
+    datalog: |-
+      ans(r) :- dbp:nationalteam(r, <http://dbpedia.org/resource/Brazil_national_football_team>)
+  63:
+    datalog: |-
+      ans(r) :- dbp:team(<http://dbpedia.org/resource/LeBron_James>, x), dbp:manager(x, r)
+  64:
+    datalog: |-
+      ans(r) :- dbp:director(<http://dbpedia.org/resource/Inception>, r), dbo:director(<http://dbpedia.org/resource/The_Dark_Knight_(film)>, r)
+  65:
+    datalog: |-
+      ans(r) :- dbp:birthPlace(<http://dbpedia.org/resource/Albert_Einstein>, r)
+  66:
+    datalog: |-
+      b(u) :- dbp:phylum(u, <http://dbpedia.org/resource/Chordate>), dbo:Bird(u)
+      n(c) :- AGGREGATE[](b(u) @ count(u)) = c
+      ans(c) :- n(c)
+  67:
+    datalog: |-
+      ans(r) :- dbp:author(<http://dbpedia.org/resource/Harry_Potter_and_the_Order_of_the_Phoenix>, r)
+  68:
+    datalog: |-
+      ans(r) :- dbo:location(<http://dbpedia.org/resource/Eiffel_Tower>, r)
+  69:
+    datalog: |-
+      ans(r) :- dbp:keyPeople(<http://dbpedia.org/resource/Wikimedia_Foundation>, r)
+  70:
+    datalog: |-
+      g(u) :- dbp:rank(u, <http://dbpedia.org/resource/General_(United_States)>)
+      n(c) :- AGGREGATE[](g(u) @ count(u)) = c
+      ans(c) :- n(c)
+  71:
+    datalog: |-
+      ans(r) :- dbp:leaderName(<http://dbpedia.org/resource/United_Nations>, r)
+  72:
+    datalog: |-
+      ans(r) :- dbo:recordedIn(<http://dbpedia.org/resource/Bohemian_Rhapsody>, r)
+  73:
+    datalog: |-
+      ans(r) :- dbo:capital(<http://dbpedia.org/resource/California>, r)
+  74:
+    datalog: |-
+      ans(a) :- dbp:subject(b, <http://dbpedia.org/resource/Battle_of_Stalingrad>), dbo:author(b, a)
+  75:
+    datalog: |-
+      ans() :- dbp:location(<http://dbpedia.org/resource/Louvre>, l), regex(str(l), '(?i)Paris')
+    note: >-
+      The SPARQL regex applies to the dbp:location value; here it applies to
+      str(l), and '(?i)' gives the 'i' flag.
+  76:
+    datalog: |-
+      pm(u) :- yago:PrimeMinistersOfTheUnitedKingdom(u)
+      pm(u) :- dbo:PrimeMinister(u), dbp:title(u, <http://dbpedia.org/resource/Prime_Minister_of_the_United_Kingdom>)
+      ans(u, s) :- dbo:Person(u), pm(u), rdfs:label(u, s), ~regex(s, '(?i)Prime Ministership'), ~regex(s, 'and the')
+    note: >-
+      lang(?string) = 'en' cannot be expressed (literals have no language tag), so
+      the Spanish labels are kept too. They agree with the official answers here.
+  77:
+    datalog: |-
+      ans(x) :- dbo:birthDate(<http://dbpedia.org/resource/Albert_Einstein>, x)
+    note: >-
+      LIMIT 1 dropped. There is a single birth date.
+  78:
+    datalog: |-
+      ans(a) :- dbo:Building(b), dbo:height(b, h), dbo:architect(b, a), (h > 300)
+  79:
+    datalog: |-
+      ans(r) :- dbo:birthPlace(<http://dbpedia.org/resource/Nikola_Tesla>, r)
+  80:
+    datalog: |-
+      cities(c, k) :- AGGREGATE[c](city_of(x, c) @ count(x)) = k
+      city_of(x, c) :- dbo:City(x), dbo:country(x, c)
+      beaten_by(c, c2) :- cities(c, k), cities(c2, k2), (k2 > k)
+      n_beaten(c, j) :- AGGREGATE[c](beaten_by(c, c2) @ count(c2)) = j
+      beaten(c) :- beaten_by(c, c2)
+      top(c) :- n_beaten(c, j), (j < 10)
+      top(c) :- cities(c, k), ~beaten(c)
+      ans(c) :- top(c)
+    note: >-
+      ORDER BY DESC(COUNT(?city)) LIMIT 10 as "fewer than 10 countries with more
+      cities" (ties at the boundary all kept).
+  81:
+    datalog: |-
+      ans(r) :- dbo:riverMouth(x, <http://dbpedia.org/resource/Black_Sea>), dbo:sourcePlace(x, r)
+  82:
+    datalog: |-
+      g(x) :- dbo:developer(x, <http://dbpedia.org/resource/Blizzard_Entertainment>), dbo:series(x, <http://dbpedia.org/resource/Warcraft>)
+      n(c) :- AGGREGATE[](g(x) @ count(x)) = c
+      ans(c) :- n(c)
+  83:
+    datalog: |-
+      ans(r) :- dbo:child(<http://dbpedia.org/resource/Aung_San_Suu_Kyi>, x), dbp:alternativeNames(x, r)
+  84:
+    datalog: |-
+      ans(r) :- dbp:occupation(r, <http://dbpedia.org/resource/Actor>), dbp:occupation(r, <http://dbpedia.org/resource/Athlete>)
+  85:
+    datalog: |-
+      ans(r) :- dbo:spouse(<http://dbpedia.org/resource/Tom_Hanks>, r)
+  86:
+    datalog: |-
+      ans(r) :- dbp:author(<http://dbpedia.org/resource/Wikipedia>, x), dbp:occupation(x, r)
+  87:
+    datalog: |-
+      ans(c) :- dbo:almaMater(p, <http://dbpedia.org/resource/Stanford_University>), dbo:employer(p, c)
+  88:
+    datalog: |-
+      ans(r) :- dbo:author(r, <http://dbpedia.org/resource/J._K._Rowling>), dbo:Book(r)
+  89:
+    datalog: |-
+      b(u) :- dbo:author(u, <http://dbpedia.org/resource/J._K._Rowling>), dbo:Book(u)
+      n(c) :- AGGREGATE[](b(u) @ count(u)) = c
+      ans(c) :- n(c)
+  90:
+    datalog: |-
+      ans(r) :- dbp:predecessor(<http://dbpedia.org/resource/Irina_Bokova>, x), dbp:birthPlace(x, r)
+  91:
+    datalog: |-
+      f(u, x) :- dbo:cinematography(<http://dbpedia.org/resource/Inception>, x), dbo:cinematography(u, x)
+      n(c) :- AGGREGATE[](f(u, x) @ count(u)) = c
+      ans(c) :- n(c)
+    note: >-
+      COUNT(?uri) without DISTINCT counts the (film, cinematographer) solutions,
+      so the count is over the pairs.
+  92:
+    datalog: |-
+      ans(r) :- dbo:locatedInArea(<http://dbpedia.org/resource/Mount_Everest>, x), dbo:country(x, y), dbo:capital(y, r)
+  93:
+    datalog: |-
+      ans() :- dbo:campus(u, <http://dbpedia.org/resource/New_York>), dbo:campus(u, <http://dbpedia.org/resource/California>), dbo:University(u)
+  94:
+    datalog: |-
+      ans() :- dbp:mascot(<http://dbpedia.org/resource/University_of_Georgia>, r), dbp:mascot(<http://dbpedia.org/resource/Atlanta_Falcons>, r)
+  95:
+    datalog: |-
+      ans(r) :- dbp:placeofburial(r, <http://dbpedia.org/resource/Père_Lachaise_Cemetery>)
+  96:
+    datalog: |-
+      ans(c) :- dbo:University(u), dbo:country(u, c)
+    note: >-
+      ORDER BY dropped.
+  97:
+    datalog: |-
+      ans(r) :- dbo:sourceMountain(r, <http://dbpedia.org/resource/Rocky_Mountains>), dbo:River(r)
+  98:
+    datalog: |-
+      ans(r) :- dbp:areaServed(<http://dbpedia.org/resource/FedEx>, r)
+  99:
+    datalog: |-
+      top(r) :- dbp:locationCountry(<http://dbpedia.org/resource/Michelin>, r)
+      top(r) :- dbp:locationCity(<http://dbpedia.org/resource/Michelin>, r)
+      ans(r) :- top(r)
+  100:
+    datalog: |-
+      ans(x, y) :- dbo:birthPlace(x, <http://dbpedia.org/resource/Paris>), dbo:author(y, x)
+    note: >-
+      SELECT * returns both ?x and ?y.

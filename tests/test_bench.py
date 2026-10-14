@@ -176,3 +176,17 @@ def test_endpoint_protocol(dataset):
         assert not broken.valid and "404" in broken.error
     finally:
         server.shutdown()
+
+
+def test_unknown_predicates_can_give_no_rows(nl):
+    from neurolang.exceptions import SymbolNotFoundError
+
+    def unknown(query):
+        raise SymbolNotFoundError("Symbol not found dbo:launchDate")
+
+    nl.execute_datalog_program = unknown
+    failed = execute(nl, "ans(x) :- dbo:launchDate(x)", "datalog")
+    assert not failed.ok and "SymbolNotFoundError" in failed.error
+    empty = execute(nl, "ans(x) :- dbo:launchDate(x)", "datalog",
+                    unknown_is_empty=True)
+    assert empty.ok and empty.rows == []

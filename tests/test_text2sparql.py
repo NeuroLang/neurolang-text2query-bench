@@ -143,3 +143,18 @@ def test_mentioned_entities_and_labels():
     }
     query = labels_query(["http://dbpedia.org/resource/A"])
     assert "VALUES ?e { <http://dbpedia.org/resource/A> }" in query
+
+
+def test_construct_projects_all_variables_of_subselects():
+    query = construct_query(
+        "PREFIX dbo: <http://dbpedia.org/ontology/>\n"
+        "SELECT ?a WHERE { { SELECT ?a ((?y + 1) AS ?z) WHERE {"
+        " ?f dbo:starring ?a ; dbo:releaseDate ?y } } } "
+        "GROUP BY ?a LIMIT 1"
+    )
+    assert "SELECT * WHERE" in query and "AS ?z" not in query
+    grouped = construct_query(
+        "SELECT ?a WHERE { { SELECT ?a (COUNT(?f) AS ?n) WHERE {"
+        " ?f <http://x.org/p> ?a } GROUP BY ?a } }"
+    )
+    assert "COUNT(?f)" in grouped

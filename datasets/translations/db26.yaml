@@ -1,0 +1,233 @@
+# Datalog translations of the gold SPARQL queries of TEXT2SPARQL db26
+# (DBpedia 2015-10), by question id. Each is checked against the official
+# result set by `t2q-bench --dataset datasets/db26.yaml check-gold`.
+#
+# Conventions: predicates are named by prefix (dbo:starring, dbp:title,
+# yago:..); an instance of a class C is C(x) (types are materialised, no
+# subclass reasoning); IRIs are <...>; ASK is ans() :- ...
+translations:
+  1:
+    datalog: |-
+      pres(u) :- dbo:President(u), dbo:country(u, <http://dbpedia.org/resource/France>)
+      pres(u) :- dbo:Person(u), dbp:title(u, <http://dbpedia.org/resource/President_of_France>)
+      ans(u) :- pres(u)
+  2:
+    datalog: |-
+      decade(180)
+      decade(181)
+      decade(182)
+      decade(183)
+      decade(184)
+      decade(185)
+      decade(186)
+      decade(187)
+      decade(188)
+      decade(189)
+      decade(190)
+      decade(191)
+      decade(192)
+      decade(193)
+      decade(194)
+      decade(195)
+      decade(196)
+      decade(197)
+      decade(198)
+      decade(199)
+      decade(200)
+      decade(201)
+      decade(202)
+      fd(a, x, f) :- dbo:Film(f), dbo:starring(f, a), dbo:releaseDate(f, d), decade(x), strstarts(str(d), str(x))
+      cnt(a, x, n) :- AGGREGATE[a, x](fd(a, x, f) @ count(f)) = n
+      top(m) :- AGGREGATE[](cnt(a, x, n) @ max(n)) = m
+      ans(a) :- cnt(a, x, m), top(m)
+    note: 'ORDER BY DESC(COUNT) LIMIT 1 is the (actor, decade) count equal to the maximum (ties all kept). SUBSTR is not a builtin: the decade is a fact decade(x) for x in 180..202 (1800s-2020s) whose digits prefix the release date. Mismatch is a subgraph gap: dbo:releaseDate has only 8 triples in the subgraph and none on a dbo:Film, so the gold''s film/starring/releaseDate triples are missing and the answer is empty.'
+  3:
+    datalog: |-
+      pa(p, w) :- dbo:Actor(p), dbo:award(p, w)
+      pa(p, w) :- dbo:MusicalArtist(p), dbo:award(p, w)
+      cnt(p, n) :- AGGREGATE[p](pa(p, w) @ count(w)) = n
+      top(m) :- AGGREGATE[](cnt(p, n) @ max(n)) = m
+      ans(p) :- cnt(p, m), top(m)
+    note: ORDER BY DESC(COUNT(DISTINCT ?award)) LIMIT 1 is the count equal to the maximum (ties all kept).
+  4:
+    datalog: |-
+      art(a) :- dbo:MusicalArtist(a)
+      art(a) :- dbo:Band(a)
+      aa(a, b) :- art(a), dbo:artist(b, a)
+      cnt(a, n) :- AGGREGATE[a](aa(a, b) @ count(b)) = n
+      hist(n, k) :- AGGREGATE[n](cnt(a, n) @ count(a)) = k
+      above(n, n2, k2) :- hist(n, k), hist(n2, k2), (n2 > n)
+      rank(n, r) :- AGGREGATE[n](above(n, n2, k2) @ sum(k2)) = r
+      ranked(n) :- rank(n, r)
+      topn(n) :- rank(n, r), (r < 5)
+      topn(n) :- hist(n, k), ~ranked(n)
+      ans(a) :- cnt(a, n), topn(n)
+    note: ORDER BY DESC(COUNT) LIMIT 5 keeps the artists whose album count is beaten by fewer than 5 artists (ties all kept); ranked through a histogram of counts, as pairs of the ~30k artists time out.
+  5:
+    datalog: |-
+      sk(s, k) :- dbo:Species(s), dbo:conservationStatus(s, z), dbo:kingdom(s, k), regex(str(z), '(?i)Endangered|Critically endangered')
+      cnt(k, n) :- AGGREGATE[k](sk(s, k) @ count(s)) = n
+      hist(n, c) :- AGGREGATE[n](cnt(k, n) @ count(k)) = c
+      above(n, n2, c2) :- hist(n, c), hist(n2, c2), (n2 > n)
+      rank(n, r) :- AGGREGATE[n](above(n, n2, c2) @ sum(c2)) = r
+      ranked(n) :- rank(n, r)
+      topn(n) :- rank(n, r), (r < 3)
+      topn(n) :- hist(n, c), ~ranked(n)
+      ans(k) :- cnt(k, n), topn(n)
+    note: 'ORDER BY DESC(COUNT) LIMIT 3 keeps the kingdoms beaten by fewer than 3 (ties kept). Mismatch is a subgraph gap: no dbo:conservationStatus triple is in the subgraph (the symbol is unknown, the answer empty), so the gold''s pattern is absent.'
+  6:
+    datalog: |-
+      ans() :- dbp:trainer(<http://dbpedia.org/resource/Sasha_Banks>, <http://dbpedia.org/resource/Booker_T_(wrestler)>)
+  7:
+    datalog: |-
+      ans() :- dbo:routeJunction(<http://dbpedia.org/resource/New_York_State_Route_470>, <http://dbpedia.org/resource/Watervliet,_New_York>)
+  8:
+    datalog: |-
+      ans() :- dbp:discoverer(<http://dbpedia.org/resource/Pluto>, <http://dbpedia.org/resource/Clyde_Tombaugh>)
+  9:
+    datalog: |-
+      ans() :- dbp:author(<http://dbpedia.org/resource/American_Psycho>, <http://dbpedia.org/resource/Bret_Easton_Ellis>)
+  10:
+    datalog: |-
+      ans() :- dbo:license(<http://dbpedia.org/resource/Blender_(software)>, <http://dbpedia.org/resource/GNU_General_Public_License>)
+  11:
+    datalog: |-
+      pm(u) :- yago:PrimeMinistersOfTheUnitedKingdom(u)
+      pm(u) :- dbo:PrimeMinister(u), dbp:title(u, <http://dbpedia.org/resource/Prime_Minister_of_the_United_Kingdom>)
+      ans(u) :- pm(u)
+  12:
+    datalog: |-
+      w(u, d) :- dbp:author(u, <http://dbpedia.org/resource/Mark_Twain>), dbp:releaseDate(u, d)
+      before(u, d, u2, d2) :- w(u, d), w(u2, d2), (d2 < d)
+      rank(u, d, r) :- AGGREGATE[u, d](before(u, d, u2, d2) @ count(u2)) = r
+      ranked(u, d) :- rank(u, d, r)
+      top(u) :- rank(u, d, r), (r < 10)
+      top(u) :- w(u, d), ~ranked(u, d)
+      ans(u) :- top(u)
+    note: ORDER BY ASC(?date) LIMIT 10 keeps the (work, date) rows with fewer than 10 strictly earlier dates (ties kept). Dates are strings as on the endpoint ('--12-10' of Huckleberry Finn sorts first), so the 10 rows give 9 works.
+  13:
+    datalog: |-
+      ans(u) :- dbo:spouse(<http://dbpedia.org/resource/Barack_Obama>, x), dbo:birthPlace(x, u), dbo:Settlement(u)
+  14:
+    datalog: |-
+      ans(u) :- dbo:silverMedalist(<http://dbpedia.org/resource/Badminton_at_the_2012_Summer_Olympics_–_Women's_doubles>, x), dbp:placeOfBirth(x, u)
+  15:
+    datalog: |-
+      ans(u) :- dbo:creator(u, <http://dbpedia.org/resource/Stan_Lee>), dbo:ComicsCharacter(u)
+  16:
+    datalog: |-
+      ans(u) :- dbp:artist(<http://dbpedia.org/resource/American_IV:_The_Man_Comes_Around>, u), dbp:artist(<http://dbpedia.org/resource/Hurt_(Nine_Inch_Nails_song)>, u)
+  17:
+    datalog: |-
+      ch(u) :- dbo:executiveProducer(x, <http://dbpedia.org/resource/Stephen_Merchant>), dbo:series(u, x), dbo:FictionalCharacter(u)
+      n(c) :- AGGREGATE[](ch(u) @ count(u)) = c
+      ans(c) :- n(c)
+  18:
+    datalog: |-
+      ans(u, x) :- dbp:parentPeak(x, <http://dbpedia.org/resource/Denali>), dbp:location(x, y), dbo:country(y, u)
+  19:
+    datalog: |-
+      ans(u) :- dbo:managerClub(<http://dbpedia.org/resource/Pep_Guardiola>, x), dbo:team(u, x), dbo:SoccerPlayer(u)
+  20:
+    datalog: |-
+      ans(u) :- dbo:sourcePlace(x, <http://dbpedia.org/resource/Yellowstone_National_Park>), dbo:city(x, u), dbo:River(x)
+  21:
+    datalog: |-
+      aa(u, a) :- dbo:Airline(a), dbp:alliance(a, u)
+      cnt(u, n) :- AGGREGATE[u](aa(u, a) @ count(a)) = n
+      top(m) :- AGGREGATE[](cnt(u, n) @ max(n)) = m
+      ans(u) :- cnt(u, m), top(m)
+    note: ORDER BY DESC(COUNT) OFFSET 0 LIMIT 1 is the count equal to the maximum (ties all kept).
+  22:
+    datalog: |-
+      ans(u) :- dbo:tenant(x, <http://dbpedia.org/resource/BC_Lions>), dbo:builder(x, u), dbo:Stadium(x), dbo:Company(u)
+  23:
+    datalog: |-
+      ans(u) :- dbo:influencedBy(u, <http://dbpedia.org/resource/Pablo_Picasso>), dbo:Artist(u)
+  24:
+    datalog: |-
+      ans(u) :- dbp:predecessor(<http://dbpedia.org/resource/Yingluck_Shinawatra>, x), dbo:party(x, u)
+  25:
+    datalog: |-
+      ans(u) :- dbo:company(u, <http://dbpedia.org/resource/HBO>), dbo:company(u, <http://dbpedia.org/resource/BBC>), dbo:TelevisionShow(u)
+  26:
+    datalog: |-
+      ans(u) :- dbo:series(x, <http://dbpedia.org/resource/Oddworld>), dbo:publisher(x, u)
+  27:
+    datalog: |-
+      ans(u) :- dbp:music(u, <http://dbpedia.org/resource/Ennio_Morricone>), dbo:Film(u)
+  28:
+    datalog: |-
+      ans(u) :- dbp:themeMusicComposer(x, <http://dbpedia.org/resource/Bear_McCreary>), dbo:related(u, x), dbo:TelevisionShow(u)
+  29:
+    datalog: |-
+      ans(u) :- dbo:recordedIn(<http://dbpedia.org/resource/Imagine_(John_Lennon_song)>, u)
+  30:
+    datalog: |-
+      ans(u) :- dbo:spouse(<http://dbpedia.org/resource/Aung_San_Suu_Kyi>, x), dbp:almaMater(x, u)
+  31:
+    datalog: |-
+      ans(u) :- dbo:birthPlace(<http://dbpedia.org/resource/Barack_Obama>, u), dbo:city(<http://dbpedia.org/resource/University_of_Hawaii_at_Manoa>, u)
+  32:
+    datalog: |-
+      river(r) :- dbp:designer(s, <http://dbpedia.org/resource/Gustave_Eiffel>), dbp:crosses(s, r)
+      n(c) :- AGGREGATE[](river(r) @ count(r)) = c
+      ans(c) :- n(c)
+  33:
+    datalog: |-
+      ans(u) :- dbp:genre(<http://dbpedia.org/resource/Back_to_Black>, x), dbo:stylisticOrigin(x, u)
+  34:
+    datalog: |-
+      ans(u) :- dbp:officialLanguages(<http://dbpedia.org/resource/Brazil>, x), dbo:spokenIn(x, u)
+  35:
+    datalog: |-
+      ans(u) :- dbo:largestCity(u, <http://dbpedia.org/resource/Rotoava>), dbp:archipelago(u, <http://dbpedia.org/resource/Tuamotus>), dbo:Island(u)
+  36:
+    datalog: |-
+      ans(a) :- dbo:country(<http://dbpedia.org/resource/University_of_Oxford>, c), dbp:areaKm(c, a)
+  37:
+    datalog: |-
+      ans(u) :- dbo:militaryBranch(<http://dbpedia.org/resource/Stewart_Bovell>, x), dbp:motto(x, u), dbo:MilitaryUnit(x)
+  38:
+    datalog: |-
+      ans(u) :- dbo:spouse(<http://dbpedia.org/resource/Jennifer_Aniston>, u), dbo:spouse(<http://dbpedia.org/resource/Angelina_Jolie>, u)
+  39:
+    datalog: |-
+      ans(u) :- dbo:operatingSystem(u, <http://dbpedia.org/resource/Linux>), dbo:operatingSystem(u, <http://dbpedia.org/resource/Mac_OS>), dbo:Software(u)
+  40:
+    datalog: |-
+      ans(u) :- dbp:state(x, <http://dbpedia.org/resource/Metro_Manila>), dbp:affiliations(x, u), dbo:University(x)
+  41:
+    datalog: |-
+      ans(u) :- dbo:Weapon(u), dbp:designer(u, x), dbp:designer(<http://dbpedia.org/resource/AK-47>, x), (u != <http://dbpedia.org/resource/AK-47>)
+  42:
+    datalog: |-
+      ans(u) :- dbo:formerBandMember(u, <http://dbpedia.org/resource/Nick_Jonas>), dbp:pastMembers(u, <http://dbpedia.org/resource/Joe_Jonas>), dbo:Band(u)
+  43:
+    datalog: |-
+      ans(u) :- dbp:trainer(x, <http://dbpedia.org/resource/Ring_of_Honor>), dbp:birthPlace(x, u), dbo:Athlete(x)
+  44:
+    datalog: |-
+      ans(u) :- dbo:award(x, <http://dbpedia.org/resource/Presidential_Medal_of_Freedom>), dbp:awards(x, u)
+  45:
+    datalog: |-
+      ans(u) :- dbo:veneratedIn(u, <http://dbpedia.org/resource/Christianity>), dbo:Saint(u)
+  46:
+    datalog: |-
+      ans(u) :- dbp:sisterStations(<http://dbpedia.org/resource/WXME>, x), dbp:city(x, u), dbo:RadioStation(x)
+  47:
+    datalog: |-
+      ans(u) :- dbo:riverMouth(u, <http://dbpedia.org/resource/Gulf_of_Mexico>), dbo:source(u, <http://dbpedia.org/resource/Lake_Itasca>), dbo:River(u)
+  48:
+    datalog: |-
+      team(u) :- dbp:playedFor(x, <http://dbpedia.org/resource/HC_Slovan_Bratislava>), dbo:formerTeam(x, u)
+      n(c) :- AGGREGATE[](team(u) @ count(u)) = c
+      ans(c) :- n(c)
+  49:
+    datalog: |-
+      ans(r) :- dbo:populationTotal(<http://dbpedia.org/resource/Tokyo>, p1), dbo:populationTotal(<http://dbpedia.org/resource/Delhi>, p2), (r == p2 - p1)
+  50:
+    datalog: |-
+      film(u) :- dbp:language(u, <http://dbpedia.org/resource/French_language>), dbo:Film(u)
+      n(c) :- AGGREGATE[](film(u) @ count(u)) = c
+      ans(c) :- n(c)

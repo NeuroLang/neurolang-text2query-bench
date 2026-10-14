@@ -88,8 +88,18 @@ def _last_result(result):
     return result
 
 
-def execute(nl, query: str, language: str, timeout: float = 120.0):
-    """Run *query* in *language* on the engine *nl* and return its rows."""
+def execute(
+    nl, query: str, language: str, timeout: float = 120.0,
+    unknown_is_empty: bool = False,
+):
+    """
+    Run *query* in *language* on the engine *nl* and return its rows.
+
+    With *unknown_is_empty*, a query on a predicate the engine does not
+    have returns no rows, as SPARQL does, instead of failing.
+    """
+    from neurolang.exceptions import SymbolNotFoundError
+
     from neurolang.utils.cli import result_to_dataframe
 
     run = (
@@ -107,6 +117,13 @@ def execute(nl, query: str, language: str, timeout: float = 120.0):
     start = time.perf_counter()
     try:
         result = _last_result(run_with_timeout(scoped, timeout))
+    except SymbolNotFoundError as exc:
+        if not unknown_is_empty:
+            return Execution(
+                error=f"{type(exc).__name__}: {exc}"[:500],
+                seconds=time.perf_counter() - start,
+            )
+        return Execution(seconds=time.perf_counter() - start)
     except QueryTimeout:
         return Execution(
             error=f"timeout after {timeout:.0f} s",

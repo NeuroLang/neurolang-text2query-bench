@@ -151,18 +151,37 @@ def _n3(term) -> str:
     return f"?{term}" if isinstance(term, Variable) else term.n3()
 
 
+_SUBSELECT = re.compile(
+    r"\bSELECT\s+(?:DISTINCT\s+|REDUCED\s+)?(?:(?!\bWHERE\b).)*?\bWHERE\b",
+    re.I | re.S,
+)
+
+
+def _project_everything(body: str) -> str:
+    """
+    Return *body* with its sub-selects projecting all their variables.
+
+    A sub-select projecting only some variables would leave the others
+    of the template unbound. Sub-selects that group are left as they are.
+    """
+    if re.search(r"\bGROUP\s+BY\b", body, re.I):
+        return body
+    return _SUBSELECT.sub("SELECT * WHERE", body)
+
+
 def construct_query(sparql: str):
     """
     Return the CONSTRUCT query of the triples a gold query matches.
 
     Its template holds the triple patterns of the query, its WHERE clause
-    the query's group pattern. It is None for a query without plain
-    triple patterns.
+    the query's group pattern, its sub-selects projecting all their
+    variables. It is None for a query without plain triple patterns.
     """
     patterns = triple_patterns(sparql)
     if not patterns:
         return None
     prologue, body = _body(sparql)
+    body = _project_everything(body)
     template = " .\n  ".join(
         " ".join(_n3(term) for term in triple) for triple in patterns
     )

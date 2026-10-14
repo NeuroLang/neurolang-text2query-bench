@@ -132,7 +132,8 @@ def evaluate(
         executed, rows, error, seconds = False, [], answer.get("error", ""), 0.0
         if answer.get("query"):
             execution = execute(
-                nl, answer["query"], answer["query_language"], timeout
+                nl, answer["query"], answer["query_language"], timeout,
+                unknown_is_empty=dataset.metric == "text2sparql",
             )
             executed, rows = execution.ok, execution.rows
             seconds = execution.seconds

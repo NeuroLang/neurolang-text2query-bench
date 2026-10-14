@@ -252,7 +252,9 @@ def check_translations(nl, dataset, timeout: float = 120.0) -> list:
         if gold is None:
             checks.append({"id": question.id, "status": "missing", "f1": 0.0})
             continue
-        execution = execute(nl, gold[1], gold[0], timeout)
+        execution = execute(
+            nl, gold[1], gold[0], timeout, unknown_is_empty=True
+        )
         if not execution.ok:
             checks.append({
                 "id": question.id, "status": "error", "f1": 0.0,
