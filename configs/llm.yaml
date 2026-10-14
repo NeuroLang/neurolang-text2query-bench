@@ -47,6 +47,7 @@ providers:
     api_key_env: ALBERT_API_KEY
     model: gemma-4-31b-it
     tool_calling: text
+    requests_per_minute: 24     # Albert keys allow 25 a minute
 
   anthropic:
     api: anthropic
