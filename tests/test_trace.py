@@ -3,7 +3,9 @@ import json
 
 from text2query_bench.runner import ask
 from text2query_bench.systems import AssistantSystem
-from text2query_bench.trace import Printer, Tracer, TracingClient, watch
+from text2query_bench.trace import (
+    Printer, Tracer, TracingClient, trace_directory, watch,
+)
 
 
 class FakeClient:
@@ -115,3 +117,25 @@ def test_watch_skips_what_is_not_an_event(tmp_path):
     text = stream.getvalue()
     assert text.count("q1 [en] Which?") == 2
     assert "Skipped a line of q1-en.jsonl" in text
+
+
+def test_watch_finds_the_traces_of_an_answers_file(tmp_path):
+    assert trace_directory(tmp_path / "x" / "answers.json") == (
+        tmp_path / "x" / "trace"
+    )
+    answers = tmp_path / "r"
+    assert trace_directory(answers) == tmp_path / "r.trace"
+    answers.write_text('[\n  {"id": "q1"}\n]\n')
+    stream = io.StringIO()
+    watch(answers, Printer(stream), follow=False)
+    assert "No trace in" in stream.getvalue()
+    tracer = Tracer(trace_directory(answers))
+    tracer.begin("q1", "en", "Which?")
+    tracer.end({"query": "ans(s) :- study(s)", "valid": True})
+    stream = io.StringIO()
+    watch(answers, Printer(stream), follow=False)
+    text = stream.getvalue()
+    assert "q1 [en] Which?" in text and "Skipped" not in text
+    run = io.StringIO()
+    watch(tmp_path / "run", Printer(run), follow=False)
+    assert f"No trace in {tmp_path / 'run' / 'trace'}" in run.getvalue()

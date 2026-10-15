@@ -142,12 +142,14 @@ system prompt and question first, then the model's previous reply and
 the observation of its action. Messages are cut to a few thousand
 characters (the system prompt to 800); `--full` prints them whole.
 
-A long run started with `--trace` (`run` or `ask`) records the same
-events in `trace/<id>-<lang>.jsonl` of its directory. Follow the
-question it is asking from another terminal with:
+`run` and `ask` record the same events, one file per question:
+`trace/<id>-<lang>.jsonl` in the run directory, or `<answers>.trace/`
+beside the answers file of `ask -o <answers>` (`--no-trace` turns this
+off). Follow the question a run is asking from another terminal with:
 
 ```bash
 t2q-bench watch runs/react-gemma            # follows the run question by question
+t2q-bench watch runs/answers.json           # the answers file of an ask run
 t2q-bench watch runs/react-gemma/trace/ck26-4-en.jsonl --no-follow
 ```
 

@@ -8,7 +8,7 @@ Command line of the benchmark: ``t2q-bench``.
     t2q-bench serve --strategy icl --provider albert
     t2q-bench report runs/*/results.json
     t2q-bench debug --ids ck26-4 --provider openrouter-gemma
-    t2q-bench watch runs/x                 # follow a run started with --trace
+    t2q-bench watch runs/x                 # follow the LLM requests of a run
 
 The engine is built once per command (the NeuroSynth engine takes about
 a minute and a half); ``--data-dir`` is its data directory.
@@ -86,17 +86,17 @@ def _examples(args, dataset):
 
 def _traced(args, system, directory: Path, printer=None):
     """
-    Trace the LLM requests of *system* in *directory*/trace, if
-    ``--trace`` or with a *printer*, and return the tracer.
+    Trace the LLM requests of *system* in *directory*, unless
+    ``--no-trace``, and return the tracer. Systems behind an endpoint
+    are not traced.
     """
     from .trace import Tracer
 
-    if not (getattr(args, "trace", False) or printer):
+    if not (getattr(args, "trace", True) or printer):
         return None
     if not hasattr(system, "trace"):
-        _log(f"{system.name} cannot be traced: it is not run in process.")
         return None
-    tracer = Tracer(directory / "trace", printer)
+    tracer = Tracer(directory, printer)
     system.trace(tracer)
     return tracer
 
@@ -252,11 +252,13 @@ def cmd_check_gold(args) -> int:
 
 
 def cmd_ask(args) -> int:
+    from .trace import trace_directory
+
     dataset = load_dataset(args.dataset)
     nl = None if args.endpoint else _engine(args, dataset)
     output = Path(args.output)
     system = _system(args, nl, dataset)
-    tracer = _traced(args, system, output.parent)
+    tracer = _traced(args, system, trace_directory(output))
     _ask(args, system, dataset, output, tracer)
     return 0
 
@@ -274,7 +276,7 @@ def cmd_run(args) -> int:
     nl = _engine(args, dataset)
     system = _system(args, nl, dataset)
     out_dir = Path(args.output or f"runs/{system.name}")
-    tracer = _traced(args, system, out_dir)
+    tracer = _traced(args, system, out_dir / "trace")
     answers = _ask(args, system, dataset, out_dir / "answers.json", tracer)
     _evaluate_and_write(args, nl, dataset, answers, out_dir)
     return 0
@@ -290,7 +292,8 @@ def cmd_debug(args) -> int:
     nl = _engine(args, dataset)
     out_dir = Path(args.output)
     system = _system(args, nl, dataset)
-    tracer = _traced(args, system, out_dir, Printer(full=args.full))
+    tracer = _traced(args, system, out_dir / "trace",
+                     Printer(full=args.full))
     answers = _ask(args, system, dataset, out_dir / "answers.json", tracer)
     gold = _gold(args, nl, dataset)
     evaluate(nl, dataset, answers, gold, args.timeout, _print_result)
@@ -356,10 +359,10 @@ def _add_selection(parser) -> None:
 
 def _add_trace(parser) -> None:
     parser.add_argument(
-        "--trace", action="store_true",
-        help="record the requests to the LLM and its replies in "
-        "trace/<id>-<lang>.jsonl of the run (follow them with "
-        "'t2q-bench watch')",
+        "--no-trace", dest="trace", action="store_false",
+        help="do not record the requests to the LLM and its replies (by "
+        "default in trace/<id>-<lang>.jsonl of the run, or "
+        "<answers>.trace/ for ask; follow them with 't2q-bench watch')",
     )
 
 
@@ -447,11 +450,11 @@ def build_parser() -> argparse.ArgumentParser:
 
     watch_parser = commands.add_parser(
         "watch",
-        help="follow the LLM requests of the question a run (started with "
-        "--trace) is asking",
+        help="follow the LLM requests of the question a run is asking",
     )
     watch_parser.add_argument(
-        "target", help="run directory, its trace directory or a trace file"
+        "target", help="run directory, answers file of ask, trace "
+        "directory or trace file",
     )
     watch_parser.add_argument("--full", action="store_true",
                               help="print the messages without cutting them")

@@ -6,9 +6,10 @@ reports each request and reply to a :class:`Tracer`. The tracer writes
 one JSON Lines file per question, ``<id>-<language>.jsonl``, in its
 directory, and prints the events when it has a :class:`Printer`.
 
-``t2q-bench watch RUN_DIR`` follows the trace of the question being
-asked by a run started with ``--trace``, from another terminal
-(:func:`watch`).
+Runs record their traces in ``trace`` of the run directory, and
+``ask -o ANSWERS`` in the directory given by :func:`trace_directory`.
+``t2q-bench watch RUN`` follows the trace of the question being asked,
+from another terminal (:func:`watch`).
 
 The events are dicts with an ``event`` key:
 
@@ -233,8 +234,34 @@ def _content(message: dict) -> str:
     return text
 
 
+def trace_directory(answers) -> Path:
+    """
+    Return the directory of the traces of the run whose answers are the
+    file *answers*: ``trace`` beside ``answers.json``, else
+    ``<answers file name>.trace``.
+    """
+    answers = Path(answers)
+    if answers.name == "answers.json":
+        return answers.parent / "trace"
+    return answers.with_name(answers.stem + ".trace")
+
+
 def _trace_files(directory: Path) -> list:
     return sorted(directory.glob("*.jsonl"), key=lambda p: p.stat().st_mtime)
+
+
+def _watched(target: Path):
+    """Return the trace directory or the trace file *target* names."""
+    if target.suffix == ".jsonl":
+        return target
+    if target.is_file():
+        return trace_directory(target)
+    if target.name == "trace" or (
+        target.is_dir() and not (target / "trace").exists()
+        and any(target.glob("*.jsonl"))
+    ):
+        return target
+    return target / "trace"
 
 
 def watch(target, printer: Printer, poll: float = 0.5,
@@ -242,22 +269,23 @@ def watch(target, printer: Printer, poll: float = 0.5,
     """
     Print the trace of the question being asked, following it.
 
-    *target* is a run directory (its ``trace`` directory, or itself when
-    it holds the traces) or a trace file. In a directory, the trace of
-    the latest question is printed from its start, then the next ones as
-    the run moves on. Without *follow*, it stops at the end of the trace.
+    *target* is a run directory, the answers file of ``ask``, a trace
+    directory or a trace file. In a directory, the trace of the latest
+    question is printed from its start, then the next ones as the run
+    moves on. Without *follow*, it stops at the end of the trace.
     """
-    target = Path(target)
-    if target.is_dir() and (target / "trace").is_dir():
-        target = target / "trace"
-    directory = target if target.is_dir() else None
+    target = _watched(Path(target))
+    directory = None if target.suffix == ".jsonl" else target
     current, offset, waiting = None, 0, False
     while True:
         if directory:
             files = _trace_files(directory)
             if not files and not waiting:
-                printer.note(f"No trace in {directory} yet: was the run "
-                             "started with --trace?")
+                printer.note(
+                    f"No trace in {directory} yet: the run has not asked a "
+                    "question yet, or it was started with --no-trace or "
+                    "before runs were traced."
+                )
                 waiting = True
             if files and files[-1] != current and (
                 current is None or current.stat().st_size <= offset
