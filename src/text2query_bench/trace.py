@@ -152,6 +152,11 @@ class Printer:
             show(event)
             self.stream.flush()
 
+    def note(self, text: str) -> None:
+        """Print *text*, a remark of the printer rather than an event."""
+        self._write(self._paint(text, "2"))
+        self.stream.flush()
+
     def _question(self, event):
         self._rule("═", f"{event['id']} [{event['language']}] "
                         f"{event['text']}", "1")
@@ -246,10 +251,14 @@ def watch(target, printer: Printer, poll: float = 0.5,
     if target.is_dir() and (target / "trace").is_dir():
         target = target / "trace"
     directory = target if target.is_dir() else None
-    current, offset = None, 0
+    current, offset, waiting = None, 0, False
     while True:
         if directory:
             files = _trace_files(directory)
+            if not files and not waiting:
+                printer.note(f"No trace in {directory} yet: was the run "
+                             "started with --trace?")
+                waiting = True
             if files and files[-1] != current and (
                 current is None or current.stat().st_size <= offset
             ):
@@ -265,7 +274,13 @@ def watch(target, printer: Printer, poll: float = 0.5,
                     if not line.endswith(b"\n"):
                         break
                     offset += len(line)
-                    printer.show(json.loads(line))
+                    try:
+                        event = json.loads(line)
+                    except ValueError:
+                        printer.note(f"Skipped a line of {current.name} that "
+                                     f"is not an event: {line[:80]!r}")
+                        continue
+                    printer.show(event)
         if not follow:
             return
         time.sleep(poll)

@@ -102,3 +102,16 @@ def test_tracing_a_run(nl, dataset, tmp_path):
     assert request["messages"][0]["role"] == "system"
     assert "mentions" in request["messages"][0]["content"]
     assert trace[-1]["query"] == "ans(s) :- mentions(s, 'pain')"
+
+
+def test_watch_skips_what_is_not_an_event(tmp_path):
+    (tmp_path / "trace").mkdir()
+    path = tmp_path / "trace" / "q1-en.jsonl"
+    event = {"event": "question", "id": "q1", "language": "en",
+             "text": "Which?"}
+    path.write_text(json.dumps(event) + "\n \n" + json.dumps(event) + "\n")
+    stream = io.StringIO()
+    watch(path, Printer(stream), follow=False)
+    text = stream.getvalue()
+    assert text.count("q1 [en] Which?") == 2
+    assert "Skipped a line of q1-en.jsonl" in text
