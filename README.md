@@ -127,6 +127,30 @@ Each run directory gets three files:
   language and per tag
 - `report.md`: the tables, and the answers that are not exact
 
+### Monitoring the requests to the LLM
+
+`debug` asks a few questions and prints each request to the LLM and its
+reply as they go, then scores the answers:
+
+```bash
+t2q-bench --data-dir ~/neurolang_data --dataset datasets/ck26.yaml debug \
+    --provider openrouter-gemma --ids ck26-4 --lang en
+```
+
+Each request shows only the messages added since the previous one: the
+system prompt and question first, then the model's previous reply and
+the observation of its action. Messages are cut to a few thousand
+characters (the system prompt to 800); `--full` prints them whole.
+
+A long run started with `--trace` (`run` or `ask`) records the same
+events in `trace/<id>-<lang>.jsonl` of its directory. Follow the
+question it is asking from another terminal with:
+
+```bash
+t2q-bench watch runs/react-gemma            # follows the run question by question
+t2q-bench watch runs/react-gemma/trace/ck26-4-en.jsonl --no-follow
+```
+
 ### Tuning ReAct for Gemma 4 31B (2026-10-15)
 
 The ReAct agent was tuned on a dev split and evaluated once on held-out

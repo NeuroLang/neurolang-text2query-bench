@@ -7,6 +7,8 @@ Command line of the benchmark: ``t2q-bench``.
     t2q-bench evaluate runs/x/answers.json
     t2q-bench serve --strategy icl --provider albert
     t2q-bench report runs/*/results.json
+    t2q-bench debug --ids ck26-4 --provider openrouter-gemma
+    t2q-bench watch runs/x                 # follow a run started with --trace
 
 The engine is built once per command (the NeuroSynth engine takes about
 a minute and a half); ``--data-dir`` is its data directory.
@@ -82,6 +84,23 @@ def _examples(args, dataset):
     return gold_examples(other, args.query_language)
 
 
+def _traced(args, system, directory: Path, printer=None):
+    """
+    Trace the LLM requests of *system* in *directory*/trace, if
+    ``--trace`` or with a *printer*, and return the tracer.
+    """
+    from .trace import Tracer
+
+    if not (getattr(args, "trace", False) or printer):
+        return None
+    if not hasattr(system, "trace"):
+        _log(f"{system.name} cannot be traced: it is not run in process.")
+        return None
+    tracer = Tracer(directory / "trace", printer)
+    system.trace(tracer)
+    return tracer
+
+
 def _system(args, nl, dataset):
     from .systems import AssistantSystem, EndpointSystem, engine_description
 
@@ -105,12 +124,25 @@ def _previous_answers(args, path: Path) -> list:
     return []
 
 
-def _saving(path: Path):
+def _saving(path: Path, tracer=None):
     """Return the progress callback printing and saving the answers."""
     def progress(answer, answers):
+        if tracer:
+            tracer.end(answer)
         _print_answer(answer)
         write_json(path, answers)
     return progress
+
+
+def _ask(args, system, dataset, path: Path, tracer=None) -> list:
+    """Ask the selected questions, saving the answers at *path*."""
+    answers = ask(
+        system, dataset, args.languages, _questions(args, dataset),
+        _saving(path, tracer), _previous_answers(args, path),
+        tracer.begin if tracer else None,
+    )
+    write_json(path, answers)
+    return answers
 
 
 def _print_answer(answer: dict) -> None:
@@ -222,13 +254,10 @@ def cmd_check_gold(args) -> int:
 def cmd_ask(args) -> int:
     dataset = load_dataset(args.dataset)
     nl = None if args.endpoint else _engine(args, dataset)
-    system = _system(args, nl, dataset)
     output = Path(args.output)
-    answers = ask(
-        system, dataset, args.languages, _questions(args, dataset),
-        _saving(output), _previous_answers(args, output),
-    )
-    write_json(output, answers)
+    system = _system(args, nl, dataset)
+    tracer = _traced(args, system, output.parent)
+    _ask(args, system, dataset, output, tracer)
     return 0
 
 
@@ -245,13 +274,38 @@ def cmd_run(args) -> int:
     nl = _engine(args, dataset)
     system = _system(args, nl, dataset)
     out_dir = Path(args.output or f"runs/{system.name}")
-    path = out_dir / "answers.json"
-    answers = ask(
-        system, dataset, args.languages, _questions(args, dataset),
-        _saving(path), _previous_answers(args, path),
-    )
-    write_json(path, answers)
+    tracer = _traced(args, system, out_dir)
+    answers = _ask(args, system, dataset, out_dir / "answers.json", tracer)
     _evaluate_and_write(args, nl, dataset, answers, out_dir)
+    return 0
+
+
+def cmd_debug(args) -> int:
+    from .trace import Printer
+
+    if not (args.ids or args.tags or args.limit):
+        _log("Choose the questions to debug with --ids, --tags or --limit.")
+        return 2
+    dataset = load_dataset(args.dataset)
+    nl = _engine(args, dataset)
+    out_dir = Path(args.output)
+    system = _system(args, nl, dataset)
+    tracer = _traced(args, system, out_dir, Printer(full=args.full))
+    answers = _ask(args, system, dataset, out_dir / "answers.json", tracer)
+    gold = _gold(args, nl, dataset)
+    evaluate(nl, dataset, answers, gold, args.timeout, _print_result)
+    _log(f"Traces in {out_dir / 'trace'}")
+    return 0
+
+
+def cmd_watch(args) -> int:
+    from .trace import Printer, watch
+
+    try:
+        watch(args.target, Printer(sys.stdout, full=args.full),
+              follow=not args.no_follow)
+    except KeyboardInterrupt:
+        pass
     return 0
 
 
@@ -298,6 +352,15 @@ def _add_selection(parser) -> None:
     parser.add_argument("--ids", nargs="+", help="question ids to ask")
     parser.add_argument("--tags", nargs="+", help="question tags to ask")
     parser.add_argument("--limit", type=int, help="ask the first N only")
+
+
+def _add_trace(parser) -> None:
+    parser.add_argument(
+        "--trace", action="store_true",
+        help="record the requests to the LLM and its replies in "
+        "trace/<id>-<lang>.jsonl of the run (follow them with "
+        "'t2q-bench watch')",
+    )
 
 
 def _add_system(parser) -> None:
@@ -357,6 +420,7 @@ def build_parser() -> argparse.ArgumentParser:
     ask_parser.add_argument("--endpoint", help="TEXT2SPARQL-style endpoint")
     ask_parser.add_argument("--name", help="name of the endpoint system")
     ask_parser.add_argument("-o", "--output", required=True)
+    _add_trace(ask_parser)
 
     evaluate_parser = commands.add_parser("evaluate", help="score answers")
     evaluate_parser.add_argument("answers")
@@ -367,6 +431,32 @@ def build_parser() -> argparse.ArgumentParser:
     run_parser.add_argument("--endpoint", help="TEXT2SPARQL-style endpoint")
     run_parser.add_argument("--name", help="name of the endpoint system")
     run_parser.add_argument("-o", "--output", help="run directory")
+    _add_trace(run_parser)
+
+    debug_parser = commands.add_parser(
+        "debug",
+        help="ask a few questions, printing the requests to the LLM and its "
+        "replies as they go, then score the answers",
+    )
+    _add_system(debug_parser)
+    _add_selection(debug_parser)
+    debug_parser.add_argument("--full", action="store_true",
+                              help="print the messages without cutting them")
+    debug_parser.add_argument("-o", "--output", default="runs/debug",
+                              help="directory of the answers and traces")
+
+    watch_parser = commands.add_parser(
+        "watch",
+        help="follow the LLM requests of the question a run (started with "
+        "--trace) is asking",
+    )
+    watch_parser.add_argument(
+        "target", help="run directory, its trace directory or a trace file"
+    )
+    watch_parser.add_argument("--full", action="store_true",
+                              help="print the messages without cutting them")
+    watch_parser.add_argument("--no-follow", action="store_true",
+                              help="print the trace and stop")
 
     serve_parser = commands.add_parser("serve", help="serve a system")
     _add_system(serve_parser)
@@ -383,6 +473,7 @@ COMMANDS = {
     "build-dbpedia-subgraph": cmd_build_dbpedia,
     "check-gold": cmd_check_gold, "ask": cmd_ask, "evaluate": cmd_evaluate,
     "run": cmd_run, "serve": cmd_serve, "report": cmd_report,
+    "debug": cmd_debug, "watch": cmd_watch,
 }
 
 

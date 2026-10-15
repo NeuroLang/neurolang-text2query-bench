@@ -65,13 +65,16 @@ class AssistantSystem(System):
     *examples* (``neurolang.utils.llm.examples.Example``) and
     *description* replace the example bank and the description of the
     engine, e.g. for an engine that is not in NeuroLang's registry.
+
+    With a *tracer* (:class:`~.trace.Tracer`), the requests to the model
+    and its replies are reported to it.
     """
 
     def __init__(
         self, nl, engine_name: str, query_language: str = "datalog",
         provider: Optional[str] = None, strategy: Optional[str] = None,
         config_path=None, client=None, exclude_gold: bool = True,
-        examples=None, description: Optional[str] = None,
+        examples=None, description: Optional[str] = None, tracer=None,
     ):
         from neurolang.utils.llm import load_config
 
@@ -82,11 +85,26 @@ class AssistantSystem(System):
         self.provider = self.config.provider(provider)
         self.strategy = strategy or self.config.assistant.strategy
         self.client = client
+        if tracer is not None:
+            self.trace(tracer)
         self.exclude_gold = exclude_gold
         self.examples = examples
         self.description = description
         self.name = (
             f"{self.strategy}-{self.query_language}-{self.provider.name}"
+        )
+
+    def trace(self, tracer) -> None:
+        """Report the requests to the model and its replies to *tracer*."""
+        from neurolang.utils.llm.providers import make_client
+
+        from .trace import TracingClient
+
+        self.client = TracingClient(
+            self.client or make_client(
+                self.provider, self.config.assistant.timeout
+            ),
+            tracer,
         )
 
     def generate(self, question: str, language: str) -> Generation:

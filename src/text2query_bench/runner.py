@@ -32,6 +32,7 @@ def answered(answer: dict) -> bool:
 def ask(
     system, dataset: Dataset, languages, questions=None,
     progress: Optional[Callable] = None, previous=(),
+    on_question: Optional[Callable] = None,
 ) -> list:
     """
     Return the answers of *system* to the questions of *dataset*.
@@ -41,6 +42,10 @@ def ask(
     text in a language are skipped for it. The *previous* answers of an
     interrupted run are kept when they are answers (see
     :func:`answered`); the other questions are asked.
+
+    *on_question* is called with the id, natural language and text of
+    each question before it is asked, and *progress* with each answer
+    and the answers so far after.
     """
     kept = {
         (a["id"], a["language"]): a for a in previous if answered(a)
@@ -54,6 +59,8 @@ def ask(
             if (question.id, language) in kept:
                 answers.append(kept[(question.id, language)])
                 continue
+            if on_question:
+                on_question(question.id, language, text)
             generation = system.generate(text, language).as_dict()
             answer = {
                 "id": question.id, "language": language, "question": text,
