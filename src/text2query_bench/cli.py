@@ -53,13 +53,17 @@ def _gold_path(dataset) -> Path:
 
 
 def _gold(args, nl, dataset) -> dict:
-    """Return the gold rows, from the cache when it is up to date."""
+    """
+    Return the gold rows, from the cache when it holds the rows of the
+    current gold queries.
+    """
     if dataset.metric == "text2sparql":
         return gold_answers(nl, dataset)
     path = _gold_path(dataset)
-    if path.exists() and path.stat().st_mtime >= dataset.path.stat().st_mtime:
+    if path.exists():
         gold = json.loads(path.read_text(encoding="utf-8"))
-        if set(gold) == {q.id for q in dataset.questions}:
+        queries = {q.id: q.gold_query()[1] for q in dataset.questions}
+        if {k: v.get("query") for k, v in gold.items()} == queries:
             for entry in gold.values():
                 entry["rows"] = [tuple(row) for row in entry["rows"]]
             return gold
