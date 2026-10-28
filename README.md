@@ -333,8 +333,10 @@ brackets, same code):
 
 The count question (nsv2-03) is now exact for all three models, the
 engine fixes remove most out-of-steps answers, and hybrid retrieval
-fixes four French questions for Gemma. What remains: nsv2-36 (the
-argmax parcel without its probability), Gemma's multi-line JSON
+gives French questions related examples (BM25 ties and gives them the
+bank's first six): Gemma +3 exact, DeepSeek +1, single runs with about
+±1-2 of noise. What remains: nsv2-36 (the right argmax parcel without
+its probability, a form mismatch), Gemma's multi-line JSON
 actions (nsv2-21 en), and DeepSeek's `cogat_definition` joined through
 a helper rule (nsv2-35 fr). Gemma on Albert was still over its daily
 cap. Details in [runs/nsv2-dev-int.md](runs/nsv2-dev-int.md);

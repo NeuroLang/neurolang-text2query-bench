@@ -87,24 +87,34 @@ question plus the bank once (cached on disk).
   return one row.
 - **Retrieval**, bm25 → hybrid on the same code: Gemma 0.850 → 0.925
   (34 → 37 exact), DeepSeek 0.925 → 0.950 (37 → 38 exact, 4.5 → 4.0
-  steps, 35 → 27 s/q). Gemma gains on French questions (nsv2-12 fr,
-  nsv2-18 fr, nsv2-26 fr, nsv2-28 fr), where BM25 finds no English
-  example.
+  steps, 35 → 27 s/q). With BM25 a French question shares almost no
+  word with the English bank, so its scores tie and every French
+  question gets the bank's first six examples (pain, terms, language
+  or speech...); hybrid picks related ones (nsv2-26 fr: amygdala
+  co-activation, superior temporal gyrus, regions of a Cognitive Atlas
+  concept). Gemma's bm25-only misses are nsv2-12, -26 and -28 fr
+  (wrong structure) and nsv2-18 fr (a 120 s engine timeout, then out
+  of steps), all exact with hybrid. These are single runs: Sonnet
+  flipped nsv2-18 fr between lean and integrated with no relevant
+  change, so ±1-2 questions is run-to-run noise, the size of
+  DeepSeek's gain; Gemma's +3 is just above it.
 - Sonnet: 39/40, nsv2-18 fr unions `saccade` and `saccades` (wrong
   value; the same miss as in the baseline, exact on the lean run).
 
 ## What still fails (integrated, hybrid)
 
 Gemma (OpenRouter):
-- nsv2-36 en, fr: the right argmax query, but answers the parcel label
+- nsv2-36 en, fr: the argmax query returns 1 row, the parcel label
   only, without its probability (gold `ans(l, p)`); fr also groups the
-  max by label (`AGGREGATE[l]`).
+  max by label (`AGGREGATE[l]`). A form mismatch: DeepSeek's identical
+  query previews the gold parcel, `17Networks RH SalVentAttnA Ins 1`.
 - nsv2-21 en: out of steps; after `search_values` it wrote the Action
   Input as multi-line JSON 7 times (text-protocol parse error; the
   error's example is a SQUALL query even in Datalog mode).
 
 DeepSeek (OpenRouter):
-- nsv2-36 fr: answers the label only, and conditions `co(l, s)`
+- nsv2-36 fr: answers the gold parcel without its probability (form
+  mismatch), and conditions `co(l, s)`
   (activation and pain) on pain, which gives the same argmax but no p.
 - nsv2-35 fr: out of steps; joins `cogat_definition` with a helper rule
   taking the text `q` (`close(q, s)`), so `study_similarity` gets an
