@@ -281,6 +281,36 @@ scripts:
   split;
 - `scripts/reevaluate.py` scores runs again after a gold change.
 
+## neurosynth-v2, lean schema (2026-10-28)
+
+NeuroLang branch `feat/llm-lean-schema` (local, on
+`feat/llm-text-search-examples`) fixes the three prompt and tool
+problems of the baseline:
+
+- the schema counts the 1264 Cognitive Atlas classes named by IRI in
+  one line: the system prompt goes from 109k to 18k characters;
+- predicates are shown with plain columns (`study_title(study_id,
+  text)`), and regions by their type, not their voxels;
+- `search_values` on a predicate without a match lists all the values
+  of a column of at most 200 (the 32 Tian labels), and the guidance
+  spells out the Tian abbreviations and PROB over `selected_study`.
+
+Dev split, ReAct, baseline → lean:
+
+| model (OpenRouter) | F1 | exact | steps | tokens/q | s/q |
+|---|---:|---:|---:|---:|---:|
+| Sonnet 5.5 | 0.975 → **1.000** | 98% → 100% | 3.8 → 3.6 | 202k → 27k | 17 → 20 |
+| Gemma 4 31B | 0.675 → 0.775 | 68% → 78% | 3.3 → 2.4 | 157k → 16k | 38 → 29 |
+| DeepSeek V4 Flash 0731 | 0.775 → 0.801 | 78% → 80% | 5.0 → 5.3 | 210k → 37k | 58 → 45 |
+
+Most of what still fails comes from the two engine bugs (argmax of a
+probability, `similar_study` outside the query rule). Gemma on Albert
+could not be run: the daily cap was already used up. At 16k tokens a
+question it now allows about 150 questions a day. Details, per tag and
+failure kind, in [runs/nsv2-dev-lean.md](runs/nsv2-dev-lean.md).
+`VENV=.venv-llmfix scripts/run_nsv2.sh ...` runs against the branch,
+and `scripts/prompt_size.py` measures the prompt.
+
 ## TEXT2SPARQL question sets in Datalog
 
 The four question sets of the TEXT2SPARQL challenge are also in the

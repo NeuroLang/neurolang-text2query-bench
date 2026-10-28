@@ -139,12 +139,16 @@ def main():
     parser.add_argument("--max-steps", type=int, default=8)
     parser.add_argument("--examples", type=int, default=0,
                         help="list this many failures per run")
+    parser.add_argument("--split", help="keep the questions of this split")
     args = parser.parse_args()
     dataset = load_dataset(args.dataset)
     questions = {q.id: q for q in dataset.questions}
     runs = {}
     for directory in args.runs:
-        pairs = load_run(directory)
+        pairs = [
+            p for p in load_run(directory)
+            if not args.split or questions[p[1]["id"]].split == args.split
+        ]
         for answer, result in pairs:
             q = questions[result["id"]]
             result["kind"] = kind(
