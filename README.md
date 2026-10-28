@@ -342,6 +342,44 @@ a helper rule (nsv2-35 fr). Gemma on Albert was still over its daily
 cap. Details in [runs/nsv2-dev-int.md](runs/nsv2-dev-int.md);
 `RETRIEVAL=bm25 scripts/run_nsv2.sh ...` switches retrieval off.
 
+## neurosynth-v2 test split, integrated (2026-10-28)
+
+English only, ReAct, Datalog, hybrid retrieval, on `llm-integration`
+with three more changes:
+
+- the text-protocol fix of PR #997. The "multi-line JSON" of Gemma's
+  nsv2-21 was in fact a repetition loop cut at the token limit, which
+  the agent fed back into the history.
+- PR #995.
+- PR #996: four magic-sets bugs that left `study_similarity`'s text
+  unbound (nsv2-29 and nsv2-35).
+
+The gold rows are unchanged (41/41). Test split, English (n = 21),
+baseline → integrated:
+
+| model | F1 | exact | steps | tokens/q | s/q |
+|---|---:|---:|---:|---:|---:|
+| Sonnet 5.5 (OpenRouter) | 1.000 → **1.000** | 100% → 100% | 3.0 → 2.9 | 177k → 24k | 13 → 13 |
+| Gemma 4 31B (OpenRouter) | 0.809 → **0.905** | 76% → 90% | 3.0 → 1.8 | 140k → 12k | 28 → 18 |
+| DeepSeek V4 Flash 0731 (OpenRouter) | 0.857 → **0.952** | 86% → 95% | 4.1 → 3.5 | 174k → 23k | 37 → 19 |
+| DeepSeek V4 Flash 0731 (Albert) | 0.857 → **0.904** | 86% → 86% | 4.5 → 4.6 | 170k → 28k | 99 → 30 |
+
+Gemma on Albert was not run: its daily cap of 2.46M input tokens was
+still exhausted. The English dev rerun shows no regression: Gemma goes
+0.900 → 0.950 (nsv2-21 now exact) and DeepSeek 1.000 → 0.950. The only
+miss left for either model is nsv2-36, which is reported separately
+pending a decision on its gold and metric.
+
+What still fails:
+
+- Gemma: a quoted study id (nsv2-02), and `rdfs:label` for
+  `cogat_term` (nsv2-33).
+- DeepSeek: steps spent on the Tian abbreviations (nsv2-15), a
+  repeated search (nsv2-20, Albert), and a term instead of free text
+  (nsv2-27, Albert).
+
+Details in [runs/nsv2-test-int.md](runs/nsv2-test-int.md).
+
 ## TEXT2SPARQL question sets in Datalog
 
 The four question sets of the TEXT2SPARQL challenge are also in the
