@@ -49,6 +49,17 @@ providers:
     tool_calling: text
     requests_per_minute: 24     # Albert keys allow 25 a minute
 
+  # DeepSeek V4 Flash (0731) on Albert. Its quota on our key is not
+  # documented: keep well under Albert's limits and run one job at a time.
+  albert-deepseek:
+    api: openai
+    base_url: https://albert.api.etalab.gouv.fr/v1
+    api_key_env: ALBERT_API_KEY
+    model: deepseek-v4-flash-0731
+    tool_calling: text
+    max_tokens: 4096
+    requests_per_minute: 10
+
   # The same Gemma 4 31B on OpenRouter, without Albert's daily cap: for
   # tuning, the final runs being on Albert.
   openrouter-gemma:
@@ -66,6 +77,18 @@ providers:
     base_url: https://openrouter.ai/api/v1
     api_key_env: OPENROUTER_API_KEY
     model: deepseek/deepseek-v4.1-flash
+    tool_calling: text
+    max_tokens: 4096
+    headers:
+      X-Title: NeuroLang
+
+  # The same DeepSeek V4 Flash (0731) as Albert's, on OpenRouter: for
+  # tuning on the dev split, the final runs being on Albert.
+  openrouter-deepseek-0731:
+    api: openai
+    base_url: https://openrouter.ai/api/v1
+    api_key_env: OPENROUTER_API_KEY
+    model: deepseek/deepseek-v4-flash-0731
     tool_calling: text
     max_tokens: 4096
     headers:

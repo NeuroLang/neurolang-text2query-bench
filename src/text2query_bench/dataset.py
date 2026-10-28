@@ -15,6 +15,9 @@ A dataset is a YAML file::
         gold:
           datalog: ans(s) :- mentions(s, 'pain')
 
+A question may name its ``split`` (e.g. ``dev`` or ``test``), so that a
+system is tuned on one part of a dataset and evaluated on the other.
+
 As in the TEXT2SPARQL challenge, the gold answers are the rows the gold
 query returns on the engine, and a question can be asked in several
 natural languages. The gold query is written in Datalog (and may also
@@ -51,6 +54,7 @@ class Question:
     gold: dict
     tags: list = field(default_factory=list)
     source_id: str = ""
+    split: str = ""
 
     def gold_query(self):
         """
@@ -93,9 +97,14 @@ class Dataset:
                 return question
         raise KeyError(question_id)
 
-    def select(self, ids=None, tags=None) -> list:
-        """Return the questions with one of the *ids* or of the *tags*."""
+    def select(self, ids=None, tags=None, split=None) -> list:
+        """
+        Return the questions with one of the *ids* or of the *tags*, in
+        the *split*.
+        """
         selected = self.questions
+        if split:
+            selected = [q for q in selected if q.split == split]
         if ids:
             selected = [q for q in selected if q.id in ids]
         if tags:
@@ -124,7 +133,7 @@ def _question(entry: dict, index: int) -> Question:
         )
     return Question(
         str(entry["id"]), dict(text), gold, list(entry.get("tags") or []),
-        str(entry.get("source_id", "")),
+        str(entry.get("source_id", "")), str(entry.get("split", "")),
     )
 
 

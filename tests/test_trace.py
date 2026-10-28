@@ -15,7 +15,7 @@ class FakeClient:
         self.texts = list(texts)
 
     def complete(self, messages, tools=None, temperature=0.0):
-        from neurolang.utils.llm.providers import Reply
+        from neurolang_apps.utils.llm.providers import Reply
 
         return Reply(self.texts.pop(0), usage={"input_tokens": 5})
 

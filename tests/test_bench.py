@@ -145,7 +145,7 @@ def test_endpoint_protocol(dataset):
 
 
 def test_unknown_predicates_can_give_no_rows(nl):
-    from neurolang.exceptions import SymbolNotFoundError
+    from nl_expr.exceptions import SymbolNotFoundError
 
     def unknown(query):
         raise SymbolNotFoundError("Symbol not found dbo:launchDate")

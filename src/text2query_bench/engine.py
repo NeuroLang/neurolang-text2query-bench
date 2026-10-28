@@ -28,7 +28,7 @@ def build_engine(name: str, data_dir, engines_file=None):
     The engine is that of *engines_file*, an engines YAML file, when
     given, else of NeuroLang's own engines.
     """
-    from neurolang.utils import engine_registry
+    from neurolang_apps.utils import engine_registry
 
     return engine_registry.build_engine(
         name, Path(data_dir), None,
@@ -98,9 +98,9 @@ def execute(
     With *unknown_is_empty*, a query on a predicate the engine does not
     have returns no rows, as SPARQL does, instead of failing.
     """
-    from neurolang.exceptions import SymbolNotFoundError
+    from nl_expr.exceptions import SymbolNotFoundError
 
-    from neurolang.utils.cli import result_to_dataframe
+    from neurolang_apps.utils.cli import result_to_dataframe
 
     run = (
         nl.execute_squall_program if language == "squall"

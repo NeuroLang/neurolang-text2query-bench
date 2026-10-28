@@ -5,7 +5,7 @@ A system turns a question into a NeuroLang query
 (:meth:`System.generate`). Two kinds are provided:
 
 * :class:`AssistantSystem` runs the NeuroLang LLM assistant in process
-  (``neurolang.utils.llm``), with the strategy (ICL or ReAct), provider
+  (``neurolang_apps.utils.llm``), with the strategy (ICL or ReAct), provider
   and query language chosen;
 * :class:`EndpointSystem` asks an HTTP endpoint following the TEXT2SPARQL
   protocol (``GET /?question=...&dataset=...``), e.g. the server of
@@ -58,11 +58,11 @@ class AssistantSystem(System):
     The NeuroLang LLM assistant, run in process on the engine *nl*.
 
     *provider* and *strategy* default to those of the configuration at
-    *config_path* (see ``neurolang.utils.llm.config``); *query_language*
+    *config_path* (see ``neurolang_apps.utils.llm.config``); *query_language*
     is ``datalog`` or ``squall``. *exclude_gold* leaves the question out
     of the few-shot examples when the engine's example bank holds it.
 
-    *examples* (``neurolang.utils.llm.examples.Example``) and
+    *examples* (``neurolang_apps.utils.llm.examples.Example``) and
     *description* replace the example bank and the description of the
     engine, e.g. for an engine that is not in NeuroLang's registry.
 
@@ -76,12 +76,15 @@ class AssistantSystem(System):
         config_path=None, client=None, exclude_gold: bool = True,
         examples=None, description: Optional[str] = None, tracer=None,
     ):
-        from neurolang.utils.llm import load_config
+        from neurolang_apps.utils.llm import load_config
 
         self.nl = nl
         self.engine_name = engine_name
         self.query_language = query_language
         self.config = load_config(config_path)
+        # The comments the assistant writes on an accepted query cost a
+        # request and do not change the query: the benchmark skips them.
+        self.config.assistant.comment_rules = False
         self.provider = self.config.provider(provider)
         self.strategy = strategy or self.config.assistant.strategy
         self.client = client
@@ -96,7 +99,7 @@ class AssistantSystem(System):
 
     def trace(self, tracer) -> None:
         """Report the requests to the model and its replies to *tracer*."""
-        from neurolang.utils.llm.providers import make_client
+        from neurolang_apps.utils.llm.providers import make_client
 
         from .trace import TracingClient
 
@@ -108,7 +111,7 @@ class AssistantSystem(System):
         )
 
     def generate(self, question: str, language: str) -> Generation:
-        from neurolang.utils.llm import LLMError, make_agent
+        from neurolang_apps.utils.llm import LLMError, make_agent
 
         steps = []
         agent = make_agent(
@@ -186,7 +189,7 @@ def gold_examples(dataset, query_language: str = "datalog") -> list:
     per natural language, so that a question is left out of its own
     prompt in any language (leave-one-out).
     """
-    from neurolang.utils.llm.examples import Example
+    from neurolang_apps.utils.llm.examples import Example
 
     examples = []
     for question in dataset.questions:

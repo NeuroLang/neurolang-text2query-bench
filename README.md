@@ -19,7 +19,7 @@ SQUALL), modelled on the
   scores them.
 
 The systems benchmarked out of the box are the two strategies of the
-NeuroLang LLM query assistant (`neurolang.utils.llm`, the `.ask` command
+NeuroLang LLM query assistant (`neurolang_apps.utils.llm`, the `.ask` command
 of the interactive `neurolang-query -i`):
 
 - **ICL**: in-context learning. The prompt holds the syntax of the
@@ -88,7 +88,7 @@ downloaded on first use). Building the engine takes about 1.5 minutes.
 
 LLM providers are configured as for NeuroLang's assistant, in
 `~/.config/neurolang/llm.yaml`, `$NEUROLANG_LLM_CONFIG` or `--llm-config`.
-See `neurolang/utils/llm/llm.example.yaml`. The supported providers are:
+See `neurolang_apps/utils/llm/llm.example.yaml`. The supported providers are:
 
 - OpenRouter
 - Albert (`https://albert.api.etalab.gouv.fr/v1`)

@@ -70,7 +70,7 @@ def _gold(args, nl, dataset) -> dict:
 
 
 def _questions(args, dataset):
-    return dataset.select(args.ids, args.tags)[: args.limit or None]
+    return dataset.select(args.ids, args.tags, args.split)[: args.limit or None]
 
 
 def _examples(args, dataset):
@@ -355,6 +355,8 @@ def _add_selection(parser) -> None:
     parser.add_argument("--ids", nargs="+", help="question ids to ask")
     parser.add_argument("--tags", nargs="+", help="question tags to ask")
     parser.add_argument("--limit", type=int, help="ask the first N only")
+    parser.add_argument("--split", help="ask the questions of this split "
+                        "only (dev, test)")
 
 
 def _add_trace(parser) -> None:

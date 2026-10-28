@@ -1,6 +1,7 @@
 __pycache__/
 !runs/README.md
 .venv/
+.venv-*/
 *.egg-info/
 data/
 data/dbpedia-cache/
