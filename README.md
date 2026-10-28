@@ -311,6 +311,35 @@ failure kind, in [runs/nsv2-dev-lean.md](runs/nsv2-dev-lean.md).
 `VENV=.venv-llmfix scripts/run_nsv2.sh ...` runs against the branch,
 and `scripts/prompt_size.py` measures the prompt.
 
+## neurosynth-v2, integrated (2026-10-28)
+
+Local NeuroLang branch `llm-integration` (worktree
+`/Users/bot/NeuroLang-llmint`, venv `.venv-llmint`): the lean schema,
+the neurosynth guidance answering "how many" questions with a count,
+hybrid example retrieval (BM25 fused with bge-m3 embeddings on Albert,
+`example_retrieval` and `embeddings` in `configs/llm.yaml`), and the
+engine fixes of PRs #993 (argmax of a probability) and #994
+(`similar_study` in a rule of constants). The gold rows are unchanged
+on this engine.
+
+Dev split, ReAct, baseline → lean → integrated (BM25 retrieval in
+brackets, same code):
+
+| model (OpenRouter) | F1 | exact | steps | tokens/q | s/q |
+|---|---:|---:|---:|---:|---:|
+| Sonnet 5.5 | 0.975 → 1.000 → 0.975 | 98% → 100% → 98% | 3.8 → 3.6 → 3.2 | 202k → 27k → 25k | 17 → 20 → 15 |
+| Gemma 4 31B | 0.675 → 0.775 → **0.925** (0.850) | 68% → 78% → 92% (85%) | 3.3 → 2.4 → 2.3 (2.4) | 157k → 16k → 17k (16k) | 38 → 29 → 34 (29) |
+| DeepSeek V4 Flash 0731 | 0.775 → 0.801 → **0.950** (0.925) | 78% → 80% → 95% (92%) | 5.0 → 5.3 → 4.0 (4.5) | 210k → 37k → 28k (31k) | 58 → 45 → 27 (35) |
+
+The count question (nsv2-03) is now exact for all three models, the
+engine fixes remove most out-of-steps answers, and hybrid retrieval
+fixes four French questions for Gemma. What remains: nsv2-36 (the
+argmax parcel without its probability), Gemma's multi-line JSON
+actions (nsv2-21 en), and DeepSeek's `cogat_definition` joined through
+a helper rule (nsv2-35 fr). Gemma on Albert was still over its daily
+cap. Details in [runs/nsv2-dev-int.md](runs/nsv2-dev-int.md);
+`RETRIEVAL=bm25 scripts/run_nsv2.sh ...` switches retrieval off.
+
 ## TEXT2SPARQL question sets in Datalog
 
 The four question sets of the TEXT2SPARQL challenge are also in the
