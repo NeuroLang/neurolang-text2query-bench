@@ -1,0 +1,559 @@
+dataset: https://neurolang.github.io/text2query/2026/neurosynth-v2/
+engine: neurosynth
+description: >
+  Held-out questions on NeuroLang's neurosynth engine as it is since the
+  package split: probabilistic answers over selected_study (the uniform
+  choice of a study), free-text search of the studies (similar_study,
+  SPECTER2), Cognitive Atlas concepts and their definitions, the
+  Schaefer networks, the Destrieux and Tian atlases, co-activation,
+  negation and aggregation. Asked in English and French. The gold
+  answers are the rows of the gold Datalog query.
+
+# The questions are none of the assistant's example bank
+# (examples/coordinate_meta_analysis.yaml): other terms, concepts,
+# networks, regions and phrasings, every question being below a bge-m3
+# cosine of 0.85 to every bank question (scripts/leakage.py).
+#
+# Tags:
+#   simple        one predicate or a probability of one term
+#   prob          a probability over selected_study (marginal or
+#                 conditional: forward inference)
+#   free-text     a topic given as a description: similar_study
+#   cogat         a Cognitive Atlas concept, its definition or hierarchy
+#   schaefer      the Schaefer parcels and their 17 networks
+#   destrieux     the Destrieux atlas (gyri and sulci)
+#   tian          the Tian atlas (subcortex)
+#   mni           points in MNI millimetres (peak_mni)
+#   coactivation  regions or points activated by the same studies
+#   negation, disjunction, conjunction, aggregation
+#
+# split: dev (to tune on) or test (held out), balanced across the tags.
+
+questions:
+  - id: nsv2-01
+    tags: [simple, prob]
+    split: test
+    question:
+      en: What fraction of the studies mention schizophrenia?
+      fr: Quelle proportion des études mentionnent la schizophrénie ?
+    gold:
+      datalog: |-
+        schizophrenia_study(s) :- mentions(s, 'schizophrenia'), selected_study(s)
+        ans(p) :- PROB[schizophrenia_study(s)] = p
+
+  - id: nsv2-02
+    tags: [simple]
+    split: test
+    question:
+      en: What is the title of study 10022492?
+      fr: Quel est le titre de l'étude 10022492 ?
+    gold:
+      datalog: ans(t) :- study_title(10022492, t)
+
+  - id: nsv2-03
+    tags: [simple, aggregation]
+    split: dev
+    question:
+      en: How many studies of the database mention smoking?
+      fr: Combien d'études de la base mentionnent le tabagisme (smoking) ?
+    gold:
+      datalog: |-
+        smoking_count(n) :- AGGREGATE[](mentions(s, 'smoking') @ count(s)) = n
+        ans(n) :- smoking_count(n)
+
+  - id: nsv2-04
+    tags: [simple, conjunction, prob]
+    split: dev
+    question:
+      en: How likely is a randomly drawn study to mention sleep as well as memory?
+      fr: Quelle est la probabilité qu'une étude tirée au hasard mentionne à la fois le sommeil et la mémoire ?
+    gold:
+      datalog: |-
+        sleep_memory(s) :- mentions(s, 'sleep'), mentions(s, 'memory'), selected_study(s)
+        ans(p) :- PROB[sleep_memory(s)] = p
+
+  - id: nsv2-05
+    tags: [disjunction, prob]
+    split: dev
+    question:
+      en: What is the probability that a study mentions anxiety or depression?
+      fr: Quelle est la probabilité qu'une étude mentionne l'anxiété ou la dépression ?
+    gold:
+      datalog: |-
+        mood(s) :- mentions(s, 'anxiety')
+        mood(s) :- mentions(s, 'depression')
+        chosen(s) :- mood(s), selected_study(s)
+        ans(p) :- PROB[chosen(s)] = p
+
+  - id: nsv2-06
+    tags: [negation, prob]
+    split: test
+    question:
+      en: What share of the studies mention reward but not punishment?
+      fr: Quelle part des études mentionne la récompense mais pas la punition ?
+    gold:
+      datalog: |-
+        reward_only(s) :- mentions(s, 'reward'), ~mentions(s, 'punishment'), selected_study(s)
+        ans(p) :- PROB[reward_only(s)] = p
+
+  - id: nsv2-07
+    tags: [negation, tian, prob]
+    split: dev
+    question:
+      en: Among the studies that mention addiction without mentioning reward, how likely is each subcortical structure to be activated?
+      fr: Parmi les études qui mentionnent l'addiction sans mentionner la récompense, quelle est la probabilité d'activation de chaque structure sous-corticale ?
+    gold:
+      datalog: |-
+        active(l, s) :- tian_activated(l, s), selected_study(s)
+        addiction_only(s) :- mentions(s, 'addiction'), ~mentions(s, 'reward'), selected_study(s)
+        ans(l, p) :- PROB[active(l, s) // addiction_only(s)] = p
+
+  - id: nsv2-08
+    tags: [negation, free-text]
+    split: test
+    question:
+      en: Give the titles of the studies about "mind wandering during rest" that never mention the default mode.
+      fr: Donne les titres des études portant sur "mind wandering during rest" qui ne mentionnent jamais le mode par défaut (default mode).
+    gold:
+      datalog: |-
+        ans(s, title) :- similar_study('mind wandering during rest', s), study_title(s, title), ~mentions(s, 'default mode')
+
+  - id: nsv2-09
+    tags: [negation, destrieux, prob]
+    split: dev
+    question:
+      en: How likely is a study to activate the left angular gyrus while leaving the right angular gyrus inactive?
+      fr: Quelle est la probabilité qu'une étude active le gyrus angulaire gauche sans activer le gyrus angulaire droit ?
+    gold:
+      datalog: |-
+        left_only(s) :- destrieux_activated('L G pariet inf Angular', s), ~destrieux_activated('R G pariet inf Angular', s), selected_study(s)
+        ans(p) :- PROB[left_only(s)] = p
+
+  - id: nsv2-10
+    tags: [destrieux, prob]
+    split: test
+    question:
+      en: Given that a study mentions arithmetic, what is the chance that it activates the left intraparietal sulcus?
+      fr: Sachant qu'une étude mentionne l'arithmétique, quelle est la probabilité qu'elle active le sillon intrapariétal gauche ?
+    gold:
+      datalog: |-
+        active(l, s) :- destrieux_activated(l, s), selected_study(s)
+        term_association(s, t) :- mentions(s, t), selected_study(s)
+        ans(p) :- PROB[active('L S intrapariet and P trans', s) // term_association(s, 'arithmetic')] = p
+
+  - id: nsv2-11
+    tags: [destrieux, prob]
+    split: test
+    question:
+      en: In the Destrieux parcellation, what is the probability of each cortical region being activated by a study that mentions the term face?
+      fr: Dans la parcellisation de Destrieux, quelle est la probabilité que chaque région corticale soit activée par une étude mentionnant le terme visage (face) ?
+    gold:
+      datalog: |-
+        active(l, s) :- destrieux_activated(l, s), selected_study(s)
+        term_association(s, t) :- mentions(s, t), selected_study(s)
+        ans(l, p) :- PROB[active(l, s) // term_association(s, 'face')] = p
+
+  - id: nsv2-12
+    tags: [destrieux, aggregation, prob]
+    split: dev
+    question:
+      en: Which Destrieux region is the most likely to be activated by the studies mentioning motor, and with what probability?
+      fr: Quelle région de Destrieux a la plus forte probabilité d'être activée par les études qui mentionnent le terme moteur (motor), et avec quelle probabilité ?
+    gold:
+      datalog: |-
+        active(l, s) :- destrieux_activated(l, s), selected_study(s)
+        term_association(s, t) :- mentions(s, t), selected_study(s)
+        region_probability(l, p) :- PROB[active(l, s) // term_association(s, 'motor')] = p
+        beaten(l) :- region_probability(l, p), region_probability(l2, p2), (p2 > p)
+        ans(l, p) :- region_probability(l, p), ~beaten(l)
+
+  - id: nsv2-13
+    tags: [tian, prob]
+    split: test
+    question:
+      en: How probable is an activation of the right nucleus accumbens, core or shell, in the studies that mention monetary reward?
+      fr: Quelle est la probabilité d'une activation du noyau accumbens droit, cœur ou coque, dans les études qui mentionnent la récompense monétaire ?
+    gold:
+      datalog: |-
+        accumbens(s) :- tian_activated('NAc core rh', s)
+        accumbens(s) :- tian_activated('NAc shell rh', s)
+        active(s) :- accumbens(s), selected_study(s)
+        term_association(s, t) :- mentions(s, t), selected_study(s)
+        ans(p) :- PROB[active(s) // term_association(s, 'monetary reward')] = p
+
+  - id: nsv2-14
+    tags: [tian, prob]
+    split: dev
+    question:
+      en: What is the probability that a study mentioning episodic memory activates the left hippocampus, anterior or posterior?
+      fr: Quelle est la probabilité qu'une étude mentionnant la mémoire épisodique active l'hippocampe gauche, antérieur ou postérieur ?
+    gold:
+      datalog: |-
+        hippocampus(s) :- tian_activated('aHIP lh', s)
+        hippocampus(s) :- tian_activated('pHIP lh', s)
+        active(s) :- hippocampus(s), selected_study(s)
+        term_association(s, t) :- mentions(s, t), selected_study(s)
+        ans(p) :- PROB[active(s) // term_association(s, 'episodic memory')] = p
+
+  - id: nsv2-15
+    tags: [tian, coactivation, prob]
+    split: test
+    question:
+      en: Seeding the left anterior caudate, how likely is a study that activates it to also activate each other subcortical region?
+      fr: En prenant le caudé antérieur gauche comme graine, quelle est la probabilité qu'une étude qui l'active active aussi chacune des autres régions sous-corticales ?
+    gold:
+      datalog: |-
+        seed(s) :- tian_activated('aCAU lh', s), selected_study(s)
+        active(l, s) :- tian_activated(l, s), selected_study(s)
+        ans(l, p) :- PROB[active(l, s) // seed(s)] = p
+
+  - id: nsv2-16
+    tags: [schaefer, prob]
+    split: dev
+    question:
+      en: For the studies mentioning visual, what is the probability of activating each parcel of the left central visual network (VisCent)?
+      fr: Pour les études mentionnant le terme visuel (visual), quelle est la probabilité d'activer chaque parcelle du réseau visuel central gauche (VisCent) ?
+    gold:
+      datalog: |-
+        central_visual(l) :- schaefer(l, r), startswith('17Networks LH VisCent', l)
+        active(l, s) :- central_visual(l), schaefer_activated(l, s), selected_study(s)
+        term_association(s, t) :- mentions(s, t), selected_study(s)
+        ans(l, p) :- PROB[active(l, s) // term_association(s, 'visual')] = p
+
+  - id: nsv2-17
+    tags: [schaefer, prob]
+    split: test
+    question:
+      en: How likely is a study that mentions working memory to activate the frontoparietal control network, in either hemisphere?
+      fr: Quelle est la probabilité qu'une étude qui mentionne la mémoire de travail active le réseau de contrôle fronto-pariétal, dans l'un ou l'autre hémisphère ?
+    gold:
+      datalog: |-
+        control_label(l) :- schaefer(l, r), startswith('17Networks LH Cont', l)
+        control_label(l) :- schaefer(l, r), startswith('17Networks RH Cont', l)
+        control(s) :- control_label(l), schaefer_activated(l, s), selected_study(s)
+        term_association(s, t) :- mentions(s, t), selected_study(s)
+        ans(p) :- PROB[control(s) // term_association(s, 'working memory')] = p
+
+  - id: nsv2-18
+    tags: [schaefer, prob]
+    split: dev
+    question:
+      en: Given that a study mentions saccades, what is the probability that it activates the dorsal attention network?
+      fr: Sachant qu'une étude mentionne les saccades, quelle est la probabilité qu'elle active le réseau attentionnel dorsal ?
+    gold:
+      datalog: |-
+        dorsal_label(l) :- schaefer(l, r), startswith('17Networks LH DorsAttn', l)
+        dorsal_label(l) :- schaefer(l, r), startswith('17Networks RH DorsAttn', l)
+        dorsal(s) :- dorsal_label(l), schaefer_activated(l, s), selected_study(s)
+        term_association(s, t) :- mentions(s, t), selected_study(s)
+        ans(p) :- PROB[dorsal(s) // term_association(s, 'saccades')] = p
+
+  - id: nsv2-19
+    tags: [schaefer, aggregation]
+    split: test
+    question:
+      en: How many parcels of the Schaefer atlas belong to the default mode network?
+      fr: Combien de parcelles de l'atlas de Schaefer appartiennent au réseau du mode par défaut ?
+    gold:
+      datalog: |-
+        default_label(l) :- schaefer_label(l), startswith('17Networks LH Default', l)
+        default_label(l) :- schaefer_label(l), startswith('17Networks RH Default', l)
+        default_count(n) :- AGGREGATE[](default_label(l) @ count(l)) = n
+        ans(n) :- default_count(n)
+
+  - id: nsv2-20
+    tags: [schaefer, negation, prob]
+    split: test
+    question:
+      en: What is the probability that a study activates the salience / ventral attention network but not the default mode network?
+      fr: Quelle est la probabilité qu'une étude active le réseau de saillance / attention ventrale mais pas le réseau du mode par défaut ?
+    gold:
+      datalog: |-
+        salience_label(l) :- schaefer(l, r), startswith('17Networks LH SalVentAttn', l)
+        salience_label(l) :- schaefer(l, r), startswith('17Networks RH SalVentAttn', l)
+        default_label(l) :- schaefer(l, r), startswith('17Networks LH Default', l)
+        default_label(l) :- schaefer(l, r), startswith('17Networks RH Default', l)
+        salience(s) :- salience_label(l), schaefer_activated(l, s)
+        default_mode(s) :- default_label(l), schaefer_activated(l, s)
+        salience_only(s) :- salience(s), ~default_mode(s), selected_study(s)
+        ans(p) :- PROB[salience_only(s)] = p
+
+  - id: nsv2-21
+    tags: [schaefer, coactivation, prob]
+    split: dev
+    question:
+      en: In studies mentioning spatial attention, how often is each pair of dorsal attention network parcels activated together?
+      fr: Dans les études mentionnant l'attention spatiale, à quelle fréquence chaque paire de parcelles du réseau attentionnel dorsal est-elle activée conjointement ?
+    gold:
+      datalog: |-
+        dorsal_label(l) :- schaefer(l, r), startswith('17Networks LH DorsAttn', l)
+        dorsal_label(l) :- schaefer(l, r), startswith('17Networks RH DorsAttn', l)
+        active(l, s) :- dorsal_label(l), schaefer_activated(l, s), selected_study(s)
+        co_active(l1, l2, s) :- active(l1, s), active(l2, s)
+        term_association(s, t) :- mentions(s, t), selected_study(s)
+        ans(l1, l2, p) :- (l1 < l2), PROB[co_active(l1, l2, s) // term_association(s, 'spatial attention')] = p
+
+  - id: nsv2-22
+    tags: [coactivation, tian, schaefer, prob]
+    split: test
+    question:
+      en: Which Schaefer parcels tend to be activated together with the right anterior putamen, and how likely?
+      fr: Quelles parcelles de Schaefer sont activées avec le putamen antérieur droit, et avec quelle probabilité ?
+    gold:
+      datalog: |-
+        seed(s) :- tian_activated('aPUT rh', s), selected_study(s)
+        active(l, s) :- schaefer_activated(l, s), selected_study(s)
+        ans(l, p) :- PROB[active(l, s) // seed(s)] = p
+
+  - id: nsv2-23
+    tags: [coactivation, mni, prob]
+    split: dev
+    question:
+      en: Are the dorsal anterior cingulate (MNI 0, 24, 30) and the right anterior insula (MNI 38, 20, -4) activated together more than chance? Give the lift.
+      fr: Le cingulaire antérieur dorsal (MNI 0, 24, 30) et l'insula antérieure droite (MNI 38, 20, -4) sont-ils activés ensemble plus que par hasard ? Donne le lift.
+    gold:
+      datalog: |-
+        near_acc(s) :- peak_mni(x, y, z, s), (euclidean(x, y, z, 0.0, 24.0, 30.0) <= 3)
+        near_insula(s) :- peak_mni(x, y, z, s), (euclidean(x, y, z, 38.0, 20.0, -4.0) <= 3)
+        acc(s) :- near_acc(s), selected_study(s)
+        insula(s) :- near_insula(s), selected_study(s)
+        both(s) :- near_acc(s), near_insula(s), selected_study(s)
+        p_acc(p) :- PROB[acc(s)] = p
+        p_insula(p) :- PROB[insula(s)] = p
+        p_both(p) :- PROB[both(s)] = p
+        ans(lift) :- p_both(p12), p_acc(p1), p_insula(p2), (lift == p12 / (p1 * p2))
+
+  - id: nsv2-24
+    tags: [coactivation, mni, prob]
+    split: test
+    question:
+      en: Among the studies with a peak within 3 mm of MNI (-44, 12, 24), what fraction also have one within 3 mm of MNI (-48, -56, -10)?
+      fr: Parmi les études ayant un pic à moins de 3 mm du point MNI (-44, 12, 24), quelle fraction en a aussi un à moins de 3 mm du point MNI (-48, -56, -10) ?
+    gold:
+      datalog: |-
+        near_frontal(s) :- peak_mni(x, y, z, s), (euclidean(x, y, z, -44.0, 12.0, 24.0) <= 3)
+        near_temporal(s) :- peak_mni(x, y, z, s), (euclidean(x, y, z, -48.0, -56.0, -10.0) <= 3)
+        seed(s) :- near_frontal(s), selected_study(s)
+        target(s) :- near_temporal(s), selected_study(s)
+        ans(p) :- PROB[target(s) // seed(s)] = p
+
+  - id: nsv2-25
+    tags: [free-text]
+    split: dev
+    question:
+      en: Which studies deal with "the perception of music and melody"? List them with their titles.
+      fr: Quelles études portent sur "the perception of music and melody" ? Donne-les avec leurs titres.
+    gold:
+      datalog: |-
+        ans(s, title) :- similar_study('the perception of music and melody', s), study_title(s, title)
+
+  - id: nsv2-26
+    tags: [free-text, tian, prob]
+    split: dev
+    question:
+      en: How likely is a study about "learning from rewards and punishments" to activate the left nucleus accumbens?
+      fr: Quelle est la probabilité qu'une étude sur "learning from rewards and punishments" active le noyau accumbens gauche ?
+    gold:
+      datalog: |-
+        accumbens(s) :- tian_activated('NAc core lh', s)
+        accumbens(s) :- tian_activated('NAc shell lh', s)
+        active(s) :- accumbens(s), selected_study(s)
+        close(q, s) :- similar_study(q, s), selected_study(s)
+        p_active_given_close(q, PROB) :- active(s) // close(q, s)
+        ans(p) :- p_active_given_close('learning from rewards and punishments', p)
+
+  - id: nsv2-27
+    tags: [free-text, schaefer, prob]
+    split: test
+    question:
+      en: Which Schaefer parcels do the studies about "imagining future events" activate, and how likely?
+      fr: Quelles parcelles de Schaefer les études sur "imagining future events" activent-elles, et avec quelle probabilité ?
+    gold:
+      datalog: |-
+        active(l, s) :- schaefer_activated(l, s), selected_study(s)
+        close(q, s) :- similar_study(q, s), selected_study(s)
+        p_active_given_close(q, l, PROB) :- active(l, s) // close(q, s)
+        ans(l, p) :- p_active_given_close('imagining future events', l, p)
+
+  - id: nsv2-28
+    tags: [free-text, prob]
+    split: dev
+    question:
+      en: What terms are used by the studies about "tasting sweet and bitter solutions", and with what probability?
+      fr: Quels termes les études sur "tasting sweet and bitter solutions" emploient-elles, et avec quelle probabilité ?
+    gold:
+      datalog: |-
+        close(q, s) :- similar_study(q, s), selected_study(s)
+        term_association(s, t) :- mentions(s, t), selected_study(s)
+        p_term_given_close(q, t, PROB) :- term_association(s, t) // close(q, s)
+        ans(t, p) :- p_term_given_close('tasting sweet and bitter solutions', t, p)
+
+  - id: nsv2-29
+    tags: [free-text, aggregation]
+    split: test
+    question:
+      en: Which study is the single closest match to "tactile stimulation of the fingertips"? Give its title.
+      fr: Quelle étude correspond le mieux à "tactile stimulation of the fingertips" ? Donne son titre.
+    gold:
+      datalog: |-
+        best(q, m) :- AGGREGATE[q](study_similarity(q, s, v) @ max(v)) = m
+        ans(s, title) :- best('tactile stimulation of the fingertips', m), study_similarity('tactile stimulation of the fingertips', s, m), study_title(s, title)
+
+  - id: nsv2-30
+    tags: [cogat, free-text]
+    split: dev
+    question:
+      en: Using the Cognitive Atlas definition of selective attention, which studies match it? Include their titles.
+      fr: D'après la définition de l'attention sélective dans la Cognitive Atlas, quelles études y correspondent ? Avec leurs titres.
+    gold:
+      datalog: |-
+        ans(s, title) :- cogat_definition('selective attention', d), similar_study(d, s), study_title(s, title)
+
+  - id: nsv2-31
+    tags: [cogat, destrieux, prob]
+    split: test
+    question:
+      en: Based on its Cognitive Atlas definition, how likely is a study about semantic memory to activate the left middle temporal gyrus?
+      fr: D'après sa définition dans la Cognitive Atlas, quelle est la probabilité qu'une étude sur la mémoire sémantique active le gyrus temporal moyen gauche ?
+    gold:
+      datalog: |-
+        temporal(s) :- destrieux_activated('L G temporal middle', s), selected_study(s)
+        close(q, s) :- similar_study(q, s), selected_study(s)
+        p_temporal_given_close(q, PROB) :- temporal(s) // close(q, s)
+        ans(p) :- cogat_definition('semantic memory', d), p_temporal_given_close(d, p)
+
+  - id: nsv2-32
+    tags: [cogat, schaefer, prob]
+    split: dev
+    question:
+      en: Taking the Cognitive Atlas definition of empathy, what is the probability that a matching study activates the limbic network?
+      fr: En prenant la définition de l'empathie de la Cognitive Atlas, quelle est la probabilité qu'une étude correspondante active le réseau limbique ?
+    gold:
+      datalog: |-
+        limbic_label(l) :- schaefer(l, r), startswith('17Networks LH Limbic', l)
+        limbic_label(l) :- schaefer(l, r), startswith('17Networks RH Limbic', l)
+        limbic(s) :- limbic_label(l), schaefer_activated(l, s), selected_study(s)
+        close(q, s) :- similar_study(q, s), selected_study(s)
+        p_limbic_given_close(q, PROB) :- limbic(s) // close(q, s)
+        ans(p) :- cogat_definition('empathy', d), p_limbic_given_close(d, p)
+
+  - id: nsv2-33
+    tags: [cogat]
+    split: test
+    question:
+      en: Which Cognitive Atlas classes are kinds of memory, at any depth?
+      fr: Quelles classes de la Cognitive Atlas sont des sortes de mémoire, à toute profondeur ?
+    gold:
+      datalog: |-
+        ans(t) :- cogat_term(c, 'memory'), cogat_subclass_of(x, c), cogat_term(x, t)
+
+  - id: nsv2-34
+    tags: [cogat, mni, prob]
+    split: test
+    question:
+      en: By its Cognitive Atlas definition, how likely is a study about navigation to report a peak within 3 mm of MNI (24, -40, -10)?
+      fr: D'après sa définition dans la Cognitive Atlas, quelle est la probabilité qu'une étude sur la navigation rapporte un pic à moins de 3 mm du point MNI (24, -40, -10) ?
+    gold:
+      datalog: |-
+        near(s) :- peak_mni(x, y, z, s), (euclidean(x, y, z, 24.0, -40.0, -10.0) <= 3)
+        hit(s) :- near(s), selected_study(s)
+        close(q, s) :- similar_study(q, s), selected_study(s)
+        p_hit_given_close(q, PROB) :- hit(s) // close(q, s)
+        ans(p) :- cogat_definition('navigation', d), p_hit_given_close(d, p)
+
+  - id: nsv2-35
+    tags: [cogat, tian, prob]
+    split: dev
+    question:
+      en: Which subcortical regions do the studies matching the Cognitive Atlas definition of motor control activate, and with what probability?
+      fr: Quelles régions sous-corticales les études correspondant à la définition du contrôle moteur de la Cognitive Atlas activent-elles, et avec quelle probabilité ?
+    gold:
+      datalog: |-
+        active(l, s) :- tian_activated(l, s), selected_study(s)
+        close(q, s) :- similar_study(q, s), selected_study(s)
+        p_active_given_close(q, l, PROB) :- active(l, s) // close(q, s)
+        ans(l, p) :- cogat_definition('motor control', d), p_active_given_close(d, l, p)
+
+  - id: nsv2-36
+    tags: [aggregation, schaefer, prob]
+    split: dev
+    question:
+      en: Which Schaefer parcel has the highest probability of activation among the studies mentioning pain?
+      fr: Quelle parcelle de Schaefer a la plus forte probabilité d'activation parmi les études mentionnant la douleur ?
+    gold:
+      datalog: |-
+        active(l, s) :- schaefer_activated(l, s), selected_study(s)
+        term_association(s, t) :- mentions(s, t), selected_study(s)
+        parcel_probability(l, p) :- PROB[active(l, s) // term_association(s, 'pain')] = p
+        beaten(l) :- parcel_probability(l, p), parcel_probability(l2, p2), (p2 > p)
+        ans(l, p) :- parcel_probability(l, p), ~beaten(l)
+
+  - id: nsv2-37
+    tags: [aggregation, tian]
+    split: test
+    question:
+      en: For each region of the Tian subcortical atlas, how many studies activate it?
+      fr: Pour chaque région de l'atlas sous-cortical de Tian, combien d'études l'activent ?
+    gold:
+      datalog: |-
+        region_count(l, n) :- AGGREGATE[l](tian_activated(l, s) @ count(s)) = n
+        ans(l, n) :- region_count(l, n)
+
+  - id: nsv2-38
+    tags: [aggregation, destrieux, prob]
+    split: test
+    question:
+      en: How many Destrieux regions have a probability above 0.2 of being activated by the studies mentioning language?
+      fr: Combien de régions de Destrieux ont une probabilité supérieure à 0,2 d'être activées par les études mentionnant le langage ?
+    gold:
+      datalog: |-
+        active(l, s) :- destrieux_activated(l, s), selected_study(s)
+        term_association(s, t) :- mentions(s, t), selected_study(s)
+        region_probability(l, p) :- PROB[active(l, s) // term_association(s, 'language')] = p
+        frequent(l) :- region_probability(l, p), (p > 0.2)
+        frequent_count(n) :- AGGREGATE[](frequent(l) @ count(l)) = n
+        ans(n) :- frequent_count(n)
+
+  - id: nsv2-39
+    tags: [mni, prob]
+    split: dev
+    question:
+      en: If a study mentions finger tapping, how likely is it to report a peak within 3 mm of MNI (-38, -22, 56)?
+      fr: Si une étude mentionne le tapotement des doigts (finger tapping), quelle est la probabilité qu'elle rapporte un pic à moins de 3 mm du point MNI (-38, -22, 56) ?
+    gold:
+      datalog: |-
+        near(s) :- peak_mni(x, y, z, s), (euclidean(x, y, z, -38.0, -22.0, 56.0) <= 3)
+        active(s) :- near(s), selected_study(s)
+        term_association(s, t) :- mentions(s, t), selected_study(s)
+        ans(p) :- PROB[active(s) // term_association(s, 'finger tapping')] = p
+
+  - id: nsv2-40
+    tags: [conjunction, tian, prob]
+    split: test
+    question:
+      en: What is the probability that a study both mentions fear and activates the right amygdala, lateral or medial?
+      fr: Quelle est la probabilité qu'une étude à la fois mentionne la peur et active l'amygdale droite, latérale ou médiane ?
+    gold:
+      datalog: |-
+        right_amygdala(s) :- tian_activated('lAMY rh', s)
+        right_amygdala(s) :- tian_activated('mAMY rh', s)
+        both(s) :- right_amygdala(s), mentions(s, 'fear'), selected_study(s)
+        ans(p) :- PROB[both(s)] = p
+
+  - id: nsv2-41
+    tags: [destrieux, prob]
+    split: dev
+    question:
+      en: What is the Bayes factor of the term reading for an activation of the left fusiform gyrus?
+      fr: Quel est le facteur de Bayes du terme lecture (reading) pour une activation du gyrus fusiforme gauche ?
+    gold:
+      datalog: |-
+        fusiform(s) :- destrieux_activated('L G oc temp lat fusifor', s)
+        active_roi(s) :- fusiform(s), selected_study(s)
+        mentioned_term(t) :- mentions(s, t), selected_study(s)
+        cooccurrence(t, s) :- fusiform(s), mentions(s, t), selected_study(s)
+        roi_probability(p_r) :- PROB[active_roi(s)] = p_r
+        term_probability(t, p_t) :- PROB[mentioned_term(t)] = p_t
+        joint_probability(t, p_rt) :- PROB[cooccurrence(t, s)] = p_rt
+        bayes_factor(t, bf) :- joint_probability(t, p_rt), roi_probability(p_r), term_probability(t, p_t), (bf == (p_rt / p_r) / ((p_t - p_rt) / (1.0 - p_r)))
+        ans(bf) :- bayes_factor('reading', bf)
