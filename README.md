@@ -224,6 +224,63 @@ On the test split, the tuned agent had 76 exact answers out of 150,
 against 44 for the baseline. It had 17 empty answers instead of 42, and
 9 errors instead of 21.
 
+## neurosynth-v2 baseline (2026-10-28)
+
+`datasets/neurosynth-v2.yaml` holds 41 held-out questions, in English
+and French, on the current neurosynth engine. It covers:
+
+- free-text search of the studies (`similar_study`);
+- Cognitive Atlas concepts and their hierarchy;
+- the Schaefer networks, and the Destrieux and Tian atlases;
+- MNI points and co-activation;
+- negation and aggregation;
+- marginal and conditional probabilities over `selected_study`.
+
+Each question has a `split`, dev (20) or test (21), balanced across the
+tags (`scripts/assign_splits.py`). None is in the assistant's example
+bank. The highest bge-m3 cosine of a question to a bank question is
+0.811 (`scripts/leakage.py`). All 41 gold queries run and return rows.
+
+These are ReAct runs writing Datalog, with NeuroLang's
+`feat/llm-text-search-examples`, at most 8 steps and 6 BM25 examples:
+
+| model (provider) | dev F1 | test F1 | test exact | steps | tokens/q | s/q |
+|---|---:|---:|---:|---:|---:|---:|
+| Sonnet 5.5 (OpenRouter) | **0.975** | **0.952** | 95% | 3.7 | 204k | 17 |
+| Gemma 4 31B (OpenRouter) | 0.675 | 0.666 | 64% | 3.6 | 171k | 40 |
+| Gemma 4 31B (Albert), 21 English test questions | | 0.524 | 52% | 2.8 | 88k | 84 |
+| DeepSeek V4 Flash 0731 (OpenRouter) | 0.775 | 0.714 | 71% | 4.8 | 203k | 49 |
+| DeepSeek V4 Flash 0731 (Albert) | | 0.738 | 74% | 4.6 | 175k | 104 |
+
+- **Gemma on Albert** stopped at its daily cap of 2.46M input tokens
+  after 16 questions; 7 answers were lost to HTTP 429 and timeouts. On
+  the 14 questions it answered, its F1 (0.786) is that of the same model
+  on OpenRouter (0.785).
+- **DeepSeek runs out of steps.** That is its main failure: 9 to 10 of
+  40 answers. It searches for Tian labels with anatomical words
+  ("accumbens"), but the labels are abbreviations (`NAc core rh`).
+- **Gemma copies the sort notation** of `describe_predicate`, e.g.
+  `study_title(study(10022492), t)`, and puts stored relations in PROB
+  without `selected_study`.
+- **Every request is about 61k tokens.** The schema lists 1264
+  Cognitive Atlas classes as predicates.
+- **Engine bugs.** The max of a probability, joined back to it, returns
+  no rows, although `prompts.py` teaches that pattern. `similar_study`
+  with a constant text fails outside the query rule.
+- **Regression set.** On the 32 old questions, Sonnet now scores F1
+  0.757 (0.918 on 2026-10-14). The drop comes from the engine's new
+  guidance, which answers with probabilities where the old golds list
+  studies or counts.
+
+Per tag, the failure kinds and examples are in
+[runs/neurosynth-v2-baseline.md](runs/neurosynth-v2-baseline.md). The
+scripts:
+
+- `scripts/run_nsv2.sh PROVIDER OUT [--split dev|test]` runs a provider;
+- `scripts/failure_taxonomy.py` gives the scores and failure kinds per
+  split;
+- `scripts/reevaluate.py` scores runs again after a gold change.
+
 ## TEXT2SPARQL question sets in Datalog
 
 The four question sets of the TEXT2SPARQL challenge are also in the
