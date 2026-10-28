@@ -68,20 +68,34 @@ bugs show up as failures of the systems that hit them.
 
 ## Setup
 
+NeuroLang is a uv workspace of four packages (`nl_expr`, `nl_core`,
+`neurolang`, `neurolang_apps`); the assistant is
+`neurolang_apps.utils.llm`. Install a checkout of them, editable, then
+the bench:
+
 ```bash
-uv venv --python 3.12
-uv pip install -e "/path/to/NeuroLang[llm]"
-uv pip install -e ".[dev]"
+uv venv --python 3.12 .venv-llmex
+N=/path/to/NeuroLang/packages
+uv pip install --python .venv-llmex/bin/python \
+    -e $N/nl_expr -e $N/nl_core -e $N/neurolang \
+    -e "$N/neurolang_apps[llm,tui,embeddings]" -e ".[dev]"
 ```
 
-Until they are merged, NeuroLang needs two branches:
+The neurosynth-v2 runs used the branch `feat/llm-text-search-examples`
+(free-text search, Cognitive Atlas, atlases). The TEXT2SPARQL sets need
+`feat/rdf-data-loading` (NeuroLang/NeuroLang#912) for loading RDF
+instances, IRIs and prefixed names in Datalog, SPARQL-like builtins,
+`min` and `avg`.
 
-- `tui-5-llm` (NeuroLang/NeuroLang#904), the LLM assistant;
-- `feat/rdf-data-loading` (NeuroLang/NeuroLang#912), for the TEXT2SPARQL sets: loading RDF
-  instances, IRIs and prefixed names in Datalog, SPARQL-like builtins,
-  `min` and `avg`.
+The free-text predicates (`similar_study`) embed the question with
+SPECTER2 (extra `embeddings`) against the embeddings of the abstracts
+cached in `<data-dir>/neurosynth/embeddings`. With torch 2.2 (the last
+for Intel Macs), transformers loads the base model only from
+safetensors: put `model.safetensors` of `allenai/specter2_base` in
+`embeddings/models/allenai--specter2_base/`.
 
-Check out a branch that merges both, and install it.
+`scripts/env.sh` exports `ALBERT_API_KEY` and `OPENROUTER_API_KEY` from
+`~/.zshrc` for non-interactive shells.
 
 The engine needs the NeuroSynth data: pass `--data-dir` (it is
 downloaded on first use). Building the engine takes about 1.5 minutes.
@@ -119,6 +133,9 @@ t2q-bench --data-dir ~/neurolang_data run \
 # compare runs
 t2q-bench report runs/*/results.json
 ```
+
+`--split dev` (or `test`) asks only the questions of a split, for the
+datasets that have one (neurosynth-v2).
 
 Each run directory gets three files:
 

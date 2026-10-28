@@ -13,6 +13,9 @@ is not exact:
 - out of steps: the agent never had a final answer accepted and used
   all its steps (its answer is then its last query with rows);
 - empty answer: the query ran and returned no rows;
+- no choice: the gold is a probability over selected_study and the
+  query does not use it (PROB over stored relations, or a list or a
+  count instead of a probability);
 - wrong predicate: it reads other engine predicates than the gold;
 - wrong value: the same predicates, other constants (terms, labels,
   texts, coordinates);
@@ -34,7 +37,8 @@ from text2query_bench.dataset import load_dataset
 
 KINDS = (
     "exact", "llm error", "timeout", "syntax/validation", "out of steps",
-    "empty answer", "wrong predicate", "wrong value", "wrong structure",
+    "empty answer", "no choice", "wrong predicate", "wrong value",
+    "wrong structure",
 )
 NOT_PREDICATES = {
     "PROB", "AGGREGATE", "count", "max", "min", "sum", "mean", "startswith",
@@ -77,22 +81,25 @@ def kind(answer: dict, result: dict, gold_query: str, max_steps: int) -> str:
     """Return the kind of *result*, the score of *answer*."""
     if result["f1"] == 1.0:
         return "exact"
+    out_of_steps = (
+        not accepted(answer) and len(answer.get("steps", [])) >= max_steps
+    )
     if answer.get("error") and not answer.get("query"):
-        return "llm error"
+        return "out of steps" if out_of_steps else "llm error"
     error = result.get("error") or ""
     if "timeout" in error:
         return "timeout"
     if not answer.get("query") or not result["executed"]:
-        if not accepted(answer) and len(answer.get("steps", [])) >= max_steps:
-            return "out of steps"
-        return "syntax/validation"
-    if not accepted(answer) and len(answer.get("steps", [])) >= max_steps:
+        return "out of steps" if out_of_steps else "syntax/validation"
+    if out_of_steps:
         return "out of steps"
     if not result["valid"]:
         return "syntax/validation"
     if result["rows"] == 0:
         return "empty answer"
     query = answer["query"]
+    if "selected_study" in gold_query and "selected_study" not in query:
+        return "no choice"
     if engine_predicates(query) != engine_predicates(gold_query):
         return "wrong predicate"
     if constants(query) != constants(gold_query):

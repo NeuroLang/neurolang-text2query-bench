@@ -116,7 +116,7 @@ questions:
       fr: Donne les titres des études portant sur "mind wandering during rest" qui ne mentionnent jamais le mode par défaut (default mode).
     gold:
       datalog: |-
-        ans(s, title) :- similar_study('mind wandering during rest', s), study_title(s, title), ~mentions(s, 'default mode')
+        ans(title) :- similar_study('mind wandering during rest', s), study_title(s, title), ~mentions(s, 'default mode')
 
   - id: nsv2-09
     tags: [negation, destrieux, prob]
@@ -205,7 +205,7 @@ questions:
       datalog: |-
         seed(s) :- tian_activated('aCAU lh', s), selected_study(s)
         active(l, s) :- tian_activated(l, s), selected_study(s)
-        ans(l, p) :- PROB[active(l, s) // seed(s)] = p
+        ans(l, p) :- PROB[active(l, s) // seed(s)] = p, (l != 'aCAU lh')
 
   - id: nsv2-16
     tags: [schaefer, prob]
@@ -397,7 +397,7 @@ questions:
     gold:
       datalog: |-
         best(q, m) :- AGGREGATE[q](study_similarity(q, s, v) @ max(v)) = m
-        ans(s, title) :- best('tactile stimulation of the fingertips', m), study_similarity('tactile stimulation of the fingertips', s, m), study_title(s, title)
+        ans(title) :- best('tactile stimulation of the fingertips', m), study_similarity('tactile stimulation of the fingertips', s, m), study_title(s, title)
 
   - id: nsv2-30
     tags: [cogat, free-text]
