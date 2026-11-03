@@ -1,0 +1,135 @@
+# Configuration for NeuroLang master (no example_retrieval/embeddings,
+# PR #1000 parked; comment_rules off; verify_rounds 1 as shipped).
+#
+# Configuration of the NeuroLang LLM query assistant (.ask in the REPL,
+# neurolang-query --ask). Copy it to ~/.config/neurolang/llm.yaml, or
+# point NEUROLANG_LLM_CONFIG or --llm-config to your copy.
+#
+# Each provider is reached in one of three ways:
+#   api: openai     the OpenAI chat completions API, which OpenRouter,
+#                   Albert, vLLM, Ollama and most open services offer
+#   api: anthropic  the Anthropic messages API
+#   api: command    a local command reading the conversation on its
+#                   standard input and writing the reply on its output;
+#                   {system} in its arguments is the system prompt
+# base_url is the URL the API paths (chat/completions, messages) are
+# appended to. API keys are never written here: api_key_env names the
+# environment variable holding the key (local servers need none).
+#
+# tool_calling selects how the ReAct agent calls its tools:
+#   native  the provider's tool calls (reliable on models trained for it)
+#   text    a Thought / Action / Observation protocol that any chat
+#           model can follow
+
+default_provider: albert-gemma
+
+providers:
+  openrouter:
+    api: openai
+    base_url: https://openrouter.ai/api/v1
+    api_key_env: OPENROUTER_API_KEY
+    model: anthropic/claude-sonnet-5.5
+    tool_calling: native
+    headers:
+      X-Title: NeuroLang
+
+  # Albert, the LLM service of the French State (DINUM / Etalab).
+  # List the models available to your key with GET /v1/models and pick
+  # one of type text-generation.
+  albert:
+    api: openai
+    base_url: https://albert.api.etalab.gouv.fr/v1
+    api_key_env: ALBERT_API_KEY
+    model: albert-large
+    tool_calling: text
+
+  # Gemma 4 31B on Albert (DINUM). The models of a key: GET /v1/models.
+  albert-gemma:
+    api: openai
+    base_url: https://albert.api.etalab.gouv.fr/v1
+    api_key_env: ALBERT_API_KEY
+    model: gemma-4-31b-it
+    tool_calling: text
+    requests_per_minute: 24     # Albert keys allow 25 a minute
+
+  # DeepSeek V4 Flash (0731) on Albert. Its quota on our key is not
+  # documented: keep well under Albert's limits and run one job at a time.
+  albert-deepseek:
+    api: openai
+    base_url: https://albert.api.etalab.gouv.fr/v1
+    api_key_env: ALBERT_API_KEY
+    model: deepseek-v4-flash-0731
+    tool_calling: text
+    max_tokens: 4096
+    requests_per_minute: 10
+
+  # The same Gemma 4 31B on OpenRouter, without Albert's daily cap: for
+  # tuning, the final runs being on Albert.
+  openrouter-gemma:
+    api: openai
+    base_url: https://openrouter.ai/api/v1
+    api_key_env: OPENROUTER_API_KEY
+    model: google/gemma-4-31b-it
+    tool_calling: text
+    headers:
+      X-Title: NeuroLang
+
+  # DeepSeek V4.1 Flash on OpenRouter.
+  openrouter-deepseek-flash:
+    api: openai
+    base_url: https://openrouter.ai/api/v1
+    api_key_env: OPENROUTER_API_KEY
+    model: deepseek/deepseek-v4.1-flash
+    tool_calling: text
+    max_tokens: 4096
+    headers:
+      X-Title: NeuroLang
+
+  # The same DeepSeek V4 Flash (0731) as Albert's, on OpenRouter: for
+  # tuning on the dev split, the final runs being on Albert.
+  openrouter-deepseek-0731:
+    api: openai
+    base_url: https://openrouter.ai/api/v1
+    api_key_env: OPENROUTER_API_KEY
+    model: deepseek/deepseek-v4-flash-0731
+    tool_calling: text
+    max_tokens: 4096
+    headers:
+      X-Title: NeuroLang
+
+  anthropic:
+    api: anthropic
+    base_url: https://api.anthropic.com/v1
+    api_key_env: ANTHROPIC_API_KEY
+    model: claude-sonnet-5-5
+    tool_calling: native
+
+  # Claude Code in print mode, using its own login: no API key here.
+  claude-code:
+    api: command
+    command: [claude, -p, --model, sonnet, --tools, "",
+              --no-session-persistence, --setting-sources, "",
+              --system-prompt, "{system}"]
+    model: sonnet
+    tool_calling: text
+
+  # Any server with an OpenAI-compatible API, here Ollama.
+  local:
+    api: openai
+    base_url: http://localhost:11434/v1
+    model: qwen3
+    tool_calling: text
+
+assistant:
+  strategy: react      # react: agent exploring the engine; icl: few-shot
+  language: auto       # auto (the REPL's .mode), squall or datalog
+  max_steps: 8         # ReAct: maximum number of tool calls
+  max_repairs: 3       # ICL: rounds of reprompting with the query error
+  few_shot_k: 6        # number of example questions in the prompt
+  samples: 1           # ICL: candidates voted on (self-consistency)
+  temperature: 0.0
+  timeout: 60          # seconds per LLM request
+  preview_rows: 10     # rows of a result shown to the model
+  comment_rules: false # no extra request commenting the rules (master default true)
+  verify_rounds: 0     # verifier off
+                       # may reject one final answer

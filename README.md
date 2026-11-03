@@ -411,6 +411,29 @@ nsv2-27, nsv2-40). The misses left are dev nsv2-36 (the
 argmax without its probability) and test nsv2-33 (`rdfs:label` for
 `cogat_term`). Details in [runs/nsv2-master.md](runs/nsv2-master.md).
 
+## neurosynth-v2: verifier and Cognitive Atlas fix (2026-11-03)
+
+NeuroLang branch `fix/llm-verifier-conditional` (on master 7437e9c5,
+`.venv-verifix`), OpenRouter only, English, test and dev. The
+back-translation now reads `PROB[A // B]` as P(A | B), and the
+verification judges the conditions from the query, not from the text
+of its rows. The guidance names Cognitive Atlas classes by `cogat_term`
+rather than `rdfs:label`.
+
+| split | model | exact master → fix (verify 0) | rejections (false) master → fix | tokens/q verify 1 → 0 |
+|---|---|---|---|---|
+| test | Gemma 4 31B | 19 → 21 (21) | 2 (2) → 4 (4) | 24k → 13k |
+| test | DeepSeek V4 Flash 0731 | 20 → 21 (20) | 1 (1) → 0 | 37k → 27k |
+| dev | Gemma 4 31B | 19 → 19 | 2 (2) → 1 (1) | |
+| dev | DeepSeek V4 Flash 0731 | 19 → 19 | 0 → 0 | |
+
+The fix took nsv2-33 (both models) and nsv2-08 (Gemma). DeepSeek's
+joint misreading of `//` is gone. Gemma still sometimes inverts the
+conditional, or judges nsv2-08 from a title. After the fix the
+verifier helped on no question, and it costs 1.6–1.8× the time.
+Recommended default: `verify_rounds: 0`. Details in
+[runs/nsv2-verifix.md](runs/nsv2-verifix.md).
+
 ## TEXT2SPARQL question sets in Datalog
 
 The four question sets of the TEXT2SPARQL challenge are also in the
