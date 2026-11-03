@@ -6,15 +6,18 @@
 # for the NeuroLang-llmfix worktree (feat/llm-lean-schema).
 # RETRIEVAL (bm25, hybrid) overrides example_retrieval of configs/llm.yaml,
 # in a copy of it kept as OUTPUT/llm.yaml.
+# CONFIG selects the LLM config (default configs/llm.yaml), e.g.
+# CONFIG=configs/llm.master.yaml VENV=.venv-master for NeuroLang master.
 cd "$(dirname "$0")/.." || exit 1
 source scripts/env.sh
 provider=$1; out=$2; shift 2
 mkdir -p runs/logs
-config=configs/llm.yaml
+base=${CONFIG:-configs/llm.yaml}
+config=$base
 if [ -n "$RETRIEVAL" ]; then
     mkdir -p "$out"; config=$out/llm.yaml
     sed "s/^  example_retrieval: .*/  example_retrieval: $RETRIEVAL/" \
-        configs/llm.yaml > "$config"
+        "$base" > "$config"
 fi
 exec "${VENV:-.venv-llmex}/bin/t2q-bench" --dataset datasets/neurosynth-v2.yaml run \
     --strategy react --llm-config "$config" --lang en fr \
