@@ -400,12 +400,14 @@ Overlap is the per-question Jaccard of the rows (`scripts/nsv2_overlap.py`).
 | test | DeepSeek V4 Flash 0731 (Albert) | 0.905 | 18 → 19 | 6 | 39k | 129 |
 
 Scores did not move, but the verifier costs 2 calls per question and
-about twice the time. 10 of its 14 rejections are false: the
+about twice the time. Of its 14 rejections, 9 are false: the
 back-translation misreads `PROB[A // B]` as a joint probability or as
-P(B | A). The cap of one round lets those answers through. Two
-rejections fixed an answer (DeepSeek Albert nsv2-27, nsv2-40), and two
-broke one (Gemma nsv2-08: one returned title says "default mode", which
-the TF-IDF `mentions` misses). The misses left are dev nsv2-36 (the
+P(B | A), and the cap of one round lets those correct answers through.
+3 rejected the gold query of nsv2-08, because one returned title says
+"default mode", which the TF-IDF `mentions` misses. That broke Gemma's
+answer on OpenRouter and Albert; DeepSeek OR recovered only through the
+out-of-steps fallback. 2 rejections fixed an answer (DeepSeek Albert
+nsv2-27, nsv2-40). The misses left are dev nsv2-36 (the
 argmax without its probability) and test nsv2-33 (`rdfs:label` for
 `cogat_term`). Details in [runs/nsv2-master.md](runs/nsv2-master.md).
 

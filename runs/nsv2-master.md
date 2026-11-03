@@ -20,7 +20,8 @@ ReAct, Datalog, **English only**, dev (20) and test (21) splits of
   `CONFIG=configs/llm.master.yaml VENV=.venv-master scripts/run_nsv2.sh ...`.
 - Gold: `check-gold` 41/41 ok, **no gold row changed** (row-by-row diff
   against the Oct 28 cache). nsv2-08 took 32 s, against 7.7 s at most
-  on Oct 28, but it ran next to a smoke run building its engine.
+  on Oct 28, but next to a run building its engine. Alone it takes
+  8.6 s (2.2 s warm), so this is not a regression.
 
 ## Overlap
 
@@ -114,10 +115,10 @@ second "no" is overridden and the answer is accepted.
 - **Helpful (2):** DeepSeek Albert nsv2-27 (a term instead of free
   text) and nsv2-40 (a conditional `PROB[A // B]` where the question
   asks for the joint "both … and …"). Both were then fixed.
-- **Harmful (2):** nsv2-08, Gemma OR and Gemma Albert, where the
-  rejected answer was the gold. DeepSeek OR survived the same rejection
-  only through the out-of-steps fallback.
-- **False, without effect (10):** the back-translation misreads
+- **Rejected the gold query, nsv2-08 (3):** harmful for Gemma OR and
+  Gemma Albert. DeepSeek OR survived the same rejection only through
+  the out-of-steps fallback.
+- **False, without effect (9):** the back-translation misreads
   `PROB[A // B]`, either as the joint probability (DeepSeek: nsv2-11 ×2,
   -17, -27) or as P(B | A) (Gemma: nsv2-14 ×2, -17, -31 ×2). The cap of
   one round let each correct answer through.
