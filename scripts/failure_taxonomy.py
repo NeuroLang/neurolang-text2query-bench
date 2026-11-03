@@ -10,8 +10,9 @@ is not exact:
 - timeout: the query ran out of time on the engine;
 - syntax/validation: the query did not run, or the agent did not
   accept it;
-- out of steps: the agent never had a final answer accepted and used
-  all its steps (its answer is then its last query with rows);
+- out of steps: the agent never had a final answer accepted (or the
+  verifier rejected it) and used all its steps (verifier steps are not
+  counted) (its answer is then its last query with rows);
 - empty answer: the query ran and returned no rows;
 - no choice: the gold is a probability over selected_study and the
   query does not use it (PROB over stored relations, or a list or a
@@ -69,11 +70,29 @@ def constants(query: str) -> set:
     return strings | numbers
 
 
+def rejected(step: dict) -> bool:
+    """Whether *step* is a verifier's rejection (NeuroLang #973)."""
+    return (step["action"] == "verify"
+            and "Answers the question: no" in step["observation"])
+
+
+def tool_steps(answer: dict) -> list:
+    """Return the agent's steps, without the verifier's."""
+    return [s for s in answer.get("steps", []) if s["action"] != "verify"]
+
+
 def accepted(answer: dict) -> bool:
-    return any(
-        step["action"] == "final_answer"
-        and step["observation"].startswith("Accepted")
-        for step in answer.get("steps", [])
+    """
+    Whether the agent's last final answer was accepted, and not then
+    rejected by the verifier.
+    """
+    steps = answer.get("steps", [])
+    finals = [i for i, s in enumerate(steps) if s["action"] == "final_answer"]
+    if not finals:
+        return False
+    last = finals[-1]
+    return steps[last]["observation"].startswith("Accepted") and not any(
+        rejected(s) for s in steps[last + 1:]
     )
 
 
@@ -82,8 +101,10 @@ def kind(answer: dict, result: dict, gold_query: str, max_steps: int) -> str:
     if result["f1"] == 1.0:
         return "exact"
     out_of_steps = (
-        not accepted(answer) and len(answer.get("steps", [])) >= max_steps
-    )
+        not accepted(answer) and len(tool_steps(answer)) >= max_steps
+    ) or (answer.get("explanation") or "").startswith(
+        "The last query that gave rows"
+    ) or (answer.get("error") or "").startswith("No valid query after")
     if answer.get("error") and not answer.get("query"):
         return "out of steps" if out_of_steps else "llm error"
     error = result.get("error") or ""
@@ -125,7 +146,7 @@ def row(name, pairs, kinds):
         f"| {mean(r['f1'] == 1.0 for r in results):.0%} "
         f"| {mean(bool(r['valid']) for r in results):.0%} "
         f"| {mean(bool(r['executed']) for r in results):.0%} "
-        f"| {mean(len(a.get('steps', [])) for a in answers):.1f} "
+        f"| {mean(len(tool_steps(a)) for a in answers):.1f} "
         f"| {mean(r['calls'] for r in results):.1f} "
         f"| {mean(r['tokens'] for r in results) / 1000:.0f}k "
         f"| {mean(r['generation_seconds'] for r in results):.0f} |"
@@ -200,7 +221,7 @@ def main():
             for answer, r in failures[: args.examples]:
                 query = " ".join(answer.get("query", "").split())
                 print(f"- {r['id']} [{r['language']}] {r['kind']}, F1 "
-                      f"{r['f1']:.2f}, {len(answer.get('steps', []))} "
+                      f"{r['f1']:.2f}, {len(tool_steps(answer))} "
                       f"steps: `{query[:300]}`"
                       + (f" ({(r.get('error') or answer.get('error'))[:150]})"
                          if (r.get('error') or answer.get('error')) else ""))

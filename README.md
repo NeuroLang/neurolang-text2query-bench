@@ -380,6 +380,35 @@ What still fails:
 
 Details in [runs/nsv2-test-int.md](runs/nsv2-test-int.md).
 
+## neurosynth-v2 on master (2026-11-03, 81298847)
+
+English only, ReAct, Datalog, on upstream master 81298847 (`.venv-master`,
+`configs/llm.master.yaml`). That means BM25 examples (#1000 is parked),
+`comment_rules: false`, and the shipped back-translation verifier
+(`verify_rounds: 1`, #973). The gold rows are unchanged (41/41).
+Overlap is the per-question Jaccard of the rows (`scripts/nsv2_overlap.py`).
+
+| split | model | mean J | exact (Oct 28 → master) | rejections | tokens/q | s/q |
+|---|---|---:|---|---:|---:|---:|
+| dev | Sonnet 5.5 (OpenRouter) | 1.000 | 20 → 20 | 0 | 35k | 27 |
+| dev | Gemma 4 31B (OpenRouter) | 0.950 | 19 → 19 | 2 | 24k | 33 |
+| dev | DeepSeek V4 Flash 0731 (OpenRouter) | 0.950 | 19 → 19 | 0 | 37k | 63 |
+| test | Sonnet 5.5 (OpenRouter) | 1.000 | 21 → 21 | 0 | 34k | 25 |
+| test | Gemma 4 31B (OpenRouter) | 0.951 | 19 → 19 | 2 | 24k | 36 |
+| test | DeepSeek V4 Flash 0731 (OpenRouter) | 0.952 | 20 → 20 | 1 | 40k | 51 |
+| test | Gemma 4 31B (Albert) | 0.951 | 11 (baseline) → 19 | 3 | 22k | 30 |
+| test | DeepSeek V4 Flash 0731 (Albert) | 0.905 | 18 → 19 | 6 | 39k | 129 |
+
+Scores did not move, but the verifier costs 2 calls per question and
+about twice the time. 10 of its 14 rejections are false: the
+back-translation misreads `PROB[A // B]` as a joint probability or as
+P(B | A). The cap of one round lets those answers through. Two
+rejections fixed an answer (DeepSeek Albert nsv2-27, nsv2-40), and two
+broke one (Gemma nsv2-08: one returned title says "default mode", which
+the TF-IDF `mentions` misses). The misses left are dev nsv2-36 (the
+argmax without its probability) and test nsv2-33 (`rdfs:label` for
+`cogat_term`). Details in [runs/nsv2-master.md](runs/nsv2-master.md).
+
 ## TEXT2SPARQL question sets in Datalog
 
 The four question sets of the TEXT2SPARQL challenge are also in the
