@@ -9,6 +9,9 @@ question and that question, and fails when one is above ``--max``.
 
     source scripts/env.sh
     python scripts/leakage.py datasets/neurosynth-v2.yaml
+    python scripts/leakage.py --openrouter datasets/neurosynth-v2.yaml
+
+``--openrouter`` embeds with baai/bge-m3 on OpenRouter instead of Albert.
 """
 
 import argparse
@@ -21,16 +24,18 @@ import numpy as np
 from text2query_bench.dataset import load_dataset
 
 ALBERT = "https://albert.api.etalab.gouv.fr/v1"
+OPENROUTER = "https://openrouter.ai/api/v1"
 
 
-def embed(texts, model="bge-m3", batch=64):
+def embed(texts, model="bge-m3", batch=64, base_url=ALBERT,
+          key_env="ALBERT_API_KEY"):
     """Return the L2-normalised bge-m3 embeddings of *texts*."""
-    headers = {"Authorization": f"Bearer {os.environ['ALBERT_API_KEY']}"}
+    headers = {"Authorization": f"Bearer {os.environ[key_env]}"}
     vectors = []
     with httpx.Client(timeout=120) as client:
         for start in range(0, len(texts), batch):
             response = client.post(
-                f"{ALBERT}/embeddings", headers=headers,
+                f"{base_url}/embeddings", headers=headers,
                 json={"model": model, "input": texts[start:start + batch]},
             )
             response.raise_for_status()
@@ -51,14 +56,18 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("dataset")
     parser.add_argument("--max", type=float, default=0.85)
+    parser.add_argument("--openrouter", action="store_true",
+                        help="embed with baai/bge-m3 on OpenRouter")
     args = parser.parse_args()
+    where = dict(model="baai/bge-m3", base_url=OPENROUTER,
+                 key_env="OPENROUTER_API_KEY") if args.openrouter else {}
     dataset = load_dataset(args.dataset)
     bank = bank_questions(dataset.engine)
     texts = [
         (q.id, lang, text) for q in dataset.questions
         for lang, text in q.text.items()
     ]
-    similarity = embed([t for _, _, t in texts]) @ embed(bank).T
+    similarity = embed([t for _, _, t in texts], **where) @ embed(bank, **where).T
     worst = 0.0
     for (qid, lang, text), row in zip(texts, similarity):
         best = int(row.argmax())

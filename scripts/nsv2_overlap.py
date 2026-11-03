@@ -37,6 +37,8 @@ def jaccard(result: dict) -> float:
 def load(directory, questions, split, lang, max_steps):
     out = {}
     for answer, result in load_run(Path(directory)):
+        if result["id"] not in questions:
+            continue  # a question left out of the dataset since
         q = questions[result["id"]]
         if q.split != split or result["language"] != lang:
             continue

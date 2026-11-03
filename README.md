@@ -564,3 +564,14 @@ pytest
 
 The tests use a small in-memory engine and a scripted model. They need
 neither the data nor an LLM.
+
+## Distilled examples (2026-11-03)
+
+`scripts/distill.py` turns Sonnet 5.5 ReAct answers on a generated pool
+of questions into few-shot examples (judge: Opus 5.5 on OpenRouter), and
+the bank of NeuroLang's neurosynth engine gets 39 of them. On
+neurosynth-v2 (English) nothing changes for DeepSeek and Gemma loses 2
+exact answers per split (noise level), with about 15% fewer tokens; on a
+held-out slice of 25 generated questions Gemma goes 18 → 21 exact and
+DeepSeek 17 → 18. Pool, filter, judge calibration (92% agreement) and
+tables in [runs/nsv2-distill.md](runs/nsv2-distill.md).
