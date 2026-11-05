@@ -38,7 +38,7 @@ by default.
 | held-out | Gemma 4 31B | 0.776 → 0.840 | 18 → 21 | 3.2 → 2.9 | 22k → 20k | 31 → 27 | n/a (no trace) |
 | held-out | DeepSeek 0731 | 0.736 → 0.720 | 17 → 18 | 5.8 → 5.0 | 42k → 37k | 54 → 54 | n/a → $0.0031 |
 
-Sonnet is the 2026-10-3x `nsv2-{dev,test}-master-sonnet` run (older
+Sonnet is the `nsv2-{dev,test}-master-sonnet` run (older
 master, verifier on, hence its 2 calls per answer and cost); on the held-out
 slice it is the gold (1.00 by construction). Cost = input x price in +
 output x price out per million tokens, from the traces (no prompt-cache
@@ -50,8 +50,8 @@ expensive per question of the three open models.
 
 ## Failures
 
-Out of steps dominates: 10 + 12 of 41 questions before, 9 + 11 after,
-and 14 of the 16 out-of-steps answers of the "after" runs never ran a
+Out of steps dominates: 10 + 12 of 41 questions before, 10 + 10 after,
+and 14 of the 16 answers of the "after" runs that ended with no accepted query never ran a
 query: the 8 steps went to `search_values` (e.g. nsv2-10 and nsv2-17
 looping over "intraparietal" / "Cont" in `schaefer`, `destrieux`, `tian`,
 repeating the same call). The rest: no probability over
