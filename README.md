@@ -575,3 +575,16 @@ exact answers per split (noise level), with about 15% fewer tokens; on a
 held-out slice of 25 generated questions Gemma goes 18 → 21 exact and
 DeepSeek 17 → 18. Pool, filter, judge calibration (92% agreement) and
 tables in [runs/nsv2-distill.md](runs/nsv2-distill.md).
+
+## Nemotron 3.5 Lightning (2026-11-05)
+
+`nvidia/nemotron-3.5-lightning` on OpenRouter (provider
+`openrouter-nemotron-lightning`, native tool calls, temperature 0,
+thinking at the provider default) as the ReAct model, with the master
+bank and the #1057 distilled bank. Mean Jaccard 0.45 dev, 0.28 test, 0.24
+on the 25 held-out questions, against 0.90-0.95 (Gemma, DeepSeek) on the
+benchmark: it spends its 8 steps on `search_values` without running a
+query, and uses 45-57k tokens a question (about $0.004, more than Gemma
+and DeepSeek per question although cheaper per token). The assistant has
+no way to pass `enable_thinking` or top_p, so thinking mode is untested.
+Tables and failures in [runs/nsv2-nemotron.md](runs/nsv2-nemotron.md).

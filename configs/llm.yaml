@@ -71,6 +71,16 @@ providers:
     headers:
       X-Title: NeuroLang
 
+  # NVIDIA Nemotron 3.5 Lightning on OpenRouter (paid tier).
+  openrouter-nemotron-lightning:
+    api: openai
+    base_url: https://openrouter.ai/api/v1
+    api_key_env: OPENROUTER_API_KEY
+    model: nvidia/nemotron-3.5-lightning
+    tool_calling: native
+    headers:
+      X-Title: NeuroLang
+
   # DeepSeek V4.1 Flash on OpenRouter.
   openrouter-deepseek-flash:
     api: openai
