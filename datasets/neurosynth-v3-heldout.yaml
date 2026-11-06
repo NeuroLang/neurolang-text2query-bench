@@ -1,0 +1,799 @@
+dataset: https://neurolang.github.io/text2query/2026/neurosynth-v3-heldout/
+engine: neurosynth
+description: >
+  Held-out questions on NeuroLang's neurosynth engine, in English, with
+  hand-checked gold Datalog: the 25 questions of
+  neurosynth-distill-heldout (Sonnet 5.5 answers accepted by an Opus
+  judge, each read against the question and corrected where needed) and
+  40 generated questions of the distillation pool that no model
+  answered (scripts/distill.py), written by hand following the engine's
+  assistant_guidance. None is in the example bank.
+
+# Conventions of the gold queries (see runs/nsv3.md):
+# - every question but a count is answered over selected_study, as the
+#   guidance asks;
+# - a "which studies" answer keeps only the study column: the
+#   probability of each study is 1/N whatever the query, so it is not
+#   scored (an answer with the probability still scores 1);
+# - an argmax question ("which ... the most") keeps only the winner;
+# - a free-text topic is the question's own words in similar_study.
+#
+# Tags: the category of the distillation pool. split: dev (to tune on)
+# or test (held out), balanced across the tags
+# (scripts/assign_splits.py).
+
+questions:
+  - id: dh-005
+    tags: [free_text]
+    split: dev
+    question:
+      en: Which subcortical regions are activated by studies about getting chills from music?
+    gold:
+      datalog: |-
+        active(l, s) :- tian_activated(l, s), selected_study(s)
+        close(q, s) :- similar_study(q, s), selected_study(s)
+        ans(l, p) :- PROB[active(l, s) // close('getting chills from music', s)] = p
+
+  - id: dh-010
+    tags: [free_text]
+    split: test
+    question:
+      en: Which voxels are activated by studies about being socially excluded in a ball-tossing game?
+    gold:
+      datalog: |-
+        activation(i, j, k, s) :- activated(i, j, k, s), selected_study(s)
+        close(q, s) :- similar_study(q, s), selected_study(s)
+        ans(i, j, k, p) :- PROB[activation(i, j, k, s) // close('being socially excluded in a ball-tossing game', s)] = p
+
+  - id: dh-015
+    tags: [free_text]
+    split: dev
+    question:
+      en: Which brain areas respond in studies about imagining future events?
+    gold:
+      datalog: |-
+        active(l, s) :- destrieux_activated(l, s), selected_study(s)
+        close(q, s) :- similar_study(q, s), selected_study(s)
+        ans(l, p) :- PROB[active(l, s) // close('imagining future events', s)] = p
+
+  - id: dh-020
+    tags: [free_text]
+    split: test
+    note: question reworded from "judging other people's intentions" (a quote cannot be in a string) to the text of the gold
+    question:
+      en: Which cortical networks are activated by studies on judging the intentions of other people?
+    gold:
+      datalog: |-
+        close(q, s) :- similar_study(q, s), selected_study(s)
+        active(l, s) :- schaefer_activated(l, s), selected_study(s)
+        ans(l, p) :- PROB[active(l, s) // close('judging the intentions of other people', s)] = p
+
+  - id: dh-029
+    tags: [cogat_term]
+    split: dev
+    question:
+      en: Which voxels are activated by studies that mention verbal fluency?
+    gold:
+      datalog: |-
+        activation(i, j, k, s) :- activated(i, j, k, s), selected_study(s)
+        term_association(s, t) :- mentions(s, t), selected_study(s)
+        ans(i, j, k, p) :- PROB[activation(i, j, k, s) // term_association(s, 'verbal fluency')] = p
+
+  - id: dh-034
+    tags: [cogat_term]
+    split: test
+    question:
+      en: Which terms co-occur with movement in a study?
+    gold:
+      datalog: |-
+        term_association(s, t) :- mentions(s, t), selected_study(s)
+        ans(t, p) :- PROB[term_association(s, t) // term_association(s, 'movement')] = p
+
+  - id: dh-039
+    tags: [cogat_term]
+    split: dev
+    question:
+      en: What is the probability that a study mentions listening, given that it activates the left hippocampus?
+    gold:
+      datalog: |-
+        hip(s) :- tian_activated('aHIP lh', s)
+        hip(s) :- tian_activated('pHIP lh', s)
+        active(s) :- hip(s), selected_study(s)
+        ment(s) :- mentions(s, 'listening'), selected_study(s)
+        ans(p) :- PROB[ment(s) // active(s)] = p
+
+  - id: dh-052
+    tags: [cogat_hierarchy]
+    split: test
+    note: the class by cogat_term rather than its IRI; only the winning term is scored
+    question:
+      en: Which subclass of fixation is mentioned by the most studies?
+    gold:
+      datalog: |-
+        sub(t) :- cogat_term(c, 'fixation'), cogat_subclass_of(x, c), cogat_term(x, t)
+        ms(t, s) :- sub(t), mentions(s, t)
+        cnt(t, n) :- AGGREGATE[t](ms(t, s) @ count(s)) = n
+        top(m) :- AGGREGATE[](cnt(t, n) @ max(n)) = m
+        ans(t) :- cnt(t, n), top(n)
+
+  - id: dh-057
+    tags: [schaefer]
+    split: dev
+    note: study column only (the probability of each study is 1/N)
+    question:
+      en: Which studies mention parietal lobe and activate the dorsal attention network?
+    gold:
+      datalog: |-
+        dorsal_label(l) :- schaefer(l, r), startswith('17Networks LH DorsAttn', l)
+        dorsal_label(l) :- schaefer(l, r), startswith('17Networks RH DorsAttn', l)
+        dorsal(s) :- dorsal_label(l), schaefer_activated(l, s)
+        ans(s) :- mentions(s, 'parietal lobe'), dorsal(s)
+
+  - id: dh-062
+    tags: [schaefer]
+    split: test
+    note: study column only (the probability of each study is 1/N)
+    question:
+      en: Which studies activate the somatomotor network but not the peripheral visual network?
+    gold:
+      datalog: |-
+        som_label(l) :- schaefer(l, r), startswith('17Networks LH SomMot', l)
+        som_label(l) :- schaefer(l, r), startswith('17Networks RH SomMot', l)
+        vis_label(l) :- schaefer(l, r), startswith('17Networks LH VisPeri', l)
+        vis_label(l) :- schaefer(l, r), startswith('17Networks RH VisPeri', l)
+        som(s) :- som_label(l), schaefer_activated(l, s)
+        vis(s) :- vis_label(l), schaefer_activated(l, s)
+        ans(s) :- som(s), ~vis(s)
+
+  - id: dh-067
+    tags: [schaefer]
+    split: dev
+    note: networks named as in the guidance (VisCent and VisPeri apart, not one 'Vis'); only the winning network is scored
+    question:
+      en: Which network is most often activated by studies that mention imagery?
+    gold:
+      datalog: |-
+        lab(l, 'VisCent') :- schaefer(l, r), startswith('17Networks LH VisCent', l)
+        lab(l, 'VisCent') :- schaefer(l, r), startswith('17Networks RH VisCent', l)
+        lab(l, 'VisPeri') :- schaefer(l, r), startswith('17Networks LH VisPeri', l)
+        lab(l, 'VisPeri') :- schaefer(l, r), startswith('17Networks RH VisPeri', l)
+        lab(l, 'SomMot') :- schaefer(l, r), startswith('17Networks LH SomMot', l)
+        lab(l, 'SomMot') :- schaefer(l, r), startswith('17Networks RH SomMot', l)
+        lab(l, 'DorsAttn') :- schaefer(l, r), startswith('17Networks LH DorsAttn', l)
+        lab(l, 'DorsAttn') :- schaefer(l, r), startswith('17Networks RH DorsAttn', l)
+        lab(l, 'SalVentAttn') :- schaefer(l, r), startswith('17Networks LH SalVentAttn', l)
+        lab(l, 'SalVentAttn') :- schaefer(l, r), startswith('17Networks RH SalVentAttn', l)
+        lab(l, 'Limbic') :- schaefer(l, r), startswith('17Networks LH Limbic', l)
+        lab(l, 'Limbic') :- schaefer(l, r), startswith('17Networks RH Limbic', l)
+        lab(l, 'Cont') :- schaefer(l, r), startswith('17Networks LH Cont', l)
+        lab(l, 'Cont') :- schaefer(l, r), startswith('17Networks RH Cont', l)
+        lab(l, 'Default') :- schaefer(l, r), startswith('17Networks LH Default', l)
+        lab(l, 'Default') :- schaefer(l, r), startswith('17Networks RH Default', l)
+        lab(l, 'TempPar') :- schaefer(l, r), startswith('17Networks LH TempPar', l)
+        lab(l, 'TempPar') :- schaefer(l, r), startswith('17Networks RH TempPar', l)
+        active(n, s) :- schaefer_activated(l, s), lab(l, n), selected_study(s)
+        term_association(s) :- mentions(s, 'imagery'), selected_study(s)
+        p_n(n, p) :- PROB[active(n, s) // term_association(s)] = p
+        top(m) :- AGGREGATE[](p_n(n, p) @ max(p)) = m
+        ans(n) :- p_n(n, p), top(p)
+
+  - id: dh-072
+    tags: [schaefer]
+    split: test
+    question:
+      en: Which parcels belong to the temporoparietal network in the right hemisphere?
+    gold:
+      datalog: |-
+        ans(l) :- schaefer(l, r), startswith('17Networks RH TempPar', l)
+
+  - id: dh-077
+    tags: [destrieux]
+    split: dev
+    question:
+      en: Which terms co-occur with an activation of right postcentral gyrus?
+    gold:
+      datalog: |-
+        active(s) :- destrieux_activated('R G postcentral', s), selected_study(s)
+        term_study(s, t) :- mentions(s, t), selected_study(s)
+        ans(t, p) :- PROB[term_study(s, t) // active(s)] = p
+
+  - id: dh-087
+    tags: [destrieux]
+    split: test
+    note: study column only (the probability of each study is 1/N)
+    question:
+      en: Which studies activate right subparietal sulcus and mention superior temporal?
+    gold:
+      datalog: |-
+        ans(s) :- destrieux_activated('R S subparietal', s), mentions(s, 'superior temporal')
+
+  - id: dh-093
+    tags: [tian]
+    split: dev
+    question:
+      en: Which Tian atlas regions are activated by studies that mention vision?
+    gold:
+      datalog: |-
+        active(l, s) :- tian_activated(l, s), selected_study(s)
+        term_association(s, t) :- mentions(s, t), selected_study(s)
+        ans(l, p) :- PROB[active(l, s) // term_association(s, 'vision')] = p
+
+  - id: dh-107
+    tags: [prob_forward]
+    split: test
+    question:
+      en: Given behavioural, how probable is sensorimotor in a study?
+    gold:
+      datalog: |-
+        ta(s, t) :- mentions(s, t), selected_study(s)
+        ans(p) :- PROB[ta(s, 'sensorimotor') // ta(s, 'behavioural')] = p
+
+  - id: dh-112
+    tags: [prob_forward]
+    split: dev
+    question:
+      en: What is the probability that a study activates the MNI point left motor hand area (MNI -38, -22, 56)?
+    gold:
+      datalog: |-
+        near(s) :- peak_mni(x, y, z, s), (euclidean(x, y, z, -38.0, -22.0, 56.0) <= 3)
+        active(s) :- near(s), selected_study(s)
+        ans(p) :- PROB[active(s)] = p
+
+  - id: dh-117
+    tags: [prob_forward]
+    split: test
+    question:
+      en: What is the lift of the association between left hippocampus (MNI -28, -22, -14) and deficit?
+    gold:
+      datalog: |-
+        near(s) :- peak_mni(x, y, z, s), (euclidean(x, y, z, -28.0, -22.0, -14.0) <= 3)
+        active(s) :- near(s), selected_study(s)
+        mentioned(s) :- mentions(s, 'deficit'), selected_study(s)
+        both(s) :- near(s), mentions(s, 'deficit'), selected_study(s)
+        pa(p) :- PROB[active(s)] = p
+        pt(p) :- PROB[mentioned(s)] = p
+        pat(p) :- PROB[both(s)] = p
+        ans(l) :- pa(a), pt(t), pat(b), (l == b / (a * t))
+
+  - id: dh-122
+    tags: [prob_forward]
+    split: dev
+    question:
+      en: How much does emotion regulation increase the chance of activating right fusiform face area (MNI 40, -52, -18)?
+    gold:
+      datalog: |-
+        near(s) :- peak_mni(x, y, z, s), (euclidean(x, y, z, 40.0, -52.0, -18.0) <= 3)
+        act(s) :- near(s), selected_study(s)
+        t(s) :- mentions(s, 'emotion regulation'), selected_study(s)
+        both(s) :- near(s), mentions(s, 'emotion regulation'), selected_study(s)
+        pr_a(p) :- PROB[act(s)] = p
+        pr_t(p) :- PROB[t(s)] = p
+        pr_b(p) :- PROB[both(s)] = p
+        ans(lift) :- pr_a(pa), pr_t(pt), pr_b(pb), (lift == (pb / pt) / pa)
+
+  - id: dh-127
+    tags: [coactivation]
+    split: test
+    question:
+      en: Which subcortical structures co-activate with hippocampus in studies about injury?
+    gold:
+      datalog: |-
+        active(l, s) :- tian_activated(l, s), selected_study(s)
+        hip(s) :- tian_activated(l, s), startswith('aHIP', l), selected_study(s)
+        hip(s) :- tian_activated(l, s), startswith('pHIP', l), selected_study(s)
+        seed(s) :- hip(s), mentions(s, 'injury'), selected_study(s)
+        ans(l, p) :- PROB[active(l, s) // seed(s)] = p
+
+  - id: dh-132
+    tags: [coactivation]
+    split: dev
+    question:
+      en: Is frontoparietal control co-activated with salience ventral attention in studies that mention cognitive control?
+    gold:
+      datalog: |-
+        cont_label(l) :- schaefer(l, r), startswith('17Networks LH Cont', l)
+        cont_label(l) :- schaefer(l, r), startswith('17Networks RH Cont', l)
+        sal_label(l) :- schaefer(l, r), startswith('17Networks LH SalVentAttn', l)
+        sal_label(l) :- schaefer(l, r), startswith('17Networks RH SalVentAttn', l)
+        cont(s) :- cont_label(l), schaefer_activated(l, s), selected_study(s)
+        sal(s) :- sal_label(l), schaefer_activated(l, s), selected_study(s)
+        both(s) :- cont(s), sal(s)
+        cc(s) :- mentions(s, 'cognitive control'), selected_study(s)
+        ans(p) :- PROB[both(s) // cc(s)] = p
+
+  - id: dh-141
+    tags: [counts]
+    split: test
+    question:
+      en: How many studies mention young adults but not orbitofrontal?
+    gold:
+      datalog: |-
+        sel(s) :- mentions(s, 'young adults'), ~mentions(s, 'orbitofrontal')
+        ans(n) :- AGGREGATE[](sel(s) @ count(s)) = n
+
+  - id: dh-151
+    tags: [counts]
+    split: dev
+    question:
+      en: How many studies that mention sound activate the left amygdala?
+    gold:
+      datalog: |-
+        amygdala(s) :- tian_activated('lAMY lh', s)
+        amygdala(s) :- tian_activated('mAMY lh', s)
+        hit(s) :- amygdala(s), mentions(s, 'sound')
+        ans(n) :- AGGREGATE[](hit(s) @ count(s)) = n
+
+  - id: dh-166
+    tags: [negation]
+    split: test
+    question:
+      en: Which gyri and sulci are not activated by studies about adolescence?
+    gold:
+      datalog: |-
+        not_active(l, s) :- destrieux(l, r), selected_study(s), ~destrieux_activated(l, s)
+        term_association(s, t) :- mentions(s, t), selected_study(s)
+        ans(l, p) :- PROB[not_active(l, s) // term_association(s, 'adolescence')] = p
+
+  - id: dh-171
+    tags: [conj_disj]
+    split: dev
+    question:
+      en: What is the probability that a study mentions both working memory and ventromedial prefrontal?
+    gold:
+      datalog: |-
+        both(s) :- mentions(s, 'working memory'), mentions(s, 'ventromedial prefrontal'), selected_study(s)
+        ans(p) :- PROB[both(s)] = p
+
+  # Questions of the distillation pool that no model answered: gold
+  # written by hand.
+
+  - id: p-008
+    tags: [free_text]
+    split: test
+    question:
+      en: Is the right insula activated by studies about disgust at rotten food?
+    gold:
+      datalog: |-
+        insula_label(l) :- destrieux(l, r), startswith('R G Ins', l)
+        insula_label(l) :- destrieux(l, r), startswith('R G insular', l)
+        insula_label(l) :- destrieux(l, r), startswith('R S circular insula', l)
+        insula(s) :- insula_label(l), destrieux_activated(l, s), selected_study(s)
+        close(q, s) :- similar_study(q, s), selected_study(s)
+        ans(p) :- PROB[insula(s) // close('disgust at rotten food', s)] = p
+
+  - id: p-009
+    tags: [free_text]
+    split: dev
+    question:
+      en: What are the titles of studies about people playing video games?
+    gold:
+      datalog: |-
+        ans(title) :- similar_study('people playing video games', s), study_title(s, title)
+
+  - id: p-017
+    tags: [free_text]
+    split: test
+    question:
+      en: Which subcortical regions are activated by studies on gambling with risky odds?
+    gold:
+      datalog: |-
+        active(l, s) :- tian_activated(l, s), selected_study(s)
+        close(q, s) :- similar_study(q, s), selected_study(s)
+        ans(l, p) :- PROB[active(l, s) // close('gambling with risky odds', s)] = p
+
+  - id: p-019
+    tags: [free_text]
+    split: dev
+    question:
+      en: Is the left hippocampus activated by studies on recalling childhood events?
+    gold:
+      datalog: |-
+        hip(s) :- tian_activated('aHIP lh', s)
+        hip(s) :- tian_activated('pHIP lh', s)
+        active(s) :- hip(s), selected_study(s)
+        close(q, s) :- similar_study(q, s), selected_study(s)
+        ans(p) :- PROB[active(s) // close('recalling childhood events', s)] = p
+
+  - id: p-035
+    tags: [cogat_term]
+    split: test
+    question:
+      en: Which studies mention both manipulation and sentence?
+    gold:
+      datalog: |-
+        ans(s) :- mentions(s, 'manipulation'), mentions(s, 'sentence')
+
+  - id: p-038
+    tags: [cogat_term]
+    split: dev
+    question:
+      en: Is the left amygdala activated by studies on choice?
+    gold:
+      datalog: |-
+        amygdala(s) :- tian_activated('lAMY lh', s)
+        amygdala(s) :- tian_activated('mAMY lh', s)
+        active(s) :- amygdala(s), selected_study(s)
+        term_association(s, t) :- mentions(s, t), selected_study(s)
+        ans(p) :- PROB[active(s) // term_association(s, 'choice')] = p
+
+  - id: p-041
+    tags: [cogat_term]
+    split: test
+    question:
+      en: Which studies about efficiency report an activation within 5 mm of MNI (40, -50, 44)?
+    gold:
+      datalog: |-
+        near(s) :- peak_mni(x, y, z, s), (euclidean(x, y, z, 40.0, -50.0, 44.0) <= 5)
+        ans(s) :- near(s), mentions(s, 'efficiency')
+
+  - id: p-049
+    tags: [cogat_hierarchy]
+    split: dev
+    question:
+      en: Which voxels are activated by studies mentioning a subclass of utility?
+    gold:
+      datalog: |-
+        sub(t) :- cogat_term(c, 'utility'), cogat_subclass_of(x, c), cogat_term(x, t)
+        term_study(s) :- sub(t), mentions(s, t), selected_study(s)
+        activation(i, j, k, s) :- activated(i, j, k, s), selected_study(s)
+        ans(i, j, k, p) :- PROB[activation(i, j, k, s) // term_study(s)] = p
+
+  - id: p-058
+    tags: [schaefer]
+    split: test
+    question:
+      en: Is the left somatomotor network activated by studies about premotor?
+    gold:
+      datalog: |-
+        som_label(l) :- schaefer(l, r), startswith('17Networks LH SomMot', l)
+        som(s) :- som_label(l), schaefer_activated(l, s), selected_study(s)
+        term_association(s, t) :- mentions(s, t), selected_study(s)
+        ans(p) :- PROB[som(s) // term_association(s, 'premotor')] = p
+
+  - id: p-060
+    tags: [schaefer]
+    split: dev
+    question:
+      en: Which parcels of the left hemisphere frontoparietal control network are activated by studies mentioning broca?
+    gold:
+      datalog: |-
+        cont_label(l) :- schaefer(l, r), startswith('17Networks LH Cont', l)
+        active(l, s) :- cont_label(l), schaefer_activated(l, s), selected_study(s)
+        term_association(s, t) :- mentions(s, t), selected_study(s)
+        ans(l, p) :- PROB[active(l, s) // term_association(s, 'broca')] = p
+
+  - id: p-064
+    tags: [schaefer]
+    split: test
+    question:
+      en: What is the probability that a study activates the limbic network, given that it activates the salience ventral attention network?
+    gold:
+      datalog: |-
+        limbic_label(l) :- schaefer(l, r), startswith('17Networks LH Limbic', l)
+        limbic_label(l) :- schaefer(l, r), startswith('17Networks RH Limbic', l)
+        sal_label(l) :- schaefer(l, r), startswith('17Networks LH SalVentAttn', l)
+        sal_label(l) :- schaefer(l, r), startswith('17Networks RH SalVentAttn', l)
+        limbic(s) :- limbic_label(l), schaefer_activated(l, s), selected_study(s)
+        sal(s) :- sal_label(l), schaefer_activated(l, s), selected_study(s)
+        ans(p) :- PROB[limbic(s) // sal(s)] = p
+
+  - id: p-068
+    tags: [schaefer]
+    split: dev
+    question:
+      en: How often do studies about frontal lobe activate the temporoparietal network?
+    gold:
+      datalog: |-
+        tp_label(l) :- schaefer(l, r), startswith('17Networks LH TempPar', l)
+        tp_label(l) :- schaefer(l, r), startswith('17Networks RH TempPar', l)
+        tp(s) :- tp_label(l), schaefer_activated(l, s), selected_study(s)
+        term_association(s, t) :- mentions(s, t), selected_study(s)
+        ans(p) :- PROB[tp(s) // term_association(s, 'frontal lobe')] = p
+
+  - id: p-079
+    tags: [destrieux]
+    split: test
+    question:
+      en: Do studies about parahippocampal report activation in left posterior mid-cingulate gyrus and sulcus?
+    gold:
+      datalog: |-
+        active(l, s) :- destrieux_activated(l, s), selected_study(s)
+        term_association(s, t) :- mentions(s, t), selected_study(s)
+        ans(p) :- PROB[active('L G and S cingul Mid Post', s) // term_association(s, 'parahippocampal')] = p
+
+  - id: p-080
+    tags: [destrieux]
+    split: dev
+    question:
+      en: Which studies report activation in right anterior transverse collateral sulcus but do not mention lesion?
+    gold:
+      datalog: |-
+        ans(s) :- destrieux_activated('R S collat transv ant', s), ~mentions(s, 'lesion')
+
+  - id: p-083
+    tags: [destrieux]
+    split: test
+    question:
+      en: How many studies on sentences activate left medial orbital (olfactory) sulcus?
+    gold:
+      datalog: |-
+        hit(s) :- destrieux_activated('L S orbital med olfact', s), mentions(s, 'sentences')
+        ans(n) :- AGGREGATE[](hit(s) @ count(s)) = n
+
+  - id: p-088
+    tags: [destrieux]
+    split: dev
+    question:
+      en: What is the probability that a study mentions extrastriate, given that it activates right angular gyrus?
+    gold:
+      datalog: |-
+        angular(s) :- destrieux_activated('R G pariet inf Angular', s), selected_study(s)
+        ment(s) :- mentions(s, 'extrastriate'), selected_study(s)
+        ans(p) :- PROB[ment(s) // angular(s)] = p
+
+  - id: p-094
+    tags: [tian]
+    split: test
+    question:
+      en: What is the probability that a study activates nucleus accumbens, given that it mentions words?
+    gold:
+      datalog: |-
+        nac_label(l) :- tian(l, r), startswith('NAc', l)
+        nac(s) :- nac_label(l), tian_activated(l, s), selected_study(s)
+        term_association(s, t) :- mentions(s, t), selected_study(s)
+        ans(p) :- PROB[nac(s) // term_association(s, 'words')] = p
+
+  - id: p-095
+    tags: [tian]
+    split: dev
+    question:
+      en: What is the probability that a study mentions visual, given that it activates amygdala?
+    gold:
+      datalog: |-
+        amygdala_label(l) :- tian(l, r), startswith('lAMY', l)
+        amygdala_label(l) :- tian(l, r), startswith('mAMY', l)
+        amygdala(s) :- amygdala_label(l), tian_activated(l, s), selected_study(s)
+        ment(s) :- mentions(s, 'visual'), selected_study(s)
+        ans(p) :- PROB[ment(s) // amygdala(s)] = p
+
+  - id: p-096
+    tags: [tian]
+    split: test
+    question:
+      en: Which terms are mentioned by studies that activate putamen?
+    gold:
+      datalog: |-
+        putamen_label(l) :- tian(l, r), startswith('aPUT', l)
+        putamen_label(l) :- tian(l, r), startswith('pPUT', l)
+        putamen(s) :- putamen_label(l), tian_activated(l, s), selected_study(s)
+        term_association(s, t) :- mentions(s, t), selected_study(s)
+        ans(t, p) :- PROB[term_association(s, t) // putamen(s)] = p
+
+  - id: p-099
+    tags: [tian]
+    split: dev
+    question:
+      en: Which studies mention painful but do not activate putamen?
+    gold:
+      datalog: |-
+        putamen_label(l) :- tian(l, r), startswith('aPUT', l)
+        putamen_label(l) :- tian(l, r), startswith('pPUT', l)
+        putamen(s) :- putamen_label(l), tian_activated(l, s)
+        ans(s) :- mentions(s, 'painful'), ~putamen(s)
+
+  - id: p-108
+    tags: [prob_forward]
+    split: test
+    question:
+      en: What is the probability of conflict among studies that mention choices?
+    gold:
+      datalog: |-
+        term_association(s, t) :- mentions(s, t), selected_study(s)
+        ans(p) :- PROB[term_association(s, 'conflict') // term_association(s, 'choices')] = p
+
+  - id: p-109
+    tags: [prob_forward]
+    split: dev
+    question:
+      en: What proportion of studies about orbitofrontal cortex also mention medication?
+    gold:
+      datalog: |-
+        term_association(s, t) :- mentions(s, t), selected_study(s)
+        ans(p) :- PROB[term_association(s, 'medication') // term_association(s, 'orbitofrontal cortex')] = p
+
+  - id: p-113
+    tags: [prob_forward]
+    split: test
+    question:
+      en: What is the probability that a study activates the MNI point right caudate (MNI 12, 12, 10), given that it mentions default mode?
+    gold:
+      datalog: |-
+        near(s) :- peak_mni(x, y, z, s), (euclidean(x, y, z, 12.0, 12.0, 10.0) <= 3)
+        active(s) :- near(s), selected_study(s)
+        term_association(s, t) :- mentions(s, t), selected_study(s)
+        ans(p) :- PROB[active(s) // term_association(s, 'default mode')] = p
+
+  - id: p-116
+    tags: [prob_forward]
+    split: dev
+    question:
+      en: What is the lift of premotor cortex given syntactic?
+    gold:
+      datalog: |-
+        pc(s) :- mentions(s, 'premotor cortex'), selected_study(s)
+        syn(s) :- mentions(s, 'syntactic'), selected_study(s)
+        both(s) :- mentions(s, 'premotor cortex'), mentions(s, 'syntactic'), selected_study(s)
+        p_pc(p) :- PROB[pc(s)] = p
+        p_syn(p) :- PROB[syn(s)] = p
+        p_both(p) :- PROB[both(s)] = p
+        ans(lift) :- p_both(b), p_pc(a), p_syn(t), (lift == b / (a * t))
+
+  - id: p-128
+    tags: [coactivation]
+    split: test
+    question:
+      en: Which functional networks are co-activated in studies that mention grey matter?
+    gold:
+      datalog: |-
+        active(l, s) :- schaefer_activated(l, s), selected_study(s)
+        co_active(l1, l2, s) :- active(l1, s), active(l2, s)
+        term_association(s, t) :- mentions(s, t), selected_study(s)
+        ans(l1, l2, p) :- (l1 < l2), PROB[co_active(l1, l2, s) // term_association(s, 'grey matter')] = p
+
+  - id: p-130
+    tags: [coactivation]
+    split: dev
+    question:
+      en: Which gyri and sulci are activated by the same studies as salience ventral attention?
+    gold:
+      datalog: |-
+        sal_label(l) :- schaefer(l, r), startswith('17Networks LH SalVentAttn', l)
+        sal_label(l) :- schaefer(l, r), startswith('17Networks RH SalVentAttn', l)
+        seed(s) :- sal_label(l), schaefer_activated(l, s), selected_study(s)
+        active(l, s) :- destrieux_activated(l, s), selected_study(s)
+        ans(l, p) :- PROB[active(l, s) // seed(s)] = p
+
+  - id: p-135
+    tags: [coactivation]
+    split: test
+    question:
+      en: Which networks tend to be active in the same studies as right suborbital sulcus?
+    gold:
+      datalog: |-
+        seed(s) :- destrieux_activated('R S suborbital', s), selected_study(s)
+        active(l, s) :- schaefer_activated(l, s), selected_study(s)
+        ans(l, p) :- PROB[active(l, s) // seed(s)] = p
+
+  - id: p-136
+    tags: [coactivation]
+    split: dev
+    question:
+      en: Which subcortical regions are co-activated with salience ventral attention?
+    gold:
+      datalog: |-
+        sal_label(l) :- schaefer(l, r), startswith('17Networks LH SalVentAttn', l)
+        sal_label(l) :- schaefer(l, r), startswith('17Networks RH SalVentAttn', l)
+        seed(s) :- sal_label(l), schaefer_activated(l, s), selected_study(s)
+        active(l, s) :- tian_activated(l, s), selected_study(s)
+        ans(l, p) :- PROB[active(l, s) // seed(s)] = p
+
+  - id: p-142
+    tags: [counts]
+    split: test
+    question:
+      en: How many studies are in the database?
+    gold:
+      datalog: |-
+        ans(n) :- AGGREGATE[](study(s) @ count(s)) = n
+
+  - id: p-150
+    tags: [counts]
+    split: dev
+    question:
+      en: How many studies activate the left amygdala?
+    gold:
+      datalog: |-
+        amygdala(s) :- tian_activated('lAMY lh', s)
+        amygdala(s) :- tian_activated('mAMY lh', s)
+        ans(n) :- AGGREGATE[](amygdala(s) @ count(s)) = n
+
+  - id: p-153
+    tags: [counts]
+    split: test
+    question:
+      en: How many studies activate each subcortical region?
+    gold:
+      datalog: |-
+        ans(l, n) :- AGGREGATE[l](tian_activated(l, s) @ count(s)) = n
+
+  - id: p-160
+    tags: [negation]
+    split: dev
+    question:
+      en: Which studies mention neither frontal cortex nor scenes?
+    gold:
+      datalog: |-
+        ans(s) :- study(s), ~mentions(s, 'frontal cortex'), ~mentions(s, 'scenes')
+
+  - id: p-162
+    tags: [negation]
+    split: test
+    question:
+      en: Which terms never co-occur with anxiety in a study?
+    gold:
+      datalog: |-
+        with_anxiety(t) :- mentions(s, 'anxiety'), mentions(s, t)
+        ans(t) :- term(t), ~with_anxiety(t)
+
+  - id: p-165
+    tags: [negation]
+    split: dev
+    question:
+      en: Which studies mention emotion without mentioning recognition?
+    gold:
+      datalog: |-
+        ans(s) :- mentions(s, 'emotion'), ~mentions(s, 'recognition')
+
+  - id: p-172
+    tags: [conj_disj]
+    split: test
+    question:
+      en: What is the probability that a study mentions either elderly or word?
+    gold:
+      datalog: |-
+        either(s) :- mentions(s, 'elderly')
+        either(s) :- mentions(s, 'word')
+        chosen(s) :- either(s), selected_study(s)
+        ans(p) :- PROB[chosen(s)] = p
+
+  - id: p-175
+    tags: [conj_disj]
+    split: dev
+    question:
+      en: Which studies activate both left subcallosal gyrus and globus pallidus?
+    gold:
+      datalog: |-
+        gp_label(l) :- tian(l, r), startswith('aGP', l)
+        gp_label(l) :- tian(l, r), startswith('pGP', l)
+        gp(s) :- gp_label(l), tian_activated(l, s)
+        ans(s) :- destrieux_activated('L G subcallosal', s), gp(s)
+
+  - id: p-180
+    tags: [conj_disj]
+    split: test
+    question:
+      en: What is the probability that a study activates left short insular gyri, given that it mentions either response inhibition or amygdala?
+    gold:
+      datalog: |-
+        either(s) :- mentions(s, 'response inhibition')
+        either(s) :- mentions(s, 'amygdala')
+        cond(s) :- either(s), selected_study(s)
+        active(s) :- destrieux_activated('L G insular short', s), selected_study(s)
+        ans(p) :- PROB[active(s) // cond(s)] = p
+
+  - id: p-184
+    tags: [study_titles]
+    split: dev
+    question:
+      en: Which terms does the study titled 'The neurobiology of self face recognition among depressed adolescents.' mention?
+    gold:
+      datalog: |-
+        ans(t) :- study_title(s, 'The neurobiology of self face recognition among depressed adolescents.'), mentions(s, t)
+
+  - id: p-186
+    tags: [study_titles]
+    split: test
+    question:
+      en: Which studies mention both visuospatial and parkinson, and what are their titles?
+    gold:
+      datalog: |-
+        ans(s, title) :- mentions(s, 'visuospatial'), mentions(s, 'parkinson'), study_title(s, title)
+
+  - id: p-194
+    tags: [study_titles]
+    split: dev
+    question:
+      en: What is the study ID of the paper titled 'Are autobiographical memories inherently social? Evidence from an fMRI study.'?
+    gold:
+      datalog: |-
+        ans(s) :- study_title(s, 'Are autobiographical memories inherently social? Evidence from an fMRI study.')
