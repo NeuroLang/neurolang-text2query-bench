@@ -588,3 +588,34 @@ query, and uses 45-57k tokens a question (about $0.004, more than Gemma
 and DeepSeek per question although cheaper per token). The assistant has
 no way to pass `enable_thinking` or top_p, so thinking mode is untested.
 Tables and failures in [runs/nsv2-nemotron.md](runs/nsv2-nemotron.md).
+
+## neurosynth-v3: DeepSeek V4 Flash against Sonnet 5.5 (2026-11-06)
+
+`datasets/neurosynth-v3-heldout.yaml`: 65 English questions with
+hand-checked gold Datalog, dev 33 / test 32 balanced by category. 25 come
+from `neurosynth-distill-heldout` (7 golds corrected: a class by
+`cogat_term` not IRI, networks named as the guidance names them, argmax and
+"which studies" answers scored on the entity only, one question reworded to
+its gold's text), 40 are pool questions no model had answered, with golds
+written by hand. All run and return rows on master; highest cosine to the
+bank 0.814 (0.840 to the #1057 bank).
+
+DeepSeek V4 Flash 0731 (OpenRouter, text protocol), mean Jaccard (exact):
+
+| | v3 dev | v3 test | nsv2 dev | nsv2 test |
+|---|---|---|---|---|
+| DeepSeek, master | 0.758 (25/33) | 0.781 (25/32) | 0.900 (18/20) | 1.000 (21/21) |
+| DeepSeek, fixes | 0.970 (32/33) | 0.781 (25/32) | 0.950 (19/20) | 1.000 (21/21) |
+| Sonnet 5.5 | 0.879 (29/33), master | 0.996 (31/32), fixes | | |
+
+The fixes (NeuroLang `fix/llm-deepseek-parity`, engine PRs #1102, #1103):
+DeepSeek's reasoning counts in `max_tokens` (8192), empty replies asked again,
+its tag-style actions parsed, the bank's "which studies" examples answering
+per study as the guidance asks, and guidance on free text, lift, Destrieux
+abbreviations, label rules and Tian parts. They took dev from 25 to 32 exact
+but not test (25 → 25): DeepSeek's remaining gap to Sonnet is search loops
+(identical repeated calls) and the queries the engine runs too slowly or
+with too much memory for the assistant's limits. Two environment pitfalls on
+current master: the studies' embedding cache is stale after #1085 (#1102),
+and cached nsv2 gold rows predate #1085 (run `check-gold` again). Details in
+[runs/nsv3.md](runs/nsv3.md).
