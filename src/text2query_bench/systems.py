@@ -88,6 +88,7 @@ class AssistantSystem(System):
         self.provider = self.config.provider(provider)
         self.strategy = strategy or self.config.assistant.strategy
         self.client = client
+        self.options = {}
         if tracer is not None:
             self.trace(tracer)
         self.exclude_gold = exclude_gold
@@ -109,6 +110,13 @@ class AssistantSystem(System):
             ),
             tracer,
         )
+        # The fallback provider's requests, priced apart (its name).
+        fallback = getattr(self.config.assistant, "fallback_provider", None)
+        if fallback is not None:
+            self.options["fallback_client"] = TracingClient(
+                make_client(fallback, self.config.assistant.timeout),
+                tracer, fallback.name,
+            )
 
     def generate(self, question: str, language: str) -> Generation:
         from neurolang_apps.utils.llm import LLMError, make_agent
@@ -125,6 +133,7 @@ class AssistantSystem(System):
             }),
             exclude_question=question if self.exclude_gold else "",
             examples=self.examples, description=self.description,
+            **self.options,
         )
         start = time.perf_counter()
         try:

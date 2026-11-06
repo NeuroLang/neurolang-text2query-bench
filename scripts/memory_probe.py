@@ -30,6 +30,8 @@ def main():
     parser.add_argument("--in-process", action="store_true")
     parser.add_argument("--show-ra", action="store_true",
                         help="print the RA plans of each query instead")
+    parser.add_argument("--save", metavar="DIR",
+                        help="save each result as DIR/<query file>.pkl")
     parser.add_argument("--stacks", action="store_true",
                         help="print the RSS every 0.2 s and the stacks every 2 s (stderr)")
     args = parser.parse_args()
@@ -68,6 +70,9 @@ def main():
             preview = validation.run_preview(
                 nl, query, "datalog", 3, args.engine, timeout=600)
         done.set()
+        if args.save and preview.frame is not None:
+            name = os.path.basename(path) + ".pkl"
+            preview.frame.to_pickle(os.path.join(args.save, name))
         faulthandler.cancel_dump_traceback_later()
         thread.join()
         print(f"{path}: {time.time() - start:.1f}s child peak "

@@ -84,9 +84,10 @@ class Tracer:
 class TracingClient:
     """The chat *client* reporting its requests and replies to *tracer*."""
 
-    def __init__(self, client, tracer: Tracer):
+    def __init__(self, client, tracer: Tracer, provider: str = ""):
         self.client = client
         self.tracer = tracer
+        self.provider = provider
         self.calls = 0
         self._previous = []
 
@@ -119,6 +120,7 @@ class TracingClient:
                 for c in reply.tool_calls
             ],
             "usage": reply.usage, "seconds": time.perf_counter() - began,
+            **({"provider": self.provider} if self.provider else {}),
         })
         return reply
 
