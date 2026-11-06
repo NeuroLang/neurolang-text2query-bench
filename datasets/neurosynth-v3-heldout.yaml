@@ -10,11 +10,12 @@ description: >
   assistant_guidance. None is in the example bank.
 
 # Conventions of the gold queries (see runs/nsv3.md):
-# - every question but a count is answered over selected_study, as the
-#   guidance asks;
-# - a "which studies" answer keeps only the study column: the
-#   probability of each study is 1/N whatever the query, so it is not
-#   scored (an answer with the probability still scores 1);
+# - a probability question (activations, co-activations or co-occurring
+#   terms of a term, topic or region: one probability per region, voxel
+#   or term) is answered with PROB over selected_study, as the guidance
+#   asks;
+# - a list ("which studies") returns the entities themselves, without
+#   PROB; a count uses AGGREGATE;
 # - an argmax question ("which ... the most") keeps only the winner;
 # - a free-text topic is the question's own words in similar_study.
 #

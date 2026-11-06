@@ -28,6 +28,8 @@ def main():
     parser.add_argument("--engine", default="neurosynth")
     parser.add_argument("--data-dir", default="neurolang_data")
     parser.add_argument("--in-process", action="store_true")
+    parser.add_argument("--show-ra", action="store_true",
+                        help="print the RA plans of each query instead")
     parser.add_argument("--stacks", action="store_true",
                         help="print the RSS every 0.2 s and the stacks every 2 s (stderr)")
     args = parser.parse_args()
@@ -36,6 +38,10 @@ def main():
     print(f"parent rss {rss_mb(os.getpid()):.0f} MB", flush=True)
     for path in args.queries:
         query = open(path).read()
+        if args.show_ra:
+            with nl.scope:
+                nl.execute_datalog_program(query, show_ra=True)
+            continue
         peak = {"child": 0.0, "parent": 0.0}
         done = threading.Event()
         parent = os.getpid()
