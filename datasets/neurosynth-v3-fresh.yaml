@@ -308,6 +308,7 @@ questions:
 
   - id: f-066
     tags: [schaefer]
+    note: an association is a ratio (guidance), the lift P(term | network) / P(term)
     split: test
     question:
       en: Which terms are associated with activation in the central visual network?
@@ -317,7 +318,9 @@ questions:
         vis_label(l) :- schaefer(l, r), startswith('17Networks RH VisCent', l)
         vis(s) :- vis_label(l), schaefer_activated(l, s), selected_study(s)
         term_association(s, t) :- mentions(s, t), selected_study(s)
-        ans(t, p) :- PROB[term_association(s, t) // vis(s)] = p
+        p_t_vis(t, p) :- PROB[term_association(s, t) // vis(s)] = p
+        p_t(t, p) :- PROB[term_association(s, t)] = p
+        ans(t, l) :- p_t_vis(t, a), p_t(t, b), (l == a / b)
 
   - id: f-071
     tags: [schaefer]
