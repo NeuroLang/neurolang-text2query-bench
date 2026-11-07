@@ -628,7 +628,7 @@ fallback), #1117 (magic-sets memory fix), #1054:
 | | v3 test (32) | fresh (32) | $/q |
 |---|---|---|---:|
 | DeepSeek V4 Flash single | 0.844 (27) | 0.836 (26) | 0.002-0.003 |
-| DeepSeek ×3 vote | 0.875 (28) | 0.963 (30) | ≤ 0.011 |
+| DeepSeek ×3 vote | 0.875 (28) | 0.963 (30) | 0.006-0.007 |
 | DeepSeek ×3 vote + Sonnet fallback | 0.906 (29) | 0.963 (30) | 0.009-0.011 |
 | Sonnet 5.5 single | 0.996 (31) | 0.767 (24) | 0.062 |
 

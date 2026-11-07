@@ -28,7 +28,7 @@ fallback's replies priced as Sonnet). s/q: up to four runs shared the machine.
 | | v3 test (32) | $/q | s/q | fresh (32) | $/q | s/q |
 |---|---|---:|---:|---|---:|---:|
 | DeepSeek single | 0.844 (27) | 0.0021 | 36 | 0.836 (26) | 0.0029 | 41 |
-| DeepSeek ×3 vote | 0.875 (28) | ≤ 0.011 | 95 | **0.963 (30)** | ≤ 0.009 | 88 |
+| DeepSeek ×3 vote | 0.875 (28) | 0.0063 | 95 | **0.963 (30)** | 0.0069 | 88 |
 | DeepSeek ×3 vote + Sonnet fallback | 0.906 (29) | 0.0110 | 95 | **0.963 (30)** | 0.0090 | 88 |
 | Sonnet 5.5 single | **0.996 (31)** | 0.0625 | 20 | 0.767 (24) | 0.0620 | 18 |
 
@@ -51,7 +51,11 @@ $0.0019 and $0.0012/q (before #1104: 0.900/0.950 dev, 1.000 test).
   misses are mostly out of steps (f-179, f-121) and one missing `selected_study`
   (f-061); the vote recovers them.
 - Cost: ×3 vote + fallback is 1/6-1/7 of Sonnet's cost per question, 4-5 times
-  slower.
+  slower; the Sonnet fallback is $0.0047/q (test) and $0.0021/q (fresh) of it.
+- Caveats: the fresh golds' conventions were written with the #1104 guidance, and
+  3 of Sonnet's 8 fresh misses are convention calls (argmax, P(both) vs lift): the
+  fresh Sonnet number is not a parity measure. The vote samples run at temperature
+  0.7, the single runs at 0: part of the vote's gain may be the temperature.
 
 ## Fresh golds spot-check
 
