@@ -619,3 +619,17 @@ with too much memory for the assistant's limits. Two environment pitfalls on
 current master: the studies' embedding cache is stale after #1085 (#1102),
 and cached nsv2 gold rows predate #1085 (run `check-gold` again). Details in
 [runs/nsv3.md](runs/nsv3.md).
+
+## neurosynth-v3b: DeepSeek ×3 vote + Sonnet fallback (2026-11-07)
+
+Mean Jaccard (exact), $/question, on master + NeuroLang #1104, #1116 (vote,
+fallback), #1117 (magic-sets memory fix), #1054:
+
+| | v3 test (32) | fresh (32) | $/q |
+|---|---|---|---:|
+| DeepSeek V4 Flash single | 0.844 (27) | 0.836 (26) | 0.002-0.003 |
+| DeepSeek ×3 vote | 0.875 (28) | 0.963 (30) | ≤ 0.011 |
+| DeepSeek ×3 vote + Sonnet fallback | 0.906 (29) | 0.963 (30) | 0.009-0.011 |
+| Sonnet 5.5 single | 0.996 (31) | 0.767 (24) | 0.062 |
+
+Fallback on 2/32 and 1/32 questions. Details in [runs/nsv3b.md](runs/nsv3b.md).
