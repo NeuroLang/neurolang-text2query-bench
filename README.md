@@ -633,3 +633,15 @@ fallback), #1117 (magic-sets memory fix), #1054:
 | Sonnet 5.5 single | 0.996 (31) | 0.767 (24) | 0.062 |
 
 Fallback on 2/32 and 1/32 questions. Details in [runs/nsv3b.md](runs/nsv3b.md).
+
+## neurosynth-v3c: master after the DeepSeek-parity PRs (2026-11-09, incomplete)
+
+NeuroLang upstream master 30db798e (#1057, #1104, #1116, #1117, #1126,
+#1127 merged). Golds unchanged (nsv2, v3, fresh); highest cosine to the
+master bank 0.867 (f-097, terms vs studies of the hippocampus: not a copy).
+The runs stopped at the OpenRouter key's total limit ($600): on the
+questions answered before it, DeepSeek single v3 test 0.816 (13/17) vs
+0.765 in nsv3b, nsv2 14/14 dev and test, Sonnet v3 test 0.906 (29/32;
+dh-166 now read as "activated by no study"). Engine bug found: checking a
+yes/no query crashed (NeuroLang PR #1144). Fresh and the vote/fallback
+numbers remain to run. Details in [runs/nsv3c.md](runs/nsv3c.md).
