@@ -16,7 +16,7 @@ Upstream master **30db798e** (after #1143), detached worktree
 `source scripts/nsv3c_env.sh` (PYTHONPATH). Configs as nsv3b:
 `configs/llm.nsv3.yaml` (single, temperature 0), `configs/llm.nsv3b-vote.yaml`
 (`samples: 3`, `fallback_provider: openrouter`; the agent raises the samples'
-temperature to max(T, 0.7) = 0.7, agent.py `_answer`). English, ReAct, BM25,
+temperature to max(T, 0.7) = 0.7, agent.py `_run`). English, ReAct, BM25,
 6 examples, 8 steps, `verify_rounds: 0`. Runs: `scripts/run_nsv3c.sh nsv2|v3|fresh`.
 
 ## Leakage (bank of master: 80 questions, #1057 included)
@@ -110,7 +110,7 @@ Changes on the clean questions:
 ```bash
 source scripts/env.sh; source scripts/nsv3c_env.sh
 scripts/run_nsv3c.sh nsv2; scripts/run_nsv3c.sh v3; scripts/run_nsv3c.sh fresh
-# (remove the partial runs/nsv3c-* first, or pass --resume through run_nsv2.sh)
+# delete the partial runs/nsv3c-* first: --resume would keep their 403 answers
 .venv-dsparity/bin/python scripts/vote_only.py runs/nsv3c-test-deepseek-vote runs/nsv3c-test-deepseek-voteonly
 .venv-dsparity/bin/python scripts/reevaluate.py datasets/neurosynth-v3-heldout.yaml runs/nsv3c-test-deepseek-vote runs/nsv3c-test-deepseek-voteonly
 .venv-dsparity/bin/python scripts/run_cost.py datasets/neurosynth-v3-heldout.yaml test deepseek=runs/nsv3c-test-deepseek deepseek-vote=runs/nsv3c-test-deepseek-vote sonnet=runs/nsv3c-test-sonnet
