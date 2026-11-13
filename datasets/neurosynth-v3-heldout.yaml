@@ -265,12 +265,10 @@ questions:
       datalog: |-
         near(s) :- peak_mni(x, y, z, s), (euclidean(x, y, z, 40.0, -52.0, -18.0) <= 6)
         act(s) :- near(s), selected_study(s)
-        t(s) :- mentions(s, 'emotion regulation'), selected_study(s)
-        both(s) :- near(s), mentions(s, 'emotion regulation'), selected_study(s)
+        close(q, s) :- similar_study(q, s), selected_study(s)
+        p_act_given_close(q, PROB) :- act(s) // close(q, s)
         pr_a(p) :- PROB[act(s)] = p
-        pr_t(p) :- PROB[t(s)] = p
-        pr_b(p) :- PROB[both(s)] = p
-        ans(lift) :- pr_a(pa), pr_t(pt), pr_b(pb), (lift == (pb / pt) / pa)
+        ans(lift) :- p_act_given_close('emotion regulation', pc), pr_a(pa), (lift == pc / pa)
 
   - id: dh-127
     tags: [coactivation]
@@ -414,8 +412,9 @@ questions:
         amygdala(s) :- tian_activated('lAMY lh', s)
         amygdala(s) :- tian_activated('mAMY lh', s)
         active(s) :- amygdala(s), selected_study(s)
-        term_association(s, t) :- mentions(s, t), selected_study(s)
-        ans(p) :- PROB[active(s) // term_association(s, 'choice')] = p
+        close(q, s) :- similar_study(q, s), selected_study(s)
+        p_active_given_close(q, PROB) :- active(s) // close(q, s)
+        ans(p) :- cogat_definition('choice', d), p_active_given_close(d, p)
 
   - id: p-041
     tags: [cogat_term]
@@ -425,7 +424,7 @@ questions:
     gold:
       datalog: |-
         near(s) :- peak_mni(x, y, z, s), (euclidean(x, y, z, 40.0, -50.0, 44.0) <= 5)
-        ans(s) :- near(s), mentions(s, 'efficiency')
+        ans(s) :- cogat_definition('efficiency', d), similar_study(d, s), near(s)
 
   - id: p-049
     tags: [cogat_hierarchy]

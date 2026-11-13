@@ -59,8 +59,9 @@ questions:
     gold:
       datalog: |-
         active(l, s) :- destrieux_activated(l, s), selected_study(s)
-        term_association(s, t) :- mentions(s, t), selected_study(s)
-        ans(l, p) :- PROB[active(l, s) // term_association(s, 'navigation')] = p
+        close(q, s) :- similar_study(q, s), selected_study(s)
+        p_active_given_close(q, l, PROB) :- active(l, s) // close(q, s)
+        ans(l, p) :- cogat_definition('navigation', d), p_active_given_close(d, l, p)
 
   - id: f-031
     tags: [cogat_term]
@@ -70,8 +71,9 @@ questions:
     gold:
       datalog: |-
         active(l, s) :- tian_activated(l, s), selected_study(s)
-        term_association(s, t) :- mentions(s, t), selected_study(s)
-        ans(l, p) :- PROB[active(l, s) // term_association(s, 'arousal')] = p
+        close(q, s) :- similar_study(q, s), selected_study(s)
+        p_active_given_close(q, l, PROB) :- active(l, s) // close(q, s)
+        ans(l, p) :- cogat_definition('arousal', d), p_active_given_close(d, l, p)
 
   - id: f-037
     tags: [cogat_term]
@@ -92,7 +94,7 @@ questions:
       datalog: |-
         kind(t) :- cogat_term(c, 'knowledge'), cogat_term(c, t)
         kind(t) :- cogat_term(c, 'knowledge'), cogat_subclass_of(x, c), cogat_term(x, t)
-        term_study(s) :- kind(t), mentions(s, t), selected_study(s)
+        term_study(s) :- kind(t), cogat_definition(t, d), similar_study(d, s), selected_study(s)
         active(l, s) :- destrieux_activated(l, s), selected_study(s)
         ans(l, p) :- PROB[active(l, s) // term_study(s)] = p
 
@@ -119,8 +121,9 @@ questions:
       datalog: |-
         active(l, s) :- destrieux_activated(l, s), selected_study(s)
         co_active(l1, l2, s) :- active(l1, s), active(l2, s)
-        term_association(s, t) :- mentions(s, t), selected_study(s)
-        ans(l1, l2, p) :- (l1 < l2), PROB[co_active(l1, l2, s) // term_association(s, 'memory')] = p
+        close(q, s) :- similar_study(q, s), selected_study(s)
+        p_co_given_close(q, l1, l2, PROB) :- co_active(l1, l2, s) // close(q, s)
+        ans(l1, l2, p) :- (l1 < l2), cogat_definition('memory', d), p_co_given_close(d, l1, l2, p)
 
   - id: f-134
     tags: [coactivation]
@@ -209,8 +212,9 @@ questions:
     gold:
       datalog: |-
         active(l, s) :- destrieux_activated(l, s), selected_study(s)
-        term_association(s, t) :- mentions(s, t), selected_study(s)
-        p_l(l, p) :- PROB[active(l, s) // term_association(s, 'retrieval')] = p
+        close(q, s) :- similar_study(q, s), selected_study(s)
+        p_active_given_close(q, l, PROB) :- active(l, s) // close(q, s)
+        p_l(l, p) :- cogat_definition('retrieval', d), p_active_given_close(d, l, p)
         top(m) :- AGGREGATE[](p_l(l, p) @ max(p)) = m
         ans(l) :- p_l(l, p), top(p)
 
@@ -389,7 +393,8 @@ questions:
     gold:
       datalog: |-
         active(l, s) :- tian_activated(l, s), selected_study(s)
-        term_association(s, t) :- mentions(s, t), selected_study(s)
-        p_l(l, p) :- PROB[active(l, s) // term_association(s, 'recollection')] = p
+        close(q, s) :- similar_study(q, s), selected_study(s)
+        p_active_given_close(q, l, PROB) :- active(l, s) // close(q, s)
+        p_l(l, p) :- p_active_given_close('recollection', l, p)
         top(m) :- AGGREGATE[](p_l(l, p) @ max(p)) = m
         ans(l) :- p_l(l, p), top(p)

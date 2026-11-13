@@ -667,3 +667,35 @@ summary in `runs/nsv3d-step1.md`.
   - on the golds, 85%, with acceptance precision 0.84 and recall 0.98.
   - Agreement alone is 90–98% precise and settles 55–60%; the DeepSeek judges are weak.
   - Below the 95% target: the disagreements go to Sonnet.
+
+## neurosynth-v3d: Cognitive Atlas first for cognitive concepts (2026-11-13)
+
+NeuroLang `feat/llm-cogat-first` (PR against master d66a4245). A question naming a
+cognitive concept without saying mention, term or word is answered as follows:
+- look the concept up in `cogat_term`;
+- if it is there, `cogat_definition` with `similar_study` (SPECTER2);
+- if not, the question's words with `similar_study`.
+
+Nine golds were rewritten under the rule (v3 p-038, p-041, dh-122; fresh f-030,
+f-031, f-048, f-078, f-102, f-133); both arms are scored with them. Mean Jaccard,
+master → branch:
+
+| | v3 test | fresh | nsv2 dev / test |
+|---|---|---|---|
+| DeepSeek single | 0.781 → 0.747 | 0.703 → 0.688 | 0.950 / 1.000 (unchanged) |
+| DeepSeek ×3 + fallback | 0.902 → 0.934 | 0.750 → 0.751 | 0.950 / 1.000 (unchanged) |
+| Sonnet 5.5 | 0.875 → 0.846 | 0.663 → 0.751 | |
+
+On the 7 concept questions:
+- CogAt lookups go from 0/21 to 21/21 answers;
+- the concept subset rises from 0.03–0.14 to 0.43–0.58.
+
+What it costs:
+- the rule is over-applied: anatomy, populations and descriptions get
+  `similar_study` or a CogAt class;
+- the about-term subset falls, e.g. Sonnet 0.90 → 0.60.
+
+Spend: $12.74 (Sonnet 4.9M tokens).
+
+Engine bug found: `RESAMPLE` gave wrong replicates for a rule over another choice
+rule (NeuroLang PR #1212). Details in [runs/nsv3d.md](runs/nsv3d.md).
