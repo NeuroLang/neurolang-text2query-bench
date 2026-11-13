@@ -1,25 +1,70 @@
-# neurosynth-v3c: validation of NeuroLang master after the DeepSeek-parity PRs (2026-11-09, INCOMPLETE)
+# neurosynth-v3c: baseline of NeuroLang master after the DeepSeek-parity PRs (2026-11-13)
 
 Goal: rerun the nsv3b comparison (runs/nsv3b.md) on upstream master, now that
 #1057 (distilled bank), #1104, #1116 (vote, fallback), #1117, #1126, #1127,
-#1102 and #1103 are merged. OpenRouter only.
-
-**Stopped by the OpenRouter key limit**: about 13 minutes into the runs every
-request got `HTTP 403 Key limit exceeded (total limit) ... $600.03 of $600.00
-used; does not reset`. The fresh runs were never started; the nsv2 and v3 runs
-were stopped. Only the questions answered before the limit are scored below.
+#1102, #1103 and #1176 are merged: the step-0 baseline of the distillation plan.
+OpenRouter only.
 
 ## Code
 
-Upstream master **30db798e** (after #1143), detached worktree
+Upstream master **8532a28b** (0.1a22, after #1176), detached worktree
 `/Users/bot/NeuroLang-nsv3c`, over `.venv-dsparity` with
-`source scripts/nsv3c_env.sh` (PYTHONPATH). Configs as nsv3b:
-`configs/llm.nsv3.yaml` (single, temperature 0), `configs/llm.nsv3b-vote.yaml`
-(`samples: 3`, `fallback_provider: openrouter`; the agent raises the samples'
-temperature to max(T, 0.7) = 0.7, agent.py `_run`). English, ReAct, BM25,
-6 examples, 8 steps, `verify_rounds: 0`. Runs: `scripts/run_nsv3c.sh nsv2|v3|fresh`.
+`source scripts/nsv3c_env.sh`. A first attempt on 30db798e stopped at the old
+key's $600 limit (its partial runs are kept in `runs/nsv3c-partial-30db798e/`,
+its findings below); the restart moved to 8532a28b because #1176 made
+`activated` and the `{atlas}_activated` predicates 6 mm (were 3 mm) and the
+MNI golds were moved to 6 mm with it (commit 4692a67): a 30db798e engine would
+mis-score every MNI and atlas question. Golds recomputed on 8532a28b
+(`check-gold`): nsv2 41/41, fresh 32/32; v3 cached by nsv3d on the same commit.
 
-## Leakage (bank of master: 80 questions, #1057 included)
+Configs as nsv3b: `configs/llm.nsv3.yaml` (single, temperature 0),
+`configs/llm.nsv3b-vote.yaml` (`samples: 3` at 0.7, `fallback_provider:
+openrouter` = Sonnet 5.5). English, ReAct, BM25, 6 examples, 8 steps,
+`verify_rounds: 0`. DeepSeek = `openrouter-deepseek-0731`. Runs:
+`scripts/run_nsv3c.sh nsv2|v3|fresh`, then `vote_only.py`, `reevaluate.py`
+(final scoring on the datasets of 4692a67), `nsv2_overlap.py` (Jaccard) and
+`run_cost.py`. Gemma on Albert (in the plan) was not run: Albert was reserved
+for the nsv3d jobs.
+
+## Results
+
+Mean Jaccard of the rows (exact matches of 32); steps = tool calls per
+question; $/q from the traced tokens (DeepSeek $0.0434/$0.30, Sonnet $2/$10
+per M in/out; the fallback's replies priced as Sonnet). s/q are not
+comparable with nsv3b: the Mac ran up to 30 agents at once (round-2 teacher).
+
+| | v3 test (32) | steps | tok/q | $/q | fresh (32) | steps | tok/q | $/q |
+|---|---|---:|---:|---:|---|---:|---:|---:|
+| DeepSeek single | 0.840 (26) | 4.1 | 35k | 0.0025 | 0.844 (27) | 4.2 | 35k | 0.0024 |
+| DeepSeek ×3 vote | 0.871 (27) | 13.9 | 113k | 0.0072 | 0.875 (28) | 11.6 | 92k | 0.0058 |
+| DeepSeek ×3 vote + Sonnet fallback | **0.902 (28)** | 13.9 | 113k | 0.0197 | **0.906 (29)** | 11.6 | 92k | 0.0079 |
+| Sonnet 5.5 single | 0.875 (28) | 3.3 | 31k | 0.0668 | 0.845 (27) | 3.6 | 33k | 0.0703 |
+
+Fallback rate: v3 test 3/32 (dh-010, p-008, p-041), fresh 1/32 (f-121),
+nsv2 0/41. Without f-097 (cosine 0.867 to a bank question, all four right on
+it): fresh single 0.839 (26/31), vote 0.871 (27), vote + fallback 0.903 (28),
+Sonnet 0.840 (26).
+
+Regression on neurosynth-v2 (DeepSeek): single dev 0.950 (19/20), test 1.000
+(21/21), $0.0016/q; ×3 vote, with or without fallback, the same, $0.0046/q.
+
+Against nsv3b (master before #1176, 3 mm): DeepSeek single v3 0.844 → 0.840,
+fresh 0.836 → 0.844; vote + fallback v3 0.906 → 0.902, fresh 0.963 → 0.906;
+Sonnet v3 0.996 → 0.875, fresh 0.767 → 0.845. Not like-for-like (kernel radius,
+golds and bank changed), so read the table as the new baseline only.
+
+Misses common to every model: dh-166 (probabilistic "not activated": all
+answer the empty deterministic query), p-128 (one value per parcel instead of
+pairs), dh-010 (`p_a_given_similar` stopped by the memory guard / out of
+steps), f-131 and f-066 (gold conventions). Sonnet only: p-096 (P(t ∧ r) for
+P(t | r)), f-078/f-102 (ranking for "most often"), f-071. DeepSeek single
+only: out of steps on dh-052, p-083, f-048, f-121 (the vote recovers them),
+f-173 (voxel-level, 1.1M rows; Sonnet right).
+
+OpenRouter spend of nsv3c (3 datasets): about $6 (Sonnet runs and fallbacks
+$4.6, DeepSeek ≈ $1.5).
+
+## Leakage (from the 30db798e attempt; bank unchanged since) (bank of master: 80 questions, #1057 included)
 
 `scripts/leakage.py --openrouter` (bge-m3), highest cosine of a dataset question
 to a bank question:
@@ -41,33 +86,7 @@ without f-097; the fresh runs could not be made.
 nsv2 41/41, v3 65/65, fresh 32/32 run and return rows; **no gold changed**
 against the nsv3b golds (`scripts/gold_diff.py`, rows rounded to 6 digits).
 
-## Results (partial)
-
-"clean" = questions none of whose requests got the 403; compared with the nsv3b
-run on the same questions (`scripts/clean_subset.py`). Mean Jaccard (exact).
-
-| run | answered | clean | master | nsv3b, same questions |
-|---|---:|---:|---|---|
-| v3 test, DeepSeek single | 32 | 17 | 0.816 (13) | 0.765 (13) |
-| v3 test, DeepSeek ×3 vote + fallback | 19 | 8 | 1.000 (8) | 1.000 (8) |
-| v3 test, Sonnet 5.5 single | 32 | 31 | 0.935 (29) | 0.996 (30) |
-| nsv2 dev, DeepSeek single | 20 | 14 | 1.000 (14) | 0.929 (13) |
-| nsv2 test, DeepSeek single | 21 | 14 | 1.000 (14) | 1.000 (14) |
-| nsv2 dev, DeepSeek ×3 vote + fallback | 11 | 6 | 1.000 (6) | 0.833 (5)* |
-| nsv2 test, DeepSeek ×3 vote + fallback | 12 | 6 | 1.000 (6) | 1.000 (6)* |
-
-\* against nsv3b's DeepSeek single (nsv3b ran no vote on nsv2).
-Sonnet, all 32 (p-186 lost to the 403): 0.906 (29), $0.060/q, 16 s/q.
-The fallback counts of the vote runs (10 and 11) are the 403s, not
-disagreements: no fallback rate can be given. $/q of the clean single runs:
-DeepSeek ≈ $0.001/q (14.5k in, 1.1k out), as in nsv3b.
-
-Changes on the clean questions:
-- DeepSeek single, v3 test: dh-052 0 → 1, dh-127 0 → 0.87, dh-117 1 → 0.
-- Sonnet, v3 test: dh-127 0.87 → 1, dh-166 1 → 0, p-096 1 → 0.
-- nsv2-07 0 → 1 (DeepSeek, single and vote).
-
-## Diagnosis
+## Diagnosis (30db798e partial runs)
 
 - **dh-127** (subcortical structures co-activating with hippocampus in injury
   studies): DeepSeek single on master now conditions on hippocampus ∧ injury,
@@ -105,16 +124,3 @@ Changes on the clean questions:
   the engine's `activated(i, j, k, s)` ("already in the IDB with different
   signature"); the model renamed it at the next step. No change.
 
-## Remains (needs a working OpenRouter key)
-
-```bash
-source scripts/env.sh; source scripts/nsv3c_env.sh
-scripts/run_nsv3c.sh nsv2; scripts/run_nsv3c.sh v3; scripts/run_nsv3c.sh fresh
-# delete the partial runs/nsv3c-* first: --resume would keep their 403 answers
-.venv-dsparity/bin/python scripts/vote_only.py runs/nsv3c-test-deepseek-vote runs/nsv3c-test-deepseek-voteonly
-.venv-dsparity/bin/python scripts/reevaluate.py datasets/neurosynth-v3-heldout.yaml runs/nsv3c-test-deepseek-vote runs/nsv3c-test-deepseek-voteonly
-.venv-dsparity/bin/python scripts/run_cost.py datasets/neurosynth-v3-heldout.yaml test deepseek=runs/nsv3c-test-deepseek deepseek-vote=runs/nsv3c-test-deepseek-vote sonnet=runs/nsv3c-test-sonnet
-```
-
-then fresh with and without f-097, and the fallback rate. Tokens spent here:
-DeepSeek 2.3M in / 0.16M out, Sonnet 0.88M in / 0.02M out.

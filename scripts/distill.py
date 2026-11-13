@@ -38,6 +38,7 @@ import json
 import os
 import random
 import re
+import signal
 import sys
 import time
 from collections import Counter
@@ -271,8 +272,15 @@ def engine(args):
 def run_rows(nl, query, timeout=300.0):
     """Return the rows and the error of *query* on the engine."""
     from text2query_bench.engine import execute
+    from neurolang_apps.utils.llm import validation
 
-    execution = execute(nl, query, "datalog", timeout)
+    # in a forked child, killed at the timeout: a thread left running a
+    # timed-out query would hold the engine (and a CPU) for the next ones
+    try:
+        execution = validation._in_child(
+            lambda: execute(nl, query, "datalog", timeout), timeout + 30, 16000)
+    except (validation.QueryTimeout, validation.QueryTooLarge) as exc:
+        return [], f"{type(exc).__name__} running the rows of the final query"
     return execution.rows, execution.error
 
 
@@ -546,6 +554,35 @@ def key_usage():
     return response.json()["data"]["usage"]
 
 
+def given_up(item, path, provider, timeout):
+    """
+    Fork: return False in the child, which answers *item*; in the parent,
+    wait for it and return True, killing it after *timeout* seconds (a
+    query stuck in the engine's planning, out of reach of the assistant's
+    guard) and recording the question as given up.
+    """
+    pid = os.fork()
+    if pid == 0:
+        return False
+    start = time.monotonic()
+    while not os.waitpid(pid, os.WNOHANG)[0]:
+        if time.monotonic() - start > timeout:
+            os.kill(pid, signal.SIGKILL)
+            os.waitpid(pid, 0)
+            log(f"{item['id']}: stuck for {timeout} s, given up")
+            with open(path, "a") as answers:
+                answers.write(json.dumps({
+                    "id": item["id"], "question": item["question"],
+                    "category": item["category"], "query": "", "valid": False,
+                    "error": f"stuck for {timeout} s (engine)", "rows": [],
+                    "steps": [], "calls": 0, "usage": {}, "seconds": timeout,
+                    "model": provider.model, "hung": True,
+                }) + "\n")
+            break
+        time.sleep(2)
+    return True
+
+
 def gate_decided(qid):
     """
     Whether the agreement gate (scripts/agreement_gate.py) has decided
@@ -565,7 +602,8 @@ def cmd_answer(args):
     """
     Answer the pool with ReAct: Sonnet (the teacher), or in round 2 any
     provider of ``--config`` (``--tag`` names the output, ``--temperature``
-    sets the sampling); run ``--shard I/N`` processes side by side.
+    sets the sampling). ``--workers`` processes share the engine, forked
+    once it is built; ``--shard I/N`` splits the pool between commands.
     """
     from neurolang_apps.utils.llm import LLMError, load_config, make_agent
 
@@ -589,10 +627,24 @@ def cmd_answer(args):
         for line in file.read_text().splitlines()
     }
     index, count = args.shard
-    path = out / (f"{tag}.w{index}.jsonl" if second else f"{tag}.{index}.jsonl")
+    worker = 0
+    if args.workers > 1:
+        # Forked workers share the engine's memory (copy on write). On
+        # macOS a forked child cannot load the text encoder: load it first.
+        from neurolang_apps.utils import text_embeddings
+
+        run_rows(nl, "ans(s) :- similar_study('working memory', s)")
+        text_embeddings.prepare_for_fork()
+        for worker in range(args.workers - 1, -1, -1):
+            if worker == 0 or os.fork() == 0:
+                break
+    name = f"{index}-{worker}" if args.workers > 1 else f"{index}"
+    path = out / (f"{tag}.w{name}.jsonl" if second else f"{tag}.{name}.jsonl")
     answered = 0
-    for number, item in enumerate(pool):
-        if number % count != index or item["id"] in done:
+    # the shards and workers split what remains to answer, evenly
+    todo = [item for item in pool if item["id"] not in done]
+    for number, item in enumerate(todo):
+        if number % count != index or (number // count) % args.workers != worker:
             continue
         if args.limit and answered >= args.limit:
             break
@@ -604,6 +656,9 @@ def cmd_answer(args):
         if second and answered % 5 == 0 and key_usage() > args.max_usage:
             log(f"worker {index}: OpenRouter usage above {args.max_usage}$, stop")
             break
+        if second and given_up(item, path, provider, args.question_timeout):
+            answered += 1
+            continue  # the parent; the child answers below
         steps = []
         agent = make_agent(
             nl, provider, config.assistant, "datalog", "react",
@@ -621,6 +676,7 @@ def cmd_answer(args):
             if second:
                 with open(out / f"{tag}.errors.log", "a") as errors:
                     errors.write(f"{item['id']}\t{exc}\n")
+                os._exit(0)
             continue
         rows, error = ([], "") if not result.query else run_rows(nl, result.query)
         entry = {
@@ -649,6 +705,15 @@ def cmd_answer(args):
             f"rows={len(rows)} steps={len(steps)} "
             f"tokens={sum(result.usage.values())}"
             + ("" if second else f" spent={sum(spent())}"))
+        if second:
+            os._exit(0)
+    if worker:
+        os._exit(0)
+    while args.workers > 1:
+        try:
+            os.wait()
+        except ChildProcessError:
+            break
 
 
 # --- judge, filter and calibration ---------------------------------------
@@ -908,6 +973,11 @@ def main():
     parser.add_argument("--tag", default="react.sonnet",
                         help="answer, round 2: name of the answer files")
     parser.add_argument("--temperature", type=float)
+    parser.add_argument("--workers", type=int, default=1,
+                        help="answer: processes forked after the engine build")
+    parser.add_argument("--question-timeout", type=int, default=900,
+                        help="answer, round 2: give a question up after "
+                        "this many seconds")
     parser.add_argument("--lazy", action="store_true",
                         help="answer, round 2: skip the questions the "
                         "agreement gate decides without this answer")

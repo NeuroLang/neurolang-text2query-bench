@@ -1,0 +1,20 @@
+{"time": "2026-11-13T14:48:49", "label": "start (baseline before nsv3c and round 2)", "usage": 20.0226, "limit_remaining": 279.9774}
+{"time": "2026-11-13T14:53:30", "label": "before nsv3c nsv2", "usage": 20.1328, "limit_remaining": 279.8672}
+{"time": "2026-11-13T15:12:40", "label": "after pool2 (templates + embeddings); before Sonnet pilot", "usage": 21.5043, "limit_remaining": 278.4957}
+{"time": "2026-11-13T15:20:01", "label": "after Sonnet pilot (10 q)", "usage": 22.3702, "limit_remaining": 277.6298}
+{"time": "2026-11-13T15:20:18", "label": "before nsv3c v3 + Sonnet teacher", "usage": 22.3705, "limit_remaining": 277.6295}
+{"time": "2026-11-13T15:41:36", "label": "checkpoint", "usage": 28.4098, "limit_remaining": 271.5902}
+{"time": "2026-11-13T16:02:26", "label": "checkpoint", "usage": 34.9361, "limit_remaining": 265.0639}
+{"time": "2026-11-13T16:03:44", "label": "before DeepSeek sample 0", "usage": 35.218, "limit_remaining": 264.782}
+{"time": "2026-11-13T16:20:43", "label": "nsv2 done; before nsv3c fresh", "usage": 40.3144, "limit_remaining": 259.6856}
+{"time": "2026-11-13T16:41:11", "label": "checkpoint", "usage": 47.2465, "limit_remaining": 252.7535}
+{"time": "2026-11-13T16:47:54", "label": "switch to forked workers", "usage": 48.4197, "limit_remaining": 251.5803}
+{"time": "2026-11-13T17:19:00", "label": "checkpoint", "usage": 61.8893, "limit_remaining": 238.1107}
+{"time": "2026-11-13T17:39:08", "label": "checkpoint", "usage": 72.0745, "limit_remaining": 227.9255}
+{"time": "2026-11-13T19:04:25", "label": "checkpoint", "usage": 88.9107, "limit_remaining": 211.0893}
+{"time": "2026-11-13T19:18:57", "label": "checkpoint", "usage": 97.0859, "limit_remaining": 202.9141}
+{"time": "2026-11-13T19:30:37", "label": "checkpoint", "usage": 97.2722, "limit_remaining": 202.7278}
+{"time": "2026-11-13T19:51:23", "label": "before Sonnet judge (first pass)", "usage": 98.8898, "limit_remaining": 201.1102}
+{"time": "2026-11-13T20:09:13", "label": "checkpoint", "usage": 103.2915, "limit_remaining": 196.7085}
+{"time": "2026-11-13T21:04:08", "label": "checkpoint", "usage": 105.8708, "limit_remaining": 194.1292}
+{"time": "2026-11-13T21:36:28", "label": "before DeepSeek sample 2 (lazy)", "usage": 110.2639, "limit_remaining": 189.7361}
