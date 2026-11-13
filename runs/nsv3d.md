@@ -53,7 +53,7 @@ stay on `mentions`.
 | dh-122 (v3 dev) | How much does emotion regulation increase the chance of activating right FFA? | lift via `mentions 'emotion regulation'` | `P(near \| close('emotion regulation')) / P(near)` | not found (only `emotional regulation task`), so its words |
 | f-030 (fresh) | Which gyri and sulci are activated by studies about navigation? | `// mentions 'navigation'` | `cogat_definition('navigation')` + `close(q, s)` | label |
 | f-031 (fresh) | … subcortical regions … about arousal? | `// mentions 'arousal'` | `cogat_definition('arousal')` + close | label |
-| f-048 (fresh) | Which brain regions are activated by studies about any kind of knowledge? | `kind(t), mentions(s, t)` | `kind(t), cogat_definition(t, d), similar_study(d, s)` | label plus subclasses: union of the definitions' studies (runs in 12 s) |
+| f-048 (fresh) | Which brain regions are activated by studies about any kind of knowledge? | `kind(t), mentions(s, t)` | `kind(t), cogat_definition(t, d), similar_study(d, s)` | label plus subclasses: union of the definitions' studies (runs in 12 s); judgement call, no run matched it |
 | f-078 (fresh) | Which gyri and sulci does retrieval activate most often? | argmax `// mentions 'retrieval'` | argmax over `cogat_definition('retrieval')` + close | label |
 | f-102 (fresh) | Which subcortical parcels are most often activated by studies on recollection? | argmax `// mentions 'recollection'` | argmax over `close('recollection')` | not found, so its words |
 | f-133 (fresh) | Which brain regions are co-activated in studies about memory? | pairs `// mentions 'memory'` | pairs `// close(d)`, `cogat_definition('memory', d)` | label |
@@ -105,6 +105,7 @@ Fallback rate (vote runs):
 | run | master | branch |
 |---|---|---|
 | looked up CogAt (`search_values` over `cogat_term`, or a query on `cogat_term`/`cogat_definition`) | 2/21 (f-048 hierarchy only) | **21/21** |
+| of which `search_values` over `cogat_term` (the rule's step 1) | 0/21 | 8/21 (Sonnet 6/7, vote 2/7, DeepSeek single 0/7) |
 | final query follows the rule (definition + `similar_study` if found; words if not) | 0/21 | 16/21 |
 | DeepSeek single (branch) | – | 5/7 (2 timed out, final = the lookup query) |
 | DeepSeek ×3 + fallback (branch) | – | 6/7 |
@@ -116,7 +117,9 @@ Sonnet uses `search_values` over `cogat_term`. DeepSeek queries
 ## Reading
 
 - **The rule is followed.** On the branch, every model looks the concept up for
-  every concept question (21/21; master 0/21 uses the definition). The concept subset
+  every concept question (21/21, of which 8 with `search_values`; DeepSeek
+  queries `cogat_definition` directly). On master, 0/21 final queries use the
+  definition. The concept subset
   goes from 0.03–0.14 to 0.43–0.58.
   - Most remaining concept misses are not about the rule:
     - "most often" ranked instead of argmax (f-102 Sonnet and vote; known from nsv3b);
@@ -139,8 +142,11 @@ Sonnet uses `search_values` over `cogat_term`. DeepSeek queries
     another choice rule were wrong. Flattening a query did not rename apart a rule's
     head variables (`a(s, s)` queried as `a(c, s)` dropped the rest of the body).
     Fixed in NeuroLang PR #1212, with tests under two hash seeds.
-    - The bank's Bayes-factor-with-CI example is written flat, so it was
-      right even before #1212.
+    - The bank's Bayes-factor-with-CI example is written flat, so it is right
+      even before #1212 (finite interval, 2.67–3.48, on the pre-fix engine).
+  - All 31 bank examples that use `similar_study` or `cogat_definition` were
+    run on the branch engine: each returns rows, all in under 12 s except
+    the unchanged `uniformity_llm` voxel map (76 s).
   - **Slow (not fixed):** a rule that joins `cogat_definition('memory', d)` with
     `similar_study(d, s)` and another atom is slow:
     - `close(s) :- cogat_definition('memory', d), similar_study(d, s),
@@ -184,3 +190,14 @@ source scripts/nsv3c_env.sh
     deepseek-vote=runs/nsv3d-cogat-branch-fresh-deepseek-vote
 .venv-dsparity/bin/python scripts/cogat_lookup.py recollection "emotion regulation" speech
 ```
+
+## Caveats
+
+- These are single runs. Only the concept-subset gain (+0.3 to +0.5) is clearly
+  beyond the noise of ±1–2 questions; the all-question deltas are not.
+- The shared gold caches (`datasets/*.gold.json`) now hold the rewritten golds,
+  so nsv3c's results are against the old ones.
+- `runs/nsv3c-partial-30db798e` (403 answers) was kept: nothing was resumed from
+  it, and nsv3c.md refers to it.
+- Follow-up for the guidance: the co-activation sentence still says
+  "conditioned on the term".

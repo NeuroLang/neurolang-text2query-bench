@@ -687,7 +687,8 @@ master → branch:
 | Sonnet 5.5 | 0.875 → 0.846 | 0.663 → 0.751 | |
 
 On the 7 concept questions:
-- CogAt lookups go from 0/21 to 21/21 answers;
+- final queries using the definition go from 0/21 to 16/21 (lookups
+  21/21, 8 with `search_values`);
 - the concept subset rises from 0.03–0.14 to 0.43–0.58.
 
 What it costs:
