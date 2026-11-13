@@ -28,7 +28,7 @@ stay on `mentions`.
 
 ## Code
 
-- NeuroLang PR (branch `feat/llm-cogat-first`, worktree
+- NeuroLang PR #1221 (branch `feat/llm-cogat-first`, worktree
   `/Users/bot/NeuroLang-cogatfirst`), from upstream master d66a4245:
   - the guidance paragraph rewritten as the rule;
   - 15 bank examples converted, plus one new example (the n-back task);

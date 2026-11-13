@@ -670,7 +670,7 @@ summary in `runs/nsv3d-step1.md`.
 
 ## neurosynth-v3d: Cognitive Atlas first for cognitive concepts (2026-11-13)
 
-NeuroLang `feat/llm-cogat-first` (PR against master d66a4245). A question naming a
+NeuroLang PR #1221 (`feat/llm-cogat-first`, from master d66a4245). A question naming a
 cognitive concept without saying mention, term or word is answered as follows:
 - look the concept up in `cogat_term`;
 - if it is there, `cogat_definition` with `similar_study` (SPECTER2);
