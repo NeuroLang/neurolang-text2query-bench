@@ -1,0 +1,6110 @@
+{
+ "counts": {
+  "answer_shape": {
+   "accepted": 43,
+   "disagreement": 55,
+   "judge_yes": 52,
+   "judge_no": 3,
+   "kept": 95,
+   "sonnet_failed": 2,
+   "sonnet_failed_engine": 0,
+   "sonnet_guard": 5,
+   "unanswered": 0
+  },
+  "coactivation": {
+   "accepted": 15,
+   "disagreement": 19,
+   "judge_yes": 16,
+   "judge_no": 3,
+   "kept": 31,
+   "sonnet_failed": 1,
+   "sonnet_failed_engine": 0,
+   "sonnet_guard": 0,
+   "unanswered": 0
+  },
+  "cogat_hierarchy": {
+   "accepted": 9,
+   "disagreement": 18,
+   "judge_yes": 10,
+   "judge_no": 8,
+   "kept": 19,
+   "sonnet_failed": 8,
+   "sonnet_failed_engine": 0,
+   "sonnet_guard": 1,
+   "unanswered": 0
+  },
+  "cogat_term": {
+   "accepted": 22,
+   "disagreement": 11,
+   "judge_yes": 10,
+   "judge_no": 1,
+   "kept": 32,
+   "sonnet_failed": 2,
+   "sonnet_failed_engine": 2,
+   "sonnet_guard": 5,
+   "unanswered": 0
+  },
+  "conj_disj": {
+   "accepted": 24,
+   "disagreement": 8,
+   "judge_yes": 5,
+   "judge_no": 3,
+   "kept": 29,
+   "sonnet_failed": 3,
+   "sonnet_failed_engine": 1,
+   "sonnet_guard": 1,
+   "unanswered": 0
+  },
+  "counts": {
+   "accepted": 26,
+   "disagreement": 5,
+   "judge_yes": 3,
+   "judge_no": 2,
+   "kept": 29,
+   "sonnet_failed": 4,
+   "sonnet_failed_engine": 1,
+   "sonnet_guard": 2,
+   "unanswered": 0
+  },
+  "destrieux": {
+   "accepted": 19,
+   "disagreement": 16,
+   "judge_yes": 16,
+   "judge_no": 0,
+   "kept": 35,
+   "sonnet_failed": 0,
+   "sonnet_failed_engine": 0,
+   "sonnet_guard": 0,
+   "unanswered": 0
+  },
+  "free_text": {
+   "accepted": 21,
+   "disagreement": 14,
+   "judge_yes": 12,
+   "judge_no": 2,
+   "kept": 33,
+   "sonnet_failed": 0,
+   "sonnet_failed_engine": 0,
+   "sonnet_guard": 0,
+   "unanswered": 0
+  },
+  "mni_point": {
+   "accepted": 47,
+   "disagreement": 41,
+   "judge_yes": 36,
+   "judge_no": 5,
+   "kept": 83,
+   "sonnet_failed": 2,
+   "sonnet_failed_engine": 0,
+   "sonnet_guard": 8,
+   "unanswered": 0
+  },
+  "negation": {
+   "accepted": 19,
+   "disagreement": 10,
+   "judge_yes": 7,
+   "judge_no": 3,
+   "kept": 26,
+   "sonnet_failed": 6,
+   "sonnet_failed_engine": 2,
+   "sonnet_guard": 5,
+   "unanswered": 0
+  },
+  "prob_forward": {
+   "accepted": 24,
+   "disagreement": 10,
+   "judge_yes": 9,
+   "judge_no": 1,
+   "kept": 33,
+   "sonnet_failed": 1,
+   "sonnet_failed_engine": 0,
+   "sonnet_guard": 0,
+   "unanswered": 0
+  },
+  "prob_negation": {
+   "accepted": 61,
+   "disagreement": 27,
+   "judge_yes": 25,
+   "judge_no": 2,
+   "kept": 86,
+   "sonnet_failed": 2,
+   "sonnet_failed_engine": 0,
+   "sonnet_guard": 8,
+   "unanswered": 0
+  },
+  "schaefer": {
+   "accepted": 23,
+   "disagreement": 12,
+   "judge_yes": 11,
+   "judge_no": 1,
+   "kept": 34,
+   "sonnet_failed": 0,
+   "sonnet_failed_engine": 0,
+   "sonnet_guard": 2,
+   "unanswered": 0
+  },
+  "study_titles": {
+   "accepted": 19,
+   "disagreement": 14,
+   "judge_yes": 9,
+   "judge_no": 5,
+   "kept": 28,
+   "sonnet_failed": 2,
+   "sonnet_failed_engine": 0,
+   "sonnet_guard": 0,
+   "unanswered": 0
+  },
+  "tian": {
+   "accepted": 20,
+   "disagreement": 13,
+   "judge_yes": 12,
+   "judge_no": 1,
+   "kept": 32,
+   "sonnet_failed": 2,
+   "sonnet_failed_engine": 0,
+   "sonnet_guard": 0,
+   "unanswered": 0
+  },
+  "value_search": {
+   "accepted": 49,
+   "disagreement": 44,
+   "judge_yes": 29,
+   "judge_no": 15,
+   "kept": 78,
+   "sonnet_failed": 7,
+   "sonnet_failed_engine": 5,
+   "sonnet_guard": 9,
+   "unanswered": 0
+  },
+  "all": {
+   "accepted": 441,
+   "disagreement": 317,
+   "judge_yes": 262,
+   "judge_no": 55,
+   "kept": 703,
+   "sonnet_failed": 42,
+   "sonnet_failed_engine": 11,
+   "sonnet_guard": 46,
+   "unanswered": 0
+  }
+ },
+ "questions": {
+  "p2-0001": {
+   "category": "free_text",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0002": {
+   "category": "free_text",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0003": {
+   "category": "free_text",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 3,
+   "sonnet_guard": false
+  },
+  "p2-0004": {
+   "category": "free_text",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0005": {
+   "category": "free_text",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 3,
+   "sonnet_guard": false
+  },
+  "p2-0006": {
+   "category": "free_text",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0007": {
+   "category": "free_text",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": false
+  },
+  "p2-0008": {
+   "category": "free_text",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0009": {
+   "category": "free_text",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0010": {
+   "category": "free_text",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0011": {
+   "category": "free_text",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0012": {
+   "category": "free_text",
+   "status": "disagreement",
+   "deepseek_agreeing": 1,
+   "deepseek_answers": 3,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0013": {
+   "category": "free_text",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0014": {
+   "category": "free_text",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 3,
+   "sonnet_guard": false
+  },
+  "p2-0015": {
+   "category": "free_text",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0016": {
+   "category": "free_text",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0017": {
+   "category": "free_text",
+   "status": "disagreement",
+   "deepseek_agreeing": 1,
+   "deepseek_answers": 3,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0018": {
+   "category": "free_text",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 3,
+   "sonnet_guard": false
+  },
+  "p2-0019": {
+   "category": "free_text",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0020": {
+   "category": "free_text",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0021": {
+   "category": "free_text",
+   "status": "disagreement",
+   "deepseek_agreeing": 1,
+   "deepseek_answers": 3,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0022": {
+   "category": "free_text",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": false
+  },
+  "p2-0023": {
+   "category": "free_text",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0024": {
+   "category": "free_text",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0025": {
+   "category": "free_text",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 3,
+   "sonnet_guard": false
+  },
+  "p2-0026": {
+   "category": "free_text",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 3,
+   "sonnet_guard": false
+  },
+  "p2-0027": {
+   "category": "free_text",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0028": {
+   "category": "free_text",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0029": {
+   "category": "free_text",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0030": {
+   "category": "free_text",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0031": {
+   "category": "free_text",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0032": {
+   "category": "free_text",
+   "status": "disagreement",
+   "deepseek_agreeing": 1,
+   "deepseek_answers": 3,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0033": {
+   "category": "free_text",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0034": {
+   "category": "free_text",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0035": {
+   "category": "free_text",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0036": {
+   "category": "cogat_term",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0037": {
+   "category": "cogat_term",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0038": {
+   "category": "cogat_term",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0039": {
+   "category": "cogat_term",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": true,
+   "sonnet_judge": true
+  },
+  "p2-0040": {
+   "category": "cogat_term",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0041": {
+   "category": "cogat_term",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0042": {
+   "category": "cogat_term",
+   "status": "disagreement",
+   "deepseek_agreeing": 1,
+   "deepseek_answers": 3,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0043": {
+   "category": "cogat_term",
+   "status": "disagreement",
+   "deepseek_agreeing": 1,
+   "deepseek_answers": 3,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0044": {
+   "category": "cogat_term",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0045": {
+   "category": "cogat_term",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0046": {
+   "category": "cogat_term",
+   "status": "disagreement",
+   "deepseek_agreeing": 1,
+   "deepseek_answers": 3,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0047": {
+   "category": "cogat_term",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0048": {
+   "category": "cogat_term",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": true,
+   "sonnet_judge": true
+  },
+  "p2-0049": {
+   "category": "cogat_term",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0050": {
+   "category": "cogat_term",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0051": {
+   "category": "cogat_term",
+   "status": "sonnet_failed",
+   "deepseek_agreeing": null,
+   "deepseek_answers": 2,
+   "sonnet_guard": true
+  },
+  "p2-0052": {
+   "category": "cogat_term",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0053": {
+   "category": "cogat_term",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": false
+  },
+  "p2-0054": {
+   "category": "cogat_term",
+   "status": "disagreement",
+   "deepseek_agreeing": 1,
+   "deepseek_answers": 3,
+   "sonnet_guard": true,
+   "sonnet_judge": true
+  },
+  "p2-0055": {
+   "category": "cogat_term",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0056": {
+   "category": "cogat_term",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0057": {
+   "category": "cogat_term",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0058": {
+   "category": "cogat_term",
+   "status": "disagreement",
+   "deepseek_agreeing": 1,
+   "deepseek_answers": 3,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0059": {
+   "category": "cogat_term",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0060": {
+   "category": "cogat_term",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0061": {
+   "category": "cogat_term",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0062": {
+   "category": "cogat_term",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0063": {
+   "category": "cogat_term",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0064": {
+   "category": "cogat_term",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0065": {
+   "category": "cogat_term",
+   "status": "sonnet_failed",
+   "deepseek_agreeing": null,
+   "deepseek_answers": 2,
+   "sonnet_guard": true
+  },
+  "p2-0066": {
+   "category": "cogat_term",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0067": {
+   "category": "cogat_term",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0068": {
+   "category": "cogat_term",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0069": {
+   "category": "cogat_term",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0070": {
+   "category": "cogat_term",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0071": {
+   "category": "cogat_hierarchy",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0072": {
+   "category": "cogat_hierarchy",
+   "status": "sonnet_failed",
+   "deepseek_agreeing": null,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0073": {
+   "category": "cogat_hierarchy",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0074": {
+   "category": "cogat_hierarchy",
+   "status": "sonnet_failed",
+   "deepseek_agreeing": null,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0075": {
+   "category": "cogat_hierarchy",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0076": {
+   "category": "cogat_hierarchy",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0077": {
+   "category": "cogat_hierarchy",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0078": {
+   "category": "cogat_hierarchy",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0079": {
+   "category": "cogat_hierarchy",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": false
+  },
+  "p2-0080": {
+   "category": "cogat_hierarchy",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0081": {
+   "category": "cogat_hierarchy",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0082": {
+   "category": "cogat_hierarchy",
+   "status": "sonnet_failed",
+   "deepseek_agreeing": null,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0083": {
+   "category": "cogat_hierarchy",
+   "status": "disagreement",
+   "deepseek_agreeing": 1,
+   "deepseek_answers": 3,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0084": {
+   "category": "cogat_hierarchy",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": false
+  },
+  "p2-0085": {
+   "category": "cogat_hierarchy",
+   "status": "sonnet_failed",
+   "deepseek_agreeing": null,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0086": {
+   "category": "cogat_hierarchy",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0087": {
+   "category": "cogat_hierarchy",
+   "status": "sonnet_failed",
+   "deepseek_agreeing": null,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0088": {
+   "category": "cogat_hierarchy",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0089": {
+   "category": "cogat_hierarchy",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0090": {
+   "category": "cogat_hierarchy",
+   "status": "disagreement",
+   "deepseek_agreeing": 1,
+   "deepseek_answers": 3,
+   "sonnet_guard": false,
+   "sonnet_judge": false
+  },
+  "p2-0091": {
+   "category": "cogat_hierarchy",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0092": {
+   "category": "cogat_hierarchy",
+   "status": "disagreement",
+   "deepseek_agreeing": 1,
+   "deepseek_answers": 3,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0093": {
+   "category": "cogat_hierarchy",
+   "status": "disagreement",
+   "deepseek_agreeing": 1,
+   "deepseek_answers": 3,
+   "sonnet_guard": false,
+   "sonnet_judge": false
+  },
+  "p2-0094": {
+   "category": "cogat_hierarchy",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0095": {
+   "category": "cogat_hierarchy",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": false
+  },
+  "p2-0096": {
+   "category": "cogat_hierarchy",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0097": {
+   "category": "cogat_hierarchy",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0098": {
+   "category": "cogat_hierarchy",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 3,
+   "sonnet_guard": false
+  },
+  "p2-0099": {
+   "category": "cogat_hierarchy",
+   "status": "sonnet_failed",
+   "deepseek_agreeing": null,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0100": {
+   "category": "cogat_hierarchy",
+   "status": "sonnet_failed",
+   "deepseek_agreeing": null,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0101": {
+   "category": "cogat_hierarchy",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": false
+  },
+  "p2-0102": {
+   "category": "cogat_hierarchy",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": true,
+   "sonnet_judge": false
+  },
+  "p2-0103": {
+   "category": "cogat_hierarchy",
+   "status": "disagreement",
+   "deepseek_agreeing": 1,
+   "deepseek_answers": 3,
+   "sonnet_guard": false,
+   "sonnet_judge": false
+  },
+  "p2-0104": {
+   "category": "cogat_hierarchy",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0105": {
+   "category": "cogat_hierarchy",
+   "status": "sonnet_failed",
+   "deepseek_agreeing": null,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0106": {
+   "category": "schaefer",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0107": {
+   "category": "schaefer",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": false
+  },
+  "p2-0108": {
+   "category": "schaefer",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0109": {
+   "category": "schaefer",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0110": {
+   "category": "schaefer",
+   "status": "disagreement",
+   "deepseek_agreeing": 1,
+   "deepseek_answers": 3,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0111": {
+   "category": "schaefer",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0112": {
+   "category": "schaefer",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0113": {
+   "category": "schaefer",
+   "status": "disagreement",
+   "deepseek_agreeing": 1,
+   "deepseek_answers": 3,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0114": {
+   "category": "schaefer",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0115": {
+   "category": "schaefer",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0116": {
+   "category": "schaefer",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": true,
+   "sonnet_judge": true
+  },
+  "p2-0117": {
+   "category": "schaefer",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": true,
+   "sonnet_judge": true
+  },
+  "p2-0118": {
+   "category": "schaefer",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0119": {
+   "category": "schaefer",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 3,
+   "sonnet_guard": false
+  },
+  "p2-0120": {
+   "category": "schaefer",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0121": {
+   "category": "schaefer",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0122": {
+   "category": "schaefer",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0123": {
+   "category": "schaefer",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0124": {
+   "category": "schaefer",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0125": {
+   "category": "schaefer",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0126": {
+   "category": "schaefer",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0127": {
+   "category": "schaefer",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0128": {
+   "category": "schaefer",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 3,
+   "sonnet_guard": false
+  },
+  "p2-0129": {
+   "category": "schaefer",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0130": {
+   "category": "schaefer",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0131": {
+   "category": "schaefer",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0132": {
+   "category": "schaefer",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0133": {
+   "category": "schaefer",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 3,
+   "sonnet_guard": false
+  },
+  "p2-0134": {
+   "category": "schaefer",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0135": {
+   "category": "schaefer",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0136": {
+   "category": "schaefer",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0137": {
+   "category": "schaefer",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0138": {
+   "category": "schaefer",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0139": {
+   "category": "schaefer",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0140": {
+   "category": "schaefer",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0141": {
+   "category": "destrieux",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0142": {
+   "category": "destrieux",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0143": {
+   "category": "destrieux",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0144": {
+   "category": "destrieux",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0145": {
+   "category": "destrieux",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0146": {
+   "category": "destrieux",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 3,
+   "sonnet_guard": false
+  },
+  "p2-0147": {
+   "category": "destrieux",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0148": {
+   "category": "destrieux",
+   "status": "disagreement",
+   "deepseek_agreeing": 1,
+   "deepseek_answers": 3,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0149": {
+   "category": "destrieux",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0150": {
+   "category": "destrieux",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0151": {
+   "category": "destrieux",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0152": {
+   "category": "destrieux",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0153": {
+   "category": "destrieux",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0154": {
+   "category": "destrieux",
+   "status": "disagreement",
+   "deepseek_agreeing": 1,
+   "deepseek_answers": 3,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0155": {
+   "category": "destrieux",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0156": {
+   "category": "destrieux",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0157": {
+   "category": "destrieux",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0158": {
+   "category": "destrieux",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0159": {
+   "category": "destrieux",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0160": {
+   "category": "destrieux",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0161": {
+   "category": "destrieux",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0162": {
+   "category": "destrieux",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0163": {
+   "category": "destrieux",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 3,
+   "sonnet_guard": false
+  },
+  "p2-0164": {
+   "category": "destrieux",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0165": {
+   "category": "destrieux",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0166": {
+   "category": "destrieux",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0167": {
+   "category": "destrieux",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0168": {
+   "category": "destrieux",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0169": {
+   "category": "destrieux",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0170": {
+   "category": "destrieux",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0171": {
+   "category": "destrieux",
+   "status": "disagreement",
+   "deepseek_agreeing": 1,
+   "deepseek_answers": 3,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0172": {
+   "category": "destrieux",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0173": {
+   "category": "destrieux",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0174": {
+   "category": "destrieux",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0175": {
+   "category": "destrieux",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0176": {
+   "category": "tian",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0177": {
+   "category": "tian",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 3,
+   "sonnet_guard": false
+  },
+  "p2-0178": {
+   "category": "tian",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0179": {
+   "category": "tian",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0180": {
+   "category": "tian",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": false
+  },
+  "p2-0181": {
+   "category": "tian",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0182": {
+   "category": "tian",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 3,
+   "sonnet_guard": false
+  },
+  "p2-0183": {
+   "category": "tian",
+   "status": "disagreement",
+   "deepseek_agreeing": 1,
+   "deepseek_answers": 3,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0184": {
+   "category": "tian",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0185": {
+   "category": "tian",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0186": {
+   "category": "tian",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0187": {
+   "category": "tian",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 3,
+   "sonnet_guard": false
+  },
+  "p2-0188": {
+   "category": "tian",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0189": {
+   "category": "tian",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0190": {
+   "category": "tian",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0191": {
+   "category": "tian",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0192": {
+   "category": "tian",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 3,
+   "sonnet_guard": false
+  },
+  "p2-0193": {
+   "category": "tian",
+   "status": "sonnet_failed",
+   "deepseek_agreeing": null,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0194": {
+   "category": "tian",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 3,
+   "sonnet_guard": false
+  },
+  "p2-0195": {
+   "category": "tian",
+   "status": "sonnet_failed",
+   "deepseek_agreeing": null,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0196": {
+   "category": "tian",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0197": {
+   "category": "tian",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0198": {
+   "category": "tian",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0199": {
+   "category": "tian",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0200": {
+   "category": "tian",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 3,
+   "sonnet_guard": false
+  },
+  "p2-0201": {
+   "category": "tian",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 3,
+   "sonnet_guard": false
+  },
+  "p2-0202": {
+   "category": "tian",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0203": {
+   "category": "tian",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0204": {
+   "category": "tian",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0205": {
+   "category": "tian",
+   "status": "disagreement",
+   "deepseek_agreeing": 1,
+   "deepseek_answers": 3,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0206": {
+   "category": "tian",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0207": {
+   "category": "tian",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 3,
+   "sonnet_guard": false
+  },
+  "p2-0208": {
+   "category": "tian",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0209": {
+   "category": "tian",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0210": {
+   "category": "tian",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0211": {
+   "category": "prob_forward",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0212": {
+   "category": "prob_forward",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0213": {
+   "category": "prob_forward",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0214": {
+   "category": "prob_forward",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0215": {
+   "category": "prob_forward",
+   "status": "sonnet_failed",
+   "deepseek_agreeing": null,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0216": {
+   "category": "prob_forward",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0217": {
+   "category": "prob_forward",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 3,
+   "sonnet_guard": false
+  },
+  "p2-0218": {
+   "category": "prob_forward",
+   "status": "disagreement",
+   "deepseek_agreeing": 1,
+   "deepseek_answers": 3,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0219": {
+   "category": "prob_forward",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0220": {
+   "category": "prob_forward",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0221": {
+   "category": "prob_forward",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0222": {
+   "category": "prob_forward",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0223": {
+   "category": "prob_forward",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0224": {
+   "category": "prob_forward",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": false
+  },
+  "p2-0225": {
+   "category": "prob_forward",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 3,
+   "sonnet_guard": false
+  },
+  "p2-0226": {
+   "category": "prob_forward",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0227": {
+   "category": "prob_forward",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0228": {
+   "category": "prob_forward",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0229": {
+   "category": "prob_forward",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0230": {
+   "category": "prob_forward",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0231": {
+   "category": "prob_forward",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0232": {
+   "category": "prob_forward",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0233": {
+   "category": "prob_forward",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0234": {
+   "category": "prob_forward",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0235": {
+   "category": "prob_forward",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 3,
+   "sonnet_guard": false
+  },
+  "p2-0236": {
+   "category": "prob_forward",
+   "status": "disagreement",
+   "deepseek_agreeing": 1,
+   "deepseek_answers": 3,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0237": {
+   "category": "prob_forward",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0238": {
+   "category": "prob_forward",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0239": {
+   "category": "prob_forward",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0240": {
+   "category": "prob_forward",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0241": {
+   "category": "prob_forward",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0242": {
+   "category": "prob_forward",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0243": {
+   "category": "prob_forward",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0244": {
+   "category": "prob_forward",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0245": {
+   "category": "prob_forward",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0246": {
+   "category": "coactivation",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0247": {
+   "category": "coactivation",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0248": {
+   "category": "coactivation",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": false
+  },
+  "p2-0249": {
+   "category": "coactivation",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0250": {
+   "category": "coactivation",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0251": {
+   "category": "coactivation",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0252": {
+   "category": "coactivation",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0253": {
+   "category": "coactivation",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 3,
+   "sonnet_guard": false
+  },
+  "p2-0254": {
+   "category": "coactivation",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0255": {
+   "category": "coactivation",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 3,
+   "sonnet_guard": false
+  },
+  "p2-0256": {
+   "category": "coactivation",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0257": {
+   "category": "coactivation",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0258": {
+   "category": "coactivation",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0259": {
+   "category": "coactivation",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0260": {
+   "category": "coactivation",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0261": {
+   "category": "coactivation",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0262": {
+   "category": "coactivation",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0263": {
+   "category": "coactivation",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0264": {
+   "category": "coactivation",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": false
+  },
+  "p2-0265": {
+   "category": "coactivation",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0266": {
+   "category": "coactivation",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0267": {
+   "category": "coactivation",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0268": {
+   "category": "coactivation",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 3,
+   "sonnet_guard": false
+  },
+  "p2-0269": {
+   "category": "coactivation",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0270": {
+   "category": "coactivation",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 3,
+   "sonnet_guard": false
+  },
+  "p2-0271": {
+   "category": "coactivation",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0272": {
+   "category": "coactivation",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 3,
+   "sonnet_guard": false
+  },
+  "p2-0273": {
+   "category": "coactivation",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 3,
+   "sonnet_guard": false
+  },
+  "p2-0274": {
+   "category": "coactivation",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0275": {
+   "category": "coactivation",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0276": {
+   "category": "coactivation",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": false
+  },
+  "p2-0277": {
+   "category": "coactivation",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0278": {
+   "category": "coactivation",
+   "status": "sonnet_failed",
+   "deepseek_agreeing": null,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0279": {
+   "category": "coactivation",
+   "status": "disagreement",
+   "deepseek_agreeing": 1,
+   "deepseek_answers": 3,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0280": {
+   "category": "coactivation",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0281": {
+   "category": "counts",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0282": {
+   "category": "counts",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0283": {
+   "category": "counts",
+   "status": "sonnet_failed",
+   "deepseek_agreeing": null,
+   "deepseek_answers": 2,
+   "sonnet_guard": true
+  },
+  "p2-0284": {
+   "category": "counts",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0285": {
+   "category": "counts",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0286": {
+   "category": "counts",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0287": {
+   "category": "counts",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0288": {
+   "category": "counts",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0289": {
+   "category": "counts",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0290": {
+   "category": "counts",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0291": {
+   "category": "counts",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0292": {
+   "category": "counts",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0293": {
+   "category": "counts",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0294": {
+   "category": "counts",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0295": {
+   "category": "counts",
+   "status": "disagreement",
+   "deepseek_agreeing": 1,
+   "deepseek_answers": 3,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0296": {
+   "category": "counts",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0297": {
+   "category": "counts",
+   "status": "disagreement",
+   "deepseek_agreeing": 1,
+   "deepseek_answers": 3,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0298": {
+   "category": "counts",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0299": {
+   "category": "counts",
+   "status": "sonnet_failed",
+   "deepseek_agreeing": null,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0300": {
+   "category": "counts",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 3,
+   "sonnet_guard": false
+  },
+  "p2-0301": {
+   "category": "counts",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0302": {
+   "category": "counts",
+   "status": "sonnet_failed",
+   "deepseek_agreeing": null,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0303": {
+   "category": "counts",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0304": {
+   "category": "counts",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0305": {
+   "category": "counts",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": true,
+   "sonnet_judge": false
+  },
+  "p2-0306": {
+   "category": "counts",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0307": {
+   "category": "counts",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0308": {
+   "category": "counts",
+   "status": "sonnet_failed",
+   "deepseek_agreeing": null,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0309": {
+   "category": "counts",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0310": {
+   "category": "counts",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0311": {
+   "category": "counts",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0312": {
+   "category": "counts",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": false
+  },
+  "p2-0313": {
+   "category": "counts",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0314": {
+   "category": "counts",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0315": {
+   "category": "counts",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0316": {
+   "category": "negation",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0317": {
+   "category": "negation",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 3,
+   "sonnet_guard": false
+  },
+  "p2-0318": {
+   "category": "negation",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0319": {
+   "category": "negation",
+   "status": "sonnet_failed",
+   "deepseek_agreeing": null,
+   "deepseek_answers": 2,
+   "sonnet_guard": true
+  },
+  "p2-0320": {
+   "category": "negation",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": true
+  },
+  "p2-0321": {
+   "category": "negation",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0322": {
+   "category": "negation",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0323": {
+   "category": "negation",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0324": {
+   "category": "negation",
+   "status": "sonnet_failed",
+   "deepseek_agreeing": null,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0325": {
+   "category": "negation",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0326": {
+   "category": "negation",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 3,
+   "sonnet_guard": true
+  },
+  "p2-0327": {
+   "category": "negation",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0328": {
+   "category": "negation",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0329": {
+   "category": "negation",
+   "status": "sonnet_failed",
+   "deepseek_agreeing": null,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0330": {
+   "category": "negation",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": false
+  },
+  "p2-0331": {
+   "category": "negation",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0332": {
+   "category": "negation",
+   "status": "sonnet_failed",
+   "deepseek_agreeing": null,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0333": {
+   "category": "negation",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0334": {
+   "category": "negation",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0335": {
+   "category": "negation",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 3,
+   "sonnet_guard": false
+  },
+  "p2-0336": {
+   "category": "negation",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0337": {
+   "category": "negation",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0338": {
+   "category": "negation",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0339": {
+   "category": "negation",
+   "status": "sonnet_failed",
+   "deepseek_agreeing": null,
+   "deepseek_answers": 2,
+   "sonnet_guard": true
+  },
+  "p2-0340": {
+   "category": "negation",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0341": {
+   "category": "negation",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0342": {
+   "category": "negation",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0343": {
+   "category": "negation",
+   "status": "disagreement",
+   "deepseek_agreeing": 1,
+   "deepseek_answers": 3,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0344": {
+   "category": "negation",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0345": {
+   "category": "negation",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0346": {
+   "category": "negation",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0347": {
+   "category": "negation",
+   "status": "sonnet_failed",
+   "deepseek_agreeing": null,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0348": {
+   "category": "negation",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0349": {
+   "category": "negation",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": true,
+   "sonnet_judge": false
+  },
+  "p2-0350": {
+   "category": "negation",
+   "status": "disagreement",
+   "deepseek_agreeing": 1,
+   "deepseek_answers": 3,
+   "sonnet_guard": false,
+   "sonnet_judge": false
+  },
+  "p2-0351": {
+   "category": "conj_disj",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0352": {
+   "category": "conj_disj",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0353": {
+   "category": "conj_disj",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0354": {
+   "category": "conj_disj",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0355": {
+   "category": "conj_disj",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0356": {
+   "category": "conj_disj",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0357": {
+   "category": "conj_disj",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0358": {
+   "category": "conj_disj",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0359": {
+   "category": "conj_disj",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0360": {
+   "category": "conj_disj",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0361": {
+   "category": "conj_disj",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0362": {
+   "category": "conj_disj",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": false
+  },
+  "p2-0363": {
+   "category": "conj_disj",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 3,
+   "sonnet_guard": false
+  },
+  "p2-0364": {
+   "category": "conj_disj",
+   "status": "sonnet_failed",
+   "deepseek_agreeing": null,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0365": {
+   "category": "conj_disj",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0366": {
+   "category": "conj_disj",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0367": {
+   "category": "conj_disj",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0368": {
+   "category": "conj_disj",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0369": {
+   "category": "conj_disj",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0370": {
+   "category": "conj_disj",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0371": {
+   "category": "conj_disj",
+   "status": "sonnet_failed",
+   "deepseek_agreeing": null,
+   "deepseek_answers": 2,
+   "sonnet_guard": true
+  },
+  "p2-0372": {
+   "category": "conj_disj",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0373": {
+   "category": "conj_disj",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0374": {
+   "category": "conj_disj",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0375": {
+   "category": "conj_disj",
+   "status": "disagreement",
+   "deepseek_agreeing": 1,
+   "deepseek_answers": 3,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0376": {
+   "category": "conj_disj",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0377": {
+   "category": "conj_disj",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": false
+  },
+  "p2-0378": {
+   "category": "conj_disj",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0379": {
+   "category": "conj_disj",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0380": {
+   "category": "conj_disj",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0381": {
+   "category": "conj_disj",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0382": {
+   "category": "conj_disj",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0383": {
+   "category": "conj_disj",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": false
+  },
+  "p2-0384": {
+   "category": "conj_disj",
+   "status": "sonnet_failed",
+   "deepseek_agreeing": null,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0385": {
+   "category": "conj_disj",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0386": {
+   "category": "study_titles",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0387": {
+   "category": "study_titles",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0388": {
+   "category": "study_titles",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0389": {
+   "category": "study_titles",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0390": {
+   "category": "study_titles",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0391": {
+   "category": "study_titles",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0392": {
+   "category": "study_titles",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0393": {
+   "category": "study_titles",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0394": {
+   "category": "study_titles",
+   "status": "disagreement",
+   "deepseek_agreeing": 1,
+   "deepseek_answers": 3,
+   "sonnet_guard": false,
+   "sonnet_judge": false
+  },
+  "p2-0395": {
+   "category": "study_titles",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0396": {
+   "category": "study_titles",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0397": {
+   "category": "study_titles",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0398": {
+   "category": "study_titles",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0399": {
+   "category": "study_titles",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0400": {
+   "category": "study_titles",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0401": {
+   "category": "study_titles",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": false
+  },
+  "p2-0402": {
+   "category": "study_titles",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0403": {
+   "category": "study_titles",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0404": {
+   "category": "study_titles",
+   "status": "disagreement",
+   "deepseek_agreeing": 1,
+   "deepseek_answers": 3,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0405": {
+   "category": "study_titles",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": false
+  },
+  "p2-0406": {
+   "category": "study_titles",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0407": {
+   "category": "study_titles",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0408": {
+   "category": "study_titles",
+   "status": "disagreement",
+   "deepseek_agreeing": 1,
+   "deepseek_answers": 3,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0409": {
+   "category": "study_titles",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": false
+  },
+  "p2-0410": {
+   "category": "study_titles",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0411": {
+   "category": "study_titles",
+   "status": "disagreement",
+   "deepseek_agreeing": 1,
+   "deepseek_answers": 3,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0412": {
+   "category": "study_titles",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0413": {
+   "category": "study_titles",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0414": {
+   "category": "study_titles",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0415": {
+   "category": "study_titles",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0416": {
+   "category": "study_titles",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0417": {
+   "category": "study_titles",
+   "status": "sonnet_failed",
+   "deepseek_agreeing": null,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0418": {
+   "category": "study_titles",
+   "status": "sonnet_failed",
+   "deepseek_agreeing": null,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0419": {
+   "category": "study_titles",
+   "status": "disagreement",
+   "deepseek_agreeing": 1,
+   "deepseek_answers": 3,
+   "sonnet_guard": false,
+   "sonnet_judge": false
+  },
+  "p2-0420": {
+   "category": "study_titles",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0421": {
+   "category": "answer_shape",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0422": {
+   "category": "answer_shape",
+   "status": "sonnet_failed",
+   "deepseek_agreeing": null,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0423": {
+   "category": "answer_shape",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0424": {
+   "category": "answer_shape",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0425": {
+   "category": "answer_shape",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0426": {
+   "category": "answer_shape",
+   "status": "sonnet_failed",
+   "deepseek_agreeing": null,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0427": {
+   "category": "answer_shape",
+   "status": "disagreement",
+   "deepseek_agreeing": 1,
+   "deepseek_answers": 3,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0428": {
+   "category": "answer_shape",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0429": {
+   "category": "answer_shape",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0430": {
+   "category": "answer_shape",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0431": {
+   "category": "answer_shape",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0432": {
+   "category": "answer_shape",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0433": {
+   "category": "answer_shape",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0434": {
+   "category": "answer_shape",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 3,
+   "sonnet_guard": false
+  },
+  "p2-0435": {
+   "category": "answer_shape",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0436": {
+   "category": "answer_shape",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0437": {
+   "category": "answer_shape",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0438": {
+   "category": "answer_shape",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": true,
+   "sonnet_judge": true
+  },
+  "p2-0439": {
+   "category": "answer_shape",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0440": {
+   "category": "answer_shape",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0441": {
+   "category": "answer_shape",
+   "status": "disagreement",
+   "deepseek_agreeing": 1,
+   "deepseek_answers": 3,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0442": {
+   "category": "answer_shape",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0443": {
+   "category": "answer_shape",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0444": {
+   "category": "answer_shape",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0445": {
+   "category": "answer_shape",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0446": {
+   "category": "answer_shape",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0447": {
+   "category": "answer_shape",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0448": {
+   "category": "answer_shape",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0449": {
+   "category": "answer_shape",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0450": {
+   "category": "answer_shape",
+   "status": "disagreement",
+   "deepseek_agreeing": 1,
+   "deepseek_answers": 3,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0451": {
+   "category": "answer_shape",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 3,
+   "sonnet_guard": false
+  },
+  "p2-0452": {
+   "category": "answer_shape",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 3,
+   "sonnet_guard": false
+  },
+  "p2-0453": {
+   "category": "answer_shape",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0454": {
+   "category": "answer_shape",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0455": {
+   "category": "answer_shape",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 3,
+   "sonnet_guard": true
+  },
+  "p2-0456": {
+   "category": "answer_shape",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 3,
+   "sonnet_guard": false
+  },
+  "p2-0457": {
+   "category": "answer_shape",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0458": {
+   "category": "answer_shape",
+   "status": "disagreement",
+   "deepseek_agreeing": 1,
+   "deepseek_answers": 3,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0459": {
+   "category": "answer_shape",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0460": {
+   "category": "answer_shape",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0461": {
+   "category": "answer_shape",
+   "status": "disagreement",
+   "deepseek_agreeing": 1,
+   "deepseek_answers": 3,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0462": {
+   "category": "answer_shape",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0463": {
+   "category": "answer_shape",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0464": {
+   "category": "answer_shape",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0465": {
+   "category": "answer_shape",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0466": {
+   "category": "answer_shape",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0467": {
+   "category": "answer_shape",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0468": {
+   "category": "answer_shape",
+   "status": "disagreement",
+   "deepseek_agreeing": 1,
+   "deepseek_answers": 3,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0469": {
+   "category": "answer_shape",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0470": {
+   "category": "answer_shape",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0471": {
+   "category": "answer_shape",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0472": {
+   "category": "answer_shape",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0473": {
+   "category": "answer_shape",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0474": {
+   "category": "answer_shape",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0475": {
+   "category": "answer_shape",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0476": {
+   "category": "answer_shape",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0477": {
+   "category": "answer_shape",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0478": {
+   "category": "answer_shape",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0479": {
+   "category": "answer_shape",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0480": {
+   "category": "answer_shape",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0481": {
+   "category": "answer_shape",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0482": {
+   "category": "answer_shape",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 3,
+   "sonnet_guard": false
+  },
+  "p2-0483": {
+   "category": "answer_shape",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": true,
+   "sonnet_judge": false
+  },
+  "p2-0484": {
+   "category": "answer_shape",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0485": {
+   "category": "answer_shape",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0486": {
+   "category": "answer_shape",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0487": {
+   "category": "answer_shape",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 3,
+   "sonnet_guard": false
+  },
+  "p2-0488": {
+   "category": "answer_shape",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0489": {
+   "category": "answer_shape",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0490": {
+   "category": "answer_shape",
+   "status": "disagreement",
+   "deepseek_agreeing": 1,
+   "deepseek_answers": 3,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0491": {
+   "category": "answer_shape",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0492": {
+   "category": "answer_shape",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0493": {
+   "category": "answer_shape",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0494": {
+   "category": "answer_shape",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0495": {
+   "category": "answer_shape",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 3,
+   "sonnet_guard": false
+  },
+  "p2-0496": {
+   "category": "answer_shape",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0497": {
+   "category": "answer_shape",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": true,
+   "sonnet_judge": true
+  },
+  "p2-0498": {
+   "category": "answer_shape",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0499": {
+   "category": "answer_shape",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0500": {
+   "category": "answer_shape",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0501": {
+   "category": "answer_shape",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0502": {
+   "category": "answer_shape",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0503": {
+   "category": "answer_shape",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0504": {
+   "category": "answer_shape",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0505": {
+   "category": "answer_shape",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0506": {
+   "category": "answer_shape",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": true,
+   "sonnet_judge": true
+  },
+  "p2-0507": {
+   "category": "answer_shape",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0508": {
+   "category": "answer_shape",
+   "status": "disagreement",
+   "deepseek_agreeing": 1,
+   "deepseek_answers": 3,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0509": {
+   "category": "answer_shape",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0510": {
+   "category": "answer_shape",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": false
+  },
+  "p2-0511": {
+   "category": "answer_shape",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0512": {
+   "category": "answer_shape",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0513": {
+   "category": "answer_shape",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0514": {
+   "category": "answer_shape",
+   "status": "disagreement",
+   "deepseek_agreeing": 1,
+   "deepseek_answers": 3,
+   "sonnet_guard": false,
+   "sonnet_judge": false
+  },
+  "p2-0515": {
+   "category": "answer_shape",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 3,
+   "sonnet_guard": false
+  },
+  "p2-0516": {
+   "category": "answer_shape",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0517": {
+   "category": "answer_shape",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 3,
+   "sonnet_guard": false
+  },
+  "p2-0518": {
+   "category": "answer_shape",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0519": {
+   "category": "answer_shape",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0520": {
+   "category": "answer_shape",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0521": {
+   "category": "prob_negation",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0522": {
+   "category": "prob_negation",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 3,
+   "sonnet_guard": false
+  },
+  "p2-0523": {
+   "category": "prob_negation",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": true,
+   "sonnet_judge": true
+  },
+  "p2-0524": {
+   "category": "prob_negation",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0525": {
+   "category": "prob_negation",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 3,
+   "sonnet_guard": false
+  },
+  "p2-0526": {
+   "category": "prob_negation",
+   "status": "disagreement",
+   "deepseek_agreeing": 1,
+   "deepseek_answers": 3,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0527": {
+   "category": "prob_negation",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": true
+  },
+  "p2-0528": {
+   "category": "prob_negation",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0529": {
+   "category": "prob_negation",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0530": {
+   "category": "prob_negation",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0531": {
+   "category": "prob_negation",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0532": {
+   "category": "prob_negation",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0533": {
+   "category": "prob_negation",
+   "status": "disagreement",
+   "deepseek_agreeing": 1,
+   "deepseek_answers": 3,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0534": {
+   "category": "prob_negation",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0535": {
+   "category": "prob_negation",
+   "status": "sonnet_failed",
+   "deepseek_agreeing": null,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0536": {
+   "category": "prob_negation",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 3,
+   "sonnet_guard": false
+  },
+  "p2-0537": {
+   "category": "prob_negation",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": false
+  },
+  "p2-0538": {
+   "category": "prob_negation",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0539": {
+   "category": "prob_negation",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0540": {
+   "category": "prob_negation",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0541": {
+   "category": "prob_negation",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0542": {
+   "category": "prob_negation",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0543": {
+   "category": "prob_negation",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0544": {
+   "category": "prob_negation",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0545": {
+   "category": "prob_negation",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0546": {
+   "category": "prob_negation",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 3,
+   "sonnet_guard": false
+  },
+  "p2-0547": {
+   "category": "prob_negation",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0548": {
+   "category": "prob_negation",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0549": {
+   "category": "prob_negation",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0550": {
+   "category": "prob_negation",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 3,
+   "sonnet_guard": false
+  },
+  "p2-0551": {
+   "category": "prob_negation",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0552": {
+   "category": "prob_negation",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0553": {
+   "category": "prob_negation",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0554": {
+   "category": "prob_negation",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0555": {
+   "category": "prob_negation",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0556": {
+   "category": "prob_negation",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0557": {
+   "category": "prob_negation",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": true,
+   "sonnet_judge": true
+  },
+  "p2-0558": {
+   "category": "prob_negation",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0559": {
+   "category": "prob_negation",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0560": {
+   "category": "prob_negation",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0561": {
+   "category": "prob_negation",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0562": {
+   "category": "prob_negation",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0563": {
+   "category": "prob_negation",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": true
+  },
+  "p2-0564": {
+   "category": "prob_negation",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0565": {
+   "category": "prob_negation",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0566": {
+   "category": "prob_negation",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0567": {
+   "category": "prob_negation",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0568": {
+   "category": "prob_negation",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": true,
+   "sonnet_judge": true
+  },
+  "p2-0569": {
+   "category": "prob_negation",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0570": {
+   "category": "prob_negation",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0571": {
+   "category": "prob_negation",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0572": {
+   "category": "prob_negation",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0573": {
+   "category": "prob_negation",
+   "status": "disagreement",
+   "deepseek_agreeing": 1,
+   "deepseek_answers": 3,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0574": {
+   "category": "prob_negation",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0575": {
+   "category": "prob_negation",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 3,
+   "sonnet_guard": false
+  },
+  "p2-0576": {
+   "category": "prob_negation",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0577": {
+   "category": "prob_negation",
+   "status": "disagreement",
+   "deepseek_agreeing": 1,
+   "deepseek_answers": 3,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0578": {
+   "category": "prob_negation",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0579": {
+   "category": "prob_negation",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0580": {
+   "category": "prob_negation",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0581": {
+   "category": "prob_negation",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0582": {
+   "category": "prob_negation",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 3,
+   "sonnet_guard": false
+  },
+  "p2-0583": {
+   "category": "prob_negation",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0584": {
+   "category": "prob_negation",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0585": {
+   "category": "prob_negation",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0586": {
+   "category": "prob_negation",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0587": {
+   "category": "prob_negation",
+   "status": "disagreement",
+   "deepseek_agreeing": 1,
+   "deepseek_answers": 3,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0588": {
+   "category": "prob_negation",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0589": {
+   "category": "prob_negation",
+   "status": "disagreement",
+   "deepseek_agreeing": 1,
+   "deepseek_answers": 3,
+   "sonnet_guard": true,
+   "sonnet_judge": true
+  },
+  "p2-0590": {
+   "category": "prob_negation",
+   "status": "disagreement",
+   "deepseek_agreeing": 1,
+   "deepseek_answers": 3,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0591": {
+   "category": "prob_negation",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0592": {
+   "category": "prob_negation",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0593": {
+   "category": "prob_negation",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0594": {
+   "category": "prob_negation",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0595": {
+   "category": "prob_negation",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0596": {
+   "category": "prob_negation",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0597": {
+   "category": "prob_negation",
+   "status": "disagreement",
+   "deepseek_agreeing": 1,
+   "deepseek_answers": 3,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0598": {
+   "category": "prob_negation",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0599": {
+   "category": "prob_negation",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0600": {
+   "category": "prob_negation",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0601": {
+   "category": "prob_negation",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": true
+  },
+  "p2-0602": {
+   "category": "prob_negation",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0603": {
+   "category": "prob_negation",
+   "status": "sonnet_failed",
+   "deepseek_agreeing": null,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0604": {
+   "category": "prob_negation",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": true
+  },
+  "p2-0605": {
+   "category": "prob_negation",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": false
+  },
+  "p2-0606": {
+   "category": "prob_negation",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0607": {
+   "category": "prob_negation",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0608": {
+   "category": "prob_negation",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0609": {
+   "category": "prob_negation",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0610": {
+   "category": "prob_negation",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0611": {
+   "category": "mni_point",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0612": {
+   "category": "mni_point",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0613": {
+   "category": "mni_point",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0614": {
+   "category": "mni_point",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0615": {
+   "category": "mni_point",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0616": {
+   "category": "mni_point",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0617": {
+   "category": "mni_point",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0618": {
+   "category": "mni_point",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0619": {
+   "category": "mni_point",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0620": {
+   "category": "mni_point",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0621": {
+   "category": "mni_point",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0622": {
+   "category": "mni_point",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0623": {
+   "category": "mni_point",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": false
+  },
+  "p2-0624": {
+   "category": "mni_point",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0625": {
+   "category": "mni_point",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0626": {
+   "category": "mni_point",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0627": {
+   "category": "mni_point",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0628": {
+   "category": "mni_point",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0629": {
+   "category": "mni_point",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0630": {
+   "category": "mni_point",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0631": {
+   "category": "mni_point",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 3,
+   "sonnet_guard": false
+  },
+  "p2-0632": {
+   "category": "mni_point",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0633": {
+   "category": "mni_point",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0634": {
+   "category": "mni_point",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0635": {
+   "category": "mni_point",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0636": {
+   "category": "mni_point",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": true,
+   "sonnet_judge": true
+  },
+  "p2-0637": {
+   "category": "mni_point",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0638": {
+   "category": "mni_point",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0639": {
+   "category": "mni_point",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0640": {
+   "category": "mni_point",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0641": {
+   "category": "mni_point",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0642": {
+   "category": "mni_point",
+   "status": "sonnet_failed",
+   "deepseek_agreeing": null,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0643": {
+   "category": "mni_point",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 3,
+   "sonnet_guard": false
+  },
+  "p2-0644": {
+   "category": "mni_point",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 3,
+   "sonnet_guard": false
+  },
+  "p2-0645": {
+   "category": "mni_point",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0646": {
+   "category": "mni_point",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 3,
+   "sonnet_guard": false
+  },
+  "p2-0647": {
+   "category": "mni_point",
+   "status": "sonnet_failed",
+   "deepseek_agreeing": null,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0648": {
+   "category": "mni_point",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0649": {
+   "category": "mni_point",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0650": {
+   "category": "mni_point",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0651": {
+   "category": "mni_point",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0652": {
+   "category": "mni_point",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0653": {
+   "category": "mni_point",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0654": {
+   "category": "mni_point",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0655": {
+   "category": "mni_point",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0656": {
+   "category": "mni_point",
+   "status": "disagreement",
+   "deepseek_agreeing": 1,
+   "deepseek_answers": 3,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0657": {
+   "category": "mni_point",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0658": {
+   "category": "mni_point",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0659": {
+   "category": "mni_point",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0660": {
+   "category": "mni_point",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0661": {
+   "category": "mni_point",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0662": {
+   "category": "mni_point",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0663": {
+   "category": "mni_point",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0664": {
+   "category": "mni_point",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": true,
+   "sonnet_judge": true
+  },
+  "p2-0665": {
+   "category": "mni_point",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0666": {
+   "category": "mni_point",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0667": {
+   "category": "mni_point",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0668": {
+   "category": "mni_point",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": true
+  },
+  "p2-0669": {
+   "category": "mni_point",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": true
+  },
+  "p2-0670": {
+   "category": "mni_point",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0671": {
+   "category": "mni_point",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0672": {
+   "category": "mni_point",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 3,
+   "sonnet_guard": true
+  },
+  "p2-0673": {
+   "category": "mni_point",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 3,
+   "sonnet_guard": true
+  },
+  "p2-0674": {
+   "category": "mni_point",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": false
+  },
+  "p2-0675": {
+   "category": "mni_point",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 3,
+   "sonnet_guard": false
+  },
+  "p2-0676": {
+   "category": "mni_point",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0677": {
+   "category": "mni_point",
+   "status": "disagreement",
+   "deepseek_agreeing": 1,
+   "deepseek_answers": 3,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0678": {
+   "category": "mni_point",
+   "status": "disagreement",
+   "deepseek_agreeing": 1,
+   "deepseek_answers": 3,
+   "sonnet_guard": false,
+   "sonnet_judge": false
+  },
+  "p2-0679": {
+   "category": "mni_point",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0680": {
+   "category": "mni_point",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 3,
+   "sonnet_guard": false
+  },
+  "p2-0681": {
+   "category": "mni_point",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0682": {
+   "category": "mni_point",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": false
+  },
+  "p2-0683": {
+   "category": "mni_point",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0684": {
+   "category": "mni_point",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0685": {
+   "category": "mni_point",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0686": {
+   "category": "mni_point",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": false
+  },
+  "p2-0687": {
+   "category": "mni_point",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": true,
+   "sonnet_judge": true
+  },
+  "p2-0688": {
+   "category": "mni_point",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0689": {
+   "category": "mni_point",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0690": {
+   "category": "mni_point",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0691": {
+   "category": "mni_point",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0692": {
+   "category": "mni_point",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": true,
+   "sonnet_judge": true
+  },
+  "p2-0693": {
+   "category": "mni_point",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0694": {
+   "category": "mni_point",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0695": {
+   "category": "mni_point",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 3,
+   "sonnet_guard": false
+  },
+  "p2-0696": {
+   "category": "mni_point",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 3,
+   "sonnet_guard": false
+  },
+  "p2-0697": {
+   "category": "mni_point",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0698": {
+   "category": "mni_point",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0699": {
+   "category": "mni_point",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0700": {
+   "category": "mni_point",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0701": {
+   "category": "value_search",
+   "status": "sonnet_failed",
+   "deepseek_agreeing": null,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0702": {
+   "category": "value_search",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 3,
+   "sonnet_guard": false
+  },
+  "p2-0703": {
+   "category": "value_search",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": false
+  },
+  "p2-0704": {
+   "category": "value_search",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0705": {
+   "category": "value_search",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0706": {
+   "category": "value_search",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 3,
+   "sonnet_guard": false
+  },
+  "p2-0707": {
+   "category": "value_search",
+   "status": "disagreement",
+   "deepseek_agreeing": 1,
+   "deepseek_answers": 3,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0708": {
+   "category": "value_search",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0709": {
+   "category": "value_search",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0710": {
+   "category": "value_search",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0711": {
+   "category": "value_search",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0712": {
+   "category": "value_search",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0713": {
+   "category": "value_search",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0714": {
+   "category": "value_search",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0715": {
+   "category": "value_search",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0716": {
+   "category": "value_search",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": false
+  },
+  "p2-0717": {
+   "category": "value_search",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0718": {
+   "category": "value_search",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0719": {
+   "category": "value_search",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0720": {
+   "category": "value_search",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0721": {
+   "category": "value_search",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0722": {
+   "category": "value_search",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0723": {
+   "category": "value_search",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 3,
+   "sonnet_guard": false
+  },
+  "p2-0724": {
+   "category": "value_search",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": true,
+   "sonnet_judge": false
+  },
+  "p2-0725": {
+   "category": "value_search",
+   "status": "sonnet_failed",
+   "deepseek_agreeing": null,
+   "deepseek_answers": 2,
+   "sonnet_guard": true
+  },
+  "p2-0726": {
+   "category": "value_search",
+   "status": "disagreement",
+   "deepseek_agreeing": 1,
+   "deepseek_answers": 3,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0727": {
+   "category": "value_search",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0728": {
+   "category": "value_search",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0729": {
+   "category": "value_search",
+   "status": "disagreement",
+   "deepseek_agreeing": 1,
+   "deepseek_answers": 3,
+   "sonnet_guard": false,
+   "sonnet_judge": false
+  },
+  "p2-0730": {
+   "category": "value_search",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0731": {
+   "category": "value_search",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0732": {
+   "category": "value_search",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0733": {
+   "category": "value_search",
+   "status": "disagreement",
+   "deepseek_agreeing": 1,
+   "deepseek_answers": 3,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0734": {
+   "category": "value_search",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 3,
+   "sonnet_guard": false
+  },
+  "p2-0735": {
+   "category": "value_search",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": false
+  },
+  "p2-0736": {
+   "category": "value_search",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0737": {
+   "category": "value_search",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0738": {
+   "category": "value_search",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0739": {
+   "category": "value_search",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0740": {
+   "category": "value_search",
+   "status": "disagreement",
+   "deepseek_agreeing": 1,
+   "deepseek_answers": 3,
+   "sonnet_guard": false,
+   "sonnet_judge": false
+  },
+  "p2-0741": {
+   "category": "value_search",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0742": {
+   "category": "value_search",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0743": {
+   "category": "value_search",
+   "status": "accepted",
+   "deepseek_agreeing": 3,
+   "deepseek_answers": 3,
+   "sonnet_guard": false
+  },
+  "p2-0744": {
+   "category": "value_search",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": false
+  },
+  "p2-0745": {
+   "category": "value_search",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": false
+  },
+  "p2-0746": {
+   "category": "value_search",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0747": {
+   "category": "value_search",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0748": {
+   "category": "value_search",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": false
+  },
+  "p2-0749": {
+   "category": "value_search",
+   "status": "sonnet_failed",
+   "deepseek_agreeing": null,
+   "deepseek_answers": 2,
+   "sonnet_guard": true
+  },
+  "p2-0750": {
+   "category": "value_search",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0751": {
+   "category": "value_search",
+   "status": "sonnet_failed",
+   "deepseek_agreeing": null,
+   "deepseek_answers": 2,
+   "sonnet_guard": true
+  },
+  "p2-0752": {
+   "category": "value_search",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0753": {
+   "category": "value_search",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0754": {
+   "category": "value_search",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0755": {
+   "category": "value_search",
+   "status": "disagreement",
+   "deepseek_agreeing": 1,
+   "deepseek_answers": 3,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0756": {
+   "category": "value_search",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": true,
+   "sonnet_judge": false
+  },
+  "p2-0757": {
+   "category": "value_search",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": false
+  },
+  "p2-0758": {
+   "category": "value_search",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0759": {
+   "category": "value_search",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 3,
+   "sonnet_guard": false
+  },
+  "p2-0760": {
+   "category": "value_search",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 3,
+   "sonnet_guard": false
+  },
+  "p2-0761": {
+   "category": "value_search",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": false
+  },
+  "p2-0762": {
+   "category": "value_search",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0763": {
+   "category": "value_search",
+   "status": "sonnet_failed",
+   "deepseek_agreeing": null,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0764": {
+   "category": "value_search",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0765": {
+   "category": "value_search",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0766": {
+   "category": "value_search",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0767": {
+   "category": "value_search",
+   "status": "disagreement",
+   "deepseek_agreeing": 1,
+   "deepseek_answers": 3,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0768": {
+   "category": "value_search",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0769": {
+   "category": "value_search",
+   "status": "sonnet_failed",
+   "deepseek_agreeing": null,
+   "deepseek_answers": 2,
+   "sonnet_guard": true
+  },
+  "p2-0770": {
+   "category": "value_search",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 3,
+   "sonnet_guard": false
+  },
+  "p2-0771": {
+   "category": "value_search",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0772": {
+   "category": "value_search",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0773": {
+   "category": "value_search",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0774": {
+   "category": "value_search",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0775": {
+   "category": "value_search",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0776": {
+   "category": "value_search",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": true,
+   "sonnet_judge": true
+  },
+  "p2-0777": {
+   "category": "value_search",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": true,
+   "sonnet_judge": true
+  },
+  "p2-0778": {
+   "category": "value_search",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0779": {
+   "category": "value_search",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0780": {
+   "category": "value_search",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0781": {
+   "category": "value_search",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": false
+  },
+  "p2-0782": {
+   "category": "value_search",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": false
+  },
+  "p2-0783": {
+   "category": "value_search",
+   "status": "disagreement",
+   "deepseek_agreeing": 1,
+   "deepseek_answers": 3,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0784": {
+   "category": "value_search",
+   "status": "sonnet_failed",
+   "deepseek_agreeing": null,
+   "deepseek_answers": 2,
+   "sonnet_guard": true
+  },
+  "p2-0785": {
+   "category": "value_search",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0786": {
+   "category": "value_search",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0787": {
+   "category": "value_search",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0788": {
+   "category": "value_search",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0789": {
+   "category": "value_search",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": false
+  },
+  "p2-0790": {
+   "category": "value_search",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0791": {
+   "category": "value_search",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0792": {
+   "category": "value_search",
+   "status": "disagreement",
+   "deepseek_agreeing": 1,
+   "deepseek_answers": 3,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0793": {
+   "category": "value_search",
+   "status": "disagreement",
+   "deepseek_agreeing": 1,
+   "deepseek_answers": 3,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0794": {
+   "category": "value_search",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  },
+  "p2-0795": {
+   "category": "value_search",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 3,
+   "sonnet_guard": false
+  },
+  "p2-0796": {
+   "category": "value_search",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 3,
+   "sonnet_guard": false
+  },
+  "p2-0797": {
+   "category": "value_search",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0798": {
+   "category": "value_search",
+   "status": "disagreement",
+   "deepseek_agreeing": 0,
+   "deepseek_answers": 2,
+   "sonnet_guard": false,
+   "sonnet_judge": true
+  },
+  "p2-0799": {
+   "category": "value_search",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 3,
+   "sonnet_guard": false
+  },
+  "p2-0800": {
+   "category": "value_search",
+   "status": "accepted",
+   "deepseek_agreeing": 2,
+   "deepseek_answers": 2,
+   "sonnet_guard": false
+  }
+ }
+}

@@ -18,3 +18,5 @@
 {"time": "2026-11-13T20:09:13", "label": "checkpoint", "usage": 103.2915, "limit_remaining": 196.7085}
 {"time": "2026-11-13T21:04:08", "label": "checkpoint", "usage": 105.8708, "limit_remaining": 194.1292}
 {"time": "2026-11-13T21:36:28", "label": "before DeepSeek sample 2 (lazy)", "usage": 110.2639, "limit_remaining": 189.7361}
+{"time": "2026-11-13T23:05:22", "label": "before final Sonnet judge pass", "usage": 119.4211, "limit_remaining": 180.5789}
+{"time": "2026-11-13T23:11:01", "label": "end of round 2 (teacher, DeepSeek x3, judge)", "usage": 120.3026, "limit_remaining": 179.6974}
