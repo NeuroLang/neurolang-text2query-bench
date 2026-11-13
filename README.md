@@ -645,3 +645,25 @@ questions answered before it, DeepSeek single v3 test 0.816 (13/17) vs
 dh-166 now read as "activated by no study"). Engine bug found: checking a
 yes/no query crashed (NeuroLang PR #1144). Fresh and the vote/fallback
 numbers remain to run. Details in [runs/nsv3c.md](runs/nsv3c.md).
+
+## neurosynth-v3d: step 1 on Albert DeepSeek, judge cascade calibration (2026-11-13)
+
+Albert DeepSeek V4 Flash on master 8532a28b (`scripts/nsv3d_env.sh`, `configs/llm.nsv3d.yaml`), v3 dev only;
+summary in `runs/nsv3d-step1.md`.
+
+- **Step 0:** 27/33 exact (mean J 0.818). Misses:
+  - one search loop;
+  - two voxel questions stopped by the assistant's memory/time guard;
+  - two wrong values;
+  - one Albert timeout.
+- **Fixes:** NeuroLang PRs #1201 (search-loop notice), #1202 (guidance: probabilistic "not activated", MNI is not
+  voxel indices), #1203 (the per-query memory guard counted the parent's shared pages), #1204 (`search_values` on
+  repeated column names), #1205 (body disjunction of builtins bound outside).
+  - With #1201–#1203: 25/33. p-116 fixed by the notice; p-019, p-150 and p-175 lost to hemisphere variance; one more
+    Albert timeout. The machine was heavily loaded by another session.
+- **Golds:** the point radius is now the engine's 6 mm, unless the question says 3 mm.
+- **Judge cascade** (`scripts/judge_cascade.py`: DeepSeek ×3 agreement, then two DeepSeek judges, then flag for Sonnet):
+  - 81% agreement with Opus on the 79 distilled answers;
+  - on the golds, 85%, with acceptance precision 0.84 and recall 0.98.
+  - Agreement alone is 90–98% precise and settles 55–60%; the DeepSeek judges are weak.
+  - Below the 95% target: the disagreements go to Sonnet.

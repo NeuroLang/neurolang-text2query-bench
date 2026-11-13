@@ -28,6 +28,12 @@ def main():
     parser.add_argument("--engine", default="neurosynth")
     parser.add_argument("--data-dir", default="neurolang_data")
     parser.add_argument("--in-process", action="store_true")
+    parser.add_argument("--tracemalloc", action="store_true",
+                        help="in process, the peak of the allocations "
+                        "(numpy's included), not the RSS")
+    parser.add_argument("--memory-mb", type=float,
+                        help="the child's memory limit, as the assistant's")
+    parser.add_argument("--timeout", type=float, default=600)
     parser.add_argument("--show-ra", action="store_true",
                         help="print the RA plans of each query instead")
     parser.add_argument("--save", metavar="DIR",
@@ -64,11 +70,21 @@ def main():
             faulthandler.dump_traceback_later(2, repeat=True)
         thread = threading.Thread(target=watch, daemon=True)
         thread.start()
-        if args.in_process:
+        if args.tracemalloc:
+            import tracemalloc
+
+            tracemalloc.start()
+            preview = validation._preview(nl, query, "datalog", 3, args.engine)
+            current, top = tracemalloc.get_traced_memory()
+            tracemalloc.stop()
+            print(f"{path}: allocated peak {top / 2**20:.0f} MB, "
+                  f"left {current / 2**20:.0f} MB", flush=True)
+        elif args.in_process:
             preview = validation._preview(nl, query, "datalog", 3, args.engine)
         else:
             preview = validation.run_preview(
-                nl, query, "datalog", 3, args.engine, timeout=600)
+                nl, query, "datalog", 3, args.engine, timeout=args.timeout,
+                memory_mb=args.memory_mb)
         done.set()
         if args.save and preview.frame is not None:
             name = os.path.basename(path) + ".pkl"

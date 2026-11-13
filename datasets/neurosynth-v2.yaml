@@ -313,8 +313,8 @@ questions:
       fr: Le cingulaire antérieur dorsal (MNI 0, 24, 30) et l'insula antérieure droite (MNI 38, 20, -4) sont-ils activés ensemble plus que par hasard ? Donne le lift.
     gold:
       datalog: |-
-        near_acc(s) :- peak_mni(x, y, z, s), (euclidean(x, y, z, 0.0, 24.0, 30.0) <= 3)
-        near_insula(s) :- peak_mni(x, y, z, s), (euclidean(x, y, z, 38.0, 20.0, -4.0) <= 3)
+        near_acc(s) :- peak_mni(x, y, z, s), (euclidean(x, y, z, 0.0, 24.0, 30.0) <= 6)
+        near_insula(s) :- peak_mni(x, y, z, s), (euclidean(x, y, z, 38.0, 20.0, -4.0) <= 6)
         acc(s) :- near_acc(s), selected_study(s)
         insula(s) :- near_insula(s), selected_study(s)
         both(s) :- near_acc(s), near_insula(s), selected_study(s)

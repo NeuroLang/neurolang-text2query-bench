@@ -273,7 +273,7 @@ questions:
       en: Given studies on auditory, how likely is an activation at MNI right insula (MNI 38, 6, 2)?
     gold:
       datalog: |-
-        near(s) :- peak_mni(x, y, z, s), (euclidean(x, y, z, 38.0, 6.0, 2.0) <= 3)
+        near(s) :- peak_mni(x, y, z, s), (euclidean(x, y, z, 38.0, 6.0, 2.0) <= 6)
         active(s) :- near(s), selected_study(s)
         term_association(s, t) :- mentions(s, t), selected_study(s)
         ans(p) :- PROB[active(s) // term_association(s, 'auditory')] = p
