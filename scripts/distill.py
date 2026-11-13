@@ -18,6 +18,13 @@ Steps, each reading what the previous one wrote in ``data/distill/``:
     bank       write the kept pairs as the bank additions, and the
                held-out slice as a bench dataset
 
+Round 2 (``--round 2``, written in ``data/distill/round2/``): ``pool``
+writes ``pool2.json``, weighted toward DeepSeek's failure types
+(CATEGORIES2) and kept away from every evaluation set; ``answer``
+takes ``--provider``, ``--tag`` and ``--temperature`` (Sonnet the
+teacher, DeepSeek x3 for the agreement gate, scripts/agreement_gate.py)
+and stops at ``--max-usage`` dollars of the OpenRouter key.
+
     source scripts/env.sh
     .venv-distill/bin/python scripts/distill.py slots
     .venv-distill/bin/python scripts/distill.py pool
@@ -45,6 +52,8 @@ import leakage  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
 OUT = ROOT / "data" / "distill"
+ROUND2 = OUT / "round2"
+LEDGER = OUT / "ledger.jsonl"   # data/distill/round2/tokens.jsonl in round 2
 OPENROUTER = "https://openrouter.ai/api/v1"
 SONNET = "anthropic/claude-sonnet-5.5"
 JUDGE = "anthropic/claude-opus-5.5"
@@ -119,6 +128,78 @@ POINTS = [
     ("left motor hand area", (-38, -22, 56)), ("right fusiform face area", (40, -52, -18)),
     ("primary visual cortex", (0, -90, 0)), ("left Broca's area", (-48, 18, 14)),
 ]
+# More MNI landmarks for round 2.
+POINTS2 = POINTS + [
+    ("left amygdala", (-24, -4, -20)), ("right putamen", (24, 4, 0)),
+    ("left caudate", (-12, 12, 10)), ("right thalamus", (10, -18, 8)),
+    ("dorsal anterior cingulate", (0, 24, 30)), ("pre-supplementary motor area", (0, 18, 50)),
+    ("left dorsolateral prefrontal cortex", (-44, 36, 24)),
+    ("right dorsolateral prefrontal cortex", (44, 36, 24)),
+    ("left temporoparietal junction", (-50, -56, 22)),
+    ("right temporoparietal junction", (52, -54, 22)),
+    ("precuneus", (2, -60, 40)), ("left angular gyrus", (-44, -66, 36)),
+    ("right intraparietal sulcus", (32, -56, 48)), ("left fusiform face area", (-40, -52, -18)),
+    ("ventromedial prefrontal cortex", (2, 46, -10)), ("right orbitofrontal cortex", (28, 34, -14)),
+    ("left visual word form area", (-44, -58, -12)), ("right V5/MT", (46, -70, 2)),
+    ("left primary auditory cortex", (-46, -22, 8)), ("ventral striatum", (10, 10, -8)),
+    ("left cerebellum", (-24, -62, -26)), ("right frontal eye field", (30, -4, 52)),
+]
+
+# Round 2: the 12 categories of round 1 (and of neurosynth-v3), with the
+# failure types of DeepSeek (runs/nsv3c.md) as categories of their own.
+FOCUS = {
+    "answer_shape": (100, "questions whose answer is a table of pairs or "
+                     "groups, not a plain list: each pair of regions "
+                     "({destrieux}, {tian}) or of networks ({network}) "
+                     "co-activated by studies about {term}, with its "
+                     "probability; for each network, region or "
+                     "subcortical structure the probability or the number "
+                     "of studies mentioning {term} (one row per region); "
+                     "for each of {term} and {term2} its probability; the "
+                     "networks with their parcels; per hemisphere. Say "
+                     "what each row holds ('each pair', 'for each', "
+                     "'per', 'with')."),
+    "prob_negation": (90, "probabilistic negation: the probability that a "
+                      "region ({destrieux}, {tian}), a network ({network}) "
+                      "or the MNI point {point} is NOT activated by "
+                      "studies about {term}; which gyri, sulci, structures "
+                      "or networks are not activated by studies about "
+                      "{term}, with the probability of not being "
+                      "activated; the probability that a study mentions "
+                      "{term} but not {term2}; the probability that a "
+                      "study about {term} activates {tian} but not "
+                      "{destrieux}. Use 'not activated', 'does not "
+                      "activate', 'without'."),
+    "mni_point": (90, "MNI coordinates in millimetres, {point}: the "
+                  "probability of an activation near the point, given "
+                  "{term}; the lift or Bayes factor of the point and "
+                  "{term}; the terms of the studies with a peak near the "
+                  "point; the region of an atlas ({destrieux}, {tian}, a "
+                  "network) at or near the point; how many studies report "
+                  "a peak within a few mm; two points activated together. "
+                  "Keep the coordinates as written in the placeholder."),
+    "value_search": (100, "questions naming things as a researcher would, "
+                     "so that the engine's own value must be looked up "
+                     "first: a gyrus, sulcus or subcortical structure in "
+                     "plain anatomical words, not an atlas label (e.g. "
+                     "'the left angular gyrus', 'the right anterior "
+                     "hippocampus', 'the head of the caudate'); a "
+                     "Cognitive Atlas concept by a synonym or "
+                     "description; a network by its usual name ('the "
+                     "salience network', 'the default network', 'the "
+                     "dorsal attention network'); a term in another "
+                     "form or plural ('emotional faces', 'memories'). Ask "
+                     "their studies, activation probability, "
+                     "co-activation, subclasses or definition. Write the "
+                     "names in the template; placeholders only {term} or "
+                     "{cogat}."),
+}
+CATEGORIES2 = {
+    **{c: (35, description) for c, (_, description) in CATEGORIES.items()},
+    **FOCUS,
+}
+EVALUATION_SETS = ["neurosynth-v2", "neurosynth-v3-heldout",
+                   "neurosynth-v3-fresh", "neurosynth-distill-heldout"]
 
 
 def log(message):
@@ -155,8 +236,8 @@ def chat(model, messages, purpose, temperature=0.0, max_tokens=4000):
     else:
         raise RuntimeError(f"OpenRouter kept failing for {purpose}")
     usage = data.get("usage", {})
-    OUT.mkdir(parents=True, exist_ok=True)
-    with open(OUT / "ledger.jsonl", "a") as ledger:
+    LEDGER.parent.mkdir(parents=True, exist_ok=True)
+    with open(LEDGER, "a") as ledger:
         ledger.write(json.dumps({
             "model": model, "purpose": purpose, "time": time.time(),
             "in": usage.get("prompt_tokens", 0),
@@ -302,8 +383,11 @@ def grist_questions():
     ]
 
 
-def propose(category, wanted, description, bank_questions, slots):
+def propose(category, wanted, description, bank_questions, slots, avoid=()):
     keys = sorted(set(re.findall(r"\{(\w+)\}", description)))
+    written = ("\n\nThese templates are already written; write different "
+               "ones (other phrasing, other kind of answer):\n- "
+               + "\n- ".join(avoid)) if avoid else ""
     reply = chat(SONNET, [{"role": "user", "content": (
         "You write English questions a researcher might ask a "
         "meta-analytic engine over ~14,000 neuroimaging studies "
@@ -316,48 +400,72 @@ def propose(category, wanted, description, bank_questions, slots):
         + " (use a placeholder only where a value of that kind fits, "
         "a second one as {term2} etc.), which are replaced by values of "
         "the engine. Vary the phrasing, the verb and the kind of answer. "
-        "Reply with a JSON list of strings, nothing else."
+        "Reply with a JSON list of strings, nothing else." + written
     )}], f"pool-{category}", temperature=0.8, max_tokens=4000)
-    return [t for t in json_block(reply) if isinstance(t, str)]
+    try:
+        return [t for t in json_block(reply) if isinstance(t, str)]
+    except ValueError:
+        log(f"{category}: no JSON list in the reply, asked again")
+        return []
 
 
 def cmd_pool(args):
     from text2query_bench.dataset import load_dataset
     from neurolang_apps.utils.llm.examples import load_examples
 
+    second = args.round == 2
+    categories = CATEGORIES2 if second else CATEGORIES
     slots = read_json(OUT / "slots.json")
+    if second:
+        slots["point"] = [f"{n} (MNI {x}, {y}, {z})" for n, (x, y, z) in POINTS2]
     bank = [e.question for e in load_examples("neurosynth") if e.question]
-    rng = random.Random(1)
+    rng = random.Random(2 if second else 1)
     used = set()
-    pool = [{"category": "grist", "question": q, "source": "grist"}
-            for q in grist_questions()]
-    for category, (target, description) in CATEGORIES.items():
-        cache = OUT / "templates" / f"{category}.json"
-        if not cache.exists():
-            write_json(cache, propose(
-                category, int(target * 1.4), description, bank, slots
-            ))
-        templates = read_json(cache)
+    pool = [] if second else [
+        {"category": "grist", "question": q, "source": "grist"}
+        for q in grist_questions()
+    ]
+    for category, (target, description) in categories.items():
+        cache = (ROUND2 / "templates" if second else OUT / "templates") / f"{category}.json"
+        templates = read_json(cache) if cache.exists() else []
+        # round 2: twice the target, 40 templates a request
+        wanted = int(target * (2.2 if second else 1.4))
+        while len(templates) < wanted:
+            templates += propose(
+                category, min(40, wanted - len(templates)), description,
+                bank, slots, avoid=templates,
+            )
+            write_json(cache, templates)
+            if not second:
+                break
+        mine = []
         for template in templates:
             question = fill(template, slots, rng, used)
             if question:
-                pool.append({"category": category, "source": "template",
+                mine.append({"category": category, "source": "template",
                              "question": question.strip()})
+        if second:
+            rng.shuffle(mine)
+        pool += mine
         log(f"{category}: {len(templates)} templates")
-    nsv2 = [text for q in load_dataset(ROOT / "datasets/neurosynth-v2.yaml").questions
-            for text in q.text.values()]
-    vectors = embed([p["question"] for p in pool] + nsv2 + bank)
-    n, m = len(pool), len(nsv2)
+    sets = EVALUATION_SETS if second else EVALUATION_SETS[:1]
+    evaluation = [text for name in sets
+                  for q in load_dataset(ROOT / f"datasets/{name}.yaml").questions
+                  for text in q.text.values()]
+    known = bank + ([p["question"] for p in read_json(OUT / "pool.json")]
+                    if second else [])
+    vectors = embed([p["question"] for p in pool] + evaluation + known)
+    n, m = len(pool), len(evaluation)
     leak = (vectors[:n] @ vectors[n:n + m].T).max(axis=1)
     near_bank = (vectors[:n] @ vectors[n + m:].T).max(axis=1)
     kept, dropped = [], Counter()
     for i, item in enumerate(pool):
         item["leak"], item["bank"] = float(leak[i]), float(near_bank[i])
         if leak[i] > MAX_LEAK:
-            dropped["near a neurosynth-v2 question"] += 1
+            dropped["near an evaluation question"] += 1
         elif near_bank[i] > MAX_DUPLICATE:
-            dropped["duplicate of a bank question"] += 1
-        elif any(float(vectors[i] @ vectors[j]) > MAX_DUPLICATE for j in kept):
+            dropped["duplicate of a bank (or round-1 pool) question"] += 1
+        elif kept and float((vectors[kept] @ vectors[i]).max()) > MAX_DUPLICATE:
             dropped["duplicate in the pool"] += 1
         else:
             kept.append(i)
@@ -365,24 +473,25 @@ def cmd_pool(args):
     taken, per = [], Counter()
     for i in kept:
         c = pool[i]["category"]
-        if c == "grist" or per[c] < CATEGORIES[c][0]:
+        if c == "grist" or per[c] < categories[c][0]:
             per[c] += 1
             taken.append(i)
     final = [pool[i] for i in taken]
     for number, item in enumerate(final, 1):
-        item["id"] = f"pool-{number:03d}"
-    # held-out slice: every 5th question of each category (about 20%)
+        item["id"] = f"p2-{number:04d}" if second else f"pool-{number:03d}"
+    # held-out slice: every 5th question of each category (about 20%);
+    # none in round 2, evaluated on neurosynth-v3 and fresh
     seen = Counter()
     for item in final:
         seen[item["category"]] += 1
         item["split"] = (
-            "heldout" if item["category"] != "grist" and seen[item["category"]] % 5 == 0
-            else "train"
+            "heldout" if not second and item["category"] != "grist"
+            and seen[item["category"]] % 5 == 0 else "train"
         )
-    write_json(OUT / "pool.json", final)
+    write_json(OUT / ("pool2.json" if second else "pool.json"), final)
     log(f"proposed {n}, dropped {dict(dropped)}, kept {len(final)} "
         f"({sum(i['split'] == 'heldout' for i in final)} held out)")
-    log(f"max cosine to a neurosynth-v2 question (kept): "
+    log(f"max cosine to an evaluation question ({', '.join(sets)}; kept): "
         f"{max(i['leak'] for i in final):.3f}; "
         f"max over all proposed: {leak.max():.3f}")
     log(f"per category: {dict(Counter(i['category'] for i in final))}")
@@ -427,27 +536,73 @@ def pool_order(pool):
     return [item for _, _, item in sorted(keyed, key=lambda k: k[:2])]
 
 
+def key_usage():
+    """Return the dollars spent by the OpenRouter key."""
+    response = httpx.get(
+        f"{OPENROUTER}/key", timeout=60,
+        headers={"Authorization": f"Bearer {os.environ['OPENROUTER_API_KEY']}"},
+    )
+    response.raise_for_status()
+    return response.json()["data"]["usage"]
+
+
+def gate_decided(qid):
+    """
+    Whether the agreement gate (scripts/agreement_gate.py) has decided
+    *qid* from Sonnet's answer and the DeepSeek samples 0 and 1 (read
+    once: run it once they are complete).
+    """
+    import agreement_gate
+
+    if not hasattr(gate_decided, "answers"):
+        gate_decided.answers = [agreement_gate.load(ROUND2, tag) for tag in
+                                ("react.sonnet", "deepseek.0", "deepseek.1")]
+    teacher, *answers = [a.get(qid) for a in gate_decided.answers]
+    return agreement_gate.status(teacher, answers)[0] != "unanswered"
+
+
 def cmd_answer(args):
-    """Answer the pool with Sonnet ReAct (the teacher)."""
+    """
+    Answer the pool with ReAct: Sonnet (the teacher), or in round 2 any
+    provider of ``--config`` (``--tag`` names the output, ``--temperature``
+    sets the sampling); run ``--shard I/N`` processes side by side.
+    """
     from neurolang_apps.utils.llm import LLMError, load_config, make_agent
 
+    second = args.round == 2
     nl = engine(args)
-    config = load_config(ROOT / "configs/llm.master-v0.yaml")
-    provider = config.provider("openrouter")
+    config = load_config(ROOT / (args.config or "configs/llm.master-v0.yaml"))
+    provider = config.provider(args.provider)
     config.assistant.comment_rules = False
     config.assistant.verify_rounds = 0
-    pool = pool_order(read_json(OUT / "pool.json"))
-    index, count = args.shard
-    path = OUT / f"react.{index}.jsonl"
+    if args.temperature is not None:
+        config.assistant.temperature = args.temperature
+    if second:
+        pool = pool_order(read_json(OUT / "pool2.json"))
+        out, tag = ROUND2, args.tag
+    else:
+        pool = pool_order(read_json(OUT / "pool.json"))
+        out, tag = OUT, "react"
+    out.mkdir(parents=True, exist_ok=True)
     done = {
-        json.loads(line)["id"] for file in OUT.glob("react.*.jsonl")
+        json.loads(line)["id"] for file in out.glob(f"{tag}.*jsonl")
         for line in file.read_text().splitlines()
     }
+    index, count = args.shard
+    path = out / (f"{tag}.w{index}.jsonl" if second else f"{tag}.{index}.jsonl")
+    answered = 0
     for number, item in enumerate(pool):
         if number % count != index or item["id"] in done:
             continue
-        if sum(spent()) > args.budget:
+        if args.limit and answered >= args.limit:
+            break
+        if args.lazy and gate_decided(item["id"]):
+            continue
+        if not second and sum(spent()) > args.budget:
             log("Sonnet budget reached")
+            break
+        if second and answered % 5 == 0 and key_usage() > args.max_usage:
+            log(f"worker {index}: OpenRouter usage above {args.max_usage}$, stop")
             break
         steps = []
         agent = make_agent(
@@ -463,27 +618,37 @@ def cmd_answer(args):
             result = agent.run(item["question"])
         except LLMError as exc:
             log(f"{item['id']}: {exc}")
+            if second:
+                with open(out / f"{tag}.errors.log", "a") as errors:
+                    errors.write(f"{item['id']}\t{exc}\n")
             continue
         rows, error = ([], "") if not result.query else run_rows(nl, result.query)
         entry = {
             "id": item["id"], "question": item["question"],
-             "query": result.query, "valid": result.valid,
+            "query": result.query, "valid": result.valid,
             "error": result.error or error, "rows": normalised(rows),
             "steps": steps, "calls": result.calls,
             "usage": dict(result.usage), "seconds": time.perf_counter() - start,
         }
-        with open(path, "a") as out:
-            out.write(json.dumps(entry, default=str) + "\n")
-        with open(OUT / "ledger.jsonl", "a") as ledger:
+        if second:
+            entry.update(category=item["category"], model=provider.model,
+                         explanation=result.explanation,
+                         temperature=config.assistant.temperature)
+        with open(path, "a") as answers:
+            answers.write(json.dumps(entry, default=str) + "\n")
+        with open(LEDGER, "a") as ledger:
             ledger.write(json.dumps({
-                "model": SONNET, "purpose": "react", "time": time.time(),
+                "model": provider.model, "purpose": f"react-{tag}" if second else "react",
+                "time": time.time(),
                 "in": result.usage.get("input", 0),
                 "out": result.usage.get("output", 0),
             }) + "\n")
         done.add(item["id"])
+        answered += 1
         log(f"{item['id']} {item['category']}: valid={result.valid} "
             f"rows={len(rows)} steps={len(steps)} "
-            f"tokens={sum(result.usage.values())} spent={sum(spent())}")
+            f"tokens={sum(result.usage.values())}"
+            + ("" if second else f" spent={sum(spent())}"))
 
 
 # --- judge, filter and calibration ---------------------------------------
@@ -736,7 +901,23 @@ def main():
     parser.add_argument("--limit", type=int, help="stop after N answers")
     parser.add_argument("--budget", type=int, default=2_800_000,
                         help="stop when Sonnet has used this many tokens")
+    parser.add_argument("--round", type=int, default=1, choices=[1, 2])
+    parser.add_argument("--config", help="answer: LLM config (default "
+                        "configs/llm.master-v0.yaml)")
+    parser.add_argument("--provider", default="openrouter")
+    parser.add_argument("--tag", default="react.sonnet",
+                        help="answer, round 2: name of the answer files")
+    parser.add_argument("--temperature", type=float)
+    parser.add_argument("--lazy", action="store_true",
+                        help="answer, round 2: skip the questions the "
+                        "agreement gate decides without this answer")
+    parser.add_argument("--max-usage", type=float, default=170.0,
+                        help="answer, round 2: stop when the OpenRouter key "
+                        "has spent this many dollars")
     args = parser.parse_args()
+    global LEDGER
+    if args.round == 2:
+        LEDGER = ROUND2 / "tokens.jsonl"
     COMMANDS[args.command](args)
 
 
