@@ -9,3 +9,6 @@ run() {
 }
 run A test albert-deepseek -r2; run C test albert-deepseek -r2
 run A fresh albert-deepseek ""; run C fresh albert-deepseek ""
+# Then (fresh at load 46-47): a second fresh pair, and Gemma on fresh.
+run A fresh albert-deepseek -r2; run C fresh albert-deepseek -r2
+run A fresh albert-gemma ""; run C fresh albert-gemma ""

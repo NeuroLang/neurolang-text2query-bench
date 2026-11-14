@@ -721,9 +721,9 @@ Exact matches (sum over runs), A = master, C = + 631 entries:
 | v3 test + fresh, DeepSeek single ×2 | 102/128 | 104/128 |
 | v3 test + fresh, ×3 vote + Sonnet fallback | 52/64 | 51/64 |
 | v3 test, Albert DeepSeek ×2 | 43/64 | 53/64 |
-| fresh, Albert DeepSeek | 23/32 | 23/32 |
+| fresh, Albert DeepSeek ×2 | 44/64 | 46/64 |
 | v3 test, Albert Gemma | 26/32 | 25/32 |
 
-No variant clearly wins (traces and hybrid neither); the Albert DeepSeek
-gain on v3 test is not reproduced on fresh. No NeuroLang PR. Spend $2.97.
+No variant clearly wins (traces and hybrid neither): C wins on v3 test
+with Albert DeepSeek only (+5 per run, two runs each); on fresh, +1. No NeuroLang PR. Spend $2.97.
 Details in [runs/nsv3e.md](runs/nsv3e.md).

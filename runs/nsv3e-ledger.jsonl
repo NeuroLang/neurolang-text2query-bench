@@ -30,3 +30,6 @@
 {"time": "2026-11-14T14:14:13", "label": "C test albert-deepseek-r2", "usage": 124.0668, "limit_remaining": 175.9332}
 {"time": "2026-11-14T14:47:20", "label": "A fresh albert-deepseek", "usage": 124.0668, "limit_remaining": 175.9332}
 {"time": "2026-11-14T15:17:17", "label": "C fresh albert-deepseek", "usage": 124.0668, "limit_remaining": 175.9332}
+{"time": "2026-11-14T15:52:08", "label": "A fresh albert-deepseek-r2", "usage": 124.0668, "limit_remaining": 175.9332}
+{"time": "2026-11-14T16:11:31", "label": "C fresh albert-deepseek-r2", "usage": 124.0668, "limit_remaining": 175.9332}
+{"time": "2026-11-14T16:23:05", "label": "check", "usage": 124.0668, "limit_remaining": 175.9332}

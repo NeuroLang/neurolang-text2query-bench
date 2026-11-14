@@ -48,9 +48,9 @@ by the Sonnet judge):
 | with a trace | 131 | 97 | 228 |
 
 - Hard-coded 6 mm radii the question does not state are written
-  `{kernel_radius_mm}`, as in the hand-written bank (98 entries).
+  `{kernel_radius_mm}`, as in the hand-written bank (83 of the 631 entries of C).
 - **Leakage:** max cosine of a new entry to an evaluation question
-  **0.850** (p2-0787); `scripts/leakage.py` over the whole bank gives 0.850
+  **0.850** (p2-0787, raw 0.8495); `scripts/leakage.py` over the whole bank gives 0.850
   (nsv2), 0.845 (v3), 0.867 (fresh): the 0.867 is f-097 against a
   hand-written master entry ("Which studies report an activation in
   hippocampus?"), not a new one.
@@ -137,6 +137,8 @@ fallback's replies as Sonnet $2/$10); the Albert runs cost nothing.
 | C Albert Gemma | 32 | 0.840 (25) | 1.8 | 14.4k / 0.39k | 0.0030 | 0/32 | 0 | 8 | coactivation: dh-127(0.88) p-128(0.00); cogat_hierarchy: dh-052(0.00); cogat_term: p-041(0.00); free_text: dh-010(0.00); negation: p-162(1.00); tian: p-096(0.00) |
 | A Albert DeepSeek | 32 | 0.720 (23) | 4.2 | 32.2k / 0.84k | 0.0016 | 0/32 | 0 | 46 | coactivation: f-131(0.00) f-133(0.00); cogat_hierarchy: f-048(0.00); cogat_term: f-030(0.00) f-031(0.00); conj_disj: f-173(0.00); schaefer: f-066(0.00) f-071(0.00); tian: f-102(0.03) |
 | C Albert DeepSeek | 32 | 0.720 (23) | 4.0 | 31.1k / 0.59k | 0.0015 | 0/32 | 1 | 47 | coactivation: f-133(0.00); cogat_hierarchy: f-048(0.00); cogat_term: f-030(0.00) f-031(0.00); conj_disj: f-173(0.00); free_text: f-011(0.00); schaefer: f-066(0.00) f-071(0.00); tian: f-102(0.03) |
+| A Albert DeepSeek r2 | 32 | 0.681 (21) | 4.2 | 32.1k / 0.70k | 0.0016 | 0/32 | 0 | 18 | coactivation: f-131(0.00) f-133(0.00) f-134(0.00); cogat_hierarchy: f-048(0.00); cogat_term: f-030(0.00) f-031(0.00); conj_disj: f-173(0.00); free_text: f-011(0.76); schaefer: f-066(0.00) f-071(0.00); tian: f-102(0.03) |
+| C Albert DeepSeek r2 | 32 | 0.719 (23) | 4.0 | 31.1k / 0.64k | 0.0015 | 0/32 | 0 | 12 | coactivation: f-133(0.00); cogat_hierarchy: f-048(0.00); cogat_term: f-030(0.00) f-031(0.00); conj_disj: f-173(0.00); free_text: f-011(0.00); schaefer: f-066(0.00) f-071(0.00); tian: f-102(0.00) |
 
 **Sonnet 5.5 reference** (not rerun; master d66a4245, same golds,
 runs/nsv3d.md): v3 test 0.875 (28), fresh 0.663 (21), $0.073–0.076/q.
@@ -150,17 +152,21 @@ runs/nsv3d.md): v3 test 0.875 (28), fresh 0.663 (21), $0.073–0.076/q.
 | test + fresh, ×3 vote only | 51 | 51 | 0 |
 | test + fresh, ×3 vote + Sonnet fallback | 52 | 51 | −1 |
 | test, Albert DeepSeek ×2 | 43 | 53 | **+10** |
-| fresh, Albert DeepSeek ×1 | 23 | 23 | 0 |
+| fresh, Albert DeepSeek ×2 | 44 | 46 | +2 |
 | test, Albert Gemma ×1 | 26 | 25 | −1 |
 
 - **No variant clearly wins.** On OpenRouter DeepSeek every C − A gap is
   within the same-variant spread (dev 4, test 2, fresh 2), and the votes
-  are even. The one gap above it, Albert DeepSeek on v3 test (+5 per run,
-  reproduced: dh-052, p-008, p-113 right in both C runs and wrong in both A
-  runs; A also ran out of steps 2–3 times), does not carry over to fresh
-  (23 = 23). Albert's DeepSeek writes far fewer output tokens (0.6–0.8k
-  against 2.2–3.3k on OpenRouter with `max_tokens` 8192), so it may
-  benefit more from examples; one more fresh pair would tell.
+  are even. **C wins on v3 test with Albert DeepSeek only:** +5 per run,
+  reproduced (dh-052, p-008, p-113 right in both C runs, wrong in both A
+  runs; p-113 is copied in one step from a distilled MNI-point example,
+  dh-052 from a CogAt-hierarchy one; A also ran out of steps 2–3 times).
+  On fresh the second pair (run at load ≤ 18, the first at 46–47) gives
+  A 21, C 23: +1 per run, within A's own spread of 2. Fresh has one MNI
+  question against three in test, so a smaller gain there is expected.
+  Albert's DeepSeek writes far fewer output tokens (0.6–0.8k against
+  2.2–3.3k on OpenRouter with `max_tokens` 8192).
+- Gemma on fresh was started and stopped (not reported) to hand back.
 - **Cheaper, not better:** C uses fewer steps on most pairs (dev 3.0–3.7
   vs 3.9–4.0; test 3.3–3.7 vs 3.8–4.0; fresh 2.9–3.6 vs 3.6–4.0) and
   slightly fewer tokens, within run-to-run variation.
@@ -182,10 +188,10 @@ runs/nsv3d.md): v3 test 0.875 (28), fresh 0.663 (21), $0.073–0.076/q.
   have stopped queries it would let through on an idle machine.
 - **Noise:** single runs at T 0 move by 1–4 exact of 32–33 on their own;
   most rows are one run.
-- The Albert pair on fresh ran under the highest load.
+- The first Albert pair on fresh ran under the highest load; it was repeated.
 
 ## Spend
 
 OpenRouter key 121.09 → 124.07: **$2.97** (`runs/nsv3e-ledger.jsonl`).
-Albert: 6 DeepSeek and 2 Gemma runs of 32 questions (about 1.1 M
+Albert: 8 DeepSeek and 2 Gemma runs of 32 questions (about 1.1 M
 Gemma tokens).
