@@ -44,7 +44,7 @@ for case in range(cases):
              for _ in range(rng.randint(1, 3))}
     facts |= {(rng.choice(("p", "r")),) + tuple(rng.sample(constants, 2))
               for _ in range(rng.randint(0, 3))}
-    predicates = {f[0] for f in facts} | t._derived_predicates(axioms)
+    predicates = {f[0] for f in facts} | t._signature(axioms)
     skip = only is not None and case not in only
     if not skip:
         nl = NeurolangPDL()
