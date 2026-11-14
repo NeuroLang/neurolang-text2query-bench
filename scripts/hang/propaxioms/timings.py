@@ -1,7 +1,8 @@
 """Build time of the neurosynth engine, then the Cognitive Atlas queries of
 NeuroLang #1228/#1238 (second, warm run of each) and those over the classes
 of cogat's six domain/range axioms, without and with one instance of each
-class in ``sys.argv[2:]``; ``sys.argv[1]`` is the timeout (s). Run it with
+class in ``sys.argv[2:]``; ``sys.argv[1]`` is the timeout (s). Each line
+gives the second run and, in parentheses, the first. Run it with
 PYTHONPATH on the NeuroLang worktree under test."""
 import signal
 import sys
@@ -49,6 +50,7 @@ print("predicates", names, flush=True)
 
 
 def timed(label, text, query):
+    first = None
     for _ in range(2):
         t = time.perf_counter()
         signal.alarm(int(sys.argv[1]))
@@ -64,8 +66,9 @@ def timed(label, text, query):
             break
         finally:
             signal.alarm(0)
-    print(label, f"{time.perf_counter() - t:6.1f}s", text, "->", out,
-          flush=True)
+        first = first or time.perf_counter() - t
+    print(label, f"{time.perf_counter() - t:6.1f}s (first {first:.1f}s)",
+          text, "->", out, flush=True)
 
 
 def run(label):
@@ -85,7 +88,25 @@ def run(label):
         timed(label, f"{name}({', '.join(args)})", query)
 
 
+def holding():
+    """The number of constraints, and of those that can hold."""
+    from neurolang.frontend.probabilistic_frontend import _only_constraints
+    from nl_core.datalog.ontologies_rewriter import constraints_that_can_hold
+    from nl_expr.logic import Union
+    table = nl.program_ir.symbol_table
+    holds = frozenset(
+        s for s in nl.program_ir.constraints()._symbols
+        if not _only_constraints(table.get(s, Union(())))
+    )
+    constraints = nl.program_ir.get_constraints()
+    can = constraints_that_can_hold(constraints, holds)
+    return (sum(map(len, constraints.values())),
+            sum(map(len, can.values())))
+
+
+print("constraints, holding", holding(), flush=True)
 run("none")
 for cls in sys.argv[2:]:
     nl.add_tuple_set([("individual",)], name=COGAT + cls)
+    print("constraints, holding", holding(), flush=True)
     run(cls)

@@ -50,3 +50,19 @@ nl.load_ontology(io.StringIO(
 nl.add_tuple_set([("Juan",)], name="Dean")
 for q in ["ans(x) :- Boss(x)"]:
     print("allValuesFrom via inverse", q, sorted(nl.execute_datalog_program(q)))
+# hasValue with range on an unnamed value: A ⊑ ∃q.C, C ⊑ ∃p.{v},
+# range(p) = D: D('v').
+nl = NeurolangPDL()
+nl.load_ontology(io.StringIO("""
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix : <http://ex.org/> .
+:A a owl:Class ; rdfs:subClassOf [ a owl:Restriction ; owl:onProperty :q ;
+    owl:someValuesFrom :C ] .
+:C a owl:Class ; rdfs:subClassOf [ a owl:Restriction ; owl:onProperty :p ;
+    owl:hasValue :v ] .
+:p rdfs:range :D .
+"""), format="turtle")
+nl.add_tuple_set([("a",)], name="A")
+print("hasValue with range", sorted(nl.execute_datalog_program(
+    "ans(y) :- D(y)")))
