@@ -29,7 +29,15 @@ for case in range(int(sys.argv[2]) if len(sys.argv) > 2 else 40):
         variables = sorted({v for atom in body for v in atom[1:]})
         head = rng.sample(variables, rng.randint(1, len(variables)))
         program = "ans({}) :- {}".format(", ".join(head), ", ".join(f"{a[0]}({', '.join(a[1:])})" for a in body))
-        expected = _certain_answers(axioms, facts, head, body)
+        signal.alarm(30)
+        try:
+            expected = _certain_answers(axioms, facts, head, body)
+        except KeyboardInterrupt:
+            print(case, "oracle timeout", axioms, sorted(facts), program,
+                  flush=True)
+            continue
+        finally:
+            signal.alarm(0)
         t = time.perf_counter(); signal.alarm(20)
         try:
             res = set(nl.execute_datalog_program(program))

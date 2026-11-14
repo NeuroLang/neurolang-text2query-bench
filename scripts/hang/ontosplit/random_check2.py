@@ -56,7 +56,8 @@ def stop(*_):
 
 
 signal.signal(signal.SIGALRM, stop)
-counts = {"ok": 0, "incomplete": 0, "unsound": 0, "timeout": 0, "error": 0}
+counts = {"ok": 0, "incomplete": 0, "unsound": 0, "timeout": 0, "error": 0,
+          "oracle": 0}
 for case in range(cases):
     axioms = ontology()
     facts = {(rng.choice(classes), rng.choice(constants[:3]))
@@ -82,7 +83,16 @@ for case in range(cases):
         head = rng.sample(variables, rng.randint(1, len(variables)))
         program = "ans({}) :- {}".format(", ".join(head), ", ".join(
             f"{a[0]}({', '.join(a[1:])})" for a in body))
-        expected = certain(axioms, facts, head, body)
+        signal.alarm(30)
+        try:
+            expected = certain(axioms, facts, head, body)
+        except KeyboardInterrupt:
+            counts["oracle"] += 1
+            print("case", case, "oracle timeout", axioms, sorted(facts),
+                  program, flush=True)
+            continue
+        finally:
+            signal.alarm(0)
         start = time.perf_counter()
         signal.alarm(10)
         try:
@@ -96,7 +106,7 @@ for case in range(cases):
         signal.alarm(0)
         counts[kind] += 1
         if kind != "ok":
-            print(kind, f"{time.perf_counter() - start:.1f}s", axioms,
+            print("case", case, kind, f"{time.perf_counter() - start:.1f}s", axioms,
                   sorted(facts), program, "got", res, "want", expected,
                   flush=True)
 print(counts)
