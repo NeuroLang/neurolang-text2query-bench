@@ -700,3 +700,30 @@ Spend: $12.74 (Sonnet 4.9M tokens).
 
 Engine bug found: `RESAMPLE` gave wrong replicates for a rule over another choice
 rule (NeuroLang PR #1212). Details in [runs/nsv3d.md](runs/nsv3d.md).
+
+## neurosynth-v3e: distilled bank, worked traces, hybrid retrieval (2026-11-14)
+
+The 703 kept Sonnet answers of distillation round 2 become entries of
+`engines/neurosynth/examples.yaml` (`scripts/distilled_bank.py`): minus 2
+duplicate queries, 64 answering a Cognitive Atlas concept with `mentions`
+(against the CogAt-first golds), and 6 failing on the engine's guard;
+B = 397 agreement-backed, C = 631 all. Max bge-m3 cosine of a new entry to
+an evaluation question: 0.850. D = C + worked traces (an optional `trace`
+field, NeuroLang local branch `feat/llm-distilled-bank`), E = C + #1000's
+hybrid selection (local port). All on master 1a4dafd8, which holds the
+step-1 fixes #1201–#1205.
+
+Exact matches (sum over runs), A = master, C = + 631 entries:
+
+| | A | C |
+|---|---:|---:|
+| v3 dev, DeepSeek single ×2 | 53/66 | 56/66 |
+| v3 test + fresh, DeepSeek single ×2 | 102/128 | 104/128 |
+| v3 test + fresh, ×3 vote + Sonnet fallback | 52/64 | 51/64 |
+| v3 test, Albert DeepSeek ×2 | 43/64 | 53/64 |
+| fresh, Albert DeepSeek | 23/32 | 23/32 |
+| v3 test, Albert Gemma | 26/32 | 25/32 |
+
+No variant clearly wins (traces and hybrid neither); the Albert DeepSeek
+gain on v3 test is not reproduced on fresh. No NeuroLang PR. Spend $2.97.
+Details in [runs/nsv3e.md](runs/nsv3e.md).

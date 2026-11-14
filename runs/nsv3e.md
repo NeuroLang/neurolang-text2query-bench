@@ -90,3 +90,102 @@ by the Sonnet judge):
 
 **Win threshold, fixed before any test run:** the best variant minus A must
 exceed the largest same-variant spread on that set (4 exact on dev).
+
+## Final runs: A (master) against C (+631 distilled entries), v3 test and fresh
+
+`scripts/nsv3e_queue.sh` then `scripts/nsv3e_queue2.sh`, one run at a time,
+A and C interleaved. Vote-only rows: `scripts/vote_only.py` +
+`reevaluate.py` on the vote runs (their tokens and $ are those of the vote
+run). $/q at OpenRouter prices (DeepSeek $0.0434/$0.30 per M, the
+fallback's replies as Sonnet $2/$10); the Albert runs cost nothing.
+
+### v3 test (32), DeepSeek on OpenRouter
+
+| run | n | mean J (exact) | steps | tokens in/out per q | $/q | fallback | invalid | max load | misses by category |
+|---|---:|---|---:|---|---:|---:|---:|---:|---|
+| A single | 32 | 0.906 (29) | 4.0 | 31.4k / 2.65k | 0.0022 | 0/32 | 0 | 4 | coactivation: p-128(0.00); cogat_term: p-041(0.00); free_text: dh-010(0.00) |
+| A single r2 | 32 | 0.902 (28) | 3.8 | 28.8k / 3.13k | 0.0022 | 0/32 | 1 | 4 | coactivation: dh-127(0.88) p-128(0.00); cogat_term: p-041(0.00); free_text: p-008(0.00) |
+| C single | 32 | 0.906 (29) | 3.7 | 28.8k / 2.82k | 0.0021 | 0/32 | 1 | 4 | coactivation: dh-127(0.00); cogat_term: p-041(0.00); tian: p-096(0.00) |
+| C single r2 | 32 | 0.844 (27) | 3.3 | 25.4k / 2.31k | 0.0018 | 0/32 | 1 | 5 | coactivation: dh-127(0.00) p-128(0.00); cogat_term: p-041(0.00); free_text: dh-010(0.00); tian: p-096(0.00) |
+| A vote only | 32 | 0.902 (28) | 12.7 | 0.0k / 0.00k | 0.0000 | 1/32 | 1 | 0 | coactivation: dh-127(0.88) p-128(0.00); cogat_term: p-041(0.00); free_text: dh-010(0.00) |
+| C vote only | 32 | 0.844 (27) | 10.4 | 0.0k / 0.00k | 0.0000 | 1/32 | 1 | 0 | coactivation: dh-127(0.00) p-128(0.00); cogat_term: p-041(0.00); free_text: dh-010(0.00); tian: p-096(0.00) |
+| A vote + fallback | 32 | 0.902 (28) | 12.7 | 99.1k / 7.47k | 0.0124 | 1/32 | 0 | 4 | coactivation: dh-127(0.88) p-128(0.00); cogat_term: p-041(0.00); free_text: dh-010(0.00) |
+| C vote + fallback | 32 | 0.844 (27) | 10.4 | 82.4k / 7.26k | 0.0121 | 1/32 | 0 | 4 | coactivation: dh-127(0.00) p-128(0.00); cogat_term: p-041(0.00); free_text: dh-010(0.00); tian: p-096(0.00) |
+
+### fresh (32), DeepSeek on OpenRouter
+
+| run | n | mean J (exact) | steps | tokens in/out per q | $/q | fallback | invalid | max load | misses by category |
+|---|---:|---|---:|---|---:|---:|---:|---:|---|
+| A single | 32 | 0.688 (22) | 3.6 | 28.2k / 2.42k | 0.0020 | 0/32 | 1 | 4 | coactivation: f-131(0.00) f-133(0.00); cogat_hierarchy: f-048(0.00); cogat_term: f-030(0.00) f-031(0.00); conj_disj: f-173(0.00) f-179(0.00); prob_forward: f-121(0.00); schaefer: f-066(0.00); tian: f-102(0.00) |
+| A single r2 | 32 | 0.720 (23) | 4.0 | 30.9k / 3.01k | 0.0022 | 0/32 | 0 | 4 | coactivation: f-131(0.00) f-133(0.00); cogat_hierarchy: f-048(0.00); cogat_term: f-030(0.00) f-031(0.00); conj_disj: f-173(0.00); prob_forward: f-121(0.00); schaefer: f-066(0.00); tian: f-102(0.03) |
+| C single | 32 | 0.720 (23) | 3.6 | 27.5k / 2.62k | 0.0020 | 0/32 | 1 | 5 | coactivation: f-133(0.00); cogat_hierarchy: f-048(0.00); cogat_term: f-030(0.00) f-031(0.00); conj_disj: f-173(0.00); destrieux: f-086(0.00); schaefer: f-066(0.00) f-071(0.00); tian: f-102(0.03) |
+| C single r2 | 32 | 0.781 (25) | 2.9 | 22.8k / 2.23k | 0.0017 | 0/32 | 1 | 5 | coactivation: f-133(0.00); cogat_hierarchy: f-048(0.00); cogat_term: f-030(0.00) f-031(0.00); schaefer: f-066(0.00) f-071(0.00); tian: f-102(0.00) |
+| A vote only | 32 | 0.719 (23) | 11.6 | 0.0k / 0.00k | 0.0000 | 2/32 | 0 | 0 | coactivation: f-131(0.00) f-133(0.00); cogat_hierarchy: f-048(0.00); cogat_term: f-030(0.00) f-031(0.00); conj_disj: f-173(0.00); prob_forward: f-121(0.00); schaefer: f-066(0.00); tian: f-102(0.00) |
+| C vote only | 32 | 0.750 (24) | 10.3 | 0.0k / 0.00k | 0.0000 | 0/32 | 0 | 0 | coactivation: f-133(0.00); cogat_hierarchy: f-048(0.00); cogat_term: f-030(0.00) f-031(0.00); conj_disj: f-173(0.00); schaefer: f-066(0.00) f-071(0.00); tian: f-102(0.00) |
+| A vote + fallback | 32 | 0.750 (24) | 11.6 | 92.4k / 7.77k | 0.0143 | 2/32 | 0 | 5 | coactivation: f-131(0.00) f-133(0.00); cogat_hierarchy: f-048(0.00); cogat_term: f-030(0.00) f-031(0.00); conj_disj: f-173(0.00); schaefer: f-066(0.00); tian: f-102(0.00) |
+| C vote + fallback | 32 | 0.750 (24) | 10.3 | 79.7k / 6.48k | 0.0054 | 0/32 | 0 | 5 | coactivation: f-133(0.00); cogat_hierarchy: f-048(0.00); cogat_term: f-030(0.00) f-031(0.00); conj_disj: f-173(0.00); schaefer: f-066(0.00) f-071(0.00); tian: f-102(0.00) |
+
+### Albert (free): v3 test, then fresh as time allowed
+
+| run | n | mean J (exact) | steps | tokens in/out per q | $/q | fallback | invalid | max load | misses by category |
+|---|---:|---|---:|---|---:|---:|---:|---:|---|
+| A Albert DeepSeek | 32 | 0.656 (21) | 4.6 | 36.5k / 0.68k | 0.0018 | 0/32 | 3 | 8 | coactivation: dh-127(0.00) p-128(0.00); cogat_hierarchy: dh-052(0.00); cogat_term: p-041(0.00); destrieux: p-079(0.00) p-083(0.00); free_text: dh-010(0.00) p-008(0.00); prob_forward: p-113(0.00); schaefer: dh-062(0.00); tian: p-096(0.00) |
+| A Albert DeepSeek r2 | 32 | 0.688 (22) | 4.8 | 37.5k / 0.79k | 0.0019 | 0/32 | 2 | 14 | coactivation: dh-127(0.00) p-128(0.00); cogat_hierarchy: dh-052(0.00); cogat_term: p-041(0.00); free_text: dh-010(0.00) p-008(0.00); prob_forward: dh-117(0.00) p-113(0.00); schaefer: p-058(0.00); tian: p-096(0.00) |
+| C Albert DeepSeek | 32 | 0.844 (27) | 4.0 | 31.9k / 0.97k | 0.0017 | 0/32 | 2 | 11 | coactivation: dh-127(0.00) p-128(0.00); cogat_term: p-041(0.00); free_text: dh-010(0.00); tian: p-096(0.00) |
+| C Albert DeepSeek r2 | 32 | 0.844 (26) | 4.0 | 31.5k / 0.67k | 0.0016 | 0/32 | 2 | 23 | coactivation: dh-127(0.00); cogat_term: p-041(0.00); free_text: dh-010(0.00); negation: p-162(1.00); prob_forward: dh-117(0.00); tian: p-096(0.00) |
+| A Albert Gemma | 32 | 0.812 (26) | 2.3 | 18.6k / 0.50k | 0.0039 | 0/32 | 0 | 8 | cogat_term: p-041(0.00); counts: p-153(0.00); free_text: dh-010(0.00) p-008(0.00); prob_forward: p-108(0.00); tian: p-096(0.00) |
+| C Albert Gemma | 32 | 0.840 (25) | 1.8 | 14.4k / 0.39k | 0.0030 | 0/32 | 0 | 8 | coactivation: dh-127(0.88) p-128(0.00); cogat_hierarchy: dh-052(0.00); cogat_term: p-041(0.00); free_text: dh-010(0.00); negation: p-162(1.00); tian: p-096(0.00) |
+| A Albert DeepSeek | 32 | 0.720 (23) | 4.2 | 32.2k / 0.84k | 0.0016 | 0/32 | 0 | 46 | coactivation: f-131(0.00) f-133(0.00); cogat_hierarchy: f-048(0.00); cogat_term: f-030(0.00) f-031(0.00); conj_disj: f-173(0.00); schaefer: f-066(0.00) f-071(0.00); tian: f-102(0.03) |
+| C Albert DeepSeek | 32 | 0.720 (23) | 4.0 | 31.1k / 0.59k | 0.0015 | 0/32 | 1 | 47 | coactivation: f-133(0.00); cogat_hierarchy: f-048(0.00); cogat_term: f-030(0.00) f-031(0.00); conj_disj: f-173(0.00); free_text: f-011(0.00); schaefer: f-066(0.00) f-071(0.00); tian: f-102(0.03) |
+
+**Sonnet 5.5 reference** (not rerun; master d66a4245, same golds,
+runs/nsv3d.md): v3 test 0.875 (28), fresh 0.663 (21), $0.073–0.076/q.
+
+## Reading
+
+| exact, sum of runs | A | C | C − A |
+|---|---:|---:|---:|
+| dev, DeepSeek single ×2 | 53 | 56 | +3 |
+| test + fresh, DeepSeek single ×2 | 102 | 104 | +2 |
+| test + fresh, ×3 vote only | 51 | 51 | 0 |
+| test + fresh, ×3 vote + Sonnet fallback | 52 | 51 | −1 |
+| test, Albert DeepSeek ×2 | 43 | 53 | **+10** |
+| fresh, Albert DeepSeek ×1 | 23 | 23 | 0 |
+| test, Albert Gemma ×1 | 26 | 25 | −1 |
+
+- **No variant clearly wins.** On OpenRouter DeepSeek every C − A gap is
+  within the same-variant spread (dev 4, test 2, fresh 2), and the votes
+  are even. The one gap above it, Albert DeepSeek on v3 test (+5 per run,
+  reproduced: dh-052, p-008, p-113 right in both C runs and wrong in both A
+  runs; A also ran out of steps 2–3 times), does not carry over to fresh
+  (23 = 23). Albert's DeepSeek writes far fewer output tokens (0.6–0.8k
+  against 2.2–3.3k on OpenRouter with `max_tokens` 8192), so it may
+  benefit more from examples; one more fresh pair would tell.
+- **Cheaper, not better:** C uses fewer steps on most pairs (dev 3.0–3.7
+  vs 3.9–4.0; test 3.3–3.7 vs 3.8–4.0; fresh 2.9–3.6 vs 3.6–4.0) and
+  slightly fewer tokens, within run-to-run variation.
+- **Traces (D)** fix dh-029 and break p-130 reproducibly on dev: a wash.
+  **Hybrid retrieval (E)** picks other examples (3.7 of 6 shared with
+  BM25) for the same score as C.
+- **What the bank cannot fix:** the CogAt-rule golds (p-038, p-049,
+  p-041, f-030, f-031, f-048) and the answer shape (p-128, dh-127, f-133);
+  dh-010 is the memory guard.
+- **No NeuroLang PR.** The trace field stays on the local branch
+  `feat/llm-distilled-bank` (fa0365e2, tests pass), the banks on the local
+  `nsv3e-*` branches, the hybrid port on `exp/nsv3e-hybrid`; nothing pushed.
+
+## Caveats
+
+- **Load:** one run at a time, but other sessions shared the Mac: the
+  1-minute load average over all runs had median 4.1 and max 47 (fresh
+  Albert pair, 46–47; `load.log` of each run). The guard (30 s, 4 GB) may
+  have stopped queries it would let through on an idle machine.
+- **Noise:** single runs at T 0 move by 1–4 exact of 32–33 on their own;
+  most rows are one run.
+- The Albert pair on fresh ran under the highest load.
+
+## Spend
+
+OpenRouter key 121.09 → 124.07: **$2.97** (`runs/nsv3e-ledger.jsonl`).
+Albert: 6 DeepSeek and 2 Gemma runs of 32 questions (about 1.1 M
+Gemma tokens).
