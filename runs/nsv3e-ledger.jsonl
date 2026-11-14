@@ -1,0 +1,10 @@
+{"time": "2026-11-14T01:08:25", "label": "start", "usage": 121.0935, "limit_remaining": 178.9065}
+{"time": "2026-11-14T01:36:42", "label": "A dev single", "usage": 121.131, "limit_remaining": 178.869}
+{"time": "2026-11-14T02:07:02", "label": "B dev single", "usage": 121.1615, "limit_remaining": 178.8385}
+{"time": "2026-11-14T02:25:59", "label": "C dev single", "usage": 121.1893, "limit_remaining": 178.8107}
+{"time": "2026-11-14T02:45:25", "label": "D dev single", "usage": 121.2471, "limit_remaining": 178.7529}
+{"time": "2026-11-14T03:04:59", "label": "E dev single", "usage": 121.3533, "limit_remaining": 178.6467}
+{"time": "2026-11-14T03:29:04", "label": "A dev single r2", "usage": 121.4114, "limit_remaining": 178.5886}
+{"time": "2026-11-14T03:52:19", "label": "C dev single r2", "usage": 121.463, "limit_remaining": 178.537}
+{"time": "2026-11-14T04:13:57", "label": "D dev single r2", "usage": 121.5412, "limit_remaining": 178.4588}
+{"time": "2026-11-14T04:16:55", "label": "before dev vote", "usage": 121.5412, "limit_remaining": 178.4588}

@@ -1,0 +1,2658 @@
+{
+ "p2-0001": [
+  0.763,
+  "Which voxels are activated by studies about being socially excluded in a ball-tossing game?"
+ ],
+ "p2-0002": [
+  0.635,
+  "Which network is most often activated by studies that mention imagery?"
+ ],
+ "p2-0003": [
+  0.573,
+  "What is the probability that a study mentions listening, given that it activates the left hippocampus?"
+ ],
+ "p2-0004": [
+  0.582,
+  "Give the titles of the studies about \"mind wandering during rest\" that never mention the default mode."
+ ],
+ "p2-0005": [
+  0.705,
+  "Which subcortical regions are activated by studies about arousal?"
+ ],
+ "p2-0006": [
+  0.773,
+  "Which gyri and sulci are activated by studies about navigation?"
+ ],
+ "p2-0008": [
+  0.706,
+  "Which brain regions are co-activated in studies about memory?"
+ ],
+ "p2-0009": [
+  0.651,
+  "What is the probability that a study activates nucleus accumbens, given that it mentions words?"
+ ],
+ "p2-0010": [
+  0.693,
+  "Which brain regions are activated by studies about any kind of knowledge?"
+ ],
+ "p2-0011": [
+  0.555,
+  "List the titles of studies about learning to navigate a virtual city."
+ ],
+ "p2-0012": [
+  0.674,
+  "Which cortical networks are activated by studies on judging the intentions of other people?"
+ ],
+ "p2-0013": [
+  0.557,
+  "How many studies that mention sound activate the left amygdala?"
+ ],
+ "p2-0014": [
+  0.549,
+  "What is the probability of conflict among studies that mention choices?"
+ ],
+ "p2-0015": [
+  0.804,
+  "Which brain regions are activated by studies about any kind of knowledge?"
+ ],
+ "p2-0016": [
+  0.651,
+  "Which terms co-occur with activation of hippocampus in a study?"
+ ],
+ "p2-0017": [
+  0.616,
+  "List the titles of studies about learning to navigate a virtual city."
+ ],
+ "p2-0018": [
+  0.655,
+  "Which gyri and sulci are activated by studies about navigation?"
+ ],
+ "p2-0019": [
+  0.664,
+  "What are the titles of studies about people playing video games?"
+ ],
+ "p2-0020": [
+  0.7,
+  "Which brain regions are activated by studies about any kind of knowledge?"
+ ],
+ "p2-0021": [
+  0.718,
+  "What is the probability that a study mentions visual, given that it activates amygdala?"
+ ],
+ "p2-0023": [
+  0.662,
+  "Which brain regions are activated by studies about any kind of knowledge?"
+ ],
+ "p2-0024": [
+  0.602,
+  "What is the probability of conflict among studies that mention choices?"
+ ],
+ "p2-0025": [
+  0.644,
+  "Which subcortical parcels are most often activated by studies on recollection?"
+ ],
+ "p2-0026": [
+  0.627,
+  "Is the right insula activated by studies about disgust at rotten food?"
+ ],
+ "p2-0027": [
+  0.782,
+  "Which subcortical regions are activated by studies about getting chills from music?"
+ ],
+ "p2-0028": [
+  0.601,
+  "What is the probability that a study mentions either elderly or word?"
+ ],
+ "p2-0030": [
+  0.672,
+  "Which cortical networks are activated by studies on judging the intentions of other people?"
+ ],
+ "p2-0031": [
+  0.695,
+  "Which subcortical regions are activated by studies on gambling with risky odds?"
+ ],
+ "p2-0032": [
+  0.614,
+  "Which gyri and sulci are activated by studies about navigation?"
+ ],
+ "p2-0033": [
+  0.69,
+  "Which cortical networks are activated by studies on judging other people's intentions?"
+ ],
+ "p2-0034": [
+  0.698,
+  "Which brain areas respond in studies about imagining future events?"
+ ],
+ "p2-0035": [
+  0.586,
+  "Which Schaefer parcels do the studies about \"imagining future events\" activate, and how likely?"
+ ],
+ "p2-0036": [
+  0.75,
+  "Which studies mention neither frontal cortex nor scenes?"
+ ],
+ "p2-0037": [
+  0.711,
+  "Which studies activate right subparietal sulcus and mention superior temporal?"
+ ],
+ "p2-0038": [
+  0.784,
+  "Which terms co-occur with movement in a study?"
+ ],
+ "p2-0041": [
+  0.759,
+  "Which brain regions are activated by studies about any kind of knowledge?"
+ ],
+ "p2-0042": [
+  0.55,
+  "Which studies mention emotion without mentioning recognition?"
+ ],
+ "p2-0044": [
+  0.703,
+  "What is the probability that a study activates left short insular gyri, given that it mentions either response inhibition or amygdala?"
+ ],
+ "p2-0045": [
+  0.762,
+  "Is the left amygdala activated by studies on choice?"
+ ],
+ "p2-0046": [
+  0.702,
+  "How many studies activate each gyrus and sulcus?"
+ ],
+ "p2-0047": [
+  0.668,
+  "What is the probability that a study mentions anxiety or depression?"
+ ],
+ "p2-0049": [
+  0.736,
+  "What is the probability that a study activates the MNI point left motor hand area (MNI -38, -22, 56)?"
+ ],
+ "p2-0050": [
+  0.592,
+  "Using the Cognitive Atlas definition of selective attention, which studies match it? Include their titles."
+ ],
+ "p2-0052": [
+  0.741,
+  "Which studies mention painful but do not activate putamen?"
+ ],
+ "p2-0055": [
+  0.632,
+  "Which cortical networks are activated by studies on judging the intentions of other people?"
+ ],
+ "p2-0056": [
+  0.764,
+  "Which brain regions are activated by studies about any kind of knowledge?"
+ ],
+ "p2-0057": [
+  0.75,
+  "Which subcortical regions are activated by studies about arousal?"
+ ],
+ "p2-0059": [
+  0.758,
+  "Which subcortical parcels are most often activated by studies on recollection?"
+ ],
+ "p2-0060": [
+  0.644,
+  "Using the Cognitive Atlas definition of selective attention, which studies match it? Include their titles."
+ ],
+ "p2-0061": [
+  0.608,
+  "Which studies mention both manipulation and sentence?"
+ ],
+ "p2-0063": [
+  0.7,
+  "Is frontoparietal control co-activated with salience ventral attention in studies that mention cognitive control?"
+ ],
+ "p2-0067": [
+  0.694,
+  "Which subcortical regions are activated by studies about arousal?"
+ ],
+ "p2-0068": [
+  0.745,
+  "How many studies activate each subcortical region?"
+ ],
+ "p2-0069": [
+  0.528,
+  "Which terms co-occur with movement in a study?"
+ ],
+ "p2-0070": [
+  0.806,
+  "Which gyri and sulci are activated by studies about navigation?"
+ ],
+ "p2-0071": [
+  0.492,
+  "Which subcortical structures co-activate with hippocampus in studies about injury?"
+ ],
+ "p2-0073": [
+  0.644,
+  "Which Cognitive Atlas classes are kinds of memory, at any depth?"
+ ],
+ "p2-0075": [
+  0.684,
+  "How many studies activate each subcortical region?"
+ ],
+ "p2-0076": [
+  0.607,
+  "Which subcortical regions are activated by studies about arousal?"
+ ],
+ "p2-0077": [
+  0.683,
+  "Which Cognitive Atlas classes are kinds of memory, at any depth?"
+ ],
+ "p2-0078": [
+  0.587,
+  "Using the Cognitive Atlas definition of selective attention, which studies match it? Include their titles."
+ ],
+ "p2-0080": [
+  0.623,
+  "Which Cognitive Atlas classes are kinds of memory, at any depth?"
+ ],
+ "p2-0081": [
+  0.608,
+  "Which studies about efficiency report an activation within 5 mm of MNI (40, -50, 44)?"
+ ],
+ "p2-0083": [
+  0.495,
+  "Which studies mention both manipulation and sentence?"
+ ],
+ "p2-0086": [
+  0.682,
+  "Which terms co-occur with movement in a study?"
+ ],
+ "p2-0089": [
+  0.528,
+  "How many distinct terms does the database contain?"
+ ],
+ "p2-0091": [
+  0.752,
+  "Which subcortical regions are activated by studies about arousal?"
+ ],
+ "p2-0092": [
+  0.7,
+  "Which gyri and sulci are activated by studies about navigation?"
+ ],
+ "p2-0094": [
+  0.747,
+  "Which parcels of the right hemisphere central visual network are activated by studies mentioning hippocampal?"
+ ],
+ "p2-0096": [
+  0.798,
+  "Which subclass of fixation is mentioned by the most studies?"
+ ],
+ "p2-0097": [
+  0.724,
+  "Which studies mention emotion without mentioning recognition?"
+ ],
+ "p2-0098": [
+  0.736,
+  "Which subcortical parcels are most often activated by studies on recollection?"
+ ],
+ "p2-0104": [
+  0.681,
+  "Which Cognitive Atlas classes are kinds of memory, at any depth?"
+ ],
+ "p2-0106": [
+  0.754,
+  "Which Schaefer parcels tend to be activated together with the right anterior putamen, and how likely?"
+ ],
+ "p2-0108": [
+  0.778,
+  "Which studies activate the somatomotor network but not the peripheral visual network?"
+ ],
+ "p2-0109": [
+  0.729,
+  "Which network is most often activated by studies that mention imagery?"
+ ],
+ "p2-0110": [
+  0.718,
+  "Is the left somatomotor network activated by studies about premotor?"
+ ],
+ "p2-0111": [
+  0.712,
+  "Which subcortical regions are co-activated with salience ventral attention?"
+ ],
+ "p2-0112": [
+  0.828,
+  "What is the probability that a study activates the limbic network, given that it activates the salience ventral attention network?"
+ ],
+ "p2-0113": [
+  0.683,
+  "Which parcels belong to the temporoparietal network in the right hemisphere?"
+ ],
+ "p2-0114": [
+  0.82,
+  "Which terms are associated with activation in the central visual network?"
+ ],
+ "p2-0115": [
+  0.785,
+  "Which parcels of the right hemisphere central visual network are activated by studies mentioning hippocampal?"
+ ],
+ "p2-0116": [
+  0.671,
+  "In studies mentioning spatial attention, how often is each pair of dorsal attention network parcels activated together?"
+ ],
+ "p2-0117": [
+  0.694,
+  "Which parcels of the right hemisphere central visual network are activated by studies mentioning hippocampal?"
+ ],
+ "p2-0118": [
+  0.693,
+  "What is the probability that a study activates the MNI point right caudate (MNI 12, 12, 10), given that it mentions default mode?"
+ ],
+ "p2-0119": [
+  0.682,
+  "How many studies about emotional stimuli activate each brain region?"
+ ],
+ "p2-0120": [
+  0.604,
+  "Is the left somatomotor network activated by studies about premotor?"
+ ],
+ "p2-0121": [
+  0.827,
+  "Which parcels belong to the temporoparietal network in the right hemisphere?"
+ ],
+ "p2-0123": [
+  0.718,
+  "Which brain regions are activated by studies about any kind of knowledge?"
+ ],
+ "p2-0124": [
+  0.783,
+  "Which parcels of the right hemisphere central visual network are activated by studies mentioning hippocampal?"
+ ],
+ "p2-0125": [
+  0.771,
+  "Which parcels of the right hemisphere central visual network are activated by studies mentioning hippocampal?"
+ ],
+ "p2-0126": [
+  0.619,
+  "Which Schaefer parcel has the highest probability of activation among the studies mentioning pain?"
+ ],
+ "p2-0127": [
+  0.702,
+  "What is the probability that a study activates the salience / ventral attention network but not the default mode network?"
+ ],
+ "p2-0128": [
+  0.666,
+  "What is the probability that a study activates the salience / ventral attention network but not the default mode network?"
+ ],
+ "p2-0129": [
+  0.731,
+  "What is the probability that a study activates the salience / ventral attention network but not the default mode network?"
+ ],
+ "p2-0130": [
+  0.787,
+  "Which hemisphere shows more limbic network activation in studies on depressive?"
+ ],
+ "p2-0131": [
+  0.718,
+  "What is the probability that a study activates the limbic network, given that it activates the salience ventral attention network?"
+ ],
+ "p2-0132": [
+  0.76,
+  "Which terms are associated with activation in the central visual network?"
+ ],
+ "p2-0133": [
+  0.77,
+  "How likely is a study to activate the left angular gyrus while leaving the right angular gyrus inactive?"
+ ],
+ "p2-0134": [
+  0.635,
+  "Which studies activate the somatomotor network but not the peripheral visual network?"
+ ],
+ "p2-0135": [
+  0.756,
+  "Which studies activate the somatomotor network but not the peripheral visual network?"
+ ],
+ "p2-0136": [
+  0.756,
+  "Is frontoparietal control co-activated with salience ventral attention in studies that mention cognitive control?"
+ ],
+ "p2-0137": [
+  0.726,
+  "What is the probability that a study activates the limbic network, given that it activates the salience ventral attention network?"
+ ],
+ "p2-0138": [
+  0.797,
+  "What is the probability that a study activates the salience / ventral attention network but not the default mode network?"
+ ],
+ "p2-0139": [
+  0.732,
+  "Which studies activate the somatomotor network but not the peripheral visual network?"
+ ],
+ "p2-0140": [
+  0.756,
+  "Which parcels belong to the temporoparietal network in the right hemisphere?"
+ ],
+ "p2-0141": [
+  0.763,
+  "Which gyri and sulci are activated by studies mentioning both psychiatric and white matter?"
+ ],
+ "p2-0142": [
+  0.787,
+  "Based on its Cognitive Atlas definition, how likely is a study about semantic memory to activate the left middle temporal gyrus?"
+ ],
+ "p2-0143": [
+  0.746,
+  "Given that a study mentions arithmetic, what is the chance that it activates the left intraparietal sulcus?"
+ ],
+ "p2-0144": [
+  0.686,
+  "Which Destrieux region is the most likely to be activated by the studies mentioning motor, and with what probability?"
+ ],
+ "p2-0145": [
+  0.655,
+  "Which studies report activation in right anterior transverse collateral sulcus but do not mention lesion?"
+ ],
+ "p2-0146": [
+  0.757,
+  "Do studies about parahippocampal report activation in left posterior mid-cingulate gyrus and sulcus?"
+ ],
+ "p2-0147": [
+  0.839,
+  "Do studies about parahippocampal report activation in left posterior mid-cingulate gyrus and sulcus?"
+ ],
+ "p2-0148": [
+  0.731,
+  "Which studies activate both right anterior mid-cingulate gyrus and sulcus and right gyrus rectus?"
+ ],
+ "p2-0149": [
+  0.741,
+  "Given that a study mentions arithmetic, what is the chance that it activates the left intraparietal sulcus?"
+ ],
+ "p2-0150": [
+  0.709,
+  "Which studies activate right subparietal sulcus and mention superior temporal?"
+ ],
+ "p2-0151": [
+  0.755,
+  "Which studies report activation in right anterior transverse collateral sulcus but do not mention lesion?"
+ ],
+ "p2-0152": [
+  0.723,
+  "Which studies activate right subparietal sulcus and mention superior temporal?"
+ ],
+ "p2-0153": [
+  0.68,
+  "Which studies report activation in right anterior transverse collateral sulcus but do not mention lesion?"
+ ],
+ "p2-0154": [
+  0.81,
+  "Which gyri and sulci are activated by studies about navigation?"
+ ],
+ "p2-0155": [
+  0.806,
+  "Which terms co-occur with an activation of right postcentral gyrus?"
+ ],
+ "p2-0156": [
+  0.644,
+  "Which studies activate both right anterior mid-cingulate gyrus and sulcus and right gyrus rectus?"
+ ],
+ "p2-0157": [
+  0.627,
+  "Which studies activate right subparietal sulcus and mention superior temporal?"
+ ],
+ "p2-0158": [
+  0.747,
+  "Do studies about parahippocampal report activation in left posterior mid-cingulate gyrus and sulcus?"
+ ],
+ "p2-0159": [
+  0.652,
+  "How likely is a study to activate the left angular gyrus while leaving the right angular gyrus inactive?"
+ ],
+ "p2-0160": [
+  0.638,
+  "What is the probability that a study mentions either elderly or word?"
+ ],
+ "p2-0161": [
+  0.645,
+  "Which gyri and sulci are activated by studies about navigation?"
+ ],
+ "p2-0162": [
+  0.845,
+  "Which gyri and sulci are not activated by studies about adolescence?"
+ ],
+ "p2-0163": [
+  0.659,
+  "Which gyri and sulci are activated by the same studies as salience ventral attention?"
+ ],
+ "p2-0164": [
+  0.804,
+  "Quelle est la probabilit\u00e9 qu'une \u00e9tude active le gyrus angulaire gauche sans activer le gyrus angulaire droit ?"
+ ],
+ "p2-0165": [
+  0.737,
+  "Which studies report activation in right anterior transverse collateral sulcus but do not mention lesion?"
+ ],
+ "p2-0166": [
+  0.62,
+  "Which studies activate right subparietal sulcus and mention superior temporal?"
+ ],
+ "p2-0167": [
+  0.758,
+  "Which gyri and sulci are activated by studies about navigation?"
+ ],
+ "p2-0168": [
+  0.767,
+  "Is left superior occipital gyrus co-activated with caudate across studies?"
+ ],
+ "p2-0169": [
+  0.747,
+  "Do studies about parahippocampal report activation in left posterior mid-cingulate gyrus and sulcus?"
+ ],
+ "p2-0170": [
+  0.76,
+  "Is the left amygdala activated by studies on choice?"
+ ],
+ "p2-0171": [
+  0.675,
+  "Is the left hippocampus activated by studies on recalling childhood events?"
+ ],
+ "p2-0172": [
+  0.78,
+  "Which Destrieux region is the most likely to be activated by the studies mentioning motor, and with what probability?"
+ ],
+ "p2-0173": [
+  0.772,
+  "Which studies activate right subparietal sulcus and mention superior temporal?"
+ ],
+ "p2-0174": [
+  0.67,
+  "Do studies about parahippocampal report activation in left posterior mid-cingulate gyrus and sulcus?"
+ ],
+ "p2-0175": [
+  0.655,
+  "Which gyri and sulci are activated by studies mentioning both psychiatric and white matter?"
+ ],
+ "p2-0176": [
+  0.793,
+  "Is left superior occipital gyrus co-activated with caudate across studies?"
+ ],
+ "p2-0177": [
+  0.649,
+  "Which terms are mentioned by studies that activate putamen?"
+ ],
+ "p2-0179": [
+  0.779,
+  "Which studies mention painful but do not activate putamen?"
+ ],
+ "p2-0181": [
+  0.703,
+  "Which subcortical regions are co-activated with salience ventral attention?"
+ ],
+ "p2-0182": [
+  0.789,
+  "Which terms are mentioned by studies that activate putamen?"
+ ],
+ "p2-0183": [
+  0.728,
+  "What is the probability that a study mentions visual, given that it activates amygdala?"
+ ],
+ "p2-0184": [
+  0.789,
+  "Which studies activate both left subcallosal gyrus and globus pallidus?"
+ ],
+ "p2-0185": [
+  0.74,
+  "For each region of the Tian subcortical atlas, how many studies activate it?"
+ ],
+ "p2-0186": [
+  0.674,
+  "What is the probability that a study activates nucleus accumbens, given that it mentions words?"
+ ],
+ "p2-0187": [
+  0.791,
+  "Which subcortical regions are activated by studies about arousal?"
+ ],
+ "p2-0188": [
+  0.749,
+  "Which studies activate both left subcallosal gyrus and globus pallidus?"
+ ],
+ "p2-0189": [
+  0.776,
+  "How many studies that mention fear activate thalamus?"
+ ],
+ "p2-0190": [
+  0.77,
+  "Which terms are mentioned by studies that activate putamen?"
+ ],
+ "p2-0192": [
+  0.687,
+  "How many studies that mention sound activate the left amygdala?"
+ ],
+ "p2-0194": [
+  0.764,
+  "Which studies mention painful but do not activate putamen?"
+ ],
+ "p2-0196": [
+  0.835,
+  "For each region of the Tian subcortical atlas, how many studies activate it?"
+ ],
+ "p2-0197": [
+  0.77,
+  "Which terms are mentioned by studies that activate putamen?"
+ ],
+ "p2-0198": [
+  0.692,
+  "What is the probability that a study activates nucleus accumbens, given that it mentions words?"
+ ],
+ "p2-0199": [
+  0.672,
+  "Which Tian atlas regions are activated by studies that mention vision?"
+ ],
+ "p2-0200": [
+  0.727,
+  "How many studies that mention fear activate thalamus?"
+ ],
+ "p2-0201": [
+  0.752,
+  "Which Tian atlas regions are activated by studies that mention vision?"
+ ],
+ "p2-0202": [
+  0.621,
+  "Which terms are mentioned by studies that activate putamen?"
+ ],
+ "p2-0203": [
+  0.731,
+  "Which terms co-occur with activation of hippocampus in a study?"
+ ],
+ "p2-0204": [
+  0.829,
+  "Which studies activate both left subcallosal gyrus and globus pallidus?"
+ ],
+ "p2-0205": [
+  0.638,
+  "Is left superior occipital gyrus co-activated with caudate across studies?"
+ ],
+ "p2-0207": [
+  0.688,
+  "Show the titles of studies that mention frontal eye but not placebo."
+ ],
+ "p2-0208": [
+  0.698,
+  "Which subcortical structures co-activate with hippocampus in studies about injury?"
+ ],
+ "p2-0209": [
+  0.769,
+  "Which subcortical regions are activated by studies about arousal?"
+ ],
+ "p2-0210": [
+  0.803,
+  "Which terms co-occur with activation of hippocampus in a study?"
+ ],
+ "p2-0211": [
+  0.793,
+  "What is the probability that a study mentions visual, given that it activates amygdala?"
+ ],
+ "p2-0212": [
+  0.563,
+  "What is the probability that a study mentions both reading and dorsolateral prefrontal?"
+ ],
+ "p2-0213": [
+  0.74,
+  "What is the probability that a study mentions anxiety or depression?"
+ ],
+ "p2-0214": [
+  0.735,
+  "How many studies activate the left amygdala?"
+ ],
+ "p2-0216": [
+  0.684,
+  "What is the probability that a study mentions visual, given that it activates amygdala?"
+ ],
+ "p2-0217": [
+  0.694,
+  "How much does emotion regulation increase the chance of activating right fusiform face area (MNI 40, -52, -18)?"
+ ],
+ "p2-0218": [
+  0.568,
+  "What is the probability that a study activates the MNI point left motor hand area (MNI -38, -22, 56)?"
+ ],
+ "p2-0219": [
+  0.686,
+  "What is the probability that a study activates the MNI point right caudate (MNI 12, 12, 10), given that it mentions default mode?"
+ ],
+ "p2-0220": [
+  0.77,
+  "What is the probability that a study activates the MNI point left motor hand area (MNI -38, -22, 56)?"
+ ],
+ "p2-0221": [
+  0.683,
+  "How many studies that mention fear activate thalamus?"
+ ],
+ "p2-0222": [
+  0.732,
+  "What is the probability that a study activates the MNI point right caudate (MNI 12, 12, 10), given that it mentions default mode?"
+ ],
+ "p2-0223": [
+  0.685,
+  "Which parcels of the left hemisphere frontoparietal control network are activated by studies mentioning broca?"
+ ],
+ "p2-0225": [
+  0.69,
+  "Given studies on auditory, how likely is an activation at MNI right insula (MNI 38, 6, 2)?"
+ ],
+ "p2-0226": [
+  0.73,
+  "What is the probability that a study mentions anxiety or depression?"
+ ],
+ "p2-0229": [
+  0.679,
+  "How often do studies about frontal lobe activate the temporoparietal network?"
+ ],
+ "p2-0230": [
+  0.648,
+  "What is the probability that a study mentions both working memory and ventromedial prefrontal?"
+ ],
+ "p2-0231": [
+  0.625,
+  "What is the probability that a study mentions visual, given that it activates amygdala?"
+ ],
+ "p2-0232": [
+  0.657,
+  "What is the probability that a study mentions both reading and dorsolateral prefrontal?"
+ ],
+ "p2-0233": [
+  0.65,
+  "Which study is the single closest match to \"tactile stimulation of the fingertips\"? Give its title."
+ ],
+ "p2-0234": [
+  0.603,
+  "What is the lift of premotor cortex given syntactic?"
+ ],
+ "p2-0235": [
+  0.768,
+  "How likely is a randomly drawn study to mention sleep as well as memory?"
+ ],
+ "p2-0236": [
+  0.631,
+  "What is the probability of conflict among studies that mention choices?"
+ ],
+ "p2-0237": [
+  0.815,
+  "How much does emotion regulation increase the chance of activating right fusiform face area (MNI 40, -52, -18)?"
+ ],
+ "p2-0238": [
+  0.604,
+  "What is the probability that a study mentions anxiety or depression?"
+ ],
+ "p2-0239": [
+  0.63,
+  "What is the probability that a study activates the MNI point left motor hand area (MNI -38, -22, 56)?"
+ ],
+ "p2-0240": [
+  0.589,
+  "Quelle est la probabilit\u00e9 qu'une \u00e9tude qui mentionne la m\u00e9moire de travail active le r\u00e9seau de contr\u00f4le fronto-pari\u00e9tal, dans l'un ou l'autre h\u00e9misph\u00e8re ?"
+ ],
+ "p2-0241": [
+  0.606,
+  "Quelle est la probabilit\u00e9 qu'une \u00e9tude tir\u00e9e au hasard mentionne \u00e0 la fois le sommeil et la m\u00e9moire ?"
+ ],
+ "p2-0242": [
+  0.612,
+  "What is the probability that a study mentions anxiety or depression?"
+ ],
+ "p2-0243": [
+  0.626,
+  "What is the probability of conflict among studies that mention choices?"
+ ],
+ "p2-0244": [
+  0.684,
+  "Which network is most often activated by studies that mention imagery?"
+ ],
+ "p2-0245": [
+  0.743,
+  "Quelle proportion des \u00e9tudes mentionnent la schizophr\u00e9nie ?"
+ ],
+ "p2-0246": [
+  0.673,
+  "What is the probability that a study activates the MNI point right caudate (MNI 12, 12, 10), given that it mentions default mode?"
+ ],
+ "p2-0247": [
+  0.669,
+  "What is the probability that a study activates nucleus accumbens, given that it mentions words?"
+ ],
+ "p2-0249": [
+  0.703,
+  "What is the probability that a study mentions visual, given that it activates amygdala?"
+ ],
+ "p2-0250": [
+  0.732,
+  "Which terms co-occur with an activation of right postcentral gyrus?"
+ ],
+ "p2-0251": [
+  0.821,
+  "Do studies about parahippocampal report activation in left posterior mid-cingulate gyrus and sulcus?"
+ ],
+ "p2-0252": [
+  0.767,
+  "Which terms are mentioned by studies that activate putamen?"
+ ],
+ "p2-0253": [
+  0.665,
+  "Is left superior occipital gyrus co-activated with caudate across studies?"
+ ],
+ "p2-0254": [
+  0.786,
+  "Which brain regions are co-activated in studies about memory?"
+ ],
+ "p2-0256": [
+  0.718,
+  "What is the probability that a study activates nucleus accumbens, given that it mentions words?"
+ ],
+ "p2-0257": [
+  0.66,
+  "Which brain regions are co-activated in studies about memory?"
+ ],
+ "p2-0258": [
+  0.715,
+  "Do studies about parahippocampal report activation in left posterior mid-cingulate gyrus and sulcus?"
+ ],
+ "p2-0259": [
+  0.739,
+  "Which subcortical structures co-activate with hippocampus in studies about injury?"
+ ],
+ "p2-0260": [
+  0.782,
+  "Which terms are mentioned by studies that activate putamen?"
+ ],
+ "p2-0261": [
+  0.759,
+  "Which studies activate right subparietal sulcus and mention superior temporal?"
+ ],
+ "p2-0262": [
+  0.704,
+  "Which terms are associated with activation in the central visual network?"
+ ],
+ "p2-0263": [
+  0.755,
+  "Which gyri and sulci are activated by the same studies as salience ventral attention?"
+ ],
+ "p2-0265": [
+  0.746,
+  "Which studies mention parietal lobe and activate the dorsal attention network?"
+ ],
+ "p2-0266": [
+  0.719,
+  "Which studies activate right subparietal sulcus and mention superior temporal?"
+ ],
+ "p2-0267": [
+  0.742,
+  "Which networks tend to be active in the same studies as right suborbital sulcus?"
+ ],
+ "p2-0268": [
+  0.752,
+  "Which subcortical regions are co-activated with salience ventral attention?"
+ ],
+ "p2-0269": [
+  0.799,
+  "How many studies activate the left amygdala?"
+ ],
+ "p2-0270": [
+  0.759,
+  "What is the probability that a study mentions memory retrieval, given that it activates both left middle frontal sulcus and globus pallidus?"
+ ],
+ "p2-0271": [
+  0.702,
+  "Which parcels of the right hemisphere central visual network are activated by studies mentioning hippocampal?"
+ ],
+ "p2-0272": [
+  0.629,
+  "Which brain regions are co-activated in studies about memory?"
+ ],
+ "p2-0273": [
+  0.723,
+  "How often do studies about frontal lobe activate the temporoparietal network?"
+ ],
+ "p2-0274": [
+  0.736,
+  "Is left superior occipital gyrus co-activated with caudate across studies?"
+ ],
+ "p2-0275": [
+  0.701,
+  "Which subcortical structures co-activate with hippocampus in studies about injury?"
+ ],
+ "p2-0277": [
+  0.623,
+  "Which terms co-occur with an activation of right postcentral gyrus?"
+ ],
+ "p2-0279": [
+  0.652,
+  "En prenant la d\u00e9finition de l'empathie de la Cognitive Atlas, quelle est la probabilit\u00e9 qu'une \u00e9tude correspondante active le r\u00e9seau limbique ?"
+ ],
+ "p2-0280": [
+  0.693,
+  "Which voxels are activated by studies that mention both midbrain and thalamus?"
+ ],
+ "p2-0281": [
+  0.827,
+  "How many studies activate each subcortical region?"
+ ],
+ "p2-0282": [
+  0.716,
+  "How many studies that mention fear activate thalamus?"
+ ],
+ "p2-0284": [
+  0.708,
+  "How many studies activate each subcortical region?"
+ ],
+ "p2-0285": [
+  0.761,
+  "Which studies activate the somatomotor network but not the peripheral visual network?"
+ ],
+ "p2-0286": [
+  0.655,
+  "How many studies activate each subcortical region?"
+ ],
+ "p2-0287": [
+  0.78,
+  "Which studies about efficiency report an activation within 5 mm of MNI (40, -50, 44)?"
+ ],
+ "p2-0288": [
+  0.663,
+  "How many studies that mention sound activate the left amygdala?"
+ ],
+ "p2-0289": [
+  0.612,
+  "How many studies are in the database?"
+ ],
+ "p2-0290": [
+  0.765,
+  "What is the probability that a study activates the salience / ventral attention network but not the default mode network?"
+ ],
+ "p2-0291": [
+  0.774,
+  "Which studies mention emotion without mentioning recognition?"
+ ],
+ "p2-0292": [
+  0.648,
+  "What is the probability that a study mentions visual, given that it activates amygdala?"
+ ],
+ "p2-0293": [
+  0.539,
+  "Quelle proportion des \u00e9tudes mentionnent la schizophr\u00e9nie ?"
+ ],
+ "p2-0294": [
+  0.676,
+  "Which studies about efficiency report an activation within 5 mm of MNI (40, -50, 44)?"
+ ],
+ "p2-0295": [
+  0.623,
+  "Which studies mention both visuospatial and parkinson, and what are their titles?"
+ ],
+ "p2-0296": [
+  0.697,
+  "How many studies about emotional stimuli activate each brain region?"
+ ],
+ "p2-0297": [
+  0.697,
+  "How many studies activate the left amygdala?"
+ ],
+ "p2-0298": [
+  0.728,
+  "How many studies are in the database?"
+ ],
+ "p2-0300": [
+  0.676,
+  "Which terms co-occur with movement in a study?"
+ ],
+ "p2-0301": [
+  0.716,
+  "How many distinct terms does the database contain?"
+ ],
+ "p2-0303": [
+  0.706,
+  "Given behavioural, how probable is sensorimotor in a study?"
+ ],
+ "p2-0304": [
+  0.594,
+  "What proportion of studies about orbitofrontal cortex also mention medication?"
+ ],
+ "p2-0306": [
+  0.693,
+  "How many studies activate each subcortical region?"
+ ],
+ "p2-0307": [
+  0.767,
+  "How many studies do not mention behaviors?"
+ ],
+ "p2-0309": [
+  0.728,
+  "How many studies about emotional stimuli activate each brain region?"
+ ],
+ "p2-0310": [
+  0.61,
+  "Quelle proportion des \u00e9tudes mentionnent la schizophr\u00e9nie ?"
+ ],
+ "p2-0311": [
+  0.669,
+  "How many distinct terms does the database contain?"
+ ],
+ "p2-0313": [
+  0.633,
+  "Which Cognitive Atlas classes are kinds of memory, at any depth?"
+ ],
+ "p2-0314": [
+  0.635,
+  "What share of the studies mention reward but not punishment?"
+ ],
+ "p2-0315": [
+  0.736,
+  "What is the probability that a study mentions both reading and dorsolateral prefrontal?"
+ ],
+ "p2-0316": [
+  0.776,
+  "How many studies activate the left amygdala?"
+ ],
+ "p2-0317": [
+  0.664,
+  "How many studies mention young adults but not orbitofrontal?"
+ ],
+ "p2-0318": [
+  0.777,
+  "Which studies mention neither frontal cortex nor scenes?"
+ ],
+ "p2-0320": [
+  0.707,
+  "How many studies mention young adults but not orbitofrontal?"
+ ],
+ "p2-0321": [
+  0.672,
+  "What is the probability that a study mentions anxiety or depression?"
+ ],
+ "p2-0322": [
+  0.653,
+  "Which terms never co-occur with anxiety in a study?"
+ ],
+ "p2-0323": [
+  0.768,
+  "How many studies do not mention behaviors?"
+ ],
+ "p2-0325": [
+  0.579,
+  "Which studies mention neither frontal cortex nor scenes?"
+ ],
+ "p2-0326": [
+  0.683,
+  "Which terms co-occur with an activation of right postcentral gyrus?"
+ ],
+ "p2-0327": [
+  0.718,
+  "Show the titles of studies that mention frontal eye but not placebo."
+ ],
+ "p2-0328": [
+  0.622,
+  "How many studies do not mention behaviors?"
+ ],
+ "p2-0331": [
+  0.672,
+  "Give the titles of the studies about \"mind wandering during rest\" that never mention the default mode."
+ ],
+ "p2-0333": [
+  0.711,
+  "Which studies mention neither frontal cortex nor scenes?"
+ ],
+ "p2-0334": [
+  0.691,
+  "What is the probability that a study mentions extrastriate, given that it activates right angular gyrus?"
+ ],
+ "p2-0335": [
+  0.688,
+  "Which parcels of the right hemisphere central visual network are activated by studies mentioning hippocampal?"
+ ],
+ "p2-0336": [
+  0.673,
+  "What is the probability that a study mentions either elderly or word?"
+ ],
+ "p2-0337": [
+  0.697,
+  "How many studies do not mention behaviors?"
+ ],
+ "p2-0338": [
+  0.723,
+  "Which studies mention emotion without mentioning recognition?"
+ ],
+ "p2-0340": [
+  0.613,
+  "Parmi les \u00e9tudes ayant un pic \u00e0 moins de 3 mm du point MNI (-44, 12, 24), quelle fraction en a aussi un \u00e0 moins de 3 mm du point MNI (-48, -56, -10) ?"
+ ],
+ "p2-0341": [
+  0.764,
+  "Which studies mention painful but do not activate putamen?"
+ ],
+ "p2-0342": [
+  0.666,
+  "Which studies activate the somatomotor network but not the peripheral visual network?"
+ ],
+ "p2-0343": [
+  0.724,
+  "Which studies activate the somatomotor network but not the peripheral visual network?"
+ ],
+ "p2-0344": [
+  0.816,
+  "Which terms never co-occur with anxiety in a study?"
+ ],
+ "p2-0345": [
+  0.627,
+  "Which studies mention neither frontal cortex nor scenes?"
+ ],
+ "p2-0346": [
+  0.704,
+  "How likely is a study to activate the left angular gyrus while leaving the right angular gyrus inactive?"
+ ],
+ "p2-0348": [
+  0.736,
+  "Which studies mention neither frontal cortex nor scenes?"
+ ],
+ "p2-0351": [
+  0.763,
+  "How many studies mention young adults but not orbitofrontal?"
+ ],
+ "p2-0352": [
+  0.794,
+  "How likely is a randomly drawn study to mention sleep as well as memory?"
+ ],
+ "p2-0353": [
+  0.683,
+  "Which studies mention neither frontal cortex nor scenes?"
+ ],
+ "p2-0354": [
+  0.754,
+  "Which studies activate both left subcallosal gyrus and globus pallidus?"
+ ],
+ "p2-0355": [
+  0.692,
+  "Given that a study mentions arithmetic, what is the chance that it activates the left intraparietal sulcus?"
+ ],
+ "p2-0356": [
+  0.749,
+  "Which studies activate right subparietal sulcus and mention superior temporal?"
+ ],
+ "p2-0357": [
+  0.741,
+  "How many studies activate each gyrus and sulcus?"
+ ],
+ "p2-0358": [
+  0.716,
+  "Which studies mention neither frontal cortex nor scenes?"
+ ],
+ "p2-0359": [
+  0.772,
+  "Which subcortical regions are activated by studies about arousal?"
+ ],
+ "p2-0360": [
+  0.757,
+  "List the titles of studies that do not mention posterior cingulate."
+ ],
+ "p2-0361": [
+  0.743,
+  "How often do studies about frontal lobe activate the temporoparietal network?"
+ ],
+ "p2-0363": [
+  0.733,
+  "D'apr\u00e8s sa d\u00e9finition dans la Cognitive Atlas, quelle est la probabilit\u00e9 qu'une \u00e9tude sur la m\u00e9moire s\u00e9mantique active le gyrus temporal moyen gauche ?"
+ ],
+ "p2-0365": [
+  0.676,
+  "How likely is a study to activate the left angular gyrus while leaving the right angular gyrus inactive?"
+ ],
+ "p2-0366": [
+  0.76,
+  "Given that a study mentions arithmetic, what is the chance that it activates the left intraparietal sulcus?"
+ ],
+ "p2-0367": [
+  0.713,
+  "What is the probability that a study mentions either posterior insula or dacc?"
+ ],
+ "p2-0368": [
+  0.715,
+  "What is the probability that a study mentions anxiety or depression?"
+ ],
+ "p2-0369": [
+  0.684,
+  "What is the probability that a study activates the MNI point right caudate (MNI 12, 12, 10), given that it mentions default mode?"
+ ],
+ "p2-0370": [
+  0.627,
+  "What is the probability that a study mentions anxiety or depression?"
+ ],
+ "p2-0372": [
+  0.796,
+  "What is the probability that a study mentions both working memory and ventromedial prefrontal?"
+ ],
+ "p2-0373": [
+  0.659,
+  "What is the probability that a study mentions anxiety or depression?"
+ ],
+ "p2-0374": [
+  0.845,
+  "What is the probability that a study mentions anxiety or depression?"
+ ],
+ "p2-0375": [
+  0.65,
+  "Which brain regions are co-activated in studies about memory?"
+ ],
+ "p2-0376": [
+  0.746,
+  "How many studies mention either encoding or behavioral performance?"
+ ],
+ "p2-0378": [
+  0.679,
+  "Given that a study mentions arithmetic, what is the chance that it activates the left intraparietal sulcus?"
+ ],
+ "p2-0379": [
+  0.714,
+  "What is the probability that a study mentions visual, given that it activates amygdala?"
+ ],
+ "p2-0380": [
+  0.767,
+  "What is the probability that a study mentions memory retrieval, given that it activates both left middle frontal sulcus and globus pallidus?"
+ ],
+ "p2-0381": [
+  0.742,
+  "How many studies that mention fear activate thalamus?"
+ ],
+ "p2-0382": [
+  0.697,
+  "How likely is a study about \"learning from rewards and punishments\" to activate the left nucleus accumbens?"
+ ],
+ "p2-0385": [
+  0.721,
+  "What is the probability that a study mentions visual, given that it activates amygdala?"
+ ],
+ "p2-0386": [
+  0.572,
+  "What is the probability that a study mentions listening, given that it activates the left hippocampus?"
+ ],
+ "p2-0387": [
+  0.643,
+  "Quelles \u00e9tudes portent sur \"the perception of music and melody\" ? Donne-les avec leurs titres."
+ ],
+ "p2-0388": [
+  0.498,
+  "Dans les \u00e9tudes mentionnant l'attention spatiale, \u00e0 quelle fr\u00e9quence chaque paire de parcelles du r\u00e9seau attentionnel dorsal est-elle activ\u00e9e conjointement ?"
+ ],
+ "p2-0389": [
+  0.689,
+  "Which brain regions are activated by studies about any kind of knowledge?"
+ ],
+ "p2-0390": [
+  0.64,
+  "Quelle proportion des \u00e9tudes mentionnent la schizophr\u00e9nie ?"
+ ],
+ "p2-0391": [
+  0.714,
+  "Quel est le titre de l'\u00e9tude 10022492 ?"
+ ],
+ "p2-0392": [
+  0.631,
+  "What is the title of study 10022492?"
+ ],
+ "p2-0393": [
+  0.671,
+  "Which terms co-occur with activation of hippocampus in a study?"
+ ],
+ "p2-0396": [
+  0.621,
+  "How often do studies about frontal lobe activate the temporoparietal network?"
+ ],
+ "p2-0397": [
+  0.681,
+  "Show the titles of studies that mention frontal eye but not placebo."
+ ],
+ "p2-0398": [
+  0.591,
+  "Which studies mention both visuospatial and parkinson, and what are their titles?"
+ ],
+ "p2-0399": [
+  0.815,
+  "How many studies activate the left amygdala?"
+ ],
+ "p2-0400": [
+  0.553,
+  "Using the Cognitive Atlas definition of selective attention, which studies match it? Include their titles."
+ ],
+ "p2-0402": [
+  0.619,
+  "Quelle proportion des \u00e9tudes mentionnent la schizophr\u00e9nie ?"
+ ],
+ "p2-0403": [
+  0.605,
+  "Which terms co-occur with activation of hippocampus in a study?"
+ ],
+ "p2-0404": [
+  0.708,
+  "Give the titles of the studies about \"mind wandering during rest\" that never mention the default mode."
+ ],
+ "p2-0406": [
+  0.73,
+  "Which brain regions are co-activated in studies about memory?"
+ ],
+ "p2-0407": [
+  0.611,
+  "Which studies mention parietal lobe and activate the dorsal attention network?"
+ ],
+ "p2-0408": [
+  0.637,
+  "How many studies are in the database?"
+ ],
+ "p2-0411": [
+  0.628,
+  "Does mentioning gray matter raise the probability of mentioning therapy?"
+ ],
+ "p2-0412": [
+  0.615,
+  "What is the title of study 10022492?"
+ ],
+ "p2-0413": [
+  0.634,
+  "Is frontoparietal control co-activated with salience ventral attention in studies that mention cognitive control?"
+ ],
+ "p2-0414": [
+  0.693,
+  "Is frontoparietal control co-activated with salience ventral attention in studies that mention cognitive control?"
+ ],
+ "p2-0415": [
+  0.583,
+  "What is the title of study 10022492?"
+ ],
+ "p2-0416": [
+  0.626,
+  "Which studies deal with \"the perception of music and melody\"? List them with their titles."
+ ],
+ "p2-0420": [
+  0.571,
+  "What is the probability that a study activates the limbic network, given that it activates the salience ventral attention network?"
+ ],
+ "p2-0421": [
+  0.812,
+  "How many studies activate each gyrus and sulcus?"
+ ],
+ "p2-0423": [
+  0.708,
+  "What is the probability that a study activates the salience / ventral attention network but not the default mode network?"
+ ],
+ "p2-0424": [
+  0.792,
+  "Which parcels belong to the temporoparietal network in the right hemisphere?"
+ ],
+ "p2-0425": [
+  0.722,
+  "Which network is most often activated by studies that mention imagery?"
+ ],
+ "p2-0427": [
+  0.69,
+  "How many studies activate each gyrus and sulcus?"
+ ],
+ "p2-0428": [
+  0.678,
+  "Which networks tend to be active in the same studies as right suborbital sulcus?"
+ ],
+ "p2-0429": [
+  0.694,
+  "Quelle est la probabilit\u00e9 qu'une \u00e9tude active le r\u00e9seau de saillance / attention ventrale mais pas le r\u00e9seau du mode par d\u00e9faut ?"
+ ],
+ "p2-0430": [
+  0.612,
+  "Taking the Cognitive Atlas definition of empathy, what is the probability that a matching study activates the limbic network?"
+ ],
+ "p2-0431": [
+  0.694,
+  "How many studies activate each gyrus and sulcus?"
+ ],
+ "p2-0432": [
+  0.815,
+  "How many studies activate each subcortical region?"
+ ],
+ "p2-0433": [
+  0.688,
+  "For the studies mentioning visual, what is the probability of activating each parcel of the left central visual network (VisCent)?"
+ ],
+ "p2-0434": [
+  0.708,
+  "Which parcels of the left hemisphere frontoparietal control network are activated by studies mentioning broca?"
+ ],
+ "p2-0436": [
+  0.748,
+  "Which parcels of the right hemisphere central visual network are activated by studies mentioning hippocampal?"
+ ],
+ "p2-0437": [
+  0.723,
+  "Which terms co-occur with activation of hippocampus in a study?"
+ ],
+ "p2-0438": [
+  0.699,
+  "Which terms are mentioned by studies that activate putamen?"
+ ],
+ "p2-0439": [
+  0.688,
+  "What is the probability that a study activates the salience / ventral attention network but not the default mode network?"
+ ],
+ "p2-0440": [
+  0.839,
+  "How many studies activate each subcortical region?"
+ ],
+ "p2-0441": [
+  0.638,
+  "Which parcels belong to the temporoparietal network in the right hemisphere?"
+ ],
+ "p2-0442": [
+  0.733,
+  "Which hemisphere shows more limbic network activation in studies on depressive?"
+ ],
+ "p2-0443": [
+  0.831,
+  "How many studies activate each subcortical region?"
+ ],
+ "p2-0444": [
+  0.675,
+  "Which parcels of the right hemisphere central visual network are activated by studies mentioning hippocampal?"
+ ],
+ "p2-0445": [
+  0.706,
+  "How many studies activate each gyrus and sulcus?"
+ ],
+ "p2-0446": [
+  0.752,
+  "Which studies report activation in right anterior transverse collateral sulcus but do not mention lesion?"
+ ],
+ "p2-0447": [
+  0.699,
+  "For the studies mentioning visual, what is the probability of activating each parcel of the left central visual network (VisCent)?"
+ ],
+ "p2-0448": [
+  0.683,
+  "Which parcels belong to the temporoparietal network in the right hemisphere?"
+ ],
+ "p2-0450": [
+  0.748,
+  "How many studies activate the left amygdala?"
+ ],
+ "p2-0451": [
+  0.67,
+  "Which hemisphere shows more limbic network activation in studies on depressive?"
+ ],
+ "p2-0452": [
+  0.622,
+  "Which parcels belong to the temporoparietal network in the right hemisphere?"
+ ],
+ "p2-0453": [
+  0.659,
+  "Which subcortical regions do the studies matching the Cognitive Atlas definition of motor control activate, and with what probability?"
+ ],
+ "p2-0454": [
+  0.568,
+  "Which parcels belong to the temporoparietal network in the right hemisphere?"
+ ],
+ "p2-0455": [
+  0.621,
+  "What is the probability that a study activates the MNI point right caudate (MNI 12, 12, 10), given that it mentions default mode?"
+ ],
+ "p2-0456": [
+  0.662,
+  "Which studies mention neither frontal cortex nor scenes?"
+ ],
+ "p2-0457": [
+  0.715,
+  "How many studies activate each gyrus and sulcus?"
+ ],
+ "p2-0458": [
+  0.722,
+  "Which gyri and sulci are activated by studies about navigation?"
+ ],
+ "p2-0459": [
+  0.7,
+  "In studies mentioning spatial attention, how often is each pair of dorsal attention network parcels activated together?"
+ ],
+ "p2-0460": [
+  0.76,
+  "Pour chaque r\u00e9gion de l'atlas sous-cortical de Tian, combien d'\u00e9tudes l'activent ?"
+ ],
+ "p2-0461": [
+  0.671,
+  "Seeding the left anterior caudate, how likely is a study that activates it to also activate each other subcortical region?"
+ ],
+ "p2-0462": [
+  0.668,
+  "How likely is a study to activate the left angular gyrus while leaving the right angular gyrus inactive?"
+ ],
+ "p2-0463": [
+  0.61,
+  "How likely is a study that mentions working memory to activate the frontoparietal control network, in either hemisphere?"
+ ],
+ "p2-0464": [
+  0.715,
+  "What is the probability that a study mentions visual, given that it activates amygdala?"
+ ],
+ "p2-0465": [
+  0.652,
+  "What is the Bayes factor of the term reading for an activation of the left fusiform gyrus?"
+ ],
+ "p2-0467": [
+  0.724,
+  "Which subcortical parcels are most often activated by studies on recollection?"
+ ],
+ "p2-0468": [
+  0.559,
+  "Which parcels belong to the temporoparietal network in the right hemisphere?"
+ ],
+ "p2-0469": [
+  0.731,
+  "Which subcortical structures co-activate with hippocampus in studies about injury?"
+ ],
+ "p2-0470": [
+  0.716,
+  "Which subcortical structures co-activate with hippocampus in studies about injury?"
+ ],
+ "p2-0472": [
+  0.714,
+  "Which brain regions are co-activated in studies about memory?"
+ ],
+ "p2-0473": [
+  0.673,
+  "Which parcels belong to the temporoparietal network in the right hemisphere?"
+ ],
+ "p2-0474": [
+  0.688,
+  "Which gyri and sulci are activated by the same studies as salience ventral attention?"
+ ],
+ "p2-0475": [
+  0.669,
+  "Using the Cognitive Atlas definition of selective attention, which studies match it? Include their titles."
+ ],
+ "p2-0476": [
+  0.754,
+  "Which gyri and sulci are activated by the same studies as salience ventral attention?"
+ ],
+ "p2-0477": [
+  0.743,
+  "For each region of the Tian subcortical atlas, how many studies activate it?"
+ ],
+ "p2-0478": [
+  0.749,
+  "Which parcels of the right hemisphere central visual network are activated by studies mentioning hippocampal?"
+ ],
+ "p2-0479": [
+  0.67,
+  "Is left superior occipital gyrus co-activated with caudate across studies?"
+ ],
+ "p2-0480": [
+  0.678,
+  "Show the titles of studies that mention frontal eye but not placebo."
+ ],
+ "p2-0481": [
+  0.522,
+  "Which parcels belong to the temporoparietal network in the right hemisphere?"
+ ],
+ "p2-0484": [
+  0.712,
+  "Parmi les \u00e9tudes qui mentionnent l'addiction sans mentionner la r\u00e9compense, quelle est la probabilit\u00e9 d'activation de chaque structure sous-corticale ?"
+ ],
+ "p2-0485": [
+  0.741,
+  "How many studies activate each gyrus and sulcus?"
+ ],
+ "p2-0486": [
+  0.795,
+  "How many studies activate each gyrus and sulcus?"
+ ],
+ "p2-0487": [
+  0.77,
+  "How many studies activate each gyrus and sulcus?"
+ ],
+ "p2-0488": [
+  0.689,
+  "Which functional networks are co-activated in studies that mention grey matter?"
+ ],
+ "p2-0489": [
+  0.669,
+  "For the studies mentioning visual, what is the probability of activating each parcel of the left central visual network (VisCent)?"
+ ],
+ "p2-0490": [
+  0.572,
+  "How many studies are in the database?"
+ ],
+ "p2-0492": [
+  0.81,
+  "How many studies activate each subcortical region?"
+ ],
+ "p2-0494": [
+  0.722,
+  "Among the studies that mention addiction without mentioning reward, how likely is each subcortical structure to be activated?"
+ ],
+ "p2-0495": [
+  0.661,
+  "How many studies activate each subcortical region?"
+ ],
+ "p2-0496": [
+  0.735,
+  "Which hemisphere shows more limbic network activation in studies on depressive?"
+ ],
+ "p2-0497": [
+  0.561,
+  "What is the probability that a study activates the MNI point right caudate (MNI 12, 12, 10), given that it mentions default mode?"
+ ],
+ "p2-0498": [
+  0.688,
+  "What is the probability that a study mentions memory retrieval, given that it activates both left middle frontal sulcus and globus pallidus?"
+ ],
+ "p2-0499": [
+  0.475,
+  "Which parcels belong to the temporoparietal network in the right hemisphere?"
+ ],
+ "p2-0500": [
+  0.679,
+  "Which subcortical structures co-activate with hippocampus in studies about injury?"
+ ],
+ "p2-0501": [
+  0.678,
+  "For the studies mentioning visual, what is the probability of activating each parcel of the left central visual network (VisCent)?"
+ ],
+ "p2-0502": [
+  0.601,
+  "For the studies mentioning visual, what is the probability of activating each parcel of the left central visual network (VisCent)?"
+ ],
+ "p2-0503": [
+  0.675,
+  "Which network is most often activated by studies that mention imagery?"
+ ],
+ "p2-0504": [
+  0.714,
+  "Which subcortical structures co-activate with hippocampus in studies about injury?"
+ ],
+ "p2-0505": [
+  0.753,
+  "How many studies activate each gyrus and sulcus?"
+ ],
+ "p2-0506": [
+  0.664,
+  "Which network is most often activated by studies that mention imagery?"
+ ],
+ "p2-0507": [
+  0.704,
+  "How many studies on sentences activate left medial orbital (olfactory) sulcus?"
+ ],
+ "p2-0508": [
+  0.61,
+  "What is the probability that a study activates the limbic network, given that it activates the salience ventral attention network?"
+ ],
+ "p2-0509": [
+  0.763,
+  "Which network is most often activated by studies that mention imagery?"
+ ],
+ "p2-0511": [
+  0.665,
+  "How often do studies about frontal lobe activate the temporoparietal network?"
+ ],
+ "p2-0512": [
+  0.588,
+  "Which Schaefer parcels tend to be activated together with the right anterior putamen, and how likely?"
+ ],
+ "p2-0513": [
+  0.693,
+  "For each region of the Tian subcortical atlas, how many studies activate it?"
+ ],
+ "p2-0515": [
+  0.716,
+  "Which Destrieux region is the most likely to be activated by the studies mentioning motor, and with what probability?"
+ ],
+ "p2-0516": [
+  0.747,
+  "How many studies activate each subcortical region?"
+ ],
+ "p2-0517": [
+  0.643,
+  "Is left superior occipital gyrus co-activated with caudate across studies?"
+ ],
+ "p2-0518": [
+  0.64,
+  "For the studies mentioning visual, what is the probability of activating each parcel of the left central visual network (VisCent)?"
+ ],
+ "p2-0519": [
+  0.671,
+  "What is the probability that a study activates the limbic network, given that it activates the salience ventral attention network?"
+ ],
+ "p2-0520": [
+  0.631,
+  "How many studies mention either encoding or behavioral performance?"
+ ],
+ "p2-0521": [
+  0.746,
+  "What is the lift of the association between left hippocampus (MNI -28, -22, -14) and deficit?"
+ ],
+ "p2-0522": [
+  0.761,
+  "Which studies mention painful but do not activate putamen?"
+ ],
+ "p2-0523": [
+  0.656,
+  "How likely is a study that mentions working memory to activate the frontoparietal control network, in either hemisphere?"
+ ],
+ "p2-0524": [
+  0.649,
+  "List the titles of studies that do not mention posterior cingulate."
+ ],
+ "p2-0525": [
+  0.706,
+  "How likely is a study to activate the left angular gyrus while leaving the right angular gyrus inactive?"
+ ],
+ "p2-0526": [
+  0.675,
+  "How likely is a study to activate the left angular gyrus while leaving the right angular gyrus inactive?"
+ ],
+ "p2-0527": [
+  0.707,
+  "Which studies mention neither frontal cortex nor scenes?"
+ ],
+ "p2-0528": [
+  0.677,
+  "How many studies activate the left amygdala?"
+ ],
+ "p2-0529": [
+  0.707,
+  "What is the probability that a study mentions memory retrieval, given that it activates both left middle frontal sulcus and globus pallidus?"
+ ],
+ "p2-0530": [
+  0.624,
+  "What is the probability that a study activates the MNI point left motor hand area (MNI -38, -22, 56)?"
+ ],
+ "p2-0531": [
+  0.714,
+  "Which terms never co-occur with anxiety in a study?"
+ ],
+ "p2-0532": [
+  0.736,
+  "How many studies do not mention behaviors?"
+ ],
+ "p2-0533": [
+  0.698,
+  "Which gyri and sulci are not activated by studies about adolescence?"
+ ],
+ "p2-0534": [
+  0.662,
+  "What is the probability that a study mentions listening, given that it activates the left hippocampus?"
+ ],
+ "p2-0536": [
+  0.706,
+  "What is the probability that a study activates nucleus accumbens, given that it mentions words?"
+ ],
+ "p2-0538": [
+  0.671,
+  "Which studies activate the somatomotor network but not the peripheral visual network?"
+ ],
+ "p2-0539": [
+  0.7,
+  "Which gyri and sulci are not activated by studies about adolescence?"
+ ],
+ "p2-0540": [
+  0.719,
+  "Which studies activate the somatomotor network but not the peripheral visual network?"
+ ],
+ "p2-0541": [
+  0.682,
+  "What is the probability that a study activates the MNI point left motor hand area (MNI -38, -22, 56)?"
+ ],
+ "p2-0542": [
+  0.679,
+  "Which studies report activation in right anterior transverse collateral sulcus but do not mention lesion?"
+ ],
+ "p2-0543": [
+  0.624,
+  "Which studies activate the somatomotor network but not the peripheral visual network?"
+ ],
+ "p2-0544": [
+  0.787,
+  "Given that a study mentions arithmetic, what is the chance that it activates the left intraparietal sulcus?"
+ ],
+ "p2-0545": [
+  0.76,
+  "What is the probability that a study activates the MNI point left motor hand area (MNI -38, -22, 56)?"
+ ],
+ "p2-0547": [
+  0.77,
+  "Which gyri and sulci are not activated by studies about adolescence?"
+ ],
+ "p2-0548": [
+  0.716,
+  "Quelle est la probabilit\u00e9 qu'une \u00e9tude active le gyrus angulaire gauche sans activer le gyrus angulaire droit ?"
+ ],
+ "p2-0549": [
+  0.671,
+  "Quelle est la probabilit\u00e9 qu'une \u00e9tude active le gyrus angulaire gauche sans activer le gyrus angulaire droit ?"
+ ],
+ "p2-0550": [
+  0.715,
+  "Quelle est la probabilit\u00e9 qu'une \u00e9tude active le gyrus angulaire gauche sans activer le gyrus angulaire droit ?"
+ ],
+ "p2-0551": [
+  0.71,
+  "Which terms co-occur with activation of hippocampus in a study?"
+ ],
+ "p2-0552": [
+  0.644,
+  "What is the probability that a study mentions memory retrieval, given that it activates both left middle frontal sulcus and globus pallidus?"
+ ],
+ "p2-0553": [
+  0.839,
+  "Quelle est la probabilit\u00e9 qu'une \u00e9tude active le gyrus angulaire gauche sans activer le gyrus angulaire droit ?"
+ ],
+ "p2-0554": [
+  0.747,
+  "What is the probability that a study mentions visual, given that it activates amygdala?"
+ ],
+ "p2-0555": [
+  0.729,
+  "What is the probability that a study mentions memory retrieval, given that it activates both left middle frontal sulcus and globus pallidus?"
+ ],
+ "p2-0556": [
+  0.738,
+  "Quelle est la probabilit\u00e9 qu'une \u00e9tude active le gyrus angulaire gauche sans activer le gyrus angulaire droit ?"
+ ],
+ "p2-0557": [
+  0.658,
+  "Which studies activate the somatomotor network but not the peripheral visual network?"
+ ],
+ "p2-0558": [
+  0.665,
+  "Show the titles of studies that mention frontal eye but not placebo."
+ ],
+ "p2-0559": [
+  0.752,
+  "What is the probability that a study mentions either elderly or word?"
+ ],
+ "p2-0560": [
+  0.756,
+  "Quelle est la probabilit\u00e9 qu'une \u00e9tude active le gyrus angulaire gauche sans activer le gyrus angulaire droit ?"
+ ],
+ "p2-0561": [
+  0.675,
+  "Which subcortical regions do the studies matching the Cognitive Atlas definition of motor control activate, and with what probability?"
+ ],
+ "p2-0562": [
+  0.735,
+  "Which gyri and sulci are not activated by studies about adolescence?"
+ ],
+ "p2-0563": [
+  0.675,
+  "Parmi les \u00e9tudes qui mentionnent l'addiction sans mentionner la r\u00e9compense, quelle est la probabilit\u00e9 d'activation de chaque structure sous-corticale ?"
+ ],
+ "p2-0564": [
+  0.699,
+  "Which studies mention emotion without mentioning recognition?"
+ ],
+ "p2-0565": [
+  0.703,
+  "Quelle est la probabilit\u00e9 qu'une \u00e9tude active le gyrus angulaire gauche sans activer le gyrus angulaire droit ?"
+ ],
+ "p2-0566": [
+  0.667,
+  "What is the probability that a study activates nucleus accumbens, given that it mentions words?"
+ ],
+ "p2-0567": [
+  0.783,
+  "Quelle est la probabilit\u00e9 qu'une \u00e9tude active le gyrus angulaire gauche sans activer le gyrus angulaire droit ?"
+ ],
+ "p2-0568": [
+  0.696,
+  "Given that a study mentions saccades, what is the probability that it activates the dorsal attention network?"
+ ],
+ "p2-0570": [
+  0.748,
+  "Quelle est la probabilit\u00e9 qu'une \u00e9tude active le gyrus angulaire gauche sans activer le gyrus angulaire droit ?"
+ ],
+ "p2-0571": [
+  0.684,
+  "What is the probability that a study mentions anxiety or depression?"
+ ],
+ "p2-0572": [
+  0.66,
+  "What is the probability that a study mentions memory retrieval, given that it activates both left middle frontal sulcus and globus pallidus?"
+ ],
+ "p2-0573": [
+  0.722,
+  "Which subcortical structures co-activate with hippocampus in studies about injury?"
+ ],
+ "p2-0574": [
+  0.755,
+  "What is the probability that a study activates nucleus accumbens, given that it mentions words?"
+ ],
+ "p2-0575": [
+  0.722,
+  "Which gyri and sulci are not activated by studies about adolescence?"
+ ],
+ "p2-0576": [
+  0.721,
+  "Which studies mention neither frontal cortex nor scenes?"
+ ],
+ "p2-0577": [
+  0.666,
+  "Quelle est la probabilit\u00e9 qu'une \u00e9tude active le gyrus angulaire gauche sans activer le gyrus angulaire droit ?"
+ ],
+ "p2-0578": [
+  0.722,
+  "Which studies report activation in right anterior transverse collateral sulcus but do not mention lesion?"
+ ],
+ "p2-0579": [
+  0.711,
+  "What is the probability that a study activates the MNI point left motor hand area (MNI -38, -22, 56)?"
+ ],
+ "p2-0580": [
+  0.683,
+  "Which studies activate the somatomotor network but not the peripheral visual network?"
+ ],
+ "p2-0582": [
+  0.668,
+  "How often do studies about frontal lobe activate the temporoparietal network?"
+ ],
+ "p2-0583": [
+  0.726,
+  "Which studies activate right subparietal sulcus and mention superior temporal?"
+ ],
+ "p2-0584": [
+  0.741,
+  "What is the probability that a study mentions extrastriate, given that it activates right angular gyrus?"
+ ],
+ "p2-0585": [
+  0.664,
+  "What is the probability that a study activates the MNI point left motor hand area (MNI -38, -22, 56)?"
+ ],
+ "p2-0586": [
+  0.694,
+  "How likely is a study to activate the left angular gyrus while leaving the right angular gyrus inactive?"
+ ],
+ "p2-0587": [
+  0.72,
+  "What is the probability that a study activates the MNI point right caudate (MNI 12, 12, 10), given that it mentions default mode?"
+ ],
+ "p2-0588": [
+  0.705,
+  "What is the probability that a study activates nucleus accumbens, given that it mentions words?"
+ ],
+ "p2-0589": [
+  0.604,
+  "What is the probability that a study activates the salience / ventral attention network but not the default mode network?"
+ ],
+ "p2-0590": [
+  0.707,
+  "Quelle est la probabilit\u00e9 qu'une \u00e9tude active le gyrus angulaire gauche sans activer le gyrus angulaire droit ?"
+ ],
+ "p2-0591": [
+  0.635,
+  "Quelle est la probabilit\u00e9 qu'une \u00e9tude mentionne l'anxi\u00e9t\u00e9 ou la d\u00e9pression ?"
+ ],
+ "p2-0592": [
+  0.688,
+  "Parmi les \u00e9tudes qui mentionnent l'addiction sans mentionner la r\u00e9compense, quelle est la probabilit\u00e9 d'activation de chaque structure sous-corticale ?"
+ ],
+ "p2-0593": [
+  0.787,
+  "Which gyri and sulci are not activated by studies about adolescence?"
+ ],
+ "p2-0594": [
+  0.718,
+  "Given that a study mentions saccades, what is the probability that it activates the dorsal attention network?"
+ ],
+ "p2-0595": [
+  0.688,
+  "Quelle est la probabilit\u00e9 qu'une \u00e9tude mentionne l'anxi\u00e9t\u00e9 ou la d\u00e9pression ?"
+ ],
+ "p2-0596": [
+  0.717,
+  "Which studies activate both left subcallosal gyrus and globus pallidus?"
+ ],
+ "p2-0597": [
+  0.661,
+  "How likely is a study to activate the left angular gyrus while leaving the right angular gyrus inactive?"
+ ],
+ "p2-0598": [
+  0.777,
+  "How likely is a study that mentions working memory to activate the frontoparietal control network, in either hemisphere?"
+ ],
+ "p2-0600": [
+  0.716,
+  "Which studies report activation in right anterior transverse collateral sulcus but do not mention lesion?"
+ ],
+ "p2-0601": [
+  0.825,
+  "Which gyri and sulci are not activated by studies about adolescence?"
+ ],
+ "p2-0602": [
+  0.764,
+  "Do studies about parahippocampal report activation in left posterior mid-cingulate gyrus and sulcus?"
+ ],
+ "p2-0604": [
+  0.666,
+  "Which studies activate the somatomotor network but not the peripheral visual network?"
+ ],
+ "p2-0606": [
+  0.709,
+  "What is the probability that a study mentions both working memory and ventromedial prefrontal?"
+ ],
+ "p2-0607": [
+  0.712,
+  "Is the left hippocampus activated by studies on recalling childhood events?"
+ ],
+ "p2-0608": [
+  0.597,
+  "Which studies activate right subparietal sulcus and mention superior temporal?"
+ ],
+ "p2-0609": [
+  0.775,
+  "Which gyri and sulci are not activated by studies about adolescence?"
+ ],
+ "p2-0610": [
+  0.772,
+  "Quelle est la probabilit\u00e9 qu'une \u00e9tude active le gyrus angulaire gauche sans activer le gyrus angulaire droit ?"
+ ],
+ "p2-0611": [
+  0.61,
+  "Which Schaefer parcels tend to be activated together with the right anterior putamen, and how likely?"
+ ],
+ "p2-0612": [
+  0.675,
+  "What is the probability that a study activates the MNI point left motor hand area (MNI -38, -22, 56)?"
+ ],
+ "p2-0613": [
+  0.732,
+  "What is the probability that a study activates the MNI point left motor hand area (MNI -38, -22, 56)?"
+ ],
+ "p2-0614": [
+  0.67,
+  "By its Cognitive Atlas definition, how likely is a study about navigation to report a peak within 3 mm of MNI (24, -40, -10)?"
+ ],
+ "p2-0615": [
+  0.656,
+  "If a study mentions finger tapping, how likely is it to report a peak within 3 mm of MNI (-38, -22, 56)?"
+ ],
+ "p2-0616": [
+  0.65,
+  "Which studies activate the somatomotor network but not the peripheral visual network?"
+ ],
+ "p2-0617": [
+  0.758,
+  "What is the lift of the association between left hippocampus (MNI -28, -22, -14) and deficit?"
+ ],
+ "p2-0618": [
+  0.595,
+  "Pour chaque r\u00e9gion de l'atlas sous-cortical de Tian, combien d'\u00e9tudes l'activent ?"
+ ],
+ "p2-0619": [
+  0.744,
+  "How much does emotion regulation increase the chance of activating right fusiform face area (MNI 40, -52, -18)?"
+ ],
+ "p2-0620": [
+  0.642,
+  "What is the probability that a study activates the MNI point left motor hand area (MNI -38, -22, 56)?"
+ ],
+ "p2-0621": [
+  0.787,
+  "How much does emotion regulation increase the chance of activating right fusiform face area (MNI 40, -52, -18)?"
+ ],
+ "p2-0622": [
+  0.603,
+  "Are the dorsal anterior cingulate (MNI 0, 24, 30) and the right anterior insula (MNI 38, 20, -4) activated together more than chance? Give the lift."
+ ],
+ "p2-0624": [
+  0.672,
+  "What is the probability that a study activates the MNI point left motor hand area (MNI -38, -22, 56)?"
+ ],
+ "p2-0625": [
+  0.65,
+  "What is the probability that a study both mentions fear and activates the right amygdala, lateral or medial?"
+ ],
+ "p2-0626": [
+  0.775,
+  "How much does emotion regulation increase the chance of activating right fusiform face area (MNI 40, -52, -18)?"
+ ],
+ "p2-0627": [
+  0.682,
+  "If a study mentions finger tapping, how likely is it to report a peak within 3 mm of MNI (-38, -22, 56)?"
+ ],
+ "p2-0628": [
+  0.684,
+  "Are the dorsal anterior cingulate (MNI 0, 24, 30) and the right anterior insula (MNI 38, 20, -4) activated together more than chance? Give the lift."
+ ],
+ "p2-0629": [
+  0.623,
+  "What is the probability that a study mentioning episodic memory activates the left hippocampus, anterior or posterior?"
+ ],
+ "p2-0630": [
+  0.646,
+  "How much does emotion regulation increase the chance of activating right fusiform face area (MNI 40, -52, -18)?"
+ ],
+ "p2-0631": [
+  0.52,
+  "Which parcels belong to the temporoparietal network in the right hemisphere?"
+ ],
+ "p2-0632": [
+  0.735,
+  "How much does emotion regulation increase the chance of activating right fusiform face area (MNI 40, -52, -18)?"
+ ],
+ "p2-0634": [
+  0.618,
+  "List the titles of studies that do not mention posterior cingulate."
+ ],
+ "p2-0635": [
+  0.656,
+  "What is the probability that a study activates the MNI point right caudate (MNI 12, 12, 10), given that it mentions default mode?"
+ ],
+ "p2-0636": [
+  0.636,
+  "What is the probability that a study mentions memory retrieval, given that it activates both left middle frontal sulcus and globus pallidus?"
+ ],
+ "p2-0637": [
+  0.701,
+  "How much does emotion regulation increase the chance of activating right fusiform face area (MNI 40, -52, -18)?"
+ ],
+ "p2-0638": [
+  0.798,
+  "Are the dorsal anterior cingulate (MNI 0, 24, 30) and the right anterior insula (MNI 38, 20, -4) activated together more than chance? Give the lift."
+ ],
+ "p2-0639": [
+  0.531,
+  "By its Cognitive Atlas definition, how likely is a study about navigation to report a peak within 3 mm of MNI (24, -40, -10)?"
+ ],
+ "p2-0640": [
+  0.663,
+  "Which studies activate both left subcallosal gyrus and globus pallidus?"
+ ],
+ "p2-0643": [
+  0.577,
+  "Which Destrieux region is the most likely to be activated by the studies mentioning motor, and with what probability?"
+ ],
+ "p2-0644": [
+  0.615,
+  "Which terms co-occur with an activation of right postcentral gyrus?"
+ ],
+ "p2-0645": [
+  0.679,
+  "Given studies on auditory, how likely is an activation at MNI right insula (MNI 38, 6, 2)?"
+ ],
+ "p2-0646": [
+  0.72,
+  "What is the probability that a study activates the MNI point right caudate (MNI 12, 12, 10), given that it mentions default mode?"
+ ],
+ "p2-0648": [
+  0.813,
+  "How much does emotion regulation increase the chance of activating right fusiform face area (MNI 40, -52, -18)?"
+ ],
+ "p2-0649": [
+  0.647,
+  "What is the probability that a study activates the MNI point left motor hand area (MNI -38, -22, 56)?"
+ ],
+ "p2-0650": [
+  0.755,
+  "What is the lift of the association between left hippocampus (MNI -28, -22, -14) and deficit?"
+ ],
+ "p2-0651": [
+  0.575,
+  "Are the dorsal anterior cingulate (MNI 0, 24, 30) and the right anterior insula (MNI 38, 20, -4) activated together more than chance? Give the lift."
+ ],
+ "p2-0652": [
+  0.605,
+  "Are the dorsal anterior cingulate (MNI 0, 24, 30) and the right anterior insula (MNI 38, 20, -4) activated together more than chance? Give the lift."
+ ],
+ "p2-0653": [
+  0.749,
+  "Which studies about efficiency report an activation within 5 mm of MNI (40, -50, 44)?"
+ ],
+ "p2-0654": [
+  0.638,
+  "How much does emotion regulation increase the chance of activating right fusiform face area (MNI 40, -52, -18)?"
+ ],
+ "p2-0655": [
+  0.644,
+  "What is the lift of the association between left hippocampus (MNI -28, -22, -14) and deficit?"
+ ],
+ "p2-0656": [
+  0.701,
+  "Which terms are mentioned by studies that activate putamen?"
+ ],
+ "p2-0657": [
+  0.638,
+  "If a study mentions finger tapping, how likely is it to report a peak within 3 mm of MNI (-38, -22, 56)?"
+ ],
+ "p2-0658": [
+  0.694,
+  "Are the dorsal anterior cingulate (MNI 0, 24, 30) and the right anterior insula (MNI 38, 20, -4) activated together more than chance? Give the lift."
+ ],
+ "p2-0659": [
+  0.662,
+  "What is the probability that a study activates the MNI point left motor hand area (MNI -38, -22, 56)?"
+ ],
+ "p2-0660": [
+  0.619,
+  "What is the probability that a study activates the MNI point left motor hand area (MNI -38, -22, 56)?"
+ ],
+ "p2-0661": [
+  0.804,
+  "How much does emotion regulation increase the chance of activating right fusiform face area (MNI 40, -52, -18)?"
+ ],
+ "p2-0662": [
+  0.672,
+  "Given studies on auditory, how likely is an activation at MNI right insula (MNI 38, 6, 2)?"
+ ],
+ "p2-0663": [
+  0.637,
+  "Which subcortical structures co-activate with hippocampus in studies about injury?"
+ ],
+ "p2-0664": [
+  0.61,
+  "What is the probability that a study activates the MNI point left motor hand area (MNI -38, -22, 56)?"
+ ],
+ "p2-0665": [
+  0.758,
+  "Given studies on auditory, how likely is an activation at MNI right insula (MNI 38, 6, 2)?"
+ ],
+ "p2-0666": [
+  0.73,
+  "How much does emotion regulation increase the chance of activating right fusiform face area (MNI 40, -52, -18)?"
+ ],
+ "p2-0667": [
+  0.685,
+  "Which parcels of the left hemisphere frontoparietal control network are activated by studies mentioning broca?"
+ ],
+ "p2-0668": [
+  0.701,
+  "Which studies report activation in right anterior transverse collateral sulcus but do not mention lesion?"
+ ],
+ "p2-0669": [
+  0.646,
+  "If a study mentions finger tapping, how likely is it to report a peak within 3 mm of MNI (-38, -22, 56)?"
+ ],
+ "p2-0670": [
+  0.737,
+  "By its Cognitive Atlas definition, how likely is a study about navigation to report a peak within 3 mm of MNI (24, -40, -10)?"
+ ],
+ "p2-0672": [
+  0.628,
+  "What is the probability that a study activates the MNI point left motor hand area (MNI -38, -22, 56)?"
+ ],
+ "p2-0673": [
+  0.605,
+  "Among the studies with a peak within 3 mm of MNI (-44, 12, 24), what fraction also have one within 3 mm of MNI (-48, -56, -10)?"
+ ],
+ "p2-0675": [
+  0.739,
+  "What is the lift of the association between left hippocampus (MNI -28, -22, -14) and deficit?"
+ ],
+ "p2-0676": [
+  0.663,
+  "What is the probability that a study activates the MNI point left motor hand area (MNI -38, -22, 56)?"
+ ],
+ "p2-0677": [
+  0.732,
+  "Which terms are mentioned by studies that activate putamen?"
+ ],
+ "p2-0680": [
+  0.756,
+  "Are the dorsal anterior cingulate (MNI 0, 24, 30) and the right anterior insula (MNI 38, 20, -4) activated together more than chance? Give the lift."
+ ],
+ "p2-0683": [
+  0.602,
+  "Which subcortical parcels are most often activated by studies on recollection?"
+ ],
+ "p2-0684": [
+  0.601,
+  "Is left superior occipital gyrus co-activated with caudate across studies?"
+ ],
+ "p2-0685": [
+  0.717,
+  "Given that a study mentions arithmetic, what is the chance that it activates the left intraparietal sulcus?"
+ ],
+ "p2-0687": [
+  0.68,
+  "Parmi les \u00e9tudes ayant un pic \u00e0 moins de 3 mm du point MNI (-44, 12, 24), quelle fraction en a aussi un \u00e0 moins de 3 mm du point MNI (-48, -56, -10) ?"
+ ],
+ "p2-0688": [
+  0.671,
+  "Is the left somatomotor network activated by studies about premotor?"
+ ],
+ "p2-0689": [
+  0.649,
+  "Are the dorsal anterior cingulate (MNI 0, 24, 30) and the right anterior insula (MNI 38, 20, -4) activated together more than chance? Give the lift."
+ ],
+ "p2-0690": [
+  0.631,
+  "List the titles of studies that do not mention posterior cingulate."
+ ],
+ "p2-0691": [
+  0.626,
+  "What is the probability that a study activates the MNI point left motor hand area (MNI -38, -22, 56)?"
+ ],
+ "p2-0692": [
+  0.552,
+  "What is the probability that a study mentions both working memory and ventromedial prefrontal?"
+ ],
+ "p2-0693": [
+  0.66,
+  "What is the probability that a study activates the MNI point left motor hand area (MNI -38, -22, 56)?"
+ ],
+ "p2-0694": [
+  0.664,
+  "If a study mentions finger tapping, how likely is it to report a peak within 3 mm of MNI (-38, -22, 56)?"
+ ],
+ "p2-0695": [
+  0.796,
+  "What is the probability that a study activates the MNI point left motor hand area (MNI -38, -22, 56)?"
+ ],
+ "p2-0696": [
+  0.567,
+  "Is the left somatomotor network activated by studies about premotor?"
+ ],
+ "p2-0697": [
+  0.675,
+  "What is the lift of the association between left hippocampus (MNI -28, -22, -14) and deficit?"
+ ],
+ "p2-0698": [
+  0.639,
+  "What is the probability that a study activates the MNI point left motor hand area (MNI -38, -22, 56)?"
+ ],
+ "p2-0699": [
+  0.731,
+  "What is the lift of the association between left hippocampus (MNI -28, -22, -14) and deficit?"
+ ],
+ "p2-0700": [
+  0.637,
+  "What is the lift of the association between left hippocampus (MNI -28, -22, -14) and deficit?"
+ ],
+ "p2-0704": [
+  0.658,
+  "Is left superior occipital gyrus co-activated with caudate across studies?"
+ ],
+ "p2-0705": [
+  0.739,
+  "Which studies activate right subparietal sulcus and mention superior temporal?"
+ ],
+ "p2-0706": [
+  0.692,
+  "Which terms co-occur with an activation of right postcentral gyrus?"
+ ],
+ "p2-0707": [
+  0.692,
+  "Which networks tend to be active in the same studies as right suborbital sulcus?"
+ ],
+ "p2-0708": [
+  0.778,
+  "What is the probability that a study mentions both working memory and ventromedial prefrontal?"
+ ],
+ "p2-0709": [
+  0.659,
+  "How many studies activate the left amygdala?"
+ ],
+ "p2-0710": [
+  0.689,
+  "Which terms are mentioned by studies that activate putamen?"
+ ],
+ "p2-0711": [
+  0.659,
+  "How likely is a study to activate the left angular gyrus while leaving the right angular gyrus inactive?"
+ ],
+ "p2-0712": [
+  0.72,
+  "Is the left hippocampus activated by studies on recalling childhood events?"
+ ],
+ "p2-0713": [
+  0.722,
+  "Seeding the left anterior caudate, how likely is a study that activates it to also activate each other subcortical region?"
+ ],
+ "p2-0714": [
+  0.636,
+  "Do studies about parahippocampal report activation in left posterior mid-cingulate gyrus and sulcus?"
+ ],
+ "p2-0715": [
+  0.773,
+  "Which studies activate both right anterior mid-cingulate gyrus and sulcus and right gyrus rectus?"
+ ],
+ "p2-0717": [
+  0.715,
+  "What is the probability that a study activates the limbic network, given that it activates the salience ventral attention network?"
+ ],
+ "p2-0718": [
+  0.747,
+  "Is the left somatomotor network activated by studies about premotor?"
+ ],
+ "p2-0719": [
+  0.717,
+  "What is the probability that a study activates the salience / ventral attention network but not the default mode network?"
+ ],
+ "p2-0720": [
+  0.691,
+  "Which terms co-occur with an activation of right postcentral gyrus?"
+ ],
+ "p2-0721": [
+  0.63,
+  "What is the probability that a study mentions anxiety or depression?"
+ ],
+ "p2-0722": [
+  0.701,
+  "Based on its Cognitive Atlas definition, how likely is a study about semantic memory to activate the left middle temporal gyrus?"
+ ],
+ "p2-0723": [
+  0.729,
+  "What is the probability that a study both mentions fear and activates the right amygdala, lateral or medial?"
+ ],
+ "p2-0726": [
+  0.624,
+  "List the titles of studies that do not mention posterior cingulate."
+ ],
+ "p2-0727": [
+  0.685,
+  "Which brain regions are activated by studies about any kind of knowledge?"
+ ],
+ "p2-0728": [
+  0.797,
+  "What is the probability that a study both mentions fear and activates the right amygdala, lateral or medial?"
+ ],
+ "p2-0730": [
+  0.72,
+  "How likely is a study to activate the left angular gyrus while leaving the right angular gyrus inactive?"
+ ],
+ "p2-0731": [
+  0.739,
+  "Which terms are mentioned by studies that activate putamen?"
+ ],
+ "p2-0732": [
+  0.729,
+  "Which studies mention parietal lobe and activate the dorsal attention network?"
+ ],
+ "p2-0733": [
+  0.664,
+  "Which studies activate the somatomotor network but not the peripheral visual network?"
+ ],
+ "p2-0734": [
+  0.647,
+  "Which gyri and sulci are activated by the same studies as salience ventral attention?"
+ ],
+ "p2-0736": [
+  0.781,
+  "Among the studies that mention addiction without mentioning reward, how likely is each subcortical structure to be activated?"
+ ],
+ "p2-0737": [
+  0.711,
+  "Which studies mention emotion without mentioning recognition?"
+ ],
+ "p2-0738": [
+  0.572,
+  "Which brain regions are activated by studies about any kind of knowledge?"
+ ],
+ "p2-0739": [
+  0.779,
+  "Which studies activate right subparietal sulcus and mention superior temporal?"
+ ],
+ "p2-0741": [
+  0.648,
+  "Which brain regions are activated by studies about any kind of knowledge?"
+ ],
+ "p2-0742": [
+  0.746,
+  "Based on its Cognitive Atlas definition, how likely is a study about semantic memory to activate the left middle temporal gyrus?"
+ ],
+ "p2-0743": [
+  0.573,
+  "Is the left hippocampus activated by studies on recalling childhood events?"
+ ],
+ "p2-0746": [
+  0.816,
+  "What is the probability that a study mentioning episodic memory activates the left hippocampus, anterior or posterior?"
+ ],
+ "p2-0747": [
+  0.697,
+  "How many studies activate the left amygdala?"
+ ],
+ "p2-0750": [
+  0.696,
+  "How many studies that mention sound activate the left amygdala?"
+ ],
+ "p2-0752": [
+  0.751,
+  "Which brain regions are co-activated in studies about memory?"
+ ],
+ "p2-0753": [
+  0.714,
+  "How many studies activate each subcortical region?"
+ ],
+ "p2-0754": [
+  0.662,
+  "Which terms co-occur with movement in a study?"
+ ],
+ "p2-0755": [
+  0.65,
+  "Which cortical networks are activated by studies on judging other people's intentions?"
+ ],
+ "p2-0758": [
+  0.765,
+  "Which subcortical regions are activated by studies about arousal?"
+ ],
+ "p2-0760": [
+  0.712,
+  "Which voxels are activated by studies that mention verbal fluency?"
+ ],
+ "p2-0762": [
+  0.714,
+  "Is left superior occipital gyrus co-activated with caudate across studies?"
+ ],
+ "p2-0764": [
+  0.762,
+  "What is the probability that a study both mentions fear and activates the right amygdala, lateral or medial?"
+ ],
+ "p2-0765": [
+  0.462,
+  "Which subclass of fixation is mentioned by the most studies?"
+ ],
+ "p2-0766": [
+  0.685,
+  "Which studies mention painful but do not activate putamen?"
+ ],
+ "p2-0767": [
+  0.837,
+  "Given that a study mentions arithmetic, what is the chance that it activates the left intraparietal sulcus?"
+ ],
+ "p2-0768": [
+  0.756,
+  "D'apr\u00e8s sa d\u00e9finition dans la Cognitive Atlas, quelle est la probabilit\u00e9 qu'une \u00e9tude sur la m\u00e9moire s\u00e9mantique active le gyrus temporal moyen gauche ?"
+ ],
+ "p2-0770": [
+  0.72,
+  "Which studies mention parietal lobe and activate the dorsal attention network?"
+ ],
+ "p2-0771": [
+  0.685,
+  "Is the left somatomotor network activated by studies about premotor?"
+ ],
+ "p2-0772": [
+  0.6,
+  "Which studies mention emotion without mentioning recognition?"
+ ],
+ "p2-0773": [
+  0.69,
+  "Which terms co-occur with an activation of right postcentral gyrus?"
+ ],
+ "p2-0774": [
+  0.757,
+  "Which studies mention parietal lobe and activate the dorsal attention network?"
+ ],
+ "p2-0775": [
+  0.65,
+  "Which studies activate both right anterior mid-cingulate gyrus and sulcus and right gyrus rectus?"
+ ],
+ "p2-0776": [
+  0.673,
+  "Show the titles of studies that mention frontal eye but not placebo."
+ ],
+ "p2-0777": [
+  0.731,
+  "Which studies activate right subparietal sulcus and mention superior temporal?"
+ ],
+ "p2-0779": [
+  0.754,
+  "Is left superior occipital gyrus co-activated with caudate across studies?"
+ ],
+ "p2-0780": [
+  0.758,
+  "Which studies mention parietal lobe and activate the dorsal attention network?"
+ ],
+ "p2-0783": [
+  0.62,
+  "Which terms co-occur with an activation of right postcentral gyrus?"
+ ],
+ "p2-0785": [
+  0.608,
+  "What is the probability that a study mentions anxiety or depression?"
+ ],
+ "p2-0786": [
+  0.695,
+  "What is the probability that a study mentions either elderly or word?"
+ ],
+ "p2-0787": [
+  0.85,
+  "How likely is a study to activate the left angular gyrus while leaving the right angular gyrus inactive?"
+ ],
+ "p2-0788": [
+  0.753,
+  "Given that a study mentions arithmetic, what is the chance that it activates the left intraparietal sulcus?"
+ ],
+ "p2-0790": [
+  0.742,
+  "Which studies report activation in right anterior transverse collateral sulcus but do not mention lesion?"
+ ],
+ "p2-0791": [
+  0.697,
+  "What is the probability that a study activates the limbic network, given that it activates the salience ventral attention network?"
+ ],
+ "p2-0792": [
+  0.726,
+  "What is the probability that a study mentions visual, given that it activates amygdala?"
+ ],
+ "p2-0793": [
+  0.773,
+  "Which terms are associated with activation in the central visual network?"
+ ],
+ "p2-0794": [
+  0.674,
+  "Do studies about parahippocampal report activation in left posterior mid-cingulate gyrus and sulcus?"
+ ],
+ "p2-0795": [
+  0.546,
+  "Which cortical networks are activated by studies on judging the intentions of other people?"
+ ],
+ "p2-0796": [
+  0.693,
+  "Which gyri and sulci are activated by the same studies as salience ventral attention?"
+ ],
+ "p2-0797": [
+  0.717,
+  "Is left superior occipital gyrus co-activated with caudate across studies?"
+ ],
+ "p2-0798": [
+  0.78,
+  "Given that a study mentions saccades, what is the probability that it activates the dorsal attention network?"
+ ],
+ "p2-0799": [
+  0.64,
+  "Is the left somatomotor network activated by studies about premotor?"
+ ],
+ "p2-0800": [
+  0.628,
+  "What is the probability that a study activates the salience / ventral attention network but not the default mode network?"
+ ]
+}
