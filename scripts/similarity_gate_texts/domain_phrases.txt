@@ -1,0 +1,108 @@
+# In-domain short phrases: tasks and topics of neuroimaging studies, in
+# the words a user of the query assistant would type.  One per line.
+tapping fingers in sequence
+socially excluded
+tasting bitter drinks
+being socially excluded in a ball-tossing game
+visual word form area
+pain
+reward anticipation
+listening to music
+reading words aloud
+recognising familiar faces
+remembering a list of words
+holding digits in mind
+stopping a planned movement
+counting backwards
+watching emotional film clips
+looking at pictures of food
+smoking cravings
+feeling empathy for others in pain
+learning a motor sequence
+mental arithmetic
+imagining a movement
+speaking a second language
+judging whether a face is trustworthy
+choosing between smaller sooner and larger later rewards
+fear conditioning
+extinction of fear
+viewing faces with angry expressions
+detecting an oddball tone
+attending to one ear
+switching between tasks
+resting with eyes closed
+sleep deprivation
+mindfulness meditation
+hypnosis
+placebo analgesia
+thinking about oneself
+lying and deception
+moral dilemmas
+trusting a partner in an economic game
+punishing unfair offers
+gambling losses
+craving cocaine
+alcohol dependence
+depressed patients
+schizophrenia hallucinations
+autism and social gaze
+reading in dyslexic children
+aging and memory decline
+navigating a maze
+recognising objects by touch
+smelling odours
+heat pain on the forearm
+itch
+swallowing
+breath holding
+viewing erotic pictures
+romantic love
+mothers seeing their infants
+looking at pictures of spiders
+humour and laughing at jokes
+deciding under uncertainty
+predicting the next tone
+semantic judgements about words
+sentence comprehension
+sign language
+mental rotation of objects
+visual motion perception
+colour perception
+binocular rivalry
+saccadic eye movements
+grasping objects
+playing the piano
+singing
+hand imitation
+action observation
+theory of mind stories
+self-referential processing
+autobiographical memory
+recognising emotional voices
+interoception and heartbeat
+anxiety in social situations
+obsessive compulsive symptoms
+attention deficit hyperactivity
+reading music notation
+time estimation
+numerical comparison
+spatial working memory
+verbal fluency
+the Stroop task
+the go/no-go task
+the n-back task
+the flanker task
+delay discounting
+reversal learning
+probabilistic learning from feedback
+prediction errors
+tasting sweet and bitter solutions
+getting chills from music
+imagining future events
+judging the intentions of other people
+disgust at rotten food
+gambling with risky odds
+recalling childhood events
+people playing video games
+learning to navigate a virtual city
+waiting for a delayed monetary payoff

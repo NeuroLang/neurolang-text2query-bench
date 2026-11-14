@@ -1,0 +1,334 @@
+# Off-domain texts: no study of a neuroimaging database is about them.
+# One text per line; '#' lines are comments.  Short phrases, sentences
+# and definition-length texts, across cooking, sport, finance, history,
+# technology, travel, law, gardening, crafts, vehicles, geography,
+# astronomy, chemistry, fashion, music business, real estate, politics,
+# animals and household chores.
+chocolate cake recipe
+football match results
+stock market crash
+medieval castle architecture
+how to fix a bicycle tyre
+best beaches in Portugal for surfing
+tax return deadline extension
+knitting a wool scarf pattern
+the history of the Roman empire
+smartphone battery life comparison
+sourdough bread starter
+grilled salmon with lemon
+vegan lasagna
+how long to boil an egg
+homemade pizza dough
+french onion soup
+thai green curry paste
+pancake batter without milk
+roasting a whole chicken
+pickling cucumbers at home
+espresso machine descaling
+wine pairing for steak
+cast iron skillet seasoning
+gluten free brownies
+olympic marathon world record
+tennis serve technique
+offside rule in soccer
+basketball playoff bracket
+cricket test match scores
+how to wax cross country skis
+formula one pit stop strategy
+golf handicap calculation
+rugby scrum laws
+swimming pool chlorine levels
+mortgage interest rates
+index fund versus ETF
+cryptocurrency exchange fees
+quarterly earnings report
+inflation and central bank policy
+corporate bond yields
+retirement savings account
+small business loan application
+credit card annual fee
+foreign exchange rate euro dollar
+the fall of Constantinople
+causes of the French revolution
+ancient Egyptian pyramids
+the Hundred Years War
+viking longships
+the Ming dynasty porcelain
+the industrial revolution in Britain
+the signing of the Magna Carta
+Napoleon's invasion of Russia
+the Silk Road trade routes
+installing Linux on a laptop
+python list comprehension
+database index on a foreign key
+kubernetes pod restart policy
+wifi router firmware update
+USB-C charging cable
+cloud storage pricing
+javascript promise chaining
+4K television refresh rate
+mechanical keyboard switches
+cheap flights to Tokyo
+visa requirements for Brazil
+backpacking in Patagonia
+hotel near the Eiffel Tower
+train from Paris to Barcelona
+travel insurance for skiing
+camping in Yosemite valley
+cruise ship itinerary Caribbean
+road trip along Route 66
+best time to visit Iceland
+tenant rights eviction notice
+copyright infringement lawsuit
+filing for divorce
+patent application process
+traffic ticket appeal
+last will and testament
+non-disclosure agreement template
+small claims court procedure
+GDPR compliance for websites
+the statute of limitations for fraud
+growing tomatoes in pots
+pruning rose bushes
+lawn fertilizer schedule
+composting kitchen scraps
+planting tulip bulbs in autumn
+organic pest control for aphids
+raised garden bed lumber
+houseplant watering schedule
+replacing car brake pads
+electric car charging stations
+diesel engine oil change
+motorcycle chain lubrication
+tire pressure for winter
+hybrid car fuel economy
+used car price negotiation
+the longest rivers in Africa
+volcanoes of Indonesia
+population of Canadian provinces
+the Sahara desert climate
+mountain ranges of South America
+rings of Saturn
+black hole event horizon
+the life cycle of a star
+Mars rover landing site
+solar eclipse dates
+periodic table of elements
+balancing chemical equations
+acid rain and limestone
+polymer chemistry of nylon
+spring fashion trends
+how to tie a necktie
+leather boots care
+wedding dress alterations
+record label royalty contracts
+concert ticket resale
+guitar string gauge
+apartment rental deposit
+property tax assessment
+kitchen renovation cost
+roof shingle replacement
+election polling methodology
+parliamentary procedure
+city council zoning vote
+migration of monarch butterflies
+dog breed for apartments
+feeding a pet rabbit
+aquarium water filter
+honey bee colony collapse
+how to remove red wine stains
+ironing a dress shirt
+unclogging a bathroom drain
+cleaning grout between tiles
+folding a fitted sheet
+painting a wooden fence
+fixing a leaky faucet
+assembling flat-pack furniture
+woodworking dovetail joint
+pottery wheel throwing clay
+watercolor landscape painting
+origami paper crane
+scrapbooking supplies
+chess opening theory
+crossword puzzle answers
+board game night ideas
+birthday party decorations
+Christmas tree lighting
+Halloween costume ideas
+coffee bean roasting levels
+craft beer brewing at home
+cocktail recipes with gin
+solar panel installation on a roof
+wind turbine blade design
+nuclear power plant decommissioning
+The recipe calls for two cups of flour, a teaspoon of baking soda and three ripe bananas.
+Simmer the tomato sauce for forty minutes, stirring occasionally so it does not stick to the pan.
+The home team scored twice in the final ten minutes to win the championship.
+She broke the national record in the 400 metre hurdles at the summer games.
+The quarterback threw for three hundred yards and two touchdowns in the second half.
+Shares of the airline fell eight percent after the company cut its profit forecast.
+The central bank raised interest rates by a quarter point to fight inflation.
+Investors moved money from technology stocks into government bonds last quarter.
+The treaty ended thirty years of war between the European powers in 1648.
+Roman legions built a network of roads that connected the provinces to the capital.
+The pharaoh's tomb was discovered in the Valley of the Kings in 1922.
+Restart the router and wait two minutes before reconnecting your devices.
+The new phone has a larger screen, a faster processor and a better camera.
+The software update fixes a security vulnerability in the web browser.
+Our flight was delayed by three hours because of a storm over Chicago.
+The old town has narrow cobbled streets, a cathedral and a busy market square.
+Book the ferry to the islands early, as it sells out in July and August.
+The landlord must return the security deposit within thirty days of the lease ending.
+The court ruled that the contract was void because one party was a minor.
+The defendant pleaded not guilty to charges of tax evasion.
+Water the seedlings every morning and keep them in a sunny window.
+Prune fruit trees in late winter, before the buds start to swell.
+Check the oil level with the engine cold and the car on level ground.
+The electric van has a range of three hundred kilometres on a single charge.
+The Amazon river carries more water than any other river in the world.
+Mount Everest grows a few millimetres every year as the plates collide.
+Jupiter has at least ninety-five moons, the largest of which is Ganymede.
+The telescope captured images of a galaxy thirteen billion light years away.
+Sodium reacts violently with water to produce hydrogen gas and heat.
+Silk ties should be hung, not folded, to avoid creases.
+The band signed a three-album deal with an independent record label.
+The house has four bedrooms, a two-car garage and a large backyard.
+Mortgage lenders require a down payment of at least ten percent.
+The senate passed the budget bill by a narrow margin after a long debate.
+Voters in the district will elect a new mayor in November.
+Monarch butterflies fly thousands of kilometres from Canada to Mexico each autumn.
+Cats sleep between twelve and sixteen hours a day.
+The beekeeper harvested forty kilograms of honey from five hives.
+Soak the stain in cold water and dish soap before washing.
+Use a plunger first, and a drain snake if the blockage remains.
+Sand the fence, apply a primer and then two coats of exterior paint.
+The cabinet doors are attached with hinges that need a small screwdriver.
+The vase was fired in a kiln at twelve hundred degrees.
+White opened with the queen's pawn and black answered with the Nimzo-Indian defence.
+The puzzle has a thousand pieces and shows a lighthouse at sunset.
+Decorate the cake with whipped cream and fresh strawberries.
+Light roasts keep more of the bean's acidity and fruity flavour.
+The brewery released a seasonal pumpkin ale for the autumn.
+The solar farm will power twenty thousand homes when completed next year.
+The bridge was closed for repairs after cracks were found in its steel supports.
+The train leaves from platform nine at quarter past eight.
+The museum's new wing displays impressionist paintings and sculpture.
+The airline lost my luggage on the connecting flight in Frankfurt.
+The marathon route passes the harbour, the old town and the university.
+The bakery on the corner sells croissants, baguettes and almond tarts.
+Our hotel room had a balcony overlooking the harbour and the fishing boats.
+The mechanic replaced the timing belt and the water pump.
+The farmer harvested wheat from two hundred hectares this summer.
+The cargo ship ran aground near the entrance of the canal.
+The orchestra will perform Beethoven's ninth symphony on Saturday evening.
+The playground has swings, a slide and a sandpit for young children.
+The library extended its opening hours during the exam period.
+A mortgage is a loan used to buy real estate, in which the property serves as collateral; the borrower repays the principal and interest in monthly instalments over a period that commonly lasts fifteen to thirty years.
+An exchange-traded fund is an investment fund traded on stock exchanges, much like individual stocks, that holds assets such as stocks, commodities or bonds and generally keeps its trading price close to its net asset value.
+Sourdough is bread made by the fermentation of dough using naturally occurring lactobacilli and yeast, which gives it a slightly sour taste and better keeping qualities than breads made with baker's yeast.
+The offside rule in association football states that a player is in an offside position if any part of the head, body or feet is nearer to the opponents' goal line than both the ball and the second-last opponent.
+A sonnet is a poetic form of fourteen lines that follows a strict rhyme scheme and specific structure, originating in thirteenth-century Italy and later popularised in English by Shakespeare.
+Photosynthesis in plants is the process by which chloroplasts convert light energy, carbon dioxide and water into glucose and oxygen, providing the energy that sustains nearly all food chains on Earth.
+A volcano is a rupture in the crust of a planetary-mass object, such as Earth, that allows hot lava, volcanic ash and gases to escape from a magma chamber below the surface.
+Plate tectonics is the scientific theory that the Earth's lithosphere is divided into large plates that move slowly over the mantle, causing earthquakes, mountain building and the formation of ocean trenches.
+Compound interest is the addition of interest to the principal sum of a loan or deposit, so that interest earned in one period itself earns interest in the following periods.
+A patent is a type of intellectual property that gives its owner the legal right to exclude others from making, using or selling an invention for a limited period of years, in exchange for publishing the invention.
+A tort is a civil wrong, other than a breach of contract, that causes a claimant to suffer loss or harm, resulting in legal liability for the person who commits the act.
+Feudalism was the combination of legal, economic, military and cultural customs that flourished in medieval Europe, structuring society around relationships derived from the holding of land in exchange for service or labour.
+The Renaissance was a period of European history marking the transition from the Middle Ages to modernity, characterised by renewed interest in classical antiquity, art, architecture and the sciences.
+A blockchain is a distributed ledger with growing lists of records, called blocks, that are securely linked together using cryptographic hashes, making past records difficult to alter.
+A compiler is a computer program that translates source code written in one programming language into another language, usually machine code that a processor can execute directly.
+A relational database stores data in tables of rows and columns, with keys linking records across tables, and is queried with a structured query language such as SQL.
+Cross-country skiing is a form of skiing in which skiers rely on their own locomotion to move across snow-covered terrain, rather than using ski lifts or other forms of assistance.
+A marathon is a long-distance foot race with a distance of 42.195 kilometres, usually run as a road race, commemorating the legendary run of a Greek messenger from Marathon to Athens.
+Composting is the natural process of recycling organic matter, such as leaves and food scraps, into a valuable fertilizer that can enrich soil and plants.
+Espresso is a coffee-brewing method of Italian origin in which a small amount of nearly boiling water is forced under pressure through finely ground coffee beans.
+A hybrid vehicle uses two or more distinct types of power, such as an internal combustion engine together with an electric motor powered by a battery, to improve fuel economy.
+A galaxy is a system of stars, stellar remnants, interstellar gas, dust and dark matter bound together by gravity; the Milky Way contains between one hundred and four hundred billion stars.
+A comet is an icy small Solar System body that, when passing close to the Sun, warms and begins to release gases, producing a visible atmosphere or coma and sometimes a tail.
+Oxidation is a chemical reaction in which a substance loses electrons, often by combining with oxygen, as when iron rusts or wood burns.
+Haute couture is the creation of exclusive custom-fitted high-end fashion, made by hand from start to finish with high-quality, expensive fabrics sewn with extreme attention to detail.
+A lease is a contractual arrangement calling for the user, the lessee, to pay the owner, the lessor, for the use of an asset such as a building or a vehicle for a fixed period.
+Proportional representation is an electoral system in which the distribution of seats in a legislature corresponds closely to the share of votes received by each party.
+The honey bee is a eusocial flying insect of the genus Apis, known for constructing perennial colonial nests from wax, for the large size of its colonies and for producing honey.
+Pottery is the process and the products of forming vessels and other objects with clay and other raw materials, which are fired at high temperatures to give them a hard and durable form.
+Origami is the Japanese art of paper folding, in which a flat square sheet of paper is transformed into a finished sculpture through folding and sculpting techniques, usually without cuts or glue.
+Chess is a board game for two players in which each player controls sixteen pieces of six types on a checkered board of sixty-four squares, with the objective of checkmating the opponent's king.
+A wind turbine is a device that converts the kinetic energy of wind into electrical energy, typically using three blades mounted on a tall tower that faces into the wind.
+Inflation is the general increase in the prices of goods and services in an economy over a period of time, which reduces the purchasing power of money.
+A sovereign bond is a debt security issued by a national government to finance its spending, paying periodic interest and returning the face value at maturity.
+Gothic architecture is a style that flourished in Europe from the late twelfth to the sixteenth century, characterised by pointed arches, ribbed vaults and flying buttresses.
+The Silk Road was a network of Eurasian trade routes active from the second century BCE until the mid-fifteenth century, linking China with the Mediterranean world.
+Cloud computing is the on-demand availability of computer system resources, especially data storage and computing power, without direct active management by the user.
+A suspension bridge is a type of bridge in which the deck is hung below suspension cables on vertical suspenders, the cables being anchored at each end of the bridge.
+Fermentation of grape juice by yeast converts its sugars into alcohol and carbon dioxide, and the resulting wine is aged in barrels or bottles before it is sold.
+A cruise ship is a large passenger ship used mainly for vacationing, on which the voyage itself and the ship's amenities are part of the experience, as well as the destinations.
+Bankruptcy is a legal process through which people or other entities who cannot repay debts to creditors may seek relief from some or all of their debts, usually imposed by a court order.
+A will is a legal document that expresses a person's wishes as to how their property is to be distributed after their death and which person is to manage the property until its final distribution.
+Crop rotation is the practice of growing a series of different types of crops in the same area across a sequence of growing seasons, which reduces soil erosion and increases soil fertility.
+A carburettor is a device used by internal combustion engines to mix air and fuel in the proper ratio for combustion, now largely replaced by fuel injection.
+The Sahara is a desert located on the African continent; with an area of nine million square kilometres it is the largest hot desert in the world.
+A tsunami is a series of waves in a water body caused by the displacement of a large volume of water, generally in an ocean, by earthquakes, volcanic eruptions or landslides.
+A stock split is a corporate action in which a company divides its existing shares into multiple shares to boost the liquidity of the shares, although the total market value stays the same.
+The decathlon is a combined event in athletics consisting of ten track and field events held over two consecutive days, with points awarded for each event.
+A soufflé is a baked egg-based dish that originated in early eighteenth-century France, combined with various other ingredients and served as a savoury main dish or a sweet dessert.
+Quilting is the process of sewing two or more layers of fabric together to make a thicker padded material, usually to create a quilt or a quilted garment.
+A tax credit is an amount of money that taxpayers can subtract directly from the taxes they owe to their government, unlike a deduction, which reduces taxable income.
+A sommelier is a trained and knowledgeable wine professional, normally working in fine restaurants, who specialises in all aspects of wine service as well as wine and food pairing.
+The printing press, invented by Johannes Gutenberg around 1440, used movable metal type to mass-produce books and contributed to the spread of literacy in Europe.
+A data centre is a building or a dedicated space within a building used to house computer systems and associated components, such as telecommunications and storage systems.
+Container shipping moves goods in standard-sized steel boxes that can be transferred between ships, trains and trucks without unloading their contents.
+A lighthouse is a tower or building designed to emit light from a system of lamps and lenses, serving as a navigational aid for maritime pilots at sea or on inland waterways.
+Basketball is a team sport in which two teams of five players try to score by shooting a ball through a hoop elevated ten feet above the floor at each end of a court.
+Wallpaper is a material used in interior decoration to cover the walls of homes, offices and other buildings, usually sold in rolls and applied with paste.
+A greenhouse is a structure with walls and roof made chiefly of transparent material such as glass, in which plants requiring regulated climatic conditions are grown.
+The Great Wall of China is a series of fortifications built across the historical northern borders of ancient Chinese states to protect against nomadic groups from the Eurasian Steppe.
+sunflower oil smoke point
+ferry timetable Greek islands
+bitcoin halving date
+dividend reinvestment plan
+rookie of the year award
+world cup qualifying group
+yacht club membership fees
+diamond engagement ring prices
+vintage vinyl record collecting
+skateboard deck sizes
+surfboard wax for cold water
+crochet amigurumi pattern
+sewing machine bobbin threading
+car insurance quote comparison
+home equity line of credit
+freight train schedule
+airport lounge access
+hiking boots waterproofing
+tent for four people
+snowboard binding angles
+bakery opening hours
+farmers market vegetables
+lobster bisque
+sushi rice vinegar
+barbecue ribs dry rub
+hot sauce fermentation
+ice cream maker
+brewing green tea temperature
+rental car one way fee
+passport renewal form
+customs duty on imported goods
+landlord insurance policy
+employment contract termination clause
+trademark registration fee
+the Treaty of Versailles
+the Byzantine empire
+the American civil war battles
+the Aztec capital Tenochtitlan
+steam locomotive history
+printer ink cartridges
+laptop overheating fan
+smart thermostat setup
+password manager subscription
+solar battery storage
+tidal energy generation
+glacier retreat in the Alps
+coral reef bleaching
+desert cactus species
+redwood forest trail
