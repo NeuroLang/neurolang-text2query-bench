@@ -228,6 +228,14 @@ def main(argv=None):
               f"| {n5 if stat[g][i] > thresholds[g] else 0} |")
 
     chk = ~fit
+    print(f"\n| {g} gate | threshold | check null FPR | check kept: all "
+          "(cogat/bench/phrase) |\n|---|---|---|---|")
+    for q in (90, 95, 99):
+        t = np.percentile(stat[g][fit & null], q)
+        per = "/".join(f"{np.mean(stat[g][chk & (kinds == k)] >= t):.2f}"
+                       for k in ("cogat", "bench", "phrase"))
+        print(f"| null p{q} | {t:.4f} | {np.mean(stat[g][chk & null] >= t):.3f}"
+              f" | {np.mean(stat[g][chk & ~null] >= t):.3f} ({per}) |")
     print(f"\ngate {g} >= {args.gate}: check half, null FPR "
           f"{np.mean(stat[g][chk & null] >= args.gate):.3f}; kept "
           + ", ".join(f"{k} {np.mean(stat[g][chk & (kinds == k)] >= args.gate):.2f}"
