@@ -33,3 +33,18 @@ engine from `neurolang_data/`.
 - `hasparterr/xrewrite_profile.py`, `xrewrite_dups.py SECONDS`: profile and
   count the Xrewrite of `q(x) :- ro:has_part(x, y)` on cogat (it does not
   finish: ~40k distinct rewritings a minute).
+- `hasparterr/xrewrite_growth.py SECONDS`: the same Xrewrite, its rewritings
+  by body length and the constraints firing most (~70k two-atom bodies a
+  minute, three-atom ones after 40 s).
+- `hasparterr/constraints_dump.py`, `derivable.py`, `constraint_cycles.py`:
+  the shapes of the 10,399 cogat constraints; how many have an antecedent
+  that can hold on the engine (none: no class or property has facts); the
+  recursion (an SCC of 3364 predicates holding all 430 `C(x) & p(x, y) ->
+  D(y)` constraints, so the UCQ rewriting is infinite once they can hold).
+- `hasparterr/trace_det.py QUERY...`: det_idb, the constraints used and the
+  Xrewrite output of each query (1–4 rules: the query's own).
+- `hasparterr/rdflib_check.py`: rdflib answers on `cogat.v2.owl` (no
+  individuals, no part triples; 323 / 408 class-restriction rows).
+- `hasparterr/with_instance.py SECONDS [QUERY...]`: one instance of a
+  restricted class, then the queries (a class high in the hierarchy makes
+  8560 constraints hold and `ans(x) :- ro:has_part(x, y)` does not finish).
