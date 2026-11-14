@@ -8,3 +8,5 @@
 {"time": "2026-11-14T03:52:19", "label": "C dev single r2", "usage": 121.463, "limit_remaining": 178.537}
 {"time": "2026-11-14T04:13:57", "label": "D dev single r2", "usage": 121.5412, "limit_remaining": 178.4588}
 {"time": "2026-11-14T04:16:55", "label": "before dev vote", "usage": 121.5412, "limit_remaining": 178.4588}
+{"time": "2026-11-14T05:07:39", "label": "C dev vote", "usage": 121.8609, "limit_remaining": 178.1391}
+{"time": "2026-11-14T06:03:32", "label": "D dev vote", "usage": 122.3828, "limit_remaining": 177.6172}

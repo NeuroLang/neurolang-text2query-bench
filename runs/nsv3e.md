@@ -71,6 +71,8 @@ by the Sonnet judge):
 | D | 33 | 0.879 (29) | 3.2 | 25.6k / 2.02k | 0.0017 | 0/33 | 1 | 13 | coactivation: p-130(0.00); cogat_hierarchy: p-049(0.00); cogat_term: p-038(0.00); prob_forward: dh-122(0.00) |
 | D-r2 | 33 | 0.848 (28) | 3.6 | 29.3k / 4.33k | 0.0026 | 0/33 | 1 | 5 | coactivation: p-130(0.00); cogat_hierarchy: p-049(0.00); cogat_term: p-038(0.00); prob_forward: dh-122(0.00); schaefer: dh-067(0.00) |
 | E | 33 | 0.909 (30) | 3.3 | 25.6k / 2.05k | 0.0017 | 0/33 | 0 | 10 | cogat_hierarchy: p-049(0.00); cogat_term: dh-029(0.00) p-038(0.00) |
+| C-vote | 33 | 0.848 (28) | 10.9 | 86.5k / 7.00k | 0.0116 | 1/33 | 1 | 10 | cogat_hierarchy: p-049(0.00); cogat_term: dh-029(0.00) p-038(0.00); prob_forward: dh-122(0.00); schaefer: dh-067(0.00) |
+| D-vote | 33 | 0.818 (27) | 10.6 | 86.3k / 7.04k | 0.0175 | 2/33 | 0 | 7 | coactivation: p-130(0.00); cogat_hierarchy: p-049(0.00); cogat_term: dh-029(0.00) p-038(0.00); prob_forward: dh-122(0.00); schaefer: dh-067(0.00) |
 
 - **Noise:** the same variant twice moves by 3–4 exact (A 28/25, C 30/26,
   D 29/28). p-038 and p-049 are missed by all 8 runs (CogAt rule).
@@ -81,6 +83,10 @@ by the Sonnet judge):
   (3.7 of 6 shared on average) and scores as C (30).
 - r2 misses dh-151, p-060 (right number of rows, wrong values) and dh-067
   (100 rows, argmax missing) are model errors, not request errors.
+
+- **Votes (×3 + Sonnet fallback):** C 28, D 27, no better than the
+  singles on dev. **C is carried** to test and fresh: the bank alone, no
+  code; traces are a wash (+1/−1) and hybrid changes nothing.
 
 **Win threshold, fixed before any test run:** the best variant minus A must
 exceed the largest same-variant spread on that set (4 exact on dev).
