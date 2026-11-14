@@ -4,7 +4,7 @@ export HOME=/tmp/tf/home
 D=/Users/bot/neurolang-text2query-bench/neurolang_data
 PY=/Users/bot/NeuroLang-llmex/.venv/bin/python
 NEW=$(ls -d /Users/bot/NeuroLang-coverage/packages/* | tr '\n' :)
-OLD=$(ls -d /tmp/nl-master/packages/* | tr '\n' :)
+OLD=$(ls -d /Users/bot/NeuroLang-master-cov/packages/* | tr '\n' :)
 cd /tmp/covbench
 echo "== query timing"; PYTHONPATH=$NEW $PY /tmp/covbench/query_timing.py $D 2>&1 | grep -v -i warn
 for engine in neurosynth neurostore; do

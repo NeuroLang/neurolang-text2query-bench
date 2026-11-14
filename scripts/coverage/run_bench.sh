@@ -6,7 +6,7 @@ source scripts/env.sh
 export HOME_REAL=$HOME
 for variant in before after; do
   case $variant in
-  before) P=/tmp/nl-master/packages ;;
+  before) P=/Users/bot/NeuroLang-master-cov/packages ;;
   after) P=/Users/bot/NeuroLang-coverage/packages ;;
   esac
   export PYTHONPATH=$P/neurolang:$P/nl_core:$P/nl_expr:$P/neurolang_apps
