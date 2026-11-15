@@ -80,7 +80,8 @@ QUERIES = {
     "cogat:measures(x, c)",
 }
 # the same queries without the constraints of the ontology: plain Datalog
-CLOSED = ["stroop_instances", "has_contrast", "inhibition_study", "inhibition_with_concept",
+CLOSED = ["stroop_instances", "has_contrast", "has_contrast_01515",
+          "inhibition_study", "inhibition_with_concept",
           "p_active_given_inhibition"]
 
 
@@ -175,7 +176,7 @@ if closed:
     # The Atlas has no fact of these (verify_atlas.py): empty relations.
     import pandas as pd
     for pred, arity in [("cogpo:has_contrast", 2), ("cogat:measures", 2),
-                        ("cogat:CAO_00487", 1)]:
+                        ("cogat:CAO_00487", 1), ("cogat:CAO_01515", 1)]:
         nl.add_tuple_set(pd.DataFrame(columns=range(arity)), name=pred)
     for name in closed:
         print("\n# closed:", name, "\n", QUERIES[name], flush=True)
