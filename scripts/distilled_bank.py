@@ -10,6 +10,16 @@ of NeuroLang's ``engines/neurosynth/examples.yaml``.
     # the bank of a variant: B (agreement only) or C (all kept), with traces
     python scripts/distilled_bank.py write C OUT.yaml [--traces]
 
+Version 2 (``--v2``, for NeuroLang master after #1249; files ``*_v2``):
+the shared bank of ``coordinate_meta_analysis`` is the one deduplicated
+against, every ``mentions`` for a question not saying mention, term or
+word is dropped (not only those of a Cognitive Atlas label), as is a
+``similar_study`` text that is a label with a definition (look it up in
+the Cognitive Atlas first), and the one-letter columns of the answers are
+named (``answer_columns.py``). A query must pass ``check_query`` and give
+rows with the guard (none needed with ``similar_study``, which master's
+similarity gate leaves empty for a text without close studies). ``leak`` also covers the neurosynth (v1) set.
+
 ``check`` keeps a kept answer (agreement, or Sonnet judge yes) unless:
 - its question or its query (whitespace aside) is already in the bank of
   the engine or earlier in the candidates;
@@ -38,10 +48,15 @@ from pathlib import Path
 import yaml
 
 ROUND2 = Path("data/distill/round2")
-CHECK = ROUND2 / "bank_check.jsonl"
-LEAK = ROUND2 / "bank_leakage.json"
-LABELS = ROUND2 / "bank_cogat_labels.json"
-SAYS_WORD = re.compile(r"mention|term|word|vocabular", re.I)
+V2 = "--v2" in sys.argv
+_SUFFIX = "_v2" if V2 else ""
+CHECK = ROUND2 / f"bank_check{_SUFFIX}.jsonl"
+LEAK = ROUND2 / f"bank_leakage{_SUFFIX}.json"
+LABELS = ROUND2 / f"bank_cogat_labels{_SUFFIX}.json"
+SIMILAR_TEXT = re.compile(r"similar_study\('([^']+)'")
+SAYS_WORD = re.compile(
+    r"\bmention\w*|(?<![-\w])terms?\b|\bwords?\b|\bphrases?\b|\bvocabular\w*",
+    re.I)
 SIX_MM = re.compile(r"(<=\s*)6(\.0)?\)")
 LITERAL = re.compile(r"'([^']+)'")
 
@@ -70,6 +85,9 @@ def bank_query(answer):
     query = answer["query"].strip()
     if not re.search(r"\b6(\.0)?\s*mm", answer["question"]):
         query = SIX_MM.sub(r"\1{kernel_radius_mm})", query)
+    if V2:
+        from answer_columns import rename
+        query = rename(query)
     return query
 
 
@@ -98,7 +116,27 @@ def mention_terms(answer):
     if "mentions(" not in answer["query"] or SAYS_WORD.search(
             answer["question"]):
         return []
-    return LITERAL.findall(answer["query"])
+    return LITERAL.findall(answer["query"]) or ["(variable)"]
+
+
+def definition_labels(nl):
+    """Return the Cognitive Atlas labels with a definition (v2)."""
+    from text2query_bench.engine import execute
+
+    rows = execute(nl, "ans(t) :- cogat_definition(t, d)", "datalog").rows
+    return {row[0] for row in rows}
+
+
+def drop_v2(answer, labels):
+    """The reason to drop *answer* in v2, if any."""
+    if mention_terms(answer):
+        return "mentions, question not saying mention/term/word"
+    if any(t in labels or t.rstrip("s") in labels
+           for t in SIMILAR_TEXT.findall(answer["query"])):
+        return "similar_study text of a Cognitive Atlas label"
+    if bank_query(answer) is None:
+        return "answer columns not named"
+    return None
 
 
 def cogat_labels(nl, answers):
@@ -121,37 +159,53 @@ def check(args):
     from neurolang_apps.utils.llm.validation import run_preview
     from text2query_bench.engine import build_engine
 
-    bank = load_examples("neurosynth")
+    bank = load_examples("coordinate_meta_analysis" if V2 else "neurosynth")
     questions = {norm(e.question) for e in bank}
     queries = {norm(e.query("datalog") or "") for e in bank}
     nl = build_engine("neurosynth", "neurolang_data")
     answers = kept()
-    labels = cogat_labels(nl, answers)
+    labels = definition_labels(nl) if V2 else cogat_labels(nl, answers)
     LABELS.write_text(json.dumps(sorted(labels)))
     print(f"cogat labels used with mentions: {sorted(labels)}", flush=True)
     done = {r["id"] for r in map(json.loads, open(CHECK))} if (
         CHECK.exists()) else set()
     with open(CHECK, "a") as out:
         for answer in answers:
-            query = bank_query(answer)
             record = {"id": answer["id"], "agreement": answer["agreement"],
                       "category": answer["category"]}
-            if norm(answer["question"]) in questions:
+            reason = drop_v2(answer, labels) if V2 else None
+            query = bank_query(answer) or answer["query"]
+            if reason:
+                record["drop"] = reason
+            elif norm(answer["question"]) in questions:
                 record["drop"] = "duplicate question"
-            elif norm(query) in queries:
+            elif norm(query.replace("{kernel_radius_mm}", "6")) in queries:
                 record["drop"] = "duplicate query"
-            elif set(mention_terms(answer)) & labels:
+            elif not V2 and set(mention_terms(answer)) & labels:
                 record["drop"] = "cogat label via mentions"
             questions.add(norm(answer["question"]))
-            queries.add(norm(query))
+            queries.add(norm(query.replace("{kernel_radius_mm}", "6")))
             if "drop" not in record and answer["id"] not in done:
                 runnable = query.replace("{kernel_radius_mm}", "6")
+                if V2:
+                    from neurolang_apps.utils.llm.validation import (
+                        check_query)
+                    checked = check_query(nl, runnable, "datalog")
+                    if not checked.ok:
+                        record["drop"] = "check_query"
+                        record["message"] = checked.message[:200]
+                        out.write(json.dumps(record) + "\n")
+                        print(record["id"], "check_query", flush=True)
+                        continue
                 preview = run_preview(nl, runnable, "datalog", rows=1,
                                       engine_name="neurosynth",
                                       timeout=30, memory_mb=4096)
                 record.update(ok=preview.ok, rows=preview.rows,
                               message=preview.text[:200])
-                if not (preview.ok and preview.rows):
+                # v2: master's similarity gate (#1240) leaves similar_study
+                # empty for a text without close studies: the query stays.
+                gated = V2 and "similar_study(" in query
+                if not (preview.ok and (preview.rows or gated)):
                     record["drop"] = "guard, error or no rows"
             elif answer["id"] in done:
                 continue
@@ -167,7 +221,7 @@ def leak(args):
     from text2query_bench.dataset import load_dataset
 
     evaluation = [
-        text for name in ("neurosynth-v2", "neurosynth-v3-heldout",
+        text for name in ("neurosynth",) * V2 + ("neurosynth-v2", "neurosynth-v3-heldout",
                           "neurosynth-v3-fresh", "neurosynth-distill-heldout")
         for q in load_dataset(f"datasets/{name}.yaml").questions
         for text in q.text.values()
@@ -186,7 +240,7 @@ def leak(args):
 def write(args):
     checked = {r["id"]: r for r in map(json.loads, open(CHECK))}
     leakage = json.loads(LEAK.read_text())
-    labels = set(json.loads(LABELS.read_text()))
+    labels = set() if V2 else set(json.loads(LABELS.read_text()))
     entries = []
     for answer in kept():
         record = checked.get(answer["id"])
@@ -237,6 +291,8 @@ def main():
     w.add_argument("variant", choices=["B", "C"])
     w.add_argument("out")
     w.add_argument("--traces", action="store_true")
+    for p in sub.choices.values():
+        p.add_argument("--v2", action="store_true")
     args = parser.parse_args()
     {"check": check, "leak": leak, "write": write}[args.command](args)
 
