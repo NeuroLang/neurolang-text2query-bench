@@ -43,6 +43,8 @@ QUERIES = {
     "study_incongruent": STROOP
     + "ans(s) :- exists(x, k; cogpo:has_contrast(s, x), rdf:type(x, k), "
     "cogat_term(k, 'stroop_task-incongruent_minus_congruent'))",
+    "study_measures": STROOP
+    + "ans(s) :- exists(x, c; cogpo:has_contrast(s, x), cogat:measures(x, c))",
     "study_inhibition": STROOP + INHIBITION + "ans(s) :- inhibition_study(s)",
     "study_which_form": STROOP
     + "ans(s, c) :- exists(x, k; cogpo:has_contrast(s, x), "
