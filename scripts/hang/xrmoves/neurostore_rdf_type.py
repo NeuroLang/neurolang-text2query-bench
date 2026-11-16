@@ -4,6 +4,9 @@ inhibition tasks whose name is a NeuroStore term, and the open-world
 inhibition_study(s) with exists, against each single mentions query and
 their union: rows and time of each, one at a time.
 argv: timeout (s), applied to the build and to each query."""
+import cProfile
+import os
+import pstats
 import signal
 import subprocess
 import sys
@@ -76,9 +79,17 @@ union = timed("union of the mentions", TERMS
               + "ans(s) :- task_term(n, m), mentions(s, m)")
 got = timed("open world inhibition_study", TYPES + INHIBITION
             + "ans(s) :- inhibition_study(s)")
-# the second time, without the preparation of the constraints
+# the second time, without the preparation of the constraints; with
+# PROFILE=N in the environment, under cProfile, its N top functions
+if os.environ.get("PROFILE"):
+    profile = cProfile.Profile()
+    profile.enable()
 timed("open world inhibition_study, again", TYPES + INHIBITION
       + "ans(s) :- inhibition_study(s)")
+if os.environ.get("PROFILE"):
+    profile.disable()
+    pstats.Stats(profile).sort_stats("cumulative").print_stats(
+        int(os.environ["PROFILE"]))
 if got is not None and union is not None:
     print("open world = union:", got == union,
           "| more than 'stroop task' alone:",
